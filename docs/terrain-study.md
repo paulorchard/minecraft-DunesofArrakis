@@ -142,7 +142,7 @@ Six Tectonic desert sites were sampled (the first area plus five more at 512², 
 
 - Worlds: `study_vanilla`, `study_tect`, `study_ru` (dev server, seed 424242, in `run-server/`, git-ignored); located desert with `/locate biome`, force-loaded blocks, read the saved chunks.
 - Images (plan view, hillshade, 1 px or 2–3 px per block): `docs/terrain-study/vanilla/`, `tectonic/`, `regions-unexplored/`. Colours: tan = desert, orange = badlands, green = forest/jungle, blue = water, grey = stone. Stats per biome in the matching `stats_*.json`. Heights include tree and plant tops.
-- Tooling to reproduce: `docs/terrain-study/tools/` (`render.js`, `nbt.js`, `closure.js`, `srv.sh`).
+- Tooling to reproduce: `tools/worldscan/` (`render.js`, `nbt.js`, `closure.js`, `srv.sh`).
 - **26.1 world layout changed:** chunks are in `<world>/dimensions/minecraft/overworld/region/*.mca` (not `<world>/region`).
 - Biome locations at seed 424242 (from the origin): vanilla desert `-2016, 1728`, badlands `-2368, 2080`; Tectonic desert `-1920, 1920`, badlands `-2048, 2016`; RU saguaro `-5184, 2976`, joshua `-2656, 2848`.
 - **Dunes:** nothing in vanilla, Tectonic (as sampled) or Regions Unexplored looks like 40-block sand dunes. Honest answer: **no.**

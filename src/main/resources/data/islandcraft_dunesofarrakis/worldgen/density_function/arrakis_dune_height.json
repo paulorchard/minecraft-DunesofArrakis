@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:mul",
+    "argument1": 40,
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": "islandcraft_dunesofarrakis:arrakis_dune_envelope",
+      "argument2": "islandcraft_dunesofarrakis:arrakis_dune_profile"
+    }
+  }
+}
