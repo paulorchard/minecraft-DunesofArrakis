@@ -15,6 +15,7 @@ const fs = require('fs'), zlib = require('zlib'), path = require('path');
 
 const args = process.argv.slice(2);
 function opt(name, def) { const i = args.indexOf('--' + name); if (i < 0) return def; const v = args[i + 1]; args.splice(i, 2); return isNaN(+v) ? v : +v; }
+const isSand = n => n === 'minecraft:sand' || n === 'islandcraft_dunesofarrakis:dune_sand';
 const SCALE = opt('scale', 2), SAND = opt('sand', 63), WIND = opt('wind', 115), WIN = opt('window', 256), GR = opt('grad', 4);
 const [dir, outPrefix, X0, Z0, SIZE] = args; const x0 = +X0, z0 = +Z0, S = +SIZE;
 if (!dir || isNaN(x0) || isNaN(z0) || !S) { console.error('usage: node render.js <regionDir> <outPrefix> <x0> <z0> <size> [--scale 2] [--sand 63] [--wind 115]'); process.exit(1); }
@@ -62,11 +63,11 @@ for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mca'))) {
       const base = s.y * 16;
       if (!s.idx) {
         const n = s.pal[0];
-        if (n === 'minecraft:sand') continue;
+        if (isSand(n)) continue;
         for (let i = 0; i < 256; i++) for (let ly = 0; ly < 16; ly++) tally(n, base + ly, colTop[i]);
       } else {
         for (let k = 0; k < 4096; k++) {
-          const n = s.pal[s.idx[k]]; if (n === 'minecraft:sand') continue;
+          const n = s.pal[s.idx[k]]; if (isSand(n)) continue;
           tally(n, base + (k >> 8), colTop[k & 255]);
         }
       }
@@ -112,7 +113,7 @@ let maxStep = 0, atSand = 0, nonSandTop = 0, n = 0;
 for (let z = 0; z < S; z++) for (let x = 0; x < S; x++) {
   const i = z * S + x; if (isNaN(H[i])) continue; n++;
   if (H[i] === 0) atSand++;
-  if (topBlock[i] !== 'minecraft:sand') nonSandTop++;
+  if (!isSand(topBlock[i])) nonSandTop++;
   if (x + 1 < S && !isNaN(H[i + 1])) maxStep = Math.max(maxStep, Math.abs(H[i + 1] - H[i]));
   if (z + 1 < S && !isNaN(H[i + S])) maxStep = Math.max(maxStep, Math.abs(H[i + S] - H[i]));
 }

@@ -8,6 +8,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
@@ -27,6 +28,9 @@ public class DunesOfArrakis {
 
     public DunesOfArrakis(IEventBus modEventBus) {
         DENSITY_FUNCTION_TYPES.register(modEventBus);
+        ArrakisBlocks.BLOCKS.register(modEventBus);
+        ArrakisBlocks.ITEMS.register(modEventBus);
+        NeoForge.EVENT_BUS.register(new DuneSandHarvest());
         LOGGER.info("IslandCraft - Dunes of Arrakis loaded");
     }
 }
