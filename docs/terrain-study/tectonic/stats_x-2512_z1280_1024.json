@@ -1,0 +1,148 @@
+{
+ "chunks": 4096,
+ "full": 4096,
+ "biomes": {
+  "minecraft:jungle": {
+   "cols": 146688,
+   "min": 53,
+   "p5": 62,
+   "p50": 71,
+   "p95": 92,
+   "max": 142
+  },
+  "minecraft:forest": {
+   "cols": 197712,
+   "min": 53,
+   "p5": 62,
+   "p50": 67,
+   "p95": 74,
+   "max": 93
+  },
+  "minecraft:river": {
+   "cols": 72208,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 92
+  },
+  "minecraft:plains": {
+   "cols": 28992,
+   "min": 60,
+   "p5": 62,
+   "p50": 64,
+   "p95": 68,
+   "max": 76
+  },
+  "minecraft:sparse_jungle": {
+   "cols": 98688,
+   "min": 52,
+   "p5": 62,
+   "p50": 65,
+   "p95": 74,
+   "max": 96
+  },
+  "minecraft:bamboo_jungle": {
+   "cols": 21104,
+   "min": 54,
+   "p5": 62,
+   "p50": 69,
+   "p95": 92,
+   "max": 97
+  },
+  "minecraft:desert": {
+   "cols": 153856,
+   "min": 37,
+   "p5": 62,
+   "p50": 73,
+   "p95": 93,
+   "max": 125
+  },
+  "minecraft:wooded_badlands": {
+   "cols": 169568,
+   "min": 62,
+   "p5": 63,
+   "p50": 96,
+   "p95": 160,
+   "max": 174
+  },
+  "minecraft:badlands": {
+   "cols": 72128,
+   "min": 60,
+   "p5": 62,
+   "p50": 72,
+   "p95": 108,
+   "max": 111
+  },
+  "minecraft:savanna": {
+   "cols": 87632,
+   "min": 55,
+   "p5": 70,
+   "p50": 72,
+   "p95": 79,
+   "max": 87
+  }
+ },
+ "relief32": {
+  "minecraft:jungle": {
+   "windows": 122,
+   "median": 30,
+   "p90": 34,
+   "max": 58
+  },
+  "minecraft:plains": {
+   "windows": 19,
+   "median": 6,
+   "p90": 11,
+   "max": 15
+  },
+  "minecraft:river": {
+   "windows": 14,
+   "median": 0,
+   "p90": 0,
+   "max": 23
+  },
+  "minecraft:sparse_jungle": {
+   "windows": 80,
+   "median": 15,
+   "p90": 20,
+   "max": 34
+  },
+  "minecraft:bamboo_jungle": {
+   "windows": 13,
+   "median": 30,
+   "p90": 34,
+   "max": 34
+  },
+  "minecraft:wooded_badlands": {
+   "windows": 138,
+   "median": 24,
+   "p90": 49,
+   "max": 69
+  },
+  "minecraft:desert": {
+   "windows": 103,
+   "median": 13,
+   "p90": 28,
+   "max": 59
+  },
+  "minecraft:forest": {
+   "windows": 175,
+   "median": 15,
+   "p90": 19,
+   "max": 27
+  },
+  "minecraft:badlands": {
+   "windows": 44,
+   "median": 16,
+   "p90": 32,
+   "max": 46
+  },
+  "minecraft:savanna": {
+   "windows": 74,
+   "median": 11,
+   "p90": 14,
+   "max": 26
+  }
+ }
+}

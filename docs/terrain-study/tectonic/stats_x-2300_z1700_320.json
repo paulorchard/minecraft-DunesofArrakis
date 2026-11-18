@@ -1,0 +1,74 @@
+{
+ "chunks": 441,
+ "full": 441,
+ "biomes": {
+  "minecraft:wooded_badlands": {
+   "cols": 63536,
+   "min": 62,
+   "p5": 76,
+   "p50": 120,
+   "p95": 164,
+   "max": 174
+  },
+  "minecraft:river": {
+   "cols": 4000,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 66
+  },
+  "minecraft:desert": {
+   "cols": 17808,
+   "min": 37,
+   "p5": 62,
+   "p50": 76,
+   "p95": 103,
+   "max": 125
+  },
+  "minecraft:bamboo_jungle": {
+   "cols": 32,
+   "min": 73,
+   "p5": 73,
+   "p50": 75,
+   "p95": 92,
+   "max": 92
+  },
+  "minecraft:sparse_jungle": {
+   "cols": 720,
+   "min": 69,
+   "p5": 71,
+   "p50": 74,
+   "p95": 83,
+   "max": 86
+  },
+  "minecraft:badlands": {
+   "cols": 16304,
+   "min": 62,
+   "p5": 62,
+   "p50": 76,
+   "p95": 98,
+   "max": 109
+  }
+ },
+ "relief32": {
+  "minecraft:wooded_badlands": {
+   "windows": 52,
+   "median": 36,
+   "p90": 53,
+   "max": 60
+  },
+  "minecraft:desert": {
+   "windows": 10,
+   "median": 31,
+   "p90": 54,
+   "max": 54
+  },
+  "minecraft:badlands": {
+   "windows": 8,
+   "median": 26,
+   "p90": 46,
+   "max": 46
+  }
+ }
+}

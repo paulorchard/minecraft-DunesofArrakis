@@ -39,3 +39,8 @@ run-server/
 **/src/generated/**/.cache/
 repo/
 !**/src/**/repo/
+
+### Terrain study (prompt 02): downloaded third-party jars/zips never go in git
+docs/terrain-study/**/*.jar
+docs/terrain-study/**/*.zip
+run-server/study-downloads/

@@ -1,0 +1,44 @@
+{
+ "chunks": 361,
+ "full": 361,
+ "biomes": {
+  "minecraft:desert": {
+   "cols": 1392,
+   "min": 66,
+   "p5": 71,
+   "p50": 73,
+   "p95": 77,
+   "max": 80
+  },
+  "minecraft:forest": {
+   "cols": 22064,
+   "min": 62,
+   "p5": 62,
+   "p50": 67,
+   "p95": 75,
+   "max": 83
+  },
+  "minecraft:savanna": {
+   "cols": 66544,
+   "min": 55,
+   "p5": 70,
+   "p50": 72,
+   "p95": 80,
+   "max": 87
+  }
+ },
+ "relief32": {
+  "minecraft:savanna": {
+   "windows": 56,
+   "median": 10,
+   "p90": 17,
+   "max": 25
+  },
+  "minecraft:forest": {
+   "windows": 15,
+   "median": 16,
+   "p90": 19,
+   "max": 19
+  }
+ }
+}

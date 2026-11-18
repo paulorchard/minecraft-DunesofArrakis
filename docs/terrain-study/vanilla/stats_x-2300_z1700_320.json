@@ -1,0 +1,82 @@
+{
+ "chunks": 441,
+ "full": 441,
+ "biomes": {
+  "minecraft:desert": {
+   "cols": 30256,
+   "min": 55,
+   "p5": 62,
+   "p50": 70,
+   "p95": 80,
+   "max": 95
+  },
+  "minecraft:wooded_badlands": {
+   "cols": 4672,
+   "min": 55,
+   "p5": 62,
+   "p50": 75,
+   "p95": 99,
+   "max": 101
+  },
+  "minecraft:jungle": {
+   "cols": 112,
+   "min": 81,
+   "p5": 82,
+   "p50": 87,
+   "p95": 94,
+   "max": 95
+  },
+  "minecraft:beach": {
+   "cols": 352,
+   "min": 62,
+   "p5": 62,
+   "p50": 76,
+   "p95": 87,
+   "max": 89
+  },
+  "minecraft:river": {
+   "cols": 3472,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 66
+  },
+  "minecraft:warm_ocean": {
+   "cols": 56432,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 65
+  },
+  "minecraft:stony_shore": {
+   "cols": 7104,
+   "min": 62,
+   "p5": 62,
+   "p50": 64,
+   "p95": 71,
+   "max": 74
+  }
+ },
+ "relief32": {
+  "minecraft:desert": {
+   "windows": 16,
+   "median": 13,
+   "p90": 28,
+   "max": 31
+  },
+  "minecraft:wooded_badlands": {
+   "windows": 3,
+   "median": 22,
+   "p90": 46,
+   "max": 46
+  },
+  "minecraft:warm_ocean": {
+   "windows": 49,
+   "median": 0,
+   "p90": 0,
+   "max": 0
+  }
+ }
+}

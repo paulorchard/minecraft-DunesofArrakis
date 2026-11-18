@@ -1,0 +1,74 @@
+{
+ "chunks": 1024,
+ "full": 1024,
+ "biomes": {
+  "minecraft:warm_ocean": {
+   "cols": 205728,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 79
+  },
+  "minecraft:desert": {
+   "cols": 23376,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 89,
+   "max": 120
+  },
+  "minecraft:river": {
+   "cols": 9088,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 63,
+   "max": 72
+  },
+  "regions_unexplored:rocky_reef": {
+   "cols": 1504,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 70
+  },
+  "minecraft:windswept_savanna": {
+   "cols": 20192,
+   "min": 61,
+   "p5": 62,
+   "p50": 62,
+   "p95": 128,
+   "max": 153
+  },
+  "regions_unexplored:saguaro_desert": {
+   "cols": 2256,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 62
+  }
+ },
+ "relief32": {
+  "minecraft:warm_ocean": {
+   "windows": 185,
+   "median": 0,
+   "p90": 0,
+   "max": 17
+  },
+  "minecraft:desert": {
+   "windows": 8,
+   "median": 21,
+   "p90": 44,
+   "max": 44
+  },
+  "minecraft:windswept_savanna": {
+   "windows": 11,
+   "median": 53,
+   "p90": 78,
+   "max": 91
+  }
+ }
+}

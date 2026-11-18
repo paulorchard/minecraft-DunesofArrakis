@@ -1,0 +1,128 @@
+{
+ "chunks": 1024,
+ "full": 1024,
+ "biomes": {
+  "minecraft:sparse_jungle": {
+   "cols": 49072,
+   "min": 46,
+   "p5": 62,
+   "p50": 67,
+   "p95": 76,
+   "max": 95
+  },
+  "minecraft:river": {
+   "cols": 16848,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 89
+  },
+  "minecraft:jungle": {
+   "cols": 62368,
+   "min": 55,
+   "p5": 62,
+   "p50": 72,
+   "p95": 92,
+   "max": 101
+  },
+  "minecraft:plains": {
+   "cols": 2800,
+   "min": 62,
+   "p5": 62,
+   "p50": 63,
+   "p95": 65,
+   "max": 74
+  },
+  "minecraft:lukewarm_ocean": {
+   "cols": 32,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 62
+  },
+  "minecraft:bamboo_jungle": {
+   "cols": 15664,
+   "min": 62,
+   "p5": 62,
+   "p50": 69,
+   "p95": 92,
+   "max": 97
+  },
+  "minecraft:beach": {
+   "cols": 9168,
+   "min": 42,
+   "p5": 63,
+   "p50": 64,
+   "p95": 68,
+   "max": 78
+  },
+  "minecraft:desert": {
+   "cols": 94368,
+   "min": 55,
+   "p5": 62,
+   "p50": 65,
+   "p95": 79,
+   "max": 101
+  },
+  "minecraft:warm_ocean": {
+   "cols": 11824,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 62
+  }
+ },
+ "relief32": {
+  "minecraft:sparse_jungle": {
+   "windows": 34,
+   "median": 17,
+   "p90": 22,
+   "max": 30
+  },
+  "minecraft:jungle": {
+   "windows": 50,
+   "median": 32,
+   "p90": 35,
+   "max": 39
+  },
+  "minecraft:beach": {
+   "windows": 5,
+   "median": 9,
+   "p90": 33,
+   "max": 33
+  },
+  "minecraft:bamboo_jungle": {
+   "windows": 9,
+   "median": 30,
+   "p90": 34,
+   "max": 34
+  },
+  "minecraft:river": {
+   "windows": 2,
+   "median": 0,
+   "p90": 0,
+   "max": 0
+  },
+  "minecraft:desert": {
+   "windows": 76,
+   "median": 6,
+   "p90": 16,
+   "max": 26
+  },
+  "minecraft:plains": {
+   "windows": 1,
+   "median": 3,
+   "p90": 3,
+   "max": 3
+  },
+  "minecraft:warm_ocean": {
+   "windows": 7,
+   "median": 0,
+   "p90": 0,
+   "max": 0
+  }
+ }
+}

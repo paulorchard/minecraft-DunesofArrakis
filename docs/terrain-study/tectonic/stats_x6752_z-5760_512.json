@@ -1,0 +1,50 @@
+{
+ "chunks": 1024,
+ "full": 1024,
+ "biomes": {
+  "minecraft:warm_ocean": {
+   "cols": 184784,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 62
+  },
+  "minecraft:desert": {
+   "cols": 65600,
+   "min": 61,
+   "p5": 62,
+   "p50": 63,
+   "p95": 65,
+   "max": 84
+  },
+  "minecraft:river": {
+   "cols": 11760,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 62
+  }
+ },
+ "relief32": {
+  "minecraft:warm_ocean": {
+   "windows": 170,
+   "median": 0,
+   "p90": 0,
+   "max": 0
+  },
+  "minecraft:desert": {
+   "windows": 55,
+   "median": 3,
+   "p90": 6,
+   "max": 21
+  },
+  "minecraft:river": {
+   "windows": 2,
+   "median": 0,
+   "p90": 0,
+   "max": 0
+  }
+ }
+}

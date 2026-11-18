@@ -1,0 +1,144 @@
+{
+ "chunks": 1024,
+ "full": 1024,
+ "biomes": {
+  "minecraft:eroded_badlands": {
+   "cols": 224,
+   "min": 116,
+   "p5": 116,
+   "p50": 117,
+   "p95": 118,
+   "max": 119
+  },
+  "minecraft:badlands": {
+   "cols": 12304,
+   "min": 111,
+   "p5": 113,
+   "p50": 119,
+   "p95": 134,
+   "max": 136
+  },
+  "minecraft:wooded_badlands": {
+   "cols": 68080,
+   "min": 96,
+   "p5": 108,
+   "p50": 118,
+   "p95": 127,
+   "max": 146
+  },
+  "minecraft:jungle": {
+   "cols": 37968,
+   "min": 60,
+   "p5": 75,
+   "p50": 129,
+   "p95": 163,
+   "max": 183
+  },
+  "minecraft:bamboo_jungle": {
+   "cols": 99824,
+   "min": 58,
+   "p5": 64,
+   "p50": 82,
+   "p95": 124,
+   "max": 192
+  },
+  "minecraft:desert": {
+   "cols": 7760,
+   "min": 77,
+   "p5": 84,
+   "p50": 93,
+   "p95": 102,
+   "max": 130
+  },
+  "minecraft:forest": {
+   "cols": 3200,
+   "min": 62,
+   "p5": 103,
+   "p50": 113,
+   "p95": 120,
+   "max": 129
+  },
+  "minecraft:sparse_jungle": {
+   "cols": 12960,
+   "min": 62,
+   "p5": 62,
+   "p50": 67,
+   "p95": 107,
+   "max": 138
+  },
+  "minecraft:river": {
+   "cols": 4416,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 77
+  },
+  "minecraft:beach": {
+   "cols": 4576,
+   "min": 60,
+   "p5": 62,
+   "p50": 63,
+   "p95": 65,
+   "max": 93
+  },
+  "minecraft:lukewarm_ocean": {
+   "cols": 10832,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 87
+  }
+ },
+ "relief32": {
+  "minecraft:badlands": {
+   "windows": 8,
+   "median": 10,
+   "p90": 17,
+   "max": 17
+  },
+  "minecraft:wooded_badlands": {
+   "windows": 58,
+   "median": 13,
+   "p90": 17,
+   "max": 34
+  },
+  "minecraft:jungle": {
+   "windows": 27,
+   "median": 32,
+   "p90": 39,
+   "max": 58
+  },
+  "minecraft:desert": {
+   "windows": 2,
+   "median": 38,
+   "p90": 38,
+   "max": 38
+  },
+  "minecraft:bamboo_jungle": {
+   "windows": 84,
+   "median": 48,
+   "p90": 113,
+   "max": 122
+  },
+  "minecraft:forest": {
+   "windows": 2,
+   "median": 25,
+   "p90": 25,
+   "max": 25
+  },
+  "minecraft:sparse_jungle": {
+   "windows": 7,
+   "median": 28,
+   "p90": 66,
+   "max": 66
+  },
+  "minecraft:lukewarm_ocean": {
+   "windows": 5,
+   "median": 0,
+   "p90": 0,
+   "max": 0
+  }
+ }
+}

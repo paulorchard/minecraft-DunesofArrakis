@@ -1,0 +1,92 @@
+{
+ "chunks": 1024,
+ "full": 1024,
+ "biomes": {
+  "minecraft:badlands": {
+   "cols": 97264,
+   "min": 62,
+   "p5": 68,
+   "p50": 102,
+   "p95": 175,
+   "max": 185
+  },
+  "minecraft:river": {
+   "cols": 14832,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 62,
+   "max": 69
+  },
+  "minecraft:desert": {
+   "cols": 37104,
+   "min": 41,
+   "p5": 64,
+   "p50": 67,
+   "p95": 74,
+   "max": 96
+  },
+  "minecraft:eroded_badlands": {
+   "cols": 4544,
+   "min": 62,
+   "p5": 62,
+   "p50": 71,
+   "p95": 88,
+   "max": 104
+  },
+  "minecraft:savanna": {
+   "cols": 97856,
+   "min": 41,
+   "p5": 62,
+   "p50": 67,
+   "p95": 75,
+   "max": 102
+  },
+  "minecraft:plains": {
+   "cols": 10544,
+   "min": 63,
+   "p5": 64,
+   "p50": 66,
+   "p95": 70,
+   "max": 76
+  }
+ },
+ "relief32": {
+  "minecraft:badlands": {
+   "windows": 82,
+   "median": 21,
+   "p90": 50,
+   "max": 71
+  },
+  "minecraft:desert": {
+   "windows": 27,
+   "median": 6,
+   "p90": 17,
+   "max": 31
+  },
+  "minecraft:eroded_badlands": {
+   "windows": 2,
+   "median": 32,
+   "p90": 32,
+   "max": 32
+  },
+  "minecraft:savanna": {
+   "windows": 81,
+   "median": 12,
+   "p90": 17,
+   "max": 36
+  },
+  "minecraft:plains": {
+   "windows": 5,
+   "median": 8,
+   "p90": 12,
+   "max": 12
+  },
+  "minecraft:river": {
+   "windows": 2,
+   "median": 0,
+   "p90": 0,
+   "max": 0
+  }
+ }
+}

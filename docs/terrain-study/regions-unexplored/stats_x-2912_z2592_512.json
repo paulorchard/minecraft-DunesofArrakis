@@ -1,0 +1,100 @@
+{
+ "chunks": 1024,
+ "full": 1024,
+ "biomes": {
+  "regions_unexplored:outback": {
+   "cols": 37568,
+   "min": 28,
+   "p5": 62,
+   "p50": 69,
+   "p95": 80,
+   "max": 119
+  },
+  "minecraft:badlands": {
+   "cols": 36048,
+   "min": 58,
+   "p5": 62,
+   "p50": 67,
+   "p95": 85,
+   "max": 106
+  },
+  "minecraft:river": {
+   "cols": 24752,
+   "min": 62,
+   "p5": 62,
+   "p50": 62,
+   "p95": 64,
+   "max": 74
+  },
+  "minecraft:eroded_badlands": {
+   "cols": 31504,
+   "min": 55,
+   "p5": 62,
+   "p50": 64,
+   "p95": 89,
+   "max": 123
+  },
+  "minecraft:wooded_badlands": {
+   "cols": 224,
+   "min": 77,
+   "p5": 78,
+   "p50": 78,
+   "p95": 80,
+   "max": 80
+  },
+  "minecraft:desert": {
+   "cols": 64768,
+   "min": 34,
+   "p5": 63,
+   "p50": 69,
+   "p95": 76,
+   "max": 96
+  },
+  "regions_unexplored:joshua_desert": {
+   "cols": 67280,
+   "min": 51,
+   "p5": 62,
+   "p50": 70,
+   "p95": 86,
+   "max": 117
+  }
+ },
+ "relief32": {
+  "regions_unexplored:outback": {
+   "windows": 16,
+   "median": 14,
+   "p90": 41,
+   "max": 46
+  },
+  "minecraft:badlands": {
+   "windows": 21,
+   "median": 12,
+   "p90": 17,
+   "max": 19
+  },
+  "minecraft:eroded_badlands": {
+   "windows": 20,
+   "median": 31,
+   "p90": 55,
+   "max": 61
+  },
+  "minecraft:river": {
+   "windows": 3,
+   "median": 1,
+   "p90": 2,
+   "max": 2
+  },
+  "regions_unexplored:joshua_desert": {
+   "windows": 51,
+   "median": 21,
+   "p90": 37,
+   "max": 51
+  },
+  "minecraft:desert": {
+   "windows": 54,
+   "median": 9,
+   "p90": 16,
+   "max": 37
+  }
+ }
+}
