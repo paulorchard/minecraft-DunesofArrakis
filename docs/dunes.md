@@ -140,3 +140,11 @@ Feedback from the first look: dunes too long, slender and regular; wanted some r
 | `mountain_height`, `mountain_first_octave`, `mountain_gain`, `mountain_offset` | 80, -10, 2.5, 0.05 | Broad smooth massifs (about 1000-block features), no direction; dunes still ripple over them. Higher offset = more and larger mountains. |
 
 Measured (seed 1, 2048², `docs/dunes/v2_seed1_…h0-110.*`): height above sand p50 15, p95 54, max 110; crest direction 26.4° with spread 18.4° (was 9.9°); windward 14.1° / leeward 20.1°; 0 air below the surface, 0 non-sand blocks; generation about 9 ms per chunk (about 2× flat). This round was only checked on seed 1 at the origin; the prompt-03 height limits (max 30–45) no longer apply on purpose. The seed 2/3 and far-location checks have not been re-run.
+
+## Default world = Arrakis
+
+With the mod installed, a new world's overworld is the dunes. Two files override vanilla data (mod data is loaded after vanilla's):
+- `data/minecraft/worldgen/world_preset/normal.json`: `minecraft:overworld` uses `minecraft:noise`, our `arrakis` noise settings and the fixed `arrakis_desert` biome. Dimension type is vanilla `minecraft:overworld` (normal sky, day cycle, working beds), not our `arrakis` type. Nether and End are unchanged vanilla.
+- `data/minecraft/tags/worldgen/world_preset/normal.json` (replace): the Create World list shows only `Default` and `Superflat`. Large Biomes, Amplified and Single Biome are removed because they would bring vanilla terrain back. Add them back to the tag if wanted.
+
+Checked on the dev server (fresh world, seed 1, 1024² of `minecraft:overworld`): dunes with p50 20, p95 55, max 83; 0 air below the surface; 0 non-sand blocks; world spawn 0, 73, 0; no warnings naming the mod. Worlds created before this keep their saved vanilla generator. The `islandcraft_dunesofarrakis:arrakis` dimension still exists for the `/execute in` command.
