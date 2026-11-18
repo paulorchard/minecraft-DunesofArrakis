@@ -127,3 +127,16 @@ The three knobs I would turn first (`tools/dunes/generate.js`, then `node tools/
 - Not looked at in game: I cannot see the window. Everything here comes from saved blocks and plan-view renders. The "you look" list is a prediction from those numbers.
 - Slopes are measured on a 4-block baseline (1-block differences are quantised to 0, 0.5, 1 and bias the mean).
 - The cost timing includes a 0.5 s polling resolution; the completion test is a 3 × 3 grid of probe chunks, so a few chunks may still have been finishing.
+
+## Round 2: irregular dunes, hills and mountains
+
+Feedback from the first look: dunes too long, slender and regular; wanted some real mountains and smaller hills and valleys breaking up the single direction. Added to `tools/dunes/generate.js` (all heights in blocks, added to or multiplied into the dune height; `arrakis_dune_height` is now `dunes × break + hills + mountains`):
+
+| Knob | Value | Effect |
+|---|---|---|
+| `spacing_warp_cycles`, `spacing_first_octave` | 0.35, -10 | Slow second warp that makes the crest spacing vary (was ±8%). 0 = even spacing. |
+| `break_gain`, `break_offset`, `break_first_octave` | 1.6, 1.05, -8 | Isotropic noise (256-block features) that cuts ridges into segments and saddles. Lower offset = more gaps (0.8 was far too many: the ridges turned into lumps). |
+| `hill_height`, `hill_first_octave`, `hill_gain`, `hill_offset` | 5, -7, 1.4, 0.45 | Low rolling hills with no direction, strongest where the dune envelope is low (they fill the flat floor). |
+| `mountain_height`, `mountain_first_octave`, `mountain_gain`, `mountain_offset` | 80, -10, 2.5, 0.05 | Broad smooth massifs (about 1000-block features), no direction; dunes still ripple over them. Higher offset = more and larger mountains. |
+
+Measured (seed 1, 2048², `docs/dunes/v2_seed1_…h0-110.*`): height above sand p50 15, p95 54, max 110; crest direction 26.4° with spread 18.4° (was 9.9°); windward 14.1° / leeward 20.1°; 0 air below the surface, 0 non-sand blocks; generation about 9 ms per chunk (about 2× flat). This round was only checked on seed 1 at the origin; the prompt-03 height limits (max 30–45) no longer apply on purpose. The seed 2/3 and far-location checks have not been re-run.

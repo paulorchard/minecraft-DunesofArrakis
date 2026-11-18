@@ -35,6 +35,18 @@ const KNOBS = {
   envelope_first_octave: -8, envelope_amplitudes: [1, 0.6],
   // Stretch of the envelope noise across / along the crests (along > 1 = long dune fields that follow the crests).
   envelope_cross_stretch: 1.0, envelope_along_stretch: 2.5,
+
+  // --- Irregularity and non-dune relief (all heights in blocks, added on top of the dunes) ---
+  // Second, slower warp that changes the crest SPACING (cycles; 0 = even spacing). Wavelength of this noise = 2^-octave.
+  spacing_warp_cycles: 0.35, spacing_first_octave: -10,
+  // Break-up: isotropic noise that cuts the ridges into segments, saddles and gaps (no preferred direction).
+  // factor = clamp(break_gain * noise + break_offset, 0, 1) multiplies the dune height. Lower offset = more gaps.
+  break_gain: 1.6, break_offset: 1.05, break_first_octave: -8,
+  // Low rolling hills with no direction, strongest where the dunes are absent (fill the flat floor).
+  hill_height: 5, hill_first_octave: -7, hill_gain: 1.4, hill_offset: 0.45,
+  // Mountains: broad smooth massifs with no direction, dunes still ripple on top of them.
+  // mask = clamp(mountain_gain * noise + mountain_offset, 0, 1)^2; higher offset = more/larger mountains.
+  mountain_height: 80, mountain_first_octave: -10, mountain_gain: 2.5, mountain_offset: 0.05,
 };
 // ──────────────────────── end knobs ───────────────────────
 
@@ -58,12 +70,20 @@ const ref = n => `${NS}:${n}`;
 
 put('noise/arrakis_dune_warp.json', { firstOctave: K.warp_first_octave, amplitudes: K.warp_amplitudes });
 put('noise/arrakis_dune_envelope.json', { firstOctave: K.envelope_first_octave, amplitudes: K.envelope_amplitudes });
+put('noise/arrakis_dune_spacing.json', { firstOctave: K.spacing_first_octave, amplitudes: [1, 0.5] });
+put('noise/arrakis_dune_break.json', { firstOctave: K.break_first_octave, amplitudes: [1, 0.6] });
+put('noise/arrakis_hills.json', { firstOctave: K.hill_first_octave, amplitudes: [1, 0.6] });
+put('noise/arrakis_mountain.json', { firstOctave: K.mountain_first_octave, amplitudes: [1, 0.4] });
+const iso = n => ({ type: 'minecraft:noise', noise: `${NS}:${n}`, xz_scale: 1.0, y_scale: 0.0 });
+const clamp01 = (gain, off, n) => ({ type: 'minecraft:clamp', input: { type: 'minecraft:add', argument1: off, argument2: { type: 'minecraft:mul', argument1: gain, argument2: iso(n) } }, min: 0.0, max: 1.0 });
 
 // phase in cycles = distance along the wind / wavelength + warp
 put('density_function/arrakis_dune_phase.json', {
   type: 'minecraft:add',
   argument1: lin(Math.cos(w) / K.wavelength, Math.sin(w) / K.wavelength),
-  argument2: { type: 'minecraft:mul', argument1: K.warp_cycles, argument2: aniso('arrakis_dune_warp', K.warp_cross_stretch, K.warp_along_stretch) },
+  argument2: { type: 'minecraft:add',
+    argument1: { type: 'minecraft:mul', argument1: K.warp_cycles, argument2: aniso('arrakis_dune_warp', K.warp_cross_stretch, K.warp_along_stretch) },
+    argument2: { type: 'minecraft:mul', argument1: K.spacing_warp_cycles, argument2: aniso('arrakis_dune_spacing', 1.0, 1.0) } },
 });
 put('density_function/arrakis_dune_profile.json', {
   type: `${NS}:arrakis_sawtooth`, argument: ref('arrakis_dune_phase'),
@@ -74,10 +94,18 @@ put('density_function/arrakis_dune_envelope.json', {
   input: { type: 'minecraft:add', argument1: K.envelope_offset, argument2: { type: 'minecraft:mul', argument1: K.envelope_gain, argument2: aniso('arrakis_dune_envelope', K.envelope_cross_stretch, K.envelope_along_stretch) } },
   min: 0.0, max: 1.0,
 });
+put('density_function/arrakis_dune_break.json', clamp01(K.break_gain, K.break_offset, 'arrakis_dune_break'));
+put('density_function/arrakis_mountain_mask.json', { type: 'minecraft:square', argument: clamp01(K.mountain_gain, K.mountain_offset, 'arrakis_mountain') });
 // dune height above sand level, in blocks, 2D, computed once per column
 put('density_function/arrakis_dune_height.json', {
   type: 'minecraft:cache_2d',
-  argument: { type: 'minecraft:mul', argument1: K.max_height, argument2: { type: 'minecraft:mul', argument1: ref('arrakis_dune_envelope'), argument2: ref('arrakis_dune_profile') } },
+  argument: { type: 'minecraft:add',
+    argument1: { type: 'minecraft:add',
+      // dunes, cut into segments by the break-up noise
+      argument1: { type: 'minecraft:mul', argument1: K.max_height, argument2: { type: 'minecraft:mul', argument1: ref('arrakis_dune_break'), argument2: { type: 'minecraft:mul', argument1: ref('arrakis_dune_envelope'), argument2: ref('arrakis_dune_profile') } } },
+      // low hills, mostly where the dune envelope is low
+      argument2: { type: 'minecraft:mul', argument1: K.hill_height, argument2: { type: 'minecraft:mul', argument1: clamp01(K.hill_gain, K.hill_offset, 'arrakis_hills'), argument2: { type: 'minecraft:add', argument1: 1.0, argument2: { type: 'minecraft:mul', argument1: -0.8, argument2: ref('arrakis_dune_envelope') } } } } },
+    argument2: { type: 'minecraft:mul', argument1: K.mountain_height, argument2: ref('arrakis_mountain_mask') } },
 });
 
 const lw = K.wavelength * a, ll = K.wavelength * (1 - a);
