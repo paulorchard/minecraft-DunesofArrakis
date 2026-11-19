@@ -1,0 +1,4 @@
+strength noise only over 1364477 rock cells (R >= 7, large continents), deciles 0-0.1 ...: 9.0% 4.6% 4.7% 5.1% 5.5% 5.9% 6.5% 7.4% 8.9% 42.4% | below 0.3: 18.3%, above 0.8: 51.3%
+strength noise x small-body x low-rock over 1364477 rock cells (R >= 7, large continents), deciles 0-0.1 ...: 9.7% 5.3% 5.7% 6.4% 7.2% 7.6% 7.9% 8.3% 9.2% 32.8% | below 0.3: 20.7%, above 0.8: 42.0%
+strength final (after the slope limit) over 1364477 rock cells (R >= 7, large continents), deciles 0-0.1 ...: 9.7% 5.3% 5.7% 6.4% 7.2% 7.6% 7.9% 8.3% 9.2% 32.8% | below 0.3: 20.7%, above 0.8: 42.0%
+step height H: p5 3.60 p25 4.43 p50 5.06 p75 5.71 p95 6.56 min 3.20 max 6.80

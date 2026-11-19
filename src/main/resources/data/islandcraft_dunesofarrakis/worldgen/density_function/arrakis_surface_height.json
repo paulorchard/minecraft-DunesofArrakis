@@ -15,6 +15,9 @@
       "relief_mid": "islandcraft_dunesofarrakis:arrakis_relief_mid",
       "relief_fine": "islandcraft_dunesofarrakis:arrakis_relief_fine",
       "relief_detail": "islandcraft_dunesofarrakis:arrakis_relief_detail",
+      "terrace_step": "islandcraft_dunesofarrakis:arrakis_terrace_step",
+      "terrace_level": "islandcraft_dunesofarrakis:arrakis_terrace_level",
+      "terrace_strength": "islandcraft_dunesofarrakis:arrakis_terrace_strength",
       "dunes": "islandcraft_dunesofarrakis:arrakis_dune_height"
     }
   }

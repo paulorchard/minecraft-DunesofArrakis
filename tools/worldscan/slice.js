@@ -62,6 +62,7 @@ const ih = Buffer.alloc(13); ih.writeUInt32BE(WW, 0); ih.writeUInt32BE(H, 4); ih
 const raw = Buffer.alloc((WW * 3 + 1) * H); for (let y = 0; y < H; y++) { raw[y * (WW * 3 + 1)] = 0; px.copy(raw, y * (WW * 3 + 1) + 1, y * WW * 3, (y + 1) * WW * 3); }
 fs.writeFileSync(out, Buffer.concat([Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]), chunk('IHDR', ih), chunk('IDAT', zlib.deflateSync(raw, { level: 6 })), chunk('IEND', Buffer.alloc(0))]));
 // numbers
+if (opt.dump) fs.writeFileSync(opt.dump, tops.map((t, i) => i + ' ' + (t[2] === null ? 'NA' : t[2] - SAND)).join(String.fromCharCode(10)) + String.fromCharCode(10));
 const known = tops.filter(t => t[2] !== null);
 let firstRock = tops.findIndex(t => t[3] === 'minecraft:sandstone'), bodyBelowSand = 0, rockTopCols = 0, duneOnRock = 0, maxH = -1e9, maxAt = null, outsideWithSandstone = 0, floating = 0;
 for (let s = 0; s < tops.length; s++) {

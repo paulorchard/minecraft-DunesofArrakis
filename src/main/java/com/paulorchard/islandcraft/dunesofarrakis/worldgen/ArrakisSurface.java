@@ -26,6 +26,9 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
         DensityFunction.NoiseHolder.CODEC.fieldOf("relief_mid").forGetter(f -> f.n[7]),
         DensityFunction.NoiseHolder.CODEC.fieldOf("relief_fine").forGetter(f -> f.n[8]),
         DensityFunction.NoiseHolder.CODEC.fieldOf("relief_detail").forGetter(f -> f.n[9]),
+        DensityFunction.NoiseHolder.CODEC.fieldOf("terrace_step").forGetter(f -> f.n[10]),
+        DensityFunction.NoiseHolder.CODEC.fieldOf("terrace_level").forGetter(f -> f.n[11]),
+        DensityFunction.NoiseHolder.CODEC.fieldOf("terrace_strength").forGetter(f -> f.n[12]),
         DensityFunction.HOLDER_HELPER_CODEC.fieldOf("dunes").forGetter(f -> f.dunes)
     ).apply(i, ArrakisSurface::new)));
 
@@ -44,8 +47,9 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
 
     public ArrakisSurface(DensityFunction.NoiseHolder a, DensityFunction.NoiseHolder b, DensityFunction.NoiseHolder c, DensityFunction.NoiseHolder d,
                           DensityFunction.NoiseHolder e, DensityFunction.NoiseHolder f, DensityFunction.NoiseHolder g, DensityFunction.NoiseHolder h,
-                          DensityFunction.NoiseHolder i, DensityFunction.NoiseHolder j, DensityFunction dunes) {
-        n[0] = a; n[1] = b; n[2] = c; n[3] = d; n[4] = e; n[5] = f; n[6] = g; n[7] = h; n[8] = i; n[9] = j;
+                          DensityFunction.NoiseHolder i, DensityFunction.NoiseHolder j, DensityFunction.NoiseHolder k, DensityFunction.NoiseHolder l,
+                          DensityFunction.NoiseHolder m, DensityFunction dunes) {
+        n[0] = a; n[1] = b; n[2] = c; n[3] = d; n[4] = e; n[5] = f; n[6] = g; n[7] = h; n[8] = i; n[9] = j; n[10] = k; n[11] = l; n[12] = m;
         this.dunes = dunes;
     }
 
@@ -84,7 +88,7 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
     public DensityFunction mapAll(Visitor visitor) {
         DensityFunction.NoiseHolder[] m = new DensityFunction.NoiseHolder[n.length];
         for (int i = 0; i < m.length; i++) m[i] = visitor.visitNoise(n[i]);
-        return visitor.apply(new ArrakisSurface(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], dunes.mapAll(visitor)));
+        return visitor.apply(new ArrakisSurface(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], dunes.mapAll(visitor)));
     }
 
     @Override

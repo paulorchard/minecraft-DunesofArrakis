@@ -1,0 +1,119 @@
+{
+ "window": {
+  "x0": -3808,
+  "z0": -13728,
+  "size": 1024
+ },
+ "generated": {
+  "columns": 1048576,
+  "fullChunks": 4096
+ },
+ "footprint": {
+  "analyticInsideColumns": 872183,
+  "fractionInside": 0.8318
+ },
+ "outline": {
+  "differentRockSandColumns": 5,
+  "withinOneBlockOfCoast": 5
+ },
+ "relief": {
+  "checkedColumns": 872183,
+  "topBelowAnalytic": 50,
+  "topAtAnalyticButNotSandstone": 3,
+  "sandstoneAboveAnalytic": 4,
+  "topAtAnalyticSandstone": 634183,
+  "duneSandAboveRock": 237943,
+  "largestDuneOverRock": 84,
+  "mismatchColumns": 57,
+  "mismatchFraction": 0.0000544,
+  "mismatchWithinOneBlockOfCoast": 0,
+  "mismatchOnChunkBorder": 11
+ },
+ "blocks": {
+  "airBelowSurface": 0,
+  "bedrockAboveBottom5": 0,
+  "floatingSandInRock": 551,
+  "sandstoneAboveRockSurface": 134,
+  "wrongBlocks": {
+   "minecraft:sandstone in a dune column": 125,
+   "minecraft:sandstone above the rock surface": 9,
+   "islandcraft_dunesofarrakis:dune_sand where sandstone is due (at or below the rock surface)": 551
+  },
+  "columnsWithWrongBlock": 64
+ },
+ "rockSurfaceHeightAboveSand": {
+  "columns": 634237,
+  "p5": 16,
+  "p50": 64,
+  "p95": 94,
+  "max": 100
+ },
+ "banking": {
+  "coast_0_30m": {
+   "columns": 40191,
+   "duneSandTop": 25508,
+   "sandstoneTop": 14683,
+   "shareDuneSand": 0.635
+  },
+  "coast_30_100m": {
+   "columns": 104073,
+   "duneSandTop": 19224,
+   "sandstoneTop": 84849,
+   "shareDuneSand": 0.185
+  },
+  "inland_over_100m": {
+   "columns": 727919,
+   "duneSandTop": 193214,
+   "sandstoneTop": 534705,
+   "shareDuneSand": 0.265
+  }
+ },
+ "coastSectors64": {
+  "dunesBankOver": 17,
+  "rockStandsClear": 10
+ },
+ "steps": {
+  "neighbourPairs": 1742076,
+  "over3": 0,
+  "over3WithDune": 0,
+  "over3RockOnly": 0,
+  "largest": 2,
+  "largestRockOnly": 1,
+  "rockOnlyExamples_x_z_step": []
+ },
+ "slope": {
+  "baselineBlocks": 8,
+  "rockColumns": 609771,
+  "share_over_20deg": 0.0874,
+  "share_over_35deg": 0.0005,
+  "steepestGradient": 0.73,
+  "within100mOfCoast": 91823,
+  "share_over_25deg_within100m": 0.0047
+ },
+ "duneMountains": {
+  "footprintColumnsWithDuneMoreThan10AboveRock": 151823,
+  "footprintShare": 0.1741,
+  "outsideWithin30mOfCoast": {
+   "columns": 33540,
+   "p50": 7,
+   "p95": 32,
+   "max": 37,
+   "shareAtLeast40": 0,
+   "shareAtLeast80": 0
+  }
+ },
+ "identityWithPrompt05Outside": {
+  "outsideColumns": 176393,
+  "differentColumns": 0,
+  "firstDifference_x_z_new_old": null
+ },
+ "pass": {
+  "noGaps": true,
+  "outlineIdentical": false,
+  "reliefMismatchBelow0_1pct": true,
+  "noAirBelowSurface": true,
+  "noFloatingSand": false,
+  "noRockWalls": true,
+  "duneIdentical": true
+ }
+}

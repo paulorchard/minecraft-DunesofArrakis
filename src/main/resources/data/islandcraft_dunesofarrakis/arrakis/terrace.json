@@ -1,0 +1,23 @@
+{
+  "_comment": "Terraces on the rock relief (docs/terraces.md). Every number is here; loaded once at startup. Metres = blocks.",
+  "mode": "terrace",
+  "_mode_note": "terrace = R' = lerp(R, stair(R), strength); off = R' = R exactly (prompt 06)",
+
+  "step": { "min": 3.2, "max": 6.8, "wavelength": 1100, "gain": 1.8 },
+  "_step_note": "step height H(x,z) in metres: min..max driven by a seeded noise (value * gain, clamped to -1..1)",
+
+  "level": { "amplitude": 3.0, "wavelength": 170, "gain": 2.0, "tilt_amplitude": 0.0, "tilt_wavelength": 45 },
+  "_level_note": "level offset O(x,z) in metres, +-amplitude: the shelf levels drift from place to place; phase p = (R + O) / H",
+
+  "stair": { "tread_rise": 0.25, "riser_slope": 0.6, "riser_input_min": 0.10, "riser_input_max": 0.45, "detail_keep": 0.7 },
+  "_stair_note": "inside one step (fractional phase f): the tread takes f in [0, 1 - riser_input) and rises tread_rise of the step, linearly; the riser takes the rest of the input and the rest of the rise as a cubic Hermite with the tread slope at both ends, so the lip and the foot are rounded and the curve is monotone and C1. riser_input = (1 - tread_rise) * ground slope / riser_slope, clamped to min..max: wide treads where the ground is gentle, the riser leaning at about riser_slope (blocks per block) on average. detail_keep: the stair squeezes the fine surface detail by about the tread rise; this share of it is added back so treads are never dead level",
+
+  "strength": { "wavelength": 260, "gain": 2.6, "bias": 0.45, "fade_r0": 2, "fade_r1": 7 },
+  "_strength_note": "terrace strength 0..1 from a seeded noise; times the small-body factor; times a fade over the first fade_r1 metres of rock height (the coast and the dune banking keep the smooth shape)",
+
+  "small": { "thickness_lo": 40, "thickness_hi": 400, "window": 160 },
+  "_small_note": "local rock half-width (largest distance from the sand within window metres): strength x smoothstep((w - lo) / (hi - lo)); a rock under 80 m across is not terraced at all, a few hundred metres across lightly",
+
+  "limit": { "max_slope": 1.2 },
+  "_limit_note": "the strength is lowered wherever the terraced surface would climb more than max_slope blocks per block, so no riser is steeper than a run of 1-block steps"
+}

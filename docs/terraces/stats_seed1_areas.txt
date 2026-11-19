@@ -1,0 +1,70 @@
+purple_flank: 1000 x 1000 m, rock 0.991 km2, terraced (strength >= 0.5, R' >= 7) 0.690 km2
+  neighbouring-column steps, all rock edges 1979421: 0 89.0%  1 11.0%  2 0.01%  3+ 0 (0.0000%)
+  inside the terraced part 1375075 edges: 0 89.1%  1 10.9%  2 0.01%  3+ 0
+  lines: 1379135 terraced columns on runs of >= 12; tread columns 99.2%; treads 11954; flat (level) runs > 8 blocks: 50328 runs holding 76.5% of tread columns
+  the same columns before the terraces (prompt 06): 67.6% of the tread-like columns in level runs > 8 blocks
+  step height (level to level, m) n 7812  p10 3.14  p25 4.87  p50 6.64  p75 10.01  p90 14.67  mean 8.12
+  riser rise (m)                  n 7812  p10 2.00  p25 2.00  p50 2.00  p75 3.00  p90 3.00  mean 2.26
+  tread width (blocks)            n 11954  p10 19.00  p25 30.00  p50 70.00  p75 154.00  p90 265.00  mean 114.40
+  tread slope (blocks per block)  n 11954  p10 0.01  p25 0.03  p50 0.07  p75 0.15  p90 0.25  mean 0.10   (1:4 = 0.25, 1:6 = 0.17)
+  risers 7812, of which a pure run of 1-block steps 99.1%
+
+blue_flank: 1000 x 1000 m, rock 0.886 km2, terraced (strength >= 0.5, R' >= 7) 0.599 km2
+  neighbouring-column steps, all rock edges 1769618: 0 88.2%  1 11.7%  2 0.07%  3+ 0 (0.0000%)
+  inside the terraced part 1193690 edges: 0 88.8%  1 11.1%  2 0.10%  3+ 0
+  lines: 1197205 terraced columns on runs of >= 12; tread columns 99.5%; treads 8808; flat (level) runs > 8 blocks: 44375 runs holding 75.7% of tread columns
+  the same columns before the terraces (prompt 06): 71.2% of the tread-like columns in level runs > 8 blocks
+  step height (level to level, m) n 4863  p10 3.03  p25 4.79  p50 6.29  p75 10.58  p90 17.28  mean 8.62
+  riser rise (m)                  n 4863  p10 2.00  p25 2.00  p50 2.00  p75 2.00  p90 3.00  mean 2.18
+  tread width (blocks)            n 8808  p10 14.00  p25 32.00  p50 80.00  p75 189.00  p90 331.00  mean 135.20
+  tread slope (blocks per block)  n 8808  p10 0.01  p25 0.03  p50 0.08  p75 0.18  p90 0.29  mean 0.12   (1:4 = 0.25, 1:6 = 0.17)
+  risers 4863, of which a pure run of 1-block steps 95.9%
+
+green_flank: 1000 x 1000 m, rock 0.836 km2, terraced (strength >= 0.5, R' >= 7) 0.545 km2
+  neighbouring-column steps, all rock edges 1670517: 0 85.4%  1 14.6%  2 0.01%  3+ 0 (0.0000%)
+  inside the terraced part 1086419 edges: 0 86.2%  1 13.7%  2 0.01%  3+ 0
+  lines: 1090062 terraced columns on runs of >= 12; tread columns 99.5%; treads 7327; flat (level) runs > 8 blocks: 38513 runs holding 60.0% of tread columns
+  the same columns before the terraces (prompt 06): 49.0% of the tread-like columns in level runs > 8 blocks
+  step height (level to level, m) n 3321  p10 3.85  p25 5.21  p50 6.74  p75 9.33  p90 14.59  mean 8.17
+  riser rise (m)                  n 3321  p10 2.00  p25 2.00  p50 2.00  p75 3.00  p90 3.00  mean 2.43
+  tread width (blocks)            n 7327  p10 13.00  p25 26.00  p50 83.00  p75 230.00  p90 404.00  mean 147.97
+  tread slope (blocks per block)  n 7327  p10 0.02  p25 0.07  p50 0.13  p75 0.22  p90 0.29  mean 0.15   (1:4 = 0.25, 1:6 = 0.17)
+  risers 3321, of which a pure run of 1-block steps 96.3%
+
+brown_medium: 1000 x 1000 m, rock 0.993 km2, terraced (strength >= 0.5, R' >= 7) 0.749 km2
+  neighbouring-column steps, all rock edges 1983741: 0 85.9%  1 14.1%  2 0.02%  3+ 0 (0.0000%)
+  inside the terraced part 1494914 edges: 0 85.7%  1 14.3%  2 0.03%  3+ 0
+  lines: 1498601 terraced columns on runs of >= 12; tread columns 98.2%; treads 19601; flat (level) runs > 8 blocks: 53848 runs holding 67.9% of tread columns
+  the same columns before the terraces (prompt 06): 50.5% of the tread-like columns in level runs > 8 blocks
+  step height (level to level, m) n 15871  p10 3.71  p25 5.20  p50 6.35  p75 8.23  p90 12.34  mean 7.27
+  riser rise (m)                  n 15871  p10 2.00  p25 2.00  p50 2.00  p75 3.00  p90 3.00  mean 2.43
+  tread width (blocks)            n 19601  p10 12.00  p25 17.00  p50 35.00  p75 94.00  p90 179.00  mean 75.10
+  tread slope (blocks per block)  n 19601  p10 0.02  p25 0.06  p50 0.13  p75 0.23  p90 0.29  mean 0.15   (1:4 = 0.25, 1:6 = 0.17)
+  risers 15871, of which a pure run of 1-block steps 97.9%
+
+islet66_small: 600 x 600 m, rock 0.304 km2, terraced (strength >= 0.5, R' >= 7) 0.224 km2
+  neighbouring-column steps, all rock edges 605915: 0 85.1%  1 14.9%  2 0.01%  3+ 0 (0.0000%)
+  inside the terraced part 447122 edges: 0 86.9%  1 13.1%  2 0.01%  3+ 0
+  lines: 448485 terraced columns on runs of >= 12; tread columns 99.7%; treads 2489; flat (level) runs > 8 blocks: 15385 runs holding 65.7% of tread columns
+  the same columns before the terraces (prompt 06): 53.1% of the tread-like columns in level runs > 8 blocks
+  step height (level to level, m) n 1099  p10 1.67  p25 4.75  p50 7.62  p75 11.34  p90 14.90  mean 8.32
+  riser rise (m)                  n 1099  p10 2.00  p25 2.00  p50 2.00  p75 2.00  p90 2.00  mean 2.04
+  tread width (blocks)            n 2489  p10 17.00  p25 56.00  p50 149.00  p75 265.00  p90 394.00  mean 179.63
+  tread slope (blocks per block)  n 2489  p10 0.01  p25 0.03  p50 0.07  p75 0.18  p90 0.29  mean 0.11   (1:4 = 0.25, 1:6 = 0.17)
+  risers 1099, of which a pure run of 1-block steps 99.9%
+
+origin_islet_99: 500 x 500 m, rock 0.138 km2, terraced (strength >= 0.5, R' >= 7) 0.000 km2
+  neighbouring-column steps, all rock edges 274636: 0 80.5%  1 19.5%  2 0.00%  3+ 0 (0.0000%)
+  inside the terraced part 0 edges: 0 0.0%  1 0.0%  2 0.00%  3+ 0
+
+coast_ramp_58: 1000 x 1000 m, rock 0.431 km2, terraced (strength >= 0.5, R' >= 7) 0.250 km2
+  neighbouring-column steps, all rock edges 859269: 0 85.4%  1 14.6%  2 0.00%  3+ 0 (0.0000%)
+  inside the terraced part 497687 edges: 0 86.6%  1 13.4%  2 0.01%  3+ 0
+  lines: 499785 terraced columns on runs of >= 12; tread columns 99.4%; treads 4138; flat (level) runs > 8 blocks: 17903 runs holding 64.6% of tread columns
+  the same columns before the terraces (prompt 06): 48.2% of the tread-like columns in level runs > 8 blocks
+  step height (level to level, m) n 1952  p10 5.52  p25 7.23  p50 9.59  p75 15.23  p90 21.56  mean 11.93
+  riser rise (m)                  n 1952  p10 2.00  p25 2.00  p50 2.00  p75 2.00  p90 3.00  mean 2.15
+  tread width (blocks)            n 4138  p10 24.00  p25 35.00  p50 84.00  p75 173.00  p90 250.00  mean 120.05
+  tread slope (blocks per block)  n 4138  p10 0.03  p25 0.05  p50 0.13  p75 0.19  p90 0.24  mean 0.13   (1:4 = 0.25, 1:6 = 0.17)
+  risers 1952, of which a pure run of 1-block steps 99.7%
+

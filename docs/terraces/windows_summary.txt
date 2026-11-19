@@ -1,0 +1,20 @@
+coast_c0_s1                mismatch   40 frac 0.0038% air 0 steps3+ 0 largest 2 visible-step sectors 4/43 2-steps 36 duneIdentical true
+coast_c1_s1                mismatch    3 frac 0.0003% air 0 steps3+ 0 largest 2 visible-step sectors 12/53 2-steps 0 duneIdentical true
+coast_c2_s1                mismatch  108 frac 0.0103% air 0 steps3+ 0 largest 2 visible-step sectors 5/38 2-steps 72 duneIdentical true
+edge_58_s1                 mismatch   27 frac 0.0026% air 0 steps3+ 0 largest 2 visible-step sectors 3/45 2-steps 52 duneIdentical true
+edge_81_s1                 mismatch   85 frac 0.0081% air 0 steps3+ 0 largest 2 visible-step sectors 4/27 2-steps 26 duneIdentical true
+gap_green_blue_s1          mismatch   20 frac 0.0019% air 0 steps3+ 0 largest 1 visible-step sectors 8/46 2-steps 0 duneIdentical true
+gap_purple_blue_s1         mismatch   12 frac 0.0011% air 0 steps3+ 0 largest 1 visible-step sectors 0/51 2-steps 0 duneIdentical true
+gap_purple_blue_s2         mismatch   46 frac 0.0044% air 0 steps3+ 0 largest 2 visible-step sectors 5/47 2-steps 0 duneIdentical true
+gap_purple_blue_s3         mismatch   27 frac 0.0026% air 0 steps3+ 0 largest 1 visible-step sectors 13/57 2-steps 0 duneIdentical true
+gap_purple_brown_s1        mismatch   35 frac 0.0033% air 0 steps3+ 0 largest 2 visible-step sectors 8/51 2-steps 59 duneIdentical true
+gap_purple_green_s1        mismatch    1 frac 0.0001% air 0 steps3+ 0 largest 1 visible-step sectors 3/37 2-steps 0 duneIdentical true
+open_desert_s1             mismatch    0 frac 0.0000% air 0 steps3+ 0 largest 0 visible-step sectors 0/0 2-steps 0 duneIdentical true
+origin_s1                  mismatch   10 frac 0.0010% air 0 steps3+ 0 largest 1 visible-step sectors 2/38 2-steps 0 duneIdentical true
+origin_s2                  mismatch    9 frac 0.0009% air 0 steps3+ 0 largest 1 visible-step sectors 5/38 2-steps 0 duneIdentical true
+origin_s3                  mismatch   14 frac 0.0013% air 0 steps3+ 0 largest 1 visible-step sectors 1/35 2-steps 0 duneIdentical true
+rock_interior_81_s1        mismatch   99 frac 0.0094% air 0 steps3+ 0 largest 2 visible-step sectors 0/0 2-steps 84 duneIdentical true
+slice_blue_s1              mismatch  172 frac 0.0164% air 0 steps3+ 0 largest 2 visible-step sectors 0/22 2-steps 1220 duneIdentical true
+slice_green_s1             mismatch  107 frac 0.0102% air 0 steps3+ 0 largest 2 visible-step sectors 8/27 2-steps 25 duneIdentical true
+slice_purple_s1            mismatch  112 frac 0.0107% air 0 steps3+ 0 largest 2 visible-step sectors 1/7 2-steps 215 duneIdentical true
+{"cols":9477914,"mm":927,"air":0,"fl":2079,"over3":0,"pairs":18919190,"outl":28,"sec":662,"vis":82,"s2":1789,"rr":14139953,"dune":0} worst mismatch 0.0164% t07_slice_blue_s1_check.json ; share of coast sectors with a full step above the dunes 12.4% ; exact-2 share 0.0127%

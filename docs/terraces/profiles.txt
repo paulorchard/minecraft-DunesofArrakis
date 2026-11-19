@@ -1,0 +1,7 @@
+line (-7690,-6822)->(-8580,-7146) 948 blocks, summit R' 111.3; steps of 2: 1, of 3+: 0 of 847 pairs, largest step 2; zoom at block 510..660 -> docs/terraces/profile_1_purple_flank_a_zoom.png
+line (13646,-12626)->(12786,-12396) 891 blocks, summit R' 111.3; steps of 2: 0, of 3+: 0 of 789 pairs, largest step 1; zoom at block 490..640 -> docs/terraces/profile_2_blue_flank_zoom.png
+line (-3191,-12862)->(-3348,-13452) 612 blocks, summit R' 100.0; steps of 2: 0, of 3+: 0 of 500 pairs, largest step 1; zoom at block 460..610 -> docs/terraces/profile_3_green_flank_zoom.png
+line (-3388,-3144)->(-3972,-3144) 585 blocks, summit R' 100.5; steps of 2: 0, of 3+: 0 of 584 pairs, largest step 1; zoom at block 430..580 -> docs/terraces/profile_4_brown_medium_zoom.png
+line (3951,-13418)->(3720,-13814) 459 blocks, summit R' 55.1; steps of 2: 0, of 3+: 0 of 458 pairs, largest step 1; zoom at block 280..430 -> docs/terraces/profile_5_islet66_merged_small_zoom.png
+line (54,-93)->(-100,172) 307 blocks, summit R' 49.0; steps of 2: 0, of 3+: 0 of 306 pairs, largest step 1; zoom at block 150..300 -> docs/terraces/profile_6_islet99_origin_zoom.png
+line (-5188,-6336)->(-5130,-6900) 568 blocks, summit R' 55.4; steps of 2: 0, of 3+: 0 of 566 pairs, largest step 1; zoom at block 120..270 -> docs/terraces/profile_7_coast_ramp_purple58_zoom.png

@@ -72,3 +72,13 @@ tools/worldscan/try.sh <name> <seed> <x0> <z0> <size>     # regenerates the dune
 - `windowcheck_relief.js <regionDir> <mask.bin> <rockmap.i16> <x0> <z0> <size> <outPrefix> [--save f] [--baseline f]`: generated chunks against the analytic outline and relief: sandstone at or below the rock top and dune sand above it, the outline (sandstone at y 62 = footprint), floating sand, air below the surface, steps between neighbouring columns, slopes, banking of dunes over rock along the coast, dune mountains beside the coast, identity of the dune columns outside the footprint with the prompt 05 run.
 - `checkrelief.sh <tag> [baseline-tag]`: runs it (and `render.js`) for every window of `windows.tsv`; output in `docs/relief/`. New windows `slice_purple`, `slice_blue`, `slice_green` hold the coast-to-summit lines.
 - `slice.js <regionDir> <x1> <z1> <x2> <z2> <out.png> [--ymin 40 --ymax 190 --vscale 3]`: vertical slice of generated chunks along a line: sand, sandstone, air, grid lines every 10 blocks above the sand level (labels in blocks above sand, heavy every 50), distance ticks every 100 blocks; prints the numbers behind it.
+
+## Terrace tools (prompt 07)
+
+- `terrace.sh [--terrace path|off] <continents.json> <command>`: compiles and runs `java/TerraceScan.java` (the mod's `ReliefModel` with the terrace config, no chunk generation). `ReliefScan` also takes `--terrace path|off`.
+  - `line <seed> x1 z1 x2 z2 out.png`: before/after profile plot (smooth R vs terraced R') plus a 150-block zoom and a `.txt` of the heights.
+  - `stats <seed> name x z size ...`: 1 m grids: neighbour steps (0/1/2/3+, with a list of 3+ faces), treads, risers, level runs, pure 1-block risers.
+  - `levels <seed> x0 z0 w h out.png`: 500 m tile level map and the level distance of tile pairs 1 km apart.
+  - `routes <seed> <continent>...`: walk-up counter (steps up of at most 1 block, corridors, share of coast with access).
+  - `calib <seed>`: strength distribution. `at <seed> x z ...`: R, R', H, O, k at points. `sweep <n>`: all invariants over seeds 1..n and the worst seed.
+- `windowcheck_relief.js` adds a `terraces` block (coast sectors with a full step visible above the dunes, steps of exactly 2). `slice.js --dump file` writes the per-column tops. `checkrelief.sh` takes `OUT=dir`.

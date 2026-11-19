@@ -1,0 +1,38 @@
+Note: tools\worldscan\java\ReliefScan.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+seed  1: faces3+ 0 | 2-steps max 0.066% | pure risers min 95.9% | strength <0.3 20.7% >0.8 42.0% | dp50 0.00 dp95 0.00 dsummit 1.60 | level pairs median 2.67 m, under 0.5 m 0.0% | terraced 68.2% of rock | islet99 terraced cols 0 | step median 6.45 | tread slope 0.128 | flat share 72.2%
+seed  2: faces3+ 0 | 2-steps max 0.024% | pure risers min 95.4% | strength <0.3 19.7% >0.8 42.2% | dp50 0.00 dp95 0.00 dsummit 1.70 | level pairs median 2.33 m, under 0.5 m 4.5% | terraced 65.5% of rock | islet99 terraced cols 0 | step median 6.10 | tread slope 0.148 | flat share 67.6%
+seed  3: faces3+ 0 | 2-steps max 0.028% | pure risers min 99.5% | strength <0.3 17.8% >0.8 42.0% | dp50 0.00 dp95 0.10 dsummit 1.30 | level pairs median 2.00 m, under 0.5 m 7.7% | terraced 63.7% of rock | islet99 terraced cols 0 | step median 6.86 | tread slope 0.122 | flat share 70.5%
+seed  4: faces3+ 0 | 2-steps max 0.022% | pure risers min 98.6% | strength <0.3 18.8% >0.8 41.1% | dp50 0.10 dp95 0.00 dsummit 3.10 | level pairs median 2.75 m, under 0.5 m 0.0% | terraced 64.1% of rock | islet99 terraced cols 0 | step median 6.56 | tread slope 0.111 | flat share 70.7%
+seed  5: faces3+ 0 | 2-steps max 0.023% | pure risers min 97.9% | strength <0.3 19.3% >0.8 42.3% | dp50 0.10 dp95 0.00 dsummit 1.30 | level pairs median 2.00 m, under 0.5 m 7.7% | terraced 65.9% of rock | islet99 terraced cols 0 | step median 6.73 | tread slope 0.126 | flat share 72.5%
+seed  6: faces3+ 0 | 2-steps max 0.014% | pure risers min 98.9% | strength <0.3 19.3% >0.8 41.7% | dp50 0.00 dp95 0.10 dsummit 1.30 | level pairs median 2.50 m, under 0.5 m 6.9% | terraced 66.1% of rock | islet99 terraced cols 0 | step median 6.21 | tread slope 0.139 | flat share 64.9%
+seed  7: faces3+ 0 | 2-steps max 0.017% | pure risers min 98.8% | strength <0.3 19.6% >0.8 42.7% | dp50 0.00 dp95 0.10 dsummit 1.30 | level pairs median 2.33 m, under 0.5 m 0.0% | terraced 63.7% of rock | islet99 terraced cols 0 | step median 6.06 | tread slope 0.108 | flat share 70.8%
+seed  8: faces3+ 0 | 2-steps max 0.044% | pure risers min 95.1% | strength <0.3 20.1% >0.8 41.9% | dp50 0.10 dp95 0.10 dsummit 1.60 | level pairs median 2.33 m, under 0.5 m 0.0% | terraced 69.1% of rock | islet99 terraced cols 0 | step median 6.46 | tread slope 0.143 | flat share 68.2%
+seed  9: faces3+ 0 | 2-steps max 0.008% | pure risers min 99.0% | strength <0.3 21.1% >0.8 41.7% | dp50 0.10 dp95 0.10 dsummit 1.90 | level pairs median 2.50 m, under 0.5 m 0.0% | terraced 62.4% of rock | islet99 terraced cols 0 | step median 6.60 | tread slope 0.102 | flat share 78.7%
+seed 10: faces3+ 0 | 2-steps max 0.008% | pure risers min 98.5% | strength <0.3 19.1% >0.8 41.3% | dp50 0.10 dp95 0.10 dsummit 1.30 | level pairs median 2.25 m, under 0.5 m 0.0% | terraced 67.1% of rock | islet99 terraced cols 0 | step median 6.31 | tread slope 0.110 | flat share 76.5%
+seed 11: faces3+ 0 | 2-steps max 0.042% | pure risers min 97.2% | strength <0.3 19.4% >0.8 42.4% | dp50 0.00 dp95 0.10 dsummit 1.40 | level pairs median 2.50 m, under 0.5 m 7.4% | terraced 65.4% of rock | islet99 terraced cols 0 | step median 6.49 | tread slope 0.141 | flat share 69.5%
+seed 12: faces3+ 0 | 2-steps max 0.011% | pure risers min 99.2% | strength <0.3 20.6% >0.8 41.0% | dp50 0.00 dp95 0.10 dsummit 1.40 | level pairs median 2.00 m, under 0.5 m 9.1% | terraced 58.1% of rock | islet99 terraced cols 0 | step median 6.95 | tread slope 0.137 | flat share 68.4%
+seed 13: faces3+ 0 | 2-steps max 0.010% | pure risers min 99.4% | strength <0.3 20.5% >0.8 41.7% | dp50 0.00 dp95 0.10 dsummit 4.80 | level pairs median 2.00 m, under 0.5 m 12.5% | terraced 63.7% of rock | islet99 terraced cols 0 | step median 5.90 | tread slope 0.099 | flat share 79.9%
+seed 14: faces3+ 0 | 2-steps max 0.068% | pure risers min 99.3% | strength <0.3 20.2% >0.8 41.2% | dp50 0.00 dp95 0.10 dsummit 2.00 | level pairs median 2.00 m, under 0.5 m 0.0% | terraced 72.3% of rock | islet99 terraced cols 0 | step median 6.33 | tread slope 0.122 | flat share 73.8%
+seed 15: faces3+ 0 | 2-steps max 0.010% | pure risers min 99.6% | strength <0.3 19.3% >0.8 41.1% | dp50 0.00 dp95 0.00 dsummit 1.30 | level pairs median 2.50 m, under 0.5 m 4.8% | terraced 66.4% of rock | islet99 terraced cols 0 | step median 6.69 | tread slope 0.090 | flat share 77.3%
+seed 16: faces3+ 0 | 2-steps max 0.056% | pure risers min 93.1% | strength <0.3 19.9% >0.8 41.7% | dp50 0.00 dp95 0.00 dsummit 1.40 | level pairs median 2.25 m, under 0.5 m 0.0% | terraced 63.6% of rock | islet99 terraced cols 0 | step median 6.42 | tread slope 0.156 | flat share 64.5%
+seed 17: faces3+ 0 | 2-steps max 0.023% | pure risers min 98.5% | strength <0.3 21.5% >0.8 41.7% | dp50 0.10 dp95 0.00 dsummit 1.10 | level pairs median 3.33 m, under 0.5 m 0.0% | terraced 64.5% of rock | islet99 terraced cols 0 | step median 6.65 | tread slope 0.132 | flat share 68.6%
+seed 18: faces3+ 10 | 2-steps max 0.049% | pure risers min 94.6% | strength <0.3 18.8% >0.8 42.2% | dp50 0.00 dp95 0.10 dsummit 1.30 | level pairs median 2.25 m, under 0.5 m 0.0% | terraced 66.8% of rock | islet99 terraced cols 0 | step median 6.43 | tread slope 0.121 | flat share 69.6%
+seed 19: faces3+ 0 | 2-steps max 0.019% | pure risers min 97.4% | strength <0.3 21.4% >0.8 41.8% | dp50 0.10 dp95 0.00 dsummit 1.30 | level pairs median 3.00 m, under 0.5 m 4.5% | terraced 67.5% of rock | islet99 terraced cols 0 | step median 6.41 | tread slope 0.110 | flat share 74.8%
+seed 20: faces3+ 0 | 2-steps max 0.020% | pure risers min 98.8% | strength <0.3 19.3% >0.8 42.2% | dp50 0.00 dp95 0.10 dsummit 1.40 | level pairs median 2.50 m, under 0.5 m 4.3% | terraced 69.7% of rock | islet99 terraced cols 0 | step median 6.27 | tread slope 0.131 | flat share 73.8%
+--- worst seeds (max / min over 20 seeds)
+faces of 3+ blocks (total over the windows)                            max 10.000 (seed 18)   min 0.000 (seed 1)
+share of 2-block steps among rock edges % (max over windows)           max 0.068 (seed 14)   min 0.008 (seed 9)
+pure 1-block risers % (min over windows)                               max 99.639 (seed 15)   min 93.060 (seed 16)
+strength below 0.3 (% of rock, large continents)                       max 21.527 (seed 17)   min 17.815 (seed 3)
+strength above 0.8                                                     max 42.705 (seed 7)   min 40.958 (seed 12)
+p50 change vs prompt 06, worst continent (m)                           max 0.100 (seed 4)   min 0.000 (seed 1)
+p95 change (m)                                                         max 0.100 (seed 3)   min 0.000 (seed 1)
+top-5 summit change (m)                                                max 4.800 (seed 13)   min 1.100 (seed 17)
+level pairs 1 km apart: median distance of dominant levels (m)         max 3.333 (seed 17)   min 2.000 (seed 3)
+level pairs under 0.5 m apart %                                        max 12.500 (seed 13)   min 0.000 (seed 1)
+terraced area % of rock (strength >= 0.5)                              max 72.307 (seed 14)   min 58.106 (seed 12)
+islet 99 terraced columns                                              max 0.000 (seed 1)   min 0.000 (seed 1)
+median step height (m)                                                 max 6.947 (seed 12)   min 5.899 (seed 13)
+mean tread slope                                                       max 0.156 (seed 16)   min 0.090 (seed 15)
+flat-run share of tread columns % (on)                                 max 79.910 (seed 13)   min 64.477 (seed 16)

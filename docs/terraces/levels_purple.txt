@@ -1,0 +1,11 @@
+level map docs/terraces/levelmap_purple.png: 8 x 7 tiles of 500 m, each tile a histogram of the surface height (bar = share of the tile's area at that height, height 10..110 m up, bottom to top)
+  tile (-9500,-9000) levels 15 26 20 30 | tile (-8500,-9000) levels 11 15 21 27 | mean distance 1.25 m
+  tile (-8500,-8500) levels 86 92 97 103 | tile (-7500,-8500) levels 56 48 43 39 | mean distance NaN m
+  tile (-9500,-8000) levels 32 39 26 14 | tile (-8500,-8000) levels 98 91 86 102 | mean distance NaN m
+  tile (-8000,-8000) levels 62 65 48 42 | tile (-7000,-8000) levels 43 47 59 50 | mean distance 2.75 m
+  tile (-9500,-7500) levels 88 92 96 83 | tile (-8500,-7500) levels 110 104 101 88 | mean distance 3.50 m
+  tile (-9000,-7500) levels 109 100 97 91 | tile (-8000,-7500) levels 58 62 46 42 | mean distance NaN m
+  tile (-8500,-7500) levels 110 104 101 88 | tile (-7500,-7500) levels 50 39 36 46 | mean distance NaN m
+  tile (-9500,-7000) levels 56 45 49 63 | tile (-8500,-7000) levels 102 68 73 105 | mean distance 5.00 m
+  tile (-9000,-6500) levels 56 60 42 38 | tile (-8000,-6500) levels 11 27 23 34 | mean distance 4.00 m
+tile pairs 1 km apart with rock: 38; mean distance of the dominant levels of one tile to the nearest of the other: n 38  p10 1.50  p25 2.00  p50 2.67  p75 3.33  p90 4.50  mean 2.79; pairs under 0.5 m (levels line up): 0 (0.0%)

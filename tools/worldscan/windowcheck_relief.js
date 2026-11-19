@@ -107,6 +107,29 @@ for (let sz = 0; sz + 64 <= S; sz += 64) for (let sx = 0; sx + 64 <= S; sx += 64
   if (n >= 100) { if (sandN / n >= 0.5) sectBank++; else sectClear++; }
 }
 
+// ---- terraces (prompt 07): in each 64 x 64 coast sector, is at least one full step visible above the dunes? A step = a monotone rise of
+// 3 or more blocks over at most 5 consecutive columns (slope 0.6 or more: steeper than the smooth ramp), all of them bare rock on top (not dune sand), within 100 m of the coast.
+let vsSectors = 0, vsWith = 0, steps2 = 0, stepsRock = 0;
+for (let sz = 0; sz + 64 <= S; sz += 64) for (let sx = 0; sx + 64 <= S; sx += 64) {
+  let n = 0, found = false;
+  for (let z = sz; z < sz + 64; z++) for (let x = sx; x < sx + 64; x++) { const k = z * S + x; if (inside[k] && dist[k] > 0 && dist[k] <= 30 && topKind[k] > 0) n++; }
+  if (n < 100) continue;
+  vsSectors++;
+  for (let z = sz; z < sz + 64 && !found; z++) for (let x = sx; x < sx + 64 && !found; x++) {
+    const k = z * S + x; if (!inside[k] || topKind[k] !== 2 || dist[k] > 100) continue;
+    for (const [dx, dz] of [[1, 0], [0, 1]]) {
+      let ok = true, prev = top[k];
+      for (let i = 1; i <= 5 && ok; i++) { const xx = x + dx * i, zz = z + dz * i; if (xx >= S || zz >= S) { ok = false; break; } const q = zz * S + xx; if (!inside[q] || topKind[q] !== 2 || top[q] < prev) ok = false; else prev = top[q]; if (ok && prev - top[k] >= 3) { found = true; break; } }
+      if (found) break;
+    }
+  }
+  if (found) vsWith++;
+}
+for (let z = 0; z < S; z++) for (let x = 0; x < S; x++) {
+  const k = z * S + x; if (!inside[k] || topKind[k] !== 2) continue;
+  for (const [dx, dz] of [[1, 0], [0, 1]]) { const xx = x + dx, zz = z + dz; if (xx >= S || zz >= S) continue; const q = zz * S + xx; if (!inside[q] || topKind[q] !== 2) continue; stepsRock++; if (Math.abs(top[k] - top[q]) === 2) steps2++; }
+}
+
 // ---- steps between neighbouring columns of the footprint
 let walls3 = 0, wallsDune = 0, wallsRock = 0, maxStep = 0, maxStepRock = 0, steps = 0;
 const wallAt = [];
@@ -165,6 +188,7 @@ const r = {
   relief: { checkedColumns: below + equalRock + equalNotRock + aboveRock + duneAbove, topBelowAnalytic: below, topAtAnalyticButNotSandstone: equalNotRock, sandstoneAboveAnalytic: aboveRock, topAtAnalyticSandstone: equalRock, duneSandAboveRock: duneAbove, largestDuneOverRock: maxDuneOver, mismatchColumns: reliefMism, mismatchFraction: +(reliefMism / (S * S)).toExponential(2), mismatchWithinOneBlockOfCoast: relMismatchRing, mismatchOnChunkBorder: relMismatchOnGrid },
   blocks: { airBelowSurface: c.airBelowSurface, bedrockAboveBottom5: c.bedrockAbove, floatingSandInRock: c.floatingSand, sandstoneAboveRockSurface: c.sandstoneAboveRock, wrongBlocks: c.wrongBlocks, columnsWithWrongBlock: wrongCols.size },
   rockSurfaceHeightAboveSand: rockHeights,
+  terraces: { coastSectors: vsSectors, withFullStepVisible: vsWith, rockRockPairs: stepsRock, stepsOfExactly2: steps2 },
   banking, coastSectors64: { dunesBankOver: sectBank, rockStandsClear: sectClear },
   steps: { neighbourPairs: steps, over3: walls3, over3WithDune: wallsDune, over3RockOnly: wallsRock, largest: maxStep, largestRockOnly: maxStepRock, rockOnlyExamples_x_z_step: wallAt },
   slope: { baselineBlocks: 2 * B, rockColumns: slopeN, share_over_20deg: slopeN ? +(slope20 / slopeN).toFixed(4) : null, share_over_35deg: slopeN ? +(slope35 / slopeN).toFixed(4) : null, steepestGradient: +slopeMax.toFixed(2), within100mOfCoast: n100, share_over_25deg_within100m: n100 ? +(slope25 / n100).toFixed(4) : null },

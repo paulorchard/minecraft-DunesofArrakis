@@ -1,0 +1,19 @@
+Note: tools\worldscan\java\ReliefScan.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+seed 1  (grid 6 m)
+  purple area 80.6 km2 | R p5 10.5 p50 39.1 p95 93.6 max 111.3 | summits(prom>=20 m) 74 heights 111@(-8580,-7146) 111@(-18330,-7038) 111@(-6090,-8718) 110@(-4458,-9540) 108@(-5328,-9270) 106@(-4452,-10158) 106@(-4770,-11316) 105@(-3276,-9372) | benches>=400 m2: 3167 (13.22 km2; 10-30 m high: 966; largest 924732 m2) | slope >20 deg 7.0%, >35 0.0%, >45 0.0%, first 100 m >25 deg 0.9%, steepest 0.81 blocks/block, steps >3: 0 | walk-up: high-ground areas 43, reachable from the coast 43 at <=1 block/block (coast with access 100%) and 43 at <=0.5 (100%): 111 m@(-8502,-7266) 111 m@(-18330,-7032) 111 m@(-5934,-8748) 106 m@(-4770,-11316) 105 m@(-3276,-9366) 105 m@(-11310,-7536)
+  green  area 42.2 km2 | R p5 7.2 p50 32.2 p95 76.8 max 100.0 | summits(prom>=20 m) 40 heights 100@(-3348,-13458) 99@(-14874,-13500) 99@(6924,-12822) 98@(4338,-10794) 98@(4848,-12588) 96@(7452,-13878) 95@(-6828,-13812) 94@(-18714,-12864) | benches>=400 m2: 1177 (5.38 km2; 10-30 m high: 457; largest 1237752 m2) | slope >20 deg 7.1%, >35 0.0%, >45 0.0%, first 100 m >25 deg 0.9%, steepest 0.86 blocks/block, steps >3: 0 | walk-up: high-ground areas 24, reachable from the coast 24 at <=1 block/block (coast with access 100%) and 24 at <=0.5 (100%): 100 m@(-3348,-13452) 99 m@(-14874,-13500) 99 m@(6918,-12810) 98 m@(4338,-10794) 95 m@(-6828,-13812) 94 m@(-18720,-12858)
+  blue   area 78.9 km2 | R p5 11.4 p50 39.3 p95 89.6 max 111.2 | summits(prom>=20 m) 77 heights 111@(12786,-12396) 111@(17058,-9720) 110@(10758,-10188) 108@(12648,-11046) 107@(19296,-7758) 107@(9990,-8334) 107@(8964,-7566) 103@(13002,-6564) | benches>=400 m2: 3330 (13.48 km2; 10-30 m high: 1041; largest 1033740 m2) | slope >20 deg 7.0%, >35 0.0%, >45 0.0%, first 100 m >25 deg 0.8%, steepest 0.90 blocks/block, steps >3: 0 | walk-up: high-ground areas 36, reachable from the coast 36 at <=1 block/block (coast with access 100%) and 36 at <=0.5 (100%): 111 m@(12786,-12396) 111 m@(17058,-9720) 110 m@(10758,-10188) 107 m@(19296,-7758) 107 m@(9990,-8334) 103 m@(13002,-6564)
+  brown  area 6.2 km2 | R p5 6.1 p50 37.8 p95 74.9 max 100.5 | summits(prom>=20 m) 5 heights 101@(-3972,-3144) 83@(-1248,-3528) 76@(-5532,-5250) 67@(-3006,-2124) 61@(-294,-18) | benches>=400 m2: 194 (0.31 km2; 10-30 m high: 41; largest 10980 m2) | slope >20 deg 9.0%, >35 0.0%, >45 0.0%, first 100 m >25 deg 1.1%, steepest 0.83 blocks/block, steps >3: 0 | walk-up: high-ground areas 4, reachable from the coast 4 at <=1 block/block (coast with access 100%) and 4 at <=0.5 (100%): 101 m@(-3972,-3144) 83 m@(-1248,-3528) 76 m@(-5532,-5244) 61 m@(-294,-18)
+  red    area 16.3 km2 | R p5 8.7 p50 29.9 p95 74.5 max 106.3 | summits(prom>=20 m) 17 heights 106@(17574,-14094) 99@(21450,-11466) 98@(18954,-13140) 94@(19938,-11904) 91@(18882,-12648) 90@(18558,-13152) 80@(22188,-2436) 80@(20058,-12906) | benches>=400 m2: 569 (2.88 km2; 10-30 m high: 232; largest 1372320 m2) | slope >20 deg 7.4%, >35 0.0%, >45 0.0%, first 100 m >25 deg 0.8%, steepest 0.70 blocks/block, steps >3: 0 | walk-up: high-ground areas 12, reachable from the coast 12 at <=1 block/block (coast with access 100%) and 12 at <=0.5 (100%): 106 m@(17574,-14094) 99 m@(21450,-11466) 98 m@(18954,-13140) 94 m@(19938,-11904) 80 m@(22188,-2430) 80 m@(20058,-12900)
+  size class 0 (r < 350): 1.7 km2 | R p5 3.5 p50 18.8 p95 50.8 max 70.3
+  size class 1 (r < 700): 17.6 km2 | R p5 5.6 p50 26.8 p95 68.2 max 110.9
+  size class 2 (r < 1400): 111.9 km2 | R p5 9.1 p50 35.2 p95 81.9 max 111.3
+  size class 3 (r < inf): 93.1 km2 | R p5 12.2 p50 42.2 p95 94.7 max 111.2
+  steepest of purple at -4968,-9996
+  steepest of green at -18906,-12768
+  steepest of blue at 11028,-10314
+  steepest of brown at -3822,-3630
+  steepest of red at 16950,-13998
+  islet 99 (origin, 440 x 207): 0.291 km2 | R p5 2.8 p50 26.5 p95 54.1 max 61.1
+

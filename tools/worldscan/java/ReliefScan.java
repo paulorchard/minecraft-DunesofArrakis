@@ -6,6 +6,7 @@ import com.paulorchard.islandcraft.dunesofarrakis.worldgen.CoastModel;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ContinentIndex;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ReliefConfig;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ReliefModel;
+import com.paulorchard.islandcraft.dunesofarrakis.worldgen.TerraceConfig;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -43,7 +44,8 @@ public class ReliefScan {
     static ReliefConfig rcfg;
     static CoastModel coast;
     static ReliefModel relief;
-    static String coastPath = RES + "arrakis/coast.json", reliefPath = RES + "arrakis/relief.json";
+    static TerraceConfig tcfg;
+    static String coastPath = RES + "arrakis/coast.json", reliefPath = RES + "arrakis/relief.json", terracePath = RES + "arrakis/terrace.json";
     static int step = 4;
     static String detailFile = null;
 
@@ -58,7 +60,10 @@ public class ReliefScan {
         ro.getAsJsonObject("distance").addProperty("tile", Integer.getInteger("tile", 2048));
         ro.getAsJsonObject("distance").addProperty("cache_tiles", 400);
         rcfg = new ReliefConfig(ro, sand);
-        relief = new ReliefModel(coast, rcfg);
+        JsonObject to = terracePath.equals("off") ? JsonParser.parseString(Files.readString(Path.of(RES + "arrakis/terrace.json"), StandardCharsets.UTF_8)).getAsJsonObject() : JsonParser.parseString(Files.readString(Path.of(terracePath), StandardCharsets.UTF_8)).getAsJsonObject();
+        if (terracePath.equals("off")) to.addProperty("mode", "off");
+        tcfg = new TerraceConfig(to);
+        relief = new ReliefModel(coast, rcfg, tcfg);
     }
 
     /** The world-seeded noise, built as RandomState does. */
@@ -85,6 +90,7 @@ public class ReliefScan {
             switch (a[p]) {
                 case "--config" -> coastPath = a[p + 1];
                 case "--relief" -> reliefPath = a[p + 1];
+                case "--terrace" -> terracePath = a[p + 1];
                 default -> throw new IllegalArgumentException(a[p]);
             }
             p += 2;
