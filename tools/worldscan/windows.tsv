@@ -1,0 +1,14 @@
+# name	seed	centre_x	centre_z	note   (1024 x 1024 block windows, aligned to the 16-block chunk grid by windows.sh)
+origin	1	0	0	brown islet 99 at the origin
+gap_purple_blue	1	506	-7097	midpoint of the 309 m purple-blue gap
+gap_purple_brown	1	-5628	-5952	midpoint of the 335 m purple-brown gap
+gap_green_blue	1	8703	-14922	midpoint of the 424 m green-blue gap
+gap_purple_green	1	-6065	-13085	midpoint of the 811 m purple-green gap
+edge_58	1	-5159	-6077	south coast of the largest purple ellipse 58
+edge_81	1	13775	-5944	south coast of the largest blue ellipse 81
+rock_interior_81	1	13626	-8763	inside ellipse 81 (cost: rock)
+open_desert	1	20000	20000	open desert, far from any rock
+origin	2	0	0	other seed
+origin	3	0	0	other seed
+gap_purple_blue	2	506	-7097	other seed
+gap_purple_blue	3	506	-7097	other seed

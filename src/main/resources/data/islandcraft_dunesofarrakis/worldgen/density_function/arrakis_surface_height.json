@@ -1,5 +1,19 @@
 {
-  "type": "minecraft:add",
-  "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
-  "argument2": "islandcraft_dunesofarrakis:arrakis_dune_height"
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:range_choice",
+    "input": "islandcraft_dunesofarrakis:arrakis_continent_field",
+    "min_inclusive": 1.0E-300,
+    "max_exclusive": 2.0,
+    "when_in_range": {
+      "type": "minecraft:add",
+      "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
+      "argument2": "islandcraft_dunesofarrakis:arrakis_rock_top"
+    },
+    "when_out_of_range": {
+      "type": "minecraft:add",
+      "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
+      "argument2": "islandcraft_dunesofarrakis:arrakis_dune_height"
+    }
+  }
 }

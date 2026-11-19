@@ -43,3 +43,10 @@ tools/worldscan/try.sh <name> <seed> <x0> <z0> <size>     # regenerates the dune
 ## Other tools
 - `nbt.js`: minimal Anvil/NBT reader (long arrays as hi/lo Int32 pairs).
 - `closure.js`, `show.js`: from the terrain study (density-function dependency closure of a Tectonic recipe; per-biome stats printer for the study's JSON).
+
+## Continent footprint tools (prompt 04)
+
+- `field.sh <command>`: evaluates the continent field with the mod's own `ContinentIndex` class (no chunk generation). `info` (conventions, index size), `render out.png [blocks-per-pixel]` (whole 50 km square, north up, origin crosshair), `areas [cell]` (union area per continent and total, overlap check), `gaps out.json` (minimum distance between each pair of continents), `coast <shapeId>` (a point on the true coast), `bench` (ns per field call), `mask x0 z0 size out.bin` (one byte per column).
+- `windows.sh <tag> [name-filter]`: generates every window in `windows.tsv` (1024 x 1024, one world each, `run-server/<tag>_<name>_s<seed>`) and writes timings to `build/worldscan/<tag>_timing.txt`.
+- `windowcheck.js <regionDir> <mask.bin> <x0> <z0> <size> <outPrefix> [--rock-top 103] [--save f] [--baseline f] [--line x1,z1,x2,z2]`: per column, compares the generated surface (sandstone or dune sand) with the analytic mask; reports mismatches, where they are (distance to the true coast), rock top flatness, wrong blocks, dune statistics outside the rock, identity with a saved dune-only run, and a strip check along a line.
+- `checkall.sh <tag> save|cmp`: runs the window checker and `render.js` for every window. `save` stores the surface heights as the reference (done once on the dune-only build, tag `base`); `cmp` compares with it.

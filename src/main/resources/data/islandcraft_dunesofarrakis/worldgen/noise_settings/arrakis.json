@@ -38,7 +38,11 @@
         },
         "then_run": { "type": "minecraft:block", "result_state": { "Name": "minecraft:bedrock" } }
       },
-      { "type": "minecraft:block", "result_state": { "Name": "islandcraft_dunesofarrakis:dune_sand" } }
+      {
+        "type": "islandcraft_dunesofarrakis:arrakis_continent_block",
+        "inside": { "Name": "minecraft:sandstone" },
+        "outside": { "Name": "islandcraft_dunesofarrakis:dune_sand" }
+      }
     ]
   }
 }

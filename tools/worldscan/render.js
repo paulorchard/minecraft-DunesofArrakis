@@ -15,7 +15,8 @@ const fs = require('fs'), zlib = require('zlib'), path = require('path');
 
 const args = process.argv.slice(2);
 function opt(name, def) { const i = args.indexOf('--' + name); if (i < 0) return def; const v = args[i + 1]; args.splice(i, 2); return isNaN(+v) ? v : +v; }
-const isSand = n => n === 'minecraft:sand' || n === 'islandcraft_dunesofarrakis:dune_sand';
+// sand-like blocks for the census: vanilla sand, dune sand, and sandstone (the continent rock; the window checker verifies rock separately)
+const isSand = n => n === 'minecraft:sand' || n === 'islandcraft_dunesofarrakis:dune_sand' || n === 'minecraft:sandstone';
 const SCALE = opt('scale', 2), SAND = opt('sand', 63), WIND = opt('wind', 115), WIN = opt('window', 256), GR = opt('grad', 4);
 const [dir, outPrefix, X0, Z0, SIZE] = args; const x0 = +X0, z0 = +Z0, S = +SIZE;
 if (!dir || isNaN(x0) || isNaN(z0) || !S) { console.error('usage: node render.js <regionDir> <outPrefix> <x0> <z0> <size> [--scale 2] [--sand 63] [--wind 115]'); process.exit(1); }
