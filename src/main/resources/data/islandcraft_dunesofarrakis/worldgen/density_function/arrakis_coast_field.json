@@ -1,0 +1,9 @@
+{
+  "type": "islandcraft_dunesofarrakis:arrakis_coast_field",
+  "lobes_gentle": "islandcraft_dunesofarrakis:arrakis_coast_lobes_gentle",
+  "lobes_strong": "islandcraft_dunesofarrakis:arrakis_coast_lobes_strong",
+  "bays_gentle": "islandcraft_dunesofarrakis:arrakis_coast_bays_gentle",
+  "bays_strong": "islandcraft_dunesofarrakis:arrakis_coast_bays_strong",
+  "detail": "islandcraft_dunesofarrakis:arrakis_coast_detail",
+  "blend": "islandcraft_dunesofarrakis:arrakis_coast_blend"
+}

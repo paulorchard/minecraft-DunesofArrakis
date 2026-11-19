@@ -12,3 +12,6 @@ origin	2	0	0	other seed
 origin	3	0	0	other seed
 gap_purple_blue	2	506	-7097	other seed
 gap_purple_blue	3	506	-7097	other seed
+coast_c0	1	3836	-13616	islet 66 (433 x 221), size class 0, whole islet in the window
+coast_c1	1	4211	-7657	coast of ellipse 25 (901 x 255), size class 1
+coast_c2	1	-11359	-6912	coast of ellipse 8 (1813 x 855), size class 2, next to the channel that used to seal

@@ -2,9 +2,9 @@
   "type": "minecraft:cache_2d",
   "argument": {
     "type": "minecraft:range_choice",
-    "input": "islandcraft_dunesofarrakis:arrakis_continent_field",
+    "input": "islandcraft_dunesofarrakis:arrakis_coast_field",
     "min_inclusive": 1.0E-300,
-    "max_exclusive": 2.0,
+    "max_exclusive": 1.0E6,
     "when_in_range": {
       "type": "minecraft:add",
       "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",

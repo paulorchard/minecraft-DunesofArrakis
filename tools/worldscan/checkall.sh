@@ -12,10 +12,10 @@ grep -v '^#' tools/worldscan/windows.tsv | while IFS=$'\t' read -r name seed cx 
   x0=$(( (cx - 512) / 16 * 16 )); z0=$(( (cz - 512) / 16 * 16 ))
   [ $(( (cx - 512) % 16 )) -lt 0 ] && x0=$(( x0 - 16 )); [ $(( (cz - 512) % 16 )) -lt 0 ] && z0=$(( z0 - 16 ))
   W="${TAG}_${name}_s${seed}"; R="run-server/$W/dimensions/islandcraft_dunesofarrakis/arrakis/region"
-  M="build/worldscan/mask_${name}.bin"; [ -f "$M" ] || ./tools/worldscan/field.sh mask $x0 $z0 1024 "$M" >/dev/null
+  M="build/worldscan/cmask_${name}_s${seed}.bin"; ./tools/worldscan/coast.sh src/main/resources/data/islandcraft_dunesofarrakis/arrakis/continents.json mask $seed $x0 $z0 1024 "$M" >/dev/null
   H="build/worldscan/heights_${W}.i16"; EXTRA=""
   [ "$MODE" = save ] && EXTRA="--save $H"
-  [ "$MODE" = cmp ] && EXTRA="--baseline build/worldscan/heights_base_${name}_s${seed}.i16 --save $H"
+  if [ "$MODE" = cmp ]; then B="build/worldscan/heights_base_${name}_s${seed}.i16"; if [ -f "$B" ]; then EXTRA="--baseline $B --save $H"; else EXTRA="--save $H"; fi; fi
   case "$name" in
     gap_purple_blue) P="1 3";; gap_purple_brown) P="1 4";; gap_green_blue) P="2 3";; gap_purple_green) P="1 2";; *) P="";;
   esac

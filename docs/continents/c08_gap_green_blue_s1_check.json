@@ -1,0 +1,75 @@
+{
+ "window": {
+  "x0": 8176,
+  "z0": -15440,
+  "size": 1024,
+  "rockTopY": 103
+ },
+ "generated": {
+  "columns": 1048576,
+  "fullChunks": 4096
+ },
+ "footprint": {
+  "analyticInsideColumns": 325612,
+  "generatedRockTopColumns": 325612,
+  "fractionInside": 0.3105
+ },
+ "mismatch": {
+  "columns": 2,
+  "fractionOfColumns": 0.00000191,
+  "withinOneBlockOfCoast": 2,
+  "sampledEvery": 1,
+  "largestDistanceToCoast": 0,
+  "onChunkBorderColumns": 1,
+  "coastEdgeColumns": 4084
+ },
+ "rock": {
+  "columns": 325611,
+  "topY_min": 103,
+  "topY_max": 103,
+  "columnsWithTopNotRockTop": 0,
+  "rockTopColumnsOutsideFootprint": 1
+ },
+ "blocks": {
+  "airBelowSurface": 0,
+  "bedrockAboveBottom5": 0,
+  "wrongBlocks": {
+   "minecraft:sandstone in dune column": 165,
+   "islandcraft_dunesofarrakis:dune_sand in rock column": 161
+  },
+  "columnsWithWrongBlock": 2
+ },
+ "duneStatsOutsideRock8": {
+  "columns": 699921,
+  "min": 0,
+  "p5": 2,
+  "p50": 23,
+  "p95": 100,
+  "max": 119,
+  "fractionAtSandLevel": 0.0165
+ },
+ "identityWithSavedDuneRun": {
+  "outsideColumns": 722964,
+  "differentOutsideAnywhere": 1,
+  "differentMoreThan8Outside": 0,
+  "firstDifference_x_z_new_old": [
+   8479,
+   -14845,
+   103,
+   165
+  ]
+ },
+ "line": {
+  "samples": 426,
+  "notDuneSandTop": 172
+ },
+ "pass": {
+  "noGaps": true,
+  "mismatchBelow0_1pct": true,
+  "mismatchOnlyInOneBlockRing": true,
+  "rockTopFlat": true,
+  "allRockIsSandstone": false,
+  "noRockOutsideFootprint": false,
+  "duneIdentical": false
+ }
+}

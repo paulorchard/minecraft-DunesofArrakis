@@ -1,0 +1,61 @@
+{
+ "window": {
+  "x0": -11872,
+  "z0": -7424,
+  "size": 1024,
+  "rockTopY": 103
+ },
+ "generated": {
+  "columns": 1048576,
+  "fullChunks": 4096
+ },
+ "footprint": {
+  "analyticInsideColumns": 771968,
+  "generatedRockTopColumns": 771967,
+  "fractionInside": 0.7362
+ },
+ "mismatch": {
+  "columns": 1,
+  "fractionOfColumns": 9.54e-7,
+  "withinOneBlockOfCoast": 1,
+  "sampledEvery": 1,
+  "largestDistanceToCoast": 0,
+  "onChunkBorderColumns": 0,
+  "coastEdgeColumns": 2961
+ },
+ "rock": {
+  "columns": 771967,
+  "topY_min": 103,
+  "topY_max": 103,
+  "columnsWithTopNotRockTop": 0,
+  "rockTopColumnsOutsideFootprint": 0
+ },
+ "blocks": {
+  "airBelowSurface": 0,
+  "bedrockAboveBottom5": 0,
+  "wrongBlocks": {
+   "islandcraft_dunesofarrakis:dune_sand in rock column": 129
+  },
+  "columnsWithWrongBlock": 1
+ },
+ "duneStatsOutsideRock8": {
+  "columns": 260532,
+  "min": 1,
+  "p5": 7,
+  "p50": 46,
+  "p95": 97,
+  "max": 119,
+  "fractionAtSandLevel": 0
+ },
+ "identityWithSavedDuneRun": null,
+ "line": null,
+ "pass": {
+  "noGaps": true,
+  "mismatchBelow0_1pct": true,
+  "mismatchOnlyInOneBlockRing": true,
+  "rockTopFlat": true,
+  "allRockIsSandstone": false,
+  "noRockOutsideFootprint": true,
+  "duneIdentical": null
+ }
+}

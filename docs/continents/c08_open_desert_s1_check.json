@@ -1,0 +1,64 @@
+{
+ "window": {
+  "x0": 19488,
+  "z0": 19488,
+  "size": 1024,
+  "rockTopY": 103
+ },
+ "generated": {
+  "columns": 1048576,
+  "fullChunks": 4096
+ },
+ "footprint": {
+  "analyticInsideColumns": 0,
+  "generatedRockTopColumns": 0,
+  "fractionInside": 0
+ },
+ "mismatch": {
+  "columns": 0,
+  "fractionOfColumns": 0,
+  "withinOneBlockOfCoast": 0,
+  "sampledEvery": 1,
+  "largestDistanceToCoast": 0,
+  "onChunkBorderColumns": 0,
+  "coastEdgeColumns": 0
+ },
+ "rock": {
+  "columns": 0,
+  "topY_min": null,
+  "topY_max": null,
+  "columnsWithTopNotRockTop": 0,
+  "rockTopColumnsOutsideFootprint": 0
+ },
+ "blocks": {
+  "airBelowSurface": 0,
+  "bedrockAboveBottom5": 0,
+  "wrongBlocks": {},
+  "columnsWithWrongBlock": 0
+ },
+ "duneStatsOutsideRock8": {
+  "columns": 1048576,
+  "min": 0,
+  "p5": 4,
+  "p50": 32,
+  "p95": 86,
+  "max": 113,
+  "fractionAtSandLevel": 0.0028
+ },
+ "identityWithSavedDuneRun": {
+  "outsideColumns": 1048576,
+  "differentOutsideAnywhere": 0,
+  "differentMoreThan8Outside": 0,
+  "firstDifference_x_z_new_old": null
+ },
+ "line": null,
+ "pass": {
+  "noGaps": true,
+  "mismatchBelow0_1pct": true,
+  "mismatchOnlyInOneBlockRing": true,
+  "rockTopFlat": true,
+  "allRockIsSandstone": true,
+  "noRockOutsideFootprint": true,
+  "duneIdentical": true
+ }
+}
