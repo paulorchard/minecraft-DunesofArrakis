@@ -26,9 +26,9 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
 
     @SuppressWarnings("unchecked")
     private static ResourceKey<NormalNoise.NoiseParameters>[] keys() {
-        ResourceKey<NormalNoise.NoiseParameters>[] k = new ResourceKey[CoastModel.NOISE_NAMES.length];
+        ResourceKey<NormalNoise.NoiseParameters>[] k = new ResourceKey[ReliefModel.NOISE_NAMES.length];
         for (int i = 0; i < k.length; i++) {
-            k[i] = ResourceKey.create(Registries.NOISE, Identifier.fromNamespaceAndPath("islandcraft_dunesofarrakis", CoastModel.NOISE_NAMES[i]));
+            k[i] = ResourceKey.create(Registries.NOISE, Identifier.fromNamespaceAndPath("islandcraft_dunesofarrakis", ReliefModel.NOISE_NAMES[i]));
         }
         return k;
     }
@@ -36,9 +36,10 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
     /** One per chunk (the rule is applied per block): remembers the last column, so the model runs once per column. */
     private static final class Column implements SurfaceRules.SurfaceRule, CoastModel.Noise {
         private final NormalNoise[] noises = new NormalNoise[KEYS.length];
-        private final CoastModel model = CoastModels.shared();
+        private final ReliefModel model = ReliefModels.shared();
         private final BlockState inside, outside;
-        private boolean has, lastInside;
+        private boolean has;
+        private double rockTop; // absolute height of the rock surface of the last column (NaN: not rock)
         private int lastX, lastZ;
 
         Column(RandomState random, BlockState inside, BlockState outside) {
@@ -53,14 +54,21 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
         }
 
         @Override
+        public Object worldKey() {
+            return noises[CoastModel.BLEND];
+        }
+
+        @Override
         public BlockState tryApply(int x, int y, int z) {
             if (!has || x != lastX || z != lastZ) {
-                lastInside = model.field(x, z, this) > 0.0;
+                double f = model.coast.field(x, z, this);
+                rockTop = f > 0.0 ? model.cfg.sandLevel + model.rockFromField(f, x, z, this) : Double.NaN;
                 lastX = x;
                 lastZ = z;
                 has = true;
             }
-            return lastInside ? inside : outside;
+            // same test as the density function (solid where 0.5 + height - y > 0): sandstone up to the rock surface, dune sand above it
+            return rockTop + 0.5 - y > 0.0 ? inside : outside;
         }
     }
 

@@ -3,6 +3,7 @@ package com.paulorchard.islandcraft.dunesofarrakis;
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.MapCodec;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ArrakisCoastField;
+import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ArrakisSurface;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ArrakisContinentField;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ArrakisContinentRule;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ArrakisLinear;
@@ -31,6 +32,7 @@ public class DunesOfArrakis {
 
     static {
         DENSITY_FUNCTION_TYPES.register("arrakis_coast_field", () -> ArrakisCoastField.CODEC.codec());
+        DENSITY_FUNCTION_TYPES.register("arrakis_surface", () -> ArrakisSurface.CODEC.codec());
         DENSITY_FUNCTION_TYPES.register("arrakis_continent_field", () -> ArrakisContinentField.CODEC.codec());
         MATERIAL_RULES.register("arrakis_continent_block", () -> ArrakisContinentRule.CODEC.codec());
         DENSITY_FUNCTION_TYPES.register("arrakis_linear", () -> ArrakisLinear.CODEC.codec());

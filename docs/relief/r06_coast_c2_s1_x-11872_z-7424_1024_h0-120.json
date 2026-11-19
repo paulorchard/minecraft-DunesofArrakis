@@ -1,0 +1,172 @@
+{
+  "area": {
+    "x0": -11872,
+    "z0": -7424,
+    "size": 1024,
+    "columns": 1048576,
+    "fullChunks": 4096,
+    "sandLevelTopBlockY": 63
+  },
+  "heightAboveSand": {
+    "min": 0,
+    "p5": 14,
+    "p50": 57,
+    "p95": 92,
+    "max": 119,
+    "mean": 55.26
+  },
+  "relief32": {
+    "windows": 1024,
+    "median": 11,
+    "p90": 22,
+    "max": 42
+  },
+  "steepestNeighbourStep": 2,
+  "fractionAtSandLevel": 0.0001,
+  "fractionTopNotSand": 0,
+  "blocks": {
+    "airBelowSurface": 0,
+    "nonSandNonBedrockBlocks": 0,
+    "otherBlockTypes": {},
+    "bedrockAboveBottomFiveLayers": 0,
+    "heightmapDisagreesWithBlocks": 0
+  },
+  "crests": {
+    "prevailingCrestDirectionDeg": 23.2,
+    "crossCrestAxisDeg": 113.2,
+    "orientationSpreadDeg_circularSd": 27.9,
+    "resultantLengthR": 0.622,
+    "note": "degrees from +x (east) toward +z (south), mod 180; spread = circular standard deviation of the gradient orientation, weighted by slope^2"
+  },
+  "slopes": {
+    "windDirectionTowardDeg": 115,
+    "windwardAlongWind": {
+      "columns": 497350,
+      "meanDeg": 15.3,
+      "p90Deg": 29.2
+    },
+    "leewardAlongWind": {
+      "columns": 454639,
+      "meanDeg": 15.5,
+      "p90Deg": 35.9
+    },
+    "windwardSteepestDescent": {
+      "meanDeg": 18.5
+    },
+    "leewardSteepestDescent": {
+      "meanDeg": 18.4
+    },
+    "note": "gradients over +-GR blocks (default 4); columns with |slope|>0.04 and height>0.5 above sand; \"along wind\" = directional derivative along the wind axis (cross-crest); windward = height rising along the wind, leeward = falling"
+  },
+  "autocorrelation": {
+    "alongCrests": {
+      "8": 1,
+      "16": 0.99,
+      "32": 0.97,
+      "48": 0.94,
+      "64": 0.91,
+      "80": 0.86,
+      "96": 0.82,
+      "128": 0.73,
+      "160": 0.65,
+      "192": 0.56,
+      "256": 0.4,
+      "320": 0.3,
+      "400": 0.26,
+      "512": 0.32
+    },
+    "acrossCrests": {
+      "8": 0.99,
+      "16": 0.96,
+      "32": 0.87,
+      "48": 0.77,
+      "64": 0.68,
+      "80": 0.61,
+      "96": 0.56,
+      "128": 0.51,
+      "160": 0.4,
+      "192": 0.19,
+      "256": -0.09,
+      "320": -0.19,
+      "400": -0.47,
+      "512": -0.5
+    }
+  },
+  "crestHeightAboveSand": {
+    "samples": 181,
+    "p10": 45.6,
+    "median": 66.2,
+    "p90": 79.7,
+    "max": 99.2
+  },
+  "crestSpacingBlocks": {
+    "samples": 81,
+    "p10": 141,
+    "median": 156,
+    "p90": 294
+  },
+  "chunkSeams": {
+    "meanStepAcrossXBorder": 0.1671,
+    "meanStepInsideX": 0.1661,
+    "meanStepAcrossZBorder": 0.2483,
+    "meanStepInsideZ": 0.2512,
+    "ratioX": 1.006,
+    "ratioZ": 0.988,
+    "note": "ratio ~1.0 = no visible 16-block seams"
+  },
+  "windows": {
+    "side": 256,
+    "tallest": [
+      {
+        "centerX": -11232,
+        "centerZ": -6528,
+        "p50": 80,
+        "p95": 109,
+        "max": 119,
+        "atSand": 0
+      },
+      {
+        "centerX": -11488,
+        "centerZ": -7296,
+        "p50": 77,
+        "p95": 108,
+        "max": 117,
+        "atSand": 0
+      },
+      {
+        "centerX": -11360,
+        "centerZ": -6528,
+        "p50": 75,
+        "p95": 109,
+        "max": 119,
+        "atSand": 0
+      }
+    ],
+    "flattest": [
+      {
+        "centerX": -10976,
+        "centerZ": -6656,
+        "p50": 13,
+        "p95": 30,
+        "max": 57,
+        "atSand": 0.00146484375
+      },
+      {
+        "centerX": -10976,
+        "centerZ": -6784,
+        "p50": 16,
+        "p95": 34,
+        "max": 43,
+        "atSand": 0
+      },
+      {
+        "centerX": -11104,
+        "centerZ": -6784,
+        "p50": 23,
+        "p95": 49,
+        "max": 60,
+        "atSand": 0
+      }
+    ]
+  }
+}

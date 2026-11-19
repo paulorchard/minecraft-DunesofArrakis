@@ -15,3 +15,6 @@ gap_purple_blue	3	506	-7097	other seed
 coast_c0	1	3836	-13616	islet 66 (433 x 221), size class 0, whole islet in the window
 coast_c1	1	4211	-7657	coast of ellipse 25 (901 x 255), size class 1
 coast_c2	1	-11359	-6912	coast of ellipse 8 (1813 x 855), size class 2, next to the channel that used to seal
+slice_purple	1	-8182	-7001	coast to summit on purple: coast (-7784,-6856) to the 111 m summit (-8580,-7146), 847 m
+slice_blue	1	13167	-12498	coast to summit on blue: coast (13549,-12600) to the 109 m summit (12786,-12396), 790 m
+slice_green	1	-3283	-13211	coast to summit on green: coast (-3219,-12969) to the 100 m summit (-3348,-13452), 500 m

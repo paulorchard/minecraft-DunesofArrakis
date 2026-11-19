@@ -19,6 +19,11 @@ public final class CoastModel {
     /** World-seeded noise source: raw noise value at (x, z) in noise units; {@code which} is one of the constants below. */
     public interface Noise {
         double get(int which, double x, double z);
+
+        /** Identity of the world these noises belong to (per-world caches are keyed by it): the same object for every user of one world. */
+        default Object worldKey() {
+            return this;
+        }
     }
 
     public static final int LOBES_GENTLE = 0, LOBES_STRONG = 1, BAYS_GENTLE = 2, BAYS_STRONG = 3, DETAIL = 4, BLEND = 5;

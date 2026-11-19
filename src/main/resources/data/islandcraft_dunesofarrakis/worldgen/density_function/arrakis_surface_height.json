@@ -1,19 +1,21 @@
 {
   "type": "minecraft:cache_2d",
   "argument": {
-    "type": "minecraft:range_choice",
-    "input": "islandcraft_dunesofarrakis:arrakis_coast_field",
-    "min_inclusive": 1.0E-300,
-    "max_exclusive": 1.0E6,
-    "when_in_range": {
-      "type": "minecraft:add",
-      "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
-      "argument2": "islandcraft_dunesofarrakis:arrakis_rock_top"
-    },
-    "when_out_of_range": {
-      "type": "minecraft:add",
-      "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
-      "argument2": "islandcraft_dunesofarrakis:arrakis_dune_height"
+    "type": "minecraft:add",
+    "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
+    "argument2": {
+      "type": "islandcraft_dunesofarrakis:arrakis_surface",
+      "lobes_gentle": "islandcraft_dunesofarrakis:arrakis_coast_lobes_gentle",
+      "lobes_strong": "islandcraft_dunesofarrakis:arrakis_coast_lobes_strong",
+      "bays_gentle": "islandcraft_dunesofarrakis:arrakis_coast_bays_gentle",
+      "bays_strong": "islandcraft_dunesofarrakis:arrakis_coast_bays_strong",
+      "detail": "islandcraft_dunesofarrakis:arrakis_coast_detail",
+      "blend": "islandcraft_dunesofarrakis:arrakis_coast_blend",
+      "relief_broad": "islandcraft_dunesofarrakis:arrakis_relief_broad",
+      "relief_mid": "islandcraft_dunesofarrakis:arrakis_relief_mid",
+      "relief_fine": "islandcraft_dunesofarrakis:arrakis_relief_fine",
+      "relief_detail": "islandcraft_dunesofarrakis:arrakis_relief_detail",
+      "dunes": "islandcraft_dunesofarrakis:arrakis_dune_height"
     }
   }
 }
