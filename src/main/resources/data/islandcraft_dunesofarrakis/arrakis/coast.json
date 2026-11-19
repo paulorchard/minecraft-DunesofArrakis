@@ -8,7 +8,9 @@
 
   "size_classes": {
     "upper_limits_of_r": [350, 700, 1400],
-    "representative_r": [250, 500, 1000, 2000]
+    "representative_r": [250, 500, 1000, 2000],
+    "small": { "upper_limit_of_r": 120, "representative_r": 80, "lobe_scale": 0.7, "detail_of_minor": 0.1 },
+    "_small_note": "fifth class, only for ellipses with a mean semi-axis under upper_limit_of_r (no mapped ellipse is that small; generated islands are): gentle noise only, lobes and bays scaled by lobe_scale, fine detail limited to detail_of_minor times the minor semi-axis"
   },
 
   "lobes": {

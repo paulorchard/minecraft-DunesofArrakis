@@ -34,6 +34,7 @@ public final class ArrakisCoastField implements DensityFunction.SimpleFunction, 
     }
 
     private final DensityFunction.NoiseHolder lobesGentle, lobesStrong, baysGentle, baysStrong, detail, blend;
+    private volatile WorldModels.Models models;
     private final ThreadLocal<Cache> cache = ThreadLocal.withInitial(Cache::new);
 
     public ArrakisCoastField(DensityFunction.NoiseHolder lobesGentle, DensityFunction.NoiseHolder lobesStrong,
@@ -67,7 +68,9 @@ public final class ArrakisCoastField implements DensityFunction.SimpleFunction, 
         long key = ((long) x << 32) | (z & 0xFFFFFFFFL);
         int slot = (x * 73856093 ^ z * 19349663) & ((1 << CACHE_BITS) - 1);
         if (c.keys[slot] == key) return c.values[slot];
-        double v = CoastModels.shared().field(x, z, this);
+        WorldModels.Models wm = models;
+        if (wm == null) models = wm = WorldModels.shared().of(this);
+        double v = wm.coast.field(x, z, this);
         c.keys[slot] = key;
         c.values[slot] = v;
         return v;

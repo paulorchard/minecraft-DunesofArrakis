@@ -1,0 +1,18 @@
+seed 1, 241 islands, grid 10 m
+  <250 m across  n 144  peak R' p50 13.4 max 31.9 | p95 of the island's own columns: p50 12.1 max 27.4
+  250-800 m      n  66  peak R' p50 33.7 max 72.4 | p95 of the island's own columns: p50 29.3 max 63.0
+  800-1500 m     n  21  peak R' p50 61.0 max 85.8 | p95 of the island's own columns: p50 52.7 max 74.3
+  >1500 m        n  10  peak R' p50 81.5 max 104.9 | p95 of the island's own columns: p50 61.8 max 91.4
+  highest island peak 104.9 m (the continents reach 112.4); islands whose peak is under 2 m: 0, under 5 m: 0, under 10 m: 29
+  by the dune MOUNTAIN lift alone (the dune floor lies at least this high; the ripples come on top): islands with at least 80% of their columns at or below it: 0; all columns: 0
+  islands lost to the visibility rule at generation (peak < 4 m or < 6 m above the mountain lift): 903 candidates
+  islands over 300 m across (n 87): Spearman rank correlation of size and p95 height 0.82
+seed 2, 217 islands, grid 10 m
+  <250 m across  n 125  peak R' p50 14.9 max 29.9 | p95 of the island's own columns: p50 13.4 max 26.5
+  250-800 m      n  72  peak R' p50 38.5 max 72.7 | p95 of the island's own columns: p50 32.4 max 60.7
+  800-1500 m     n  15  peak R' p50 64.3 max 95.5 | p95 of the island's own columns: p50 54.3 max 83.7
+  >1500 m        n   5  peak R' p50 73.6 max 97.2 | p95 of the island's own columns: p50 56.8 max 88.6
+  highest island peak 97.2 m (the continents reach 112.4); islands whose peak is under 2 m: 0, under 5 m: 0, under 10 m: 23
+  by the dune MOUNTAIN lift alone (the dune floor lies at least this high; the ripples come on top): islands with at least 80% of their columns at or below it: 0; all columns: 0
+  islands lost to the visibility rule at generation (peak < 4 m or < 6 m above the mountain lift): 541 candidates
+  islands over 300 m across (n 81): Spearman rank correlation of size and p95 height 0.62

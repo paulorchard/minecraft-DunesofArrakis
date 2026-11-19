@@ -1,0 +1,25 @@
+seed 1: 254 islands (ring 67, archipelago 52 in 10 clusters, scatter 135), seed hash e1c7bcb0cead2b4a
+  rejected candidates: edge 5, mapped gap 117, island gap 328, mainland band 1, visibility 613, ring band 157; archipelago centre attempts 45
+  accidental merges 0, vanished islands 0, fifth size class (mean semi-axis < 120 m) 161, largest island 2683 m across, origin clearance 101 m
+  size histogram (length across = 2 x major semi-axis): <100 29 | 100-250 122 | 250-500 48 | 500-800 24 | 800-1500 19 | 1500-2000 3 | >2000 9
+  mix: under 250 m 59%, 250-800 m 28%, larger 12%, above 2 km 9
+  ring        gap to nearest other land (m, after noise; ring: to the mainland) min 143 p10 186 median 286 p90 380 max 436 (n 134)
+  archipelago gap to nearest other land (m, after noise; ring: to the mainland) min 143 p10 156 median 234 p90 688 max 700 (n 52)
+  scatter     gap to nearest other land (m, after noise; ring: to the mainland) min 120 p10 208 median 645 p90 700 max 700 (n 135)
+  minimum sand gap after the noise: island to any other land 120 m, island to the mapped land 156 m
+  ring islands within 150-500 m of the mainland coast: 67 of 67 (100.0%), range 232 - 436 m
+  share of each mainland coast with an island within 500 m: purple 23%, green 16%, blue 12%, brown 18%, red 31%
+  scatter islands per km2 of open sand by distance from the mainland coast: <3 km 0.1164 (n 69, 593 km2), 3-10 km 0.0595 (n 44, 740 km2), >10 km 0.0246 (n 22, 894 km2)
+  islands in the four largest between-continent regions (sand within 4 km of two different mainlands, split in four quadrants: NW purple/green, NE green/blue/red, SW purple/brown, SE purple/blue/brown), all roles / scatter: #1 at (-13954, -12063) 89 km2: 16/9, #2 at (11478, -13907) 83 km2: 27/14, #3 at (-6111, -4926) 62 km2: 25/11, #4 at (13210, -5755) 74 km2: 12/4
+  archipelagos (group: members, centre, spread = rms distance from the centre):
+     1:  5 islands at (-8891, -9406), spread 635 m
+     2:  5 islands at (21587, 5275), spread 1075 m
+     3:  4 islands at (-15905, 2080), spread 1221 m
+     4:  4 islands at (-872, -19098), spread 1877 m
+     5:  3 islands at (14494, -17235), spread 1012 m
+     6:  3 islands at (2069, -3512), spread 964 m
+     7: 12 islands at (-21870, 3579), spread 820 m
+     8:  5 islands at (20759, -13763), spread 492 m
+     9:  8 islands at (11000, 1853), spread 570 m
+    10:  3 islands at (-2180, 12546), spread 630 m
+

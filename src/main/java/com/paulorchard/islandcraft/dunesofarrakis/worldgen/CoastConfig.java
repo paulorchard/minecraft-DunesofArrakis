@@ -27,6 +27,9 @@ public final class CoastConfig {
     public final boolean noisy;
     public final double fadeExtra, detailAmplitude, detailWavelength, blendWavelength, blendContrast, noiseGain, minSand, gridMargin, medialFraction, internalFade;
     public final double[] classUpperLimits, classRepresentativeR;
+    /** Fifth size class (generated islands below {@code smallUpperR} mean semi-axis): index {@link #smallClass}, 0 = none. */
+    public final double smallUpperR, smallLobeScale, smallDetailOfMinor;
+    public final int smallClass;
     public final Part lobesGentle, lobesStrong, baysGentle, baysStrong;
     public final Map<Integer, Double> ellipseNoiseScale = new HashMap<>();
 
@@ -67,7 +70,22 @@ public final class CoastConfig {
         noisy = !"oval".equals(o.get("mode").getAsString());
         fadeExtra = o.get("fade_extra").getAsDouble();
         classUpperLimits = array(o.getAsJsonObject("size_classes").getAsJsonArray("upper_limits_of_r"));
-        classRepresentativeR = array(o.getAsJsonObject("size_classes").getAsJsonArray("representative_r"));
+        double[] rep = array(o.getAsJsonObject("size_classes").getAsJsonArray("representative_r"));
+        JsonObject sc = o.getAsJsonObject("size_classes").has("small") ? o.getAsJsonObject("size_classes").getAsJsonObject("small") : null;
+        if (sc != null) {
+            smallUpperR = sc.get("upper_limit_of_r").getAsDouble();
+            smallLobeScale = sc.get("lobe_scale").getAsDouble();
+            smallDetailOfMinor = sc.get("detail_of_minor").getAsDouble();
+            smallClass = rep.length;
+            rep = java.util.Arrays.copyOf(rep, rep.length + 1);
+            rep[rep.length - 1] = sc.get("representative_r").getAsDouble();
+        } else {
+            smallUpperR = 0;
+            smallLobeScale = 1;
+            smallDetailOfMinor = 1e9;
+            smallClass = -1;
+        }
+        classRepresentativeR = rep;
         lobesGentle = part(o.getAsJsonObject("lobes").getAsJsonObject("gentle"));
         lobesStrong = part(o.getAsJsonObject("lobes").getAsJsonObject("strong"));
         baysGentle = part(o.getAsJsonObject("bays").getAsJsonObject("gentle"));
@@ -85,6 +103,7 @@ public final class CoastConfig {
     }
 
     public int classOf(double r) {
+        if (smallClass >= 0 && r < smallUpperR) return smallClass;
         for (int i = 0; i < classUpperLimits.length; i++) if (r < classUpperLimits[i]) return i;
         return classUpperLimits.length;
     }

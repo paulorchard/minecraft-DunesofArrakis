@@ -4,6 +4,8 @@ import com.google.gson.JsonParser;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.CoastConfig;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.CoastModel;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ContinentIndex;
+import com.paulorchard.islandcraft.dunesofarrakis.worldgen.IslandConfig;
+import com.paulorchard.islandcraft.dunesofarrakis.worldgen.WorldModels;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ReliefConfig;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ReliefModel;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.TerraceConfig;
@@ -45,6 +47,9 @@ public class ReliefScan {
     static CoastModel coast;
     static ReliefModel relief;
     static TerraceConfig tcfg;
+    static IslandConfig icfg;
+    static WorldModels wm;
+    static String islandsPath = RES + "arrakis/islands.json";
     static String coastPath = RES + "arrakis/coast.json", reliefPath = RES + "arrakis/relief.json", terracePath = RES + "arrakis/terrace.json";
     static int step = 4;
     static String detailFile = null;
@@ -64,6 +69,10 @@ public class ReliefScan {
         if (terracePath.equals("off")) to.addProperty("mode", "off");
         tcfg = new TerraceConfig(to);
         relief = new ReliefModel(coast, rcfg, tcfg);
+        JsonObject io = JsonParser.parseString(Files.readString(Path.of(islandsPath.equals("off") ? RES + "arrakis/islands.json" : islandsPath), StandardCharsets.UTF_8)).getAsJsonObject();
+        if (islandsPath.equals("off")) io.addProperty("mode", "off");
+        icfg = new IslandConfig(io);
+        wm = new WorldModels(ccfg, rcfg, tcfg, icfg, idx);
     }
 
     /** The world-seeded noise, built as RandomState does. */
@@ -78,6 +87,10 @@ public class ReliefScan {
                 for (int k = 0; k < amps.length; k++) amps[k] = a.get(k).getAsDouble();
                 n[i] = NormalNoise.create(f.fromHashOf("islandcraft_dunesofarrakis:" + ReliefModel.NOISE_NAMES[i]), p.get("firstOctave").getAsInt(), amps);
             }
+            // the footprint of this world: the mapped land plus its seeded islands (the statics below are what every command reads)
+            WorldModels.Models m = wm.of(this);
+            coast = m.coast;
+            relief = m.relief;
         }
         public double get(int which, double x, double z) { return n[which].getValue(x, 0.0, z); }
         public Object worldKey() { return n[CoastModel.BLEND]; }
@@ -91,6 +104,7 @@ public class ReliefScan {
                 case "--config" -> coastPath = a[p + 1];
                 case "--relief" -> reliefPath = a[p + 1];
                 case "--terrace" -> terracePath = a[p + 1];
+                case "--islands" -> islandsPath = a[p + 1];
                 default -> throw new IllegalArgumentException(a[p]);
             }
             p += 2;
@@ -109,9 +123,20 @@ public class ReliefScan {
             case "sweep" -> sweep(Integer.parseInt(rest.get(0)), rest.size() > 1 ? rest.get(1) : null);
             case "profile" -> profile(Long.parseLong(rest.get(0)), Double.parseDouble(rest.get(1)), Double.parseDouble(rest.get(2)));
             case "calib" -> calib(Long.parseLong(rest.get(0)));
+            case "mask" -> mask(Long.parseLong(rest.get(0)), Integer.parseInt(rest.get(1)), Integer.parseInt(rest.get(2)), Integer.parseInt(rest.get(3)), rest.get(4));
             case "at" -> { Seeded nz = new Seeded(Long.parseLong(rest.get(0))); for (int i = 1; i + 1 < rest.size(); i += 2) { int x = Integer.parseInt(rest.get(i)), z = Integer.parseInt(rest.get(i + 1)); double f = coast.field(x, z, nz); System.out.printf("(%d,%d) F=%.2f R=%.2f cap=%.2f ramp=%.2f%n", x, z, f, f > 0 ? relief.rockFromField(f, x, z, nz) : Double.NaN, relief.summitCap(x, z, nz), f > 0 ? relief.ramp(f) : Double.NaN); } }
             default -> throw new IllegalArgumentException(cmd);
         }
+    }
+
+    /** One byte per column (1 = rock) of a window, from the world footprint with its islands, for windowcheck_relief.js. */
+    static void mask(long seed, int x0, int z0, int size, String out) throws Exception {
+        Seeded nz = new Seeded(seed);
+        byte[] b = new byte[size * size];
+        IntStream.range(0, size).parallel().forEach(j -> { for (int i = 0; i < size; i++) b[j * size + i] = (byte) (coast.field(x0 + i, z0 + j, nz, null) > 0 ? 1 : 0); });
+        try (FileOutputStream f = new FileOutputStream(out)) { f.write(b); }
+        long n = 0; for (byte v : b) n += v;
+        System.out.println("wrote " + out + " rock columns " + n + " of " + (long) size * size);
     }
 
     // ---------------------------------------------------------------- images

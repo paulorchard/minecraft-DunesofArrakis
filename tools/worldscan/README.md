@@ -82,3 +82,8 @@ tools/worldscan/try.sh <name> <seed> <x0> <z0> <size>     # regenerates the dune
   - `routes <seed> <continent>...`: walk-up counter (steps up of at most 1 block, corridors, share of coast with access).
   - `calib <seed>`: strength distribution. `at <seed> x z ...`: R, R', H, O, k at points. `sweep <n>`: all invariants over seeds 1..n and the worst seed.
 - `windowcheck_relief.js` adds a `terraces` block (coast sectors with a full step visible above the dunes, steps of exactly 2). `slice.js --dump file` writes the per-column tops. `checkrelief.sh` takes `OUT=dir`.
+
+## Islands (prompt 08)
+- `island.sh <continents.json> <cmd> ...` (IslandScan): render, sheet, stats, sweep, heights, pick, list, testmode, bench, noise, islandmask.
+- `islandburial.js heights rockmap islandmask size`: dune cover of the islands in a generated window.
+- `windows.sh` / `checkrelief.sh`: `SKIP=<substr>` skips windows. `gen.sh`: `ORDER=reverse` reverses the tile order (order-independence test). `--islands off|path` on ReliefScan.

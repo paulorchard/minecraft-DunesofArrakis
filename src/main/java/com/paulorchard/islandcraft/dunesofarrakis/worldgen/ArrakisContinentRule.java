@@ -36,7 +36,7 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
     /** One per chunk (the rule is applied per block): remembers the last column, so the model runs once per column. */
     private static final class Column implements SurfaceRules.SurfaceRule, CoastModel.Noise {
         private final NormalNoise[] noises = new NormalNoise[KEYS.length];
-        private final ReliefModel model = ReliefModels.shared();
+        private ReliefModel model; // the world's footprint, fetched on the first column
         private final BlockState inside, outside;
         private boolean has;
         private double rockTop; // absolute height of the rock surface of the last column (NaN: not rock)
@@ -60,6 +60,7 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
 
         @Override
         public BlockState tryApply(int x, int y, int z) {
+            if (model == null) model = WorldModels.shared().relief(this);
             if (!has || x != lastX || z != lastZ) {
                 double f = model.coast.field(x, z, this);
                 rockTop = f > 0.0 ? model.cfg.sandLevel + model.rockFromField(f, x, z, this) : Double.NaN;

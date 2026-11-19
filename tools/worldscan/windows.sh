@@ -9,6 +9,7 @@ mkdir -p build/worldscan
 grep -v '^#' tools/worldscan/windows.tsv | while IFS=$'\t' read -r name seed cx cz note; do
   [ -z "$name" ] && continue
   [[ -n "$ONLY" && "$name" != *$ONLY* ]] && continue
+  [[ -n "$SKIP" && "$name" == *$SKIP* ]] && continue
   x0=$(( (cx - 512) / 16 * 16 )); z0=$(( (cz - 512) / 16 * 16 ))
   [ $(( (cx - 512) % 16 )) -lt 0 ] && x0=$(( x0 - 16 )); [ $(( (cz - 512) % 16 )) -lt 0 ] && z0=$(( z0 - 16 ))
   W="${TAG}_${name}_s${seed}"

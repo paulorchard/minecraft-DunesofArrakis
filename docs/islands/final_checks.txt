@@ -1,0 +1,12 @@
+t08 {"cols":0,"mm":986,"air":0,"out":32,"n":25} worst 0.0171% t08_slice_blue_s1_check.json
+t08off {"cols":0,"mm":31245,"air":0,"out":62497,"n":19} worst 1.2800% t08off_gap_purple_green_s1_check.json
+t08rev {"cols":0,"mm":52,"air":0,"out":4,"n":6} worst 0.0017% t08rev_isl_ring_s2_check.json
+order isl_ring_s1 differing columns 0
+order isl_ring_s2 differing columns 0
+order isl_arch_s1 differing columns 0
+order isl_arch_s2 differing columns 0
+order isl_scatter_s1 differing columns 0
+order isl_scatter_s2 differing columns 0
+islands off vs prompt 07: 19 windows, 0 differing columns; order test total 0
+cost_off open_desert 1 6.14 | isl_scatter 1 5.90 | isl_scatter 2 5.30 | isl_ring 1 6.29 | isl_ring 2 6.16 | isl_arch 1 5.34 | isl_arch 2 5.72
+cost_on open_desert 1 6.19 | isl_scatter 1 6.45 | isl_scatter 2 6.27 | isl_ring 1 7.02 | isl_ring 2 6.45 | isl_arch 1 6.27 | isl_arch 2 6.41

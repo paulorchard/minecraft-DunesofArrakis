@@ -18,6 +18,7 @@
       "terrace_step": "islandcraft_dunesofarrakis:arrakis_terrace_step",
       "terrace_level": "islandcraft_dunesofarrakis:arrakis_terrace_level",
       "terrace_strength": "islandcraft_dunesofarrakis:arrakis_terrace_strength",
+      "mountain": "islandcraft_dunesofarrakis:arrakis_mountain",
       "dunes": "islandcraft_dunesofarrakis:arrakis_dune_height"
     }
   }

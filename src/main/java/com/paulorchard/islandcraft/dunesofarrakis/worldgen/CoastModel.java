@@ -41,7 +41,7 @@ public final class CoastModel {
     public final CoastConfig cfg;
     private final int n;
     private final int[] cls;
-    private final double[] lobeG, lobeS, bayG, bayS, plateau, fadeEnd, scale, wavLG, wavLS, wavBG, wavBS;
+    private final double[] lobeG, lobeS, bayG, bayS, plateau, fadeEnd, scale, wavLG, wavLS, wavBG, wavBS, detA;
 
     private static final class Scratch {
         double[] s = new double[0], px = new double[0], pz = new double[0];
@@ -56,8 +56,9 @@ public final class CoastModel {
         n = idx.count;
         cls = new int[n];
         lobeG = new double[n]; lobeS = new double[n]; bayG = new double[n]; bayS = new double[n];
-        plateau = new double[n]; fadeEnd = new double[n]; scale = new double[n];
-        wavLG = new double[4]; wavLS = new double[4]; wavBG = new double[4]; wavBS = new double[4];
+        plateau = new double[n]; fadeEnd = new double[n]; scale = new double[n]; detA = new double[n];
+        int nc = cfg.classRepresentativeR.length;
+        wavLG = new double[nc]; wavLS = new double[nc]; wavBG = new double[nc]; wavBS = new double[nc];
         for (int c = 0; c < cfg.classRepresentativeR.length; c++) {
             double r = cfg.classRepresentativeR[c];
             wavLG[c] = cfg.lobesGentle.wavelengthOfR() * r;
@@ -73,8 +74,18 @@ public final class CoastModel {
             lobeS[e] = cfg.lobesStrong.amplitude(minor) * scale[e];
             bayG[e] = cfg.baysGentle.amplitude(minor) * scale[e];
             bayS[e] = cfg.baysStrong.amplitude(minor) * scale[e];
+            detA[e] = cfg.detailAmplitude * scale[e];
+            if (cls[e] == cfg.smallClass) {
+                // the fifth class (islands under about 120 m mean semi-axis): gentle only, lobes and bays scaled down, and the fine detail
+                // limited to a share of the island's own minor semi-axis, so a 100 m island gets a rounded, lightly indented coast
+                lobeG[e] *= cfg.smallLobeScale;
+                bayG[e] *= cfg.smallLobeScale;
+                lobeS[e] = lobeG[e];
+                bayS[e] = bayG[e];
+                detA[e] = Math.min(detA[e], cfg.smallDetailOfMinor * minor * scale[e]);
+            }
             // largest possible push (strong setting, every noise at its clamp), then fade_extra more metres to zero
-            plateau[e] = Math.max(lobeS[e] + bayS[e], lobeG[e] + bayG[e]) + cfg.detailAmplitude * scale[e];
+            plateau[e] = Math.max(lobeS[e] + bayS[e], lobeG[e] + bayG[e]) + detA[e];
             fadeEnd[e] = plateau[e] + cfg.fadeExtra;
         }
     }
@@ -94,9 +105,9 @@ public final class CoastModel {
     /** The push in metres of ellipse e at its coast point (px, pz): positive grows the land, negative cuts it. */
     private double delta(int e, double px, double pz, Noise noise, double[] blendOut) {
         int c = cls[e];
-        double b = Math.max(0, Math.min(1, 0.5 + 0.5 * cfg.blendContrast * gain(noise.get(BLEND, px / cfg.blendWavelength, pz / cfg.blendWavelength))));
+        double b = cfg.smallClass >= 0 && c == cfg.smallClass ? 0 : Math.max(0, Math.min(1, 0.5 + 0.5 * cfg.blendContrast * gain(noise.get(BLEND, px / cfg.blendWavelength, pz / cfg.blendWavelength))));
         if (blendOut != null) blendOut[0] = b;
-        double d = cfg.detailAmplitude * scale[e] * gain(noise.get(DETAIL, px / cfg.detailWavelength, pz / cfg.detailWavelength));
+        double d = detA[e] * gain(noise.get(DETAIL, px / cfg.detailWavelength, pz / cfg.detailWavelength));
         if (b < 1) {
             d += (1 - b) * (lobeG[e] * gain(noise.get(LOBES_GENTLE, px / wavLG[c], pz / wavLG[c])) + bayG[e] * gain(noise.get(BAYS_GENTLE, px / wavBG[c], pz / wavBG[c])));
         }

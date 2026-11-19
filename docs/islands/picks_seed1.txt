@@ -1,0 +1,10 @@
+seed 1 picks (tp: /execute in islandcraft_dunesofarrakis:arrakis run tp @s X Y Z yaw pitch)
+ring island id 1011 (612 m across) at (-12821, -6721), gap 334 m; window row: ring	1	-12821	-6721
+  look out across the gap from the mainland coast: tp @s -12280 78 -6763 86 8
+  from the sand between, to see the gap: tp @s -12551 150 -6742 86 12  (you drop onto the sand; fly low)
+archipelago group 7 (12 islands) centre (-21870, 3579); window row: archipelago	1	-21870	3579
+  300 up: tp @s -21870 370 3579 0 90
+scatter island id 1135 (390 m across) at (-5562, -23820), 8.7 km from the mainland; window row: scatter	1	-5562	-23820
+  from the ground: tp @s -5162 150 -23420 -90 10 (about 566 m south-east... you drop onto the sand)
+smallest island id 1195 (scatter, 80 x 50 m across) at (-10915, -17763): tp @s -10915 120 -17703 0 45
+largest island id 1194 (scatter, 2683 x 1969 m across) at (-286, 13605): tp @s -286 400 13605 0 90

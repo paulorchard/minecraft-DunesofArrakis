@@ -1,0 +1,12 @@
+== isl_ring s1
+islands with rock in this window 1; rock columns 141848, covered by dune sand 58506 (41.2%); islands with at least 80% of their columns covered 0; fully covered 0; any column covered 1; peak under sand 1
+== isl_ring s2
+islands with rock in this window 2; rock columns 181791, covered by dune sand 72343 (39.8%); islands with at least 80% of their columns covered 0; fully covered 0; any column covered 2; peak under sand 1
+== isl_arch s1
+islands with rock in this window 4; rock columns 294568, covered by dune sand 103759 (35.2%); islands with at least 80% of their columns covered 0; fully covered 0; any column covered 4; peak under sand 2
+== isl_arch s2
+islands with rock in this window 5; rock columns 141596, covered by dune sand 32740 (23.1%); islands with at least 80% of their columns covered 1; fully covered 1; any column covered 5; peak under sand 2
+== isl_scatter s1
+islands with rock in this window 1; rock columns 117312, covered by dune sand 49962 (42.6%); islands with at least 80% of their columns covered 0; fully covered 0; any column covered 1; peak under sand 1
+== isl_scatter s2
+islands with rock in this window 1; rock columns 349281, covered by dune sand 94462 (27.0%); islands with at least 80% of their columns covered 0; fully covered 0; any column covered 1; peak under sand 0

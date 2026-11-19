@@ -19,10 +19,11 @@ probe_points() { for fx in 8 $((SIZE/2)) $((SIZE-8)); do for fz in 8 $((SIZE/2))
 (
   for i in $(seq 1 240); do grep -q "Done (" $LOG 2>/dev/null && break; sleep 1; done; sleep 1
   T0=$(date +%s.%N)
-  for ((x=X0; x<X0+SIZE; x+=256)); do for ((z=Z0; z<Z0+SIZE; z+=256)); do
+  # ORDER=reverse loads the 256 x 256 tiles in the opposite order (the chunk-order independence check of prompt 08)
+  ( for ((x=X0; x<X0+SIZE; x+=256)); do for ((z=Z0; z<Z0+SIZE; z+=256)); do
     ex=$((x+255)); [ $ex -ge $((X0+SIZE)) ] && ex=$((X0+SIZE-1)); ez=$((z+255)); [ $ez -ge $((Z0+SIZE)) ] && ez=$((Z0+SIZE-1))
     echo "execute in $DIM run forceload add $x $z $ex $ez"
-  done; done
+  done; done ) | if [ "${ORDER:-}" = reverse ]; then tac; else cat; fi
   n=0; DONE=0
   while [ $n -lt 1200 ]; do
     n=$((n+1)); k=0

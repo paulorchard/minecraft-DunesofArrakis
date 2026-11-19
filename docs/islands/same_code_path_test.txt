@@ -1,0 +1,4 @@
+ellipse 120 x 60 m at (0, 14000), class 4: 58081 points, 627 rock; field differs at 0, R' differs at 0  -> bit-identical
+ellipse 620 x 300 m at (0, 16000), class 0: 165649 points, 16326 rock; field differs at 0, R' differs at 0  -> bit-identical
+ellipse 2600 x 1400 m at (0, 19000), class 2: 1138489 points, 316560 rock; field differs at 0, R' differs at 0  -> bit-identical
+ellipse 236 x 120 m at (5000, 22000), class 4: 77841 points, 2441 rock; field differs at 0, R' differs at 0  -> bit-identical

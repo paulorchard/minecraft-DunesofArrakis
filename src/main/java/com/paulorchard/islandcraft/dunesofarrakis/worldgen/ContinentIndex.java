@@ -27,6 +27,8 @@ public final class ContinentIndex {
 
     public final int count;
     public final int[] id, continent;
+    /** 0 = mapped ellipse, 1 = ring island, 2 = archipelago island, 3 = scatter island (generated per world, see IslandGenerator). */
+    public final int[] role, group;
     public final double[] cx, cz, major, minor, angle;
     public final double[] cos, sin;
     private final double[] invMajor2, invMinor2;
@@ -63,29 +65,70 @@ public final class ContinentIndex {
         }
     }
 
+    /** Raw ellipse arrays, parsed from the JSON or assembled from the mapped ellipses plus generated islands. */
+    public static final class Raw {
+        public int[] id, continent, role, group;
+        public double[] cx, cz, major, minor, angle;
+
+        public Raw(int n) {
+            id = new int[n]; continent = new int[n]; role = new int[n]; group = new int[n];
+            cx = new double[n]; cz = new double[n]; major = new double[n]; minor = new double[n]; angle = new double[n];
+        }
+    }
+
+    private static Raw parse(JsonArray shapes) {
+        Raw r = new Raw(shapes.size());
+        for (int i = 0; i < r.id.length; i++) {
+            JsonObject o = shapes.get(i).getAsJsonObject();
+            r.id[i] = o.get("id").getAsInt();
+            r.continent[i] = o.get("continent").getAsInt();
+            r.cx[i] = o.get("x").getAsDouble();
+            r.cz[i] = o.get("z").getAsDouble();
+            r.major[i] = o.get("major").getAsDouble();
+            r.minor[i] = o.get("minor").getAsDouble();
+            r.angle[i] = o.get("angle").getAsDouble();
+        }
+        return r;
+    }
+
     public ContinentIndex(JsonArray shapes, double margin) {
-        count = shapes.size();
-        id = new int[count];
-        continent = new int[count];
-        cx = new double[count];
-        cz = new double[count];
-        major = new double[count];
-        minor = new double[count];
-        angle = new double[count];
+        this(parse(shapes), margin);
+    }
+
+    /** The mapped ellipses of {@code base} followed by generated islands {extra: id, continent, role, group, x, z, major, minor, angle}; mapped indices are unchanged. */
+    public static ContinentIndex withExtra(ContinentIndex base, java.util.List<double[]> extra, double margin) {
+        int n = base.count + extra.size();
+        Raw r = new Raw(n);
+        for (int i = 0; i < base.count; i++) {
+            r.id[i] = base.id[i]; r.continent[i] = base.continent[i]; r.role[i] = base.role[i]; r.group[i] = base.group[i];
+            r.cx[i] = base.cx[i]; r.cz[i] = base.cz[i]; r.major[i] = base.major[i]; r.minor[i] = base.minor[i]; r.angle[i] = base.angle[i];
+        }
+        for (int k = 0; k < extra.size(); k++) {
+            double[] d = extra.get(k);
+            int i = base.count + k;
+            r.id[i] = (int) d[0]; r.continent[i] = (int) d[1]; r.role[i] = (int) d[2]; r.group[i] = (int) d[3];
+            r.cx[i] = d[4]; r.cz[i] = d[5]; r.major[i] = d[6]; r.minor[i] = d[7]; r.angle[i] = d[8];
+        }
+        return new ContinentIndex(r, margin);
+    }
+
+    public ContinentIndex(Raw raw, double margin) {
+        count = raw.id.length;
+        id = raw.id;
+        continent = raw.continent;
+        role = raw.role;
+        group = raw.group;
+        cx = raw.cx;
+        cz = raw.cz;
+        major = raw.major;
+        minor = raw.minor;
+        angle = raw.angle;
         cos = new double[count];
         sin = new double[count];
         invMajor2 = new double[count];
         invMinor2 = new double[count];
         double minX = Double.MAX_VALUE, minZ = Double.MAX_VALUE, maxX = -Double.MAX_VALUE, maxZ = -Double.MAX_VALUE;
         for (int i = 0; i < count; i++) {
-            JsonObject o = shapes.get(i).getAsJsonObject();
-            id[i] = o.get("id").getAsInt();
-            continent[i] = o.get("continent").getAsInt();
-            cx[i] = o.get("x").getAsDouble();
-            cz[i] = o.get("z").getAsDouble();
-            major[i] = o.get("major").getAsDouble();
-            minor[i] = o.get("minor").getAsDouble();
-            angle[i] = o.get("angle").getAsDouble();
             double a = Math.toRadians(angle[i]);
             cos[i] = Math.cos(a);
             sin[i] = Math.sin(a);
@@ -200,10 +243,15 @@ public final class ContinentIndex {
 
     /** As above; if {@code pt} is not null it receives the world (x, z) of the nearest point of this ellipse's coast. */
     public double signedDistance(int e, double x, double z, double[] pt) {
-        double dx = x - cx[e], dz = z - cz[e];
-        double u0 = dx * cos[e] + dz * sin[e], v0 = -dx * sin[e] + dz * cos[e];
+        return signedDistance(cx[e], cz[e], cos[e], sin[e], major[e], minor[e], x, z, pt);
+    }
+
+    /** The same exact distance for any ellipse given by its centre, the cos and sin of its angle and its semi-axes (used by the island generator and the tools). */
+    public static double signedDistance(double ecx, double ecz, double ecos, double esin, double emajor, double eminor, double x, double z, double[] pt) {
+        double dx = x - ecx, dz = z - ecz;
+        double u0 = dx * ecos + dz * esin, v0 = -dx * esin + dz * ecos;
         double u = Math.abs(u0), v = Math.abs(v0);
-        double a = major[e], b = minor[e];
+        double a = emajor, b = eminor;
         boolean sw = u > v;
         if (sw) { double t = u; u = v; v = t; t = a; a = b; b = t; }
         double qx = 0, qy = 0;
@@ -249,8 +297,8 @@ public final class ContinentIndex {
             double pu = sw ? qy : qx, pv = sw ? qx : qy;
             if (u0 < 0) pu = -pu;
             if (v0 < 0) pv = -pv;
-            pt[0] = cx[e] + pu * cos[e] - pv * sin[e];
-            pt[1] = cz[e] + pu * sin[e] + pv * cos[e];
+            pt[0] = ecx + pu * ecos - pv * esin;
+            pt[1] = ecz + pu * esin + pv * ecos;
         }
         return -out;
     }
