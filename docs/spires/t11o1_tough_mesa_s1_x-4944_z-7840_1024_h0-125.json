@@ -1,0 +1,181 @@
+{
+  "area": {
+    "x0": -4944,
+    "z0": -7840,
+    "size": 1024,
+    "columns": 1048576,
+    "fullChunks": 4096,
+    "sandLevelTopBlockY": 63
+  },
+  "heightAboveSand": {
+    "min": 11,
+    "p5": 14,
+    "p50": 32,
+    "p95": 56,
+    "max": 122,
+    "mean": 32.78
+  },
+  "relief32": {
+    "windows": 1024,
+    "median": 7,
+    "p90": 17,
+    "max": 89
+  },
+  "steepestNeighbourStep": 58,
+  "fractionAtSandLevel": 0,
+  "fractionTopNotSand": 0.078938,
+  "blocks": {
+    "airBelowSurface": 0,
+    "nonSandNonBedrockBlocks": 116394365,
+    "otherBlockTypes": {
+      "minecraft:stone": 39082244,
+      "minecraft:tuff": 1222327,
+      "minecraft:deepslate": 68422096,
+      "minecraft:diorite": 1512375,
+      "minecraft:granite": 1666368,
+      "minecraft:andesite": 2370490,
+      "minecraft:smooth_sandstone": 1804612,
+      "minecraft:calcite": 313853
+    },
+    "bedrockAboveBottomFiveLayers": 0,
+    "heightmapDisagreesWithBlocks": 0
+  },
+  "crests": {
+    "prevailingCrestDirectionDeg": 23.2,
+    "crossCrestAxisDeg": 113.2,
+    "orientationSpreadDeg_circularSd": 53.9,
+    "resultantLengthR": 0.171,
+    "note": "degrees from +x (east) toward +z (south), mod 180; spread = circular standard deviation of the gradient orientation, weighted by slope^2"
+  },
+  "slopes": {
+    "windDirectionTowardDeg": 115,
+    "windwardAlongWind": {
+      "columns": 452187,
+      "meanDeg": 12.4,
+      "p90Deg": 21.4
+    },
+    "leewardAlongWind": {
+      "columns": 336898,
+      "meanDeg": 14,
+      "p90Deg": 33.9
+    },
+    "windwardSteepestDescent": {
+      "meanDeg": 15.8
+    },
+    "leewardSteepestDescent": {
+      "meanDeg": 17.8
+    },
+    "note": "gradients over +-GR blocks (default 4); columns with |slope|>0.04 and height>0.5 above sand; \"along wind\" = directional derivative along the wind axis (cross-crest); windward = height rising along the wind, leeward = falling"
+  },
+  "autocorrelation": {
+    "alongCrests": {
+      "8": 0.99,
+      "16": 0.95,
+      "32": 0.9,
+      "48": 0.87,
+      "64": 0.83,
+      "80": 0.77,
+      "96": 0.74,
+      "128": 0.64,
+      "160": 0.55,
+      "192": 0.45,
+      "256": 0.24,
+      "320": 0.01,
+      "400": -0.21,
+      "512": -0.32
+    },
+    "acrossCrests": {
+      "8": 0.97,
+      "16": 0.92,
+      "32": 0.85,
+      "48": 0.78,
+      "64": 0.74,
+      "80": 0.68,
+      "96": 0.66,
+      "128": 0.61,
+      "160": 0.54,
+      "192": 0.44,
+      "256": 0.26,
+      "320": 0.14,
+      "400": -0.12,
+      "512": -0.32
+    }
+  },
+  "crestHeightAboveSand": {
+    "samples": 201,
+    "p10": 31.8,
+    "median": 38.5,
+    "p90": 58.3,
+    "max": 104.9
+  },
+  "crestSpacingBlocks": {
+    "samples": 104,
+    "p10": 39,
+    "median": 144,
+    "p90": 308
+  },
+  "chunkSeams": {
+    "meanStepAcrossXBorder": 0.1633,
+    "meanStepInsideX": 0.1588,
+    "meanStepAcrossZBorder": 0.207,
+    "meanStepInsideZ": 0.1973,
+    "ratioX": 1.028,
+    "ratioZ": 1.049,
+    "note": "ratio ~1.0 = no visible 16-block seams"
+  },
+  "windows": {
+    "side": 256,
+    "tallest": [
+      {
+        "centerX": -4176,
+        "centerZ": -6944,
+        "p50": 55,
+        "p95": 72,
+        "max": 109,
+        "atSand": 0
+      },
+      {
+        "centerX": -4560,
+        "centerZ": -6944,
+        "p50": 48,
+        "p95": 74,
+        "max": 117,
+        "atSand": 0
+      },
+      {
+        "centerX": -4432,
+        "centerZ": -6944,
+        "p50": 47,
+        "p95": 75,
+        "max": 122,
+        "atSand": 0
+      }
+    ],
+    "flattest": [
+      {
+        "centerX": -4304,
+        "centerZ": -7584,
+        "p50": 15,
+        "p95": 18,
+        "max": 28,
+        "atSand": 0
+      },
+      {
+        "centerX": -4176,
+        "centerZ": -7584,
+        "p50": 15,
+        "p95": 23,
+        "max": 28,
+        "atSand": 0
+      },
+      {
+        "centerX": -4304,
+        "centerZ": -7712,
+        "p50": 15,
+        "p95": 29,
+        "max": 35,
+        "atSand": 0
+      }
+    ]
+  }
+}

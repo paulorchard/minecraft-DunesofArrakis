@@ -1,0 +1,11 @@
+Note: tools\worldscan\java\ReliefScan.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+[islandcraft_dunesofarrakis] islands generated for a world: 206 (seed hash 47803cf00d783075, mapped rock nodes 89665) in 515 ms, key 667447085
+seed 8: spires probed 120 (1 m windows)
+  steps between neighbouring columns on spires (block tops): 0: 8.2% 1: 42.4% 2: 8.0% 3-5: 14.7% 6+: 26.6% (115087 pairs)
+  spire top width (blocks, bounding box of the columns at the peak block): min 3 p5 4 p50 6; of the top two blocks: min 3 p50 6
+  top above sand (blocks): p5 55.0 p25 81.0 p50 104.0 p75 128.0 p95 173.0 max 180.0
+  spires with at least one ledge (flat run in a radial profile): 79 of 120 (66%)
+  wedges probed 120: back ramp columns 1029849, with steps of at most 1 block to every neighbour: 97.9%
+  wedge columns with a step of 3+: 73000, descending within 60 deg of south: 71957 (98.6%), outside: 1043 (first: step 3 at (6327, -14844) direction 166)
+  compass histogram of the descent direction of wedge steps of 3+ (deg from +X toward +Z, 90 = south): 0-30:424 30-60:8608 60-90:23661 90-120:33360 120-150:6328 150-180:199 180-210:263 210-240:13 240-270:2 270-300:13 300-330:15 330-360:114 

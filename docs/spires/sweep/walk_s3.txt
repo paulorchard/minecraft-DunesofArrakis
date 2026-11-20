@@ -1,0 +1,7 @@
+Note: tools\worldscan\java\ReliefScan.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+[islandcraft_dunesofarrakis] islands generated for a world: 233 (seed hash b5414ba97eafa207, mapped rock nodes 90322) in 484 ms, key 667447085
+  without a route: the highest reachable column is below the top by (blocks): p5 NaN p25 NaN p50 NaN p75 NaN p95 NaN max NaN
+seed 3: wedges with a walk-up route to the top (steps of at most 1 block up, any start on the base): 60 of 60 (100.0%); first without: -
+  without a route: the highest reachable column is below the top by (blocks): p5 21.0 p25 39.0 p50 55.0 p75 65.0 p95 94.0 max 101.0
+seed 3: spires with a walk-up route to the top (steps of at most 1 block up, any start on the base): 0 of 60 (0.0%); first without: (11192, -8338) spire 44 m high

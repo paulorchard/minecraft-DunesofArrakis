@@ -1,0 +1,181 @@
+{
+  "area": {
+    "x0": -3152,
+    "z0": -13296,
+    "size": 1024,
+    "columns": 1048576,
+    "fullChunks": 4096,
+    "sandLevelTopBlockY": 63
+  },
+  "heightAboveSand": {
+    "min": 0,
+    "p5": 2,
+    "p50": 20,
+    "p95": 72,
+    "max": 87,
+    "mean": 27.6
+  },
+  "relief32": {
+    "windows": 1024,
+    "median": 9,
+    "p90": 16,
+    "max": 32
+  },
+  "steepestNeighbourStep": 2,
+  "fractionAtSandLevel": 0.0091,
+  "fractionTopNotSand": 0,
+  "blocks": {
+    "airBelowSurface": 0,
+    "nonSandNonBedrockBlocks": 114757311,
+    "otherBlockTypes": {
+      "minecraft:andesite": 1878343,
+      "minecraft:stone": 38088804,
+      "minecraft:diorite": 1599564,
+      "minecraft:granite": 1523747,
+      "minecraft:deepslate": 68324633,
+      "minecraft:tuff": 1325944,
+      "minecraft:smooth_sandstone": 1686711,
+      "minecraft:calcite": 329565
+    },
+    "bedrockAboveBottomFiveLayers": 0,
+    "heightmapDisagreesWithBlocks": 0
+  },
+  "crests": {
+    "prevailingCrestDirectionDeg": 17.3,
+    "crossCrestAxisDeg": 107.3,
+    "orientationSpreadDeg_circularSd": 33.8,
+    "resultantLengthR": 0.498,
+    "note": "degrees from +x (east) toward +z (south), mod 180; spread = circular standard deviation of the gradient orientation, weighted by slope^2"
+  },
+  "slopes": {
+    "windDirectionTowardDeg": 115,
+    "windwardAlongWind": {
+      "columns": 392359,
+      "meanDeg": 13.3,
+      "p90Deg": 24
+    },
+    "leewardAlongWind": {
+      "columns": 452233,
+      "meanDeg": 12.9,
+      "p90Deg": 24
+    },
+    "windwardSteepestDescent": {
+      "meanDeg": 15.6
+    },
+    "leewardSteepestDescent": {
+      "meanDeg": 16.3
+    },
+    "note": "gradients over +-GR blocks (default 4); columns with |slope|>0.04 and height>0.5 above sand; \"along wind\" = directional derivative along the wind axis (cross-crest); windward = height rising along the wind, leeward = falling"
+  },
+  "autocorrelation": {
+    "alongCrests": {
+      "8": 1,
+      "16": 1,
+      "32": 0.99,
+      "48": 0.97,
+      "64": 0.96,
+      "80": 0.94,
+      "96": 0.92,
+      "128": 0.87,
+      "160": 0.83,
+      "192": 0.78,
+      "256": 0.68,
+      "320": 0.59,
+      "400": 0.49,
+      "512": 0.39
+    },
+    "acrossCrests": {
+      "8": 1,
+      "16": 0.99,
+      "32": 0.96,
+      "48": 0.92,
+      "64": 0.88,
+      "80": 0.84,
+      "96": 0.82,
+      "128": 0.78,
+      "160": 0.7,
+      "192": 0.61,
+      "256": 0.45,
+      "320": 0.24,
+      "400": -0.13,
+      "512": -0.42
+    }
+  },
+  "crestHeightAboveSand": {
+    "samples": 160,
+    "p10": 9,
+    "median": 24.6,
+    "p90": 68,
+    "max": 86.8
+  },
+  "crestSpacingBlocks": {
+    "samples": 74,
+    "p10": 131,
+    "median": 141,
+    "p90": 421
+  },
+  "chunkSeams": {
+    "meanStepAcrossXBorder": 0.1165,
+    "meanStepInsideX": 0.1165,
+    "meanStepAcrossZBorder": 0.1949,
+    "meanStepInsideZ": 0.1921,
+    "ratioX": 1,
+    "ratioZ": 1.014,
+    "note": "ratio ~1.0 = no visible 16-block seams"
+  },
+  "windows": {
+    "side": 256,
+    "tallest": [
+      {
+        "centerX": -2640,
+        "centerZ": -13168,
+        "p50": 68,
+        "p95": 82,
+        "max": 87,
+        "atSand": 0
+      },
+      {
+        "centerX": -2768,
+        "centerZ": -13168,
+        "p50": 69,
+        "p95": 77,
+        "max": 82,
+        "atSand": 0
+      },
+      {
+        "centerX": -2512,
+        "centerZ": -13168,
+        "p50": 64,
+        "p95": 82,
+        "max": 87,
+        "atSand": 0
+      }
+    ],
+    "flattest": [
+      {
+        "centerX": -2768,
+        "centerZ": -12528,
+        "p50": 2,
+        "p95": 8,
+        "max": 13,
+        "atSand": 0.0113525390625
+      },
+      {
+        "centerX": -3024,
+        "centerZ": -12656,
+        "p50": 4,
+        "p95": 7,
+        "max": 21,
+        "atSand": 0.04510498046875
+      },
+      {
+        "centerX": -2896,
+        "centerZ": -12528,
+        "p50": 3,
+        "p95": 9,
+        "max": 15,
+        "atSand": 0.0291748046875
+      }
+    ]
+  }
+}

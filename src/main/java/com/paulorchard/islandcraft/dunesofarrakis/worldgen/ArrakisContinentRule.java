@@ -49,6 +49,7 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             case "minecraft:white_terracotta" -> Blocks.WHITE_TERRACOTTA.defaultBlockState();
             case "minecraft:light_gray_terracotta" -> Blocks.LIGHT_GRAY_TERRACOTTA.defaultBlockState();
             case "minecraft:andesite" -> Blocks.ANDESITE.defaultBlockState();
+            case "minecraft:stone" -> Blocks.STONE.defaultBlockState();
             case "minecraft:diorite" -> Blocks.DIORITE.defaultBlockState();
             case "minecraft:granite" -> Blocks.GRANITE.defaultBlockState();
             case "minecraft:tuff" -> Blocks.TUFF.defaultBlockState();
@@ -72,7 +73,7 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
         private double dMin, dMax, dWl, sWl, sThr, rMin, rMax, flat, chance, deepChance;
         private BlockState[] band, band2, blobStates;
         private double[] blobCum;
-        private BlockState capBlock, patchBlock, patchBlock2, smooth, deepBlob;
+        private BlockState capBlock, patchBlock, patchBlock2, smooth, deepBlob, k1Stone, k1Streak;
         private final BlockState stone = Blocks.STONE.defaultBlockState(), deepslate = Blocks.DEEPSLATE.defaultBlockState();
         private final SurfaceRules.SurfaceRule gradient; // vanilla vertical gradient, deepslate for y <= 0, stone from y 8, a seeded mix between
         private final BlockState inside, outside;
@@ -134,6 +135,8 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             for (int i = 0; i < band2.length; i++) band2[i] = state(tough.paletteBlock2[i]);
             patchBlock2 = state(tc.s("kind2_bands", "cap_patch_block"));
             capBlock = state("minecraft:red_sandstone");
+            k1Stone = state(tough.stoneBlock);
+            k1Streak = state(tough.streakBlock);
             patchBlock = state(tc.s("bands", "cap_patch_block"));
             smooth = state("minecraft:smooth_sandstone");
             deepBlob = state(tc.s("underground", "deepslate_blob"));
@@ -264,6 +267,10 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
                 if (!layers) return inside;
                 if (y > weatheredBottom(x, z)) return y < sandLevel - 2 && smooth(x, z) ? smooth : inside;
                 return deep(x, y, z);
+            }
+            if (col.kind == 1) { // spires and wedges: stone, with vertical streaks and patches of andesite below the top few blocks
+                int top1 = (int) Math.ceil(rockTop + 0.5) - 1;
+                return y > top1 - tough.stoneCapDepth || !tough.andesite(this, x, y, z) ? k1Stone : k1Streak;
             }
             // tough rock: red sandstone cap, then bands by height
             if (capDepth < 0) {

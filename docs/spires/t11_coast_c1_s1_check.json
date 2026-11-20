@@ -1,0 +1,196 @@
+{
+ "window": {
+  "x0": 3696,
+  "z0": -8176,
+  "size": 1024
+ },
+ "generated": {
+  "columns": 1048576,
+  "fullChunks": 4096
+ },
+ "footprint": {
+  "analyticInsideColumns": 279624,
+  "fractionInside": 0.2667
+ },
+ "outline": {
+  "differentRockSandColumns": 1,
+  "withinOneBlockOfCoast": 1
+ },
+ "relief": {
+  "checkedColumns": 279624,
+  "topBelowAnalytic": 2,
+  "topAtAnalyticButNotSandstone": 0,
+  "sandstoneAboveAnalytic": 1,
+  "topAtAnalyticSandstone": 119589,
+  "duneSandAboveRock": 160032,
+  "largestDuneOverRock": 93,
+  "mismatchColumns": 3,
+  "mismatchFraction": 0.00000286,
+  "mismatchWithinOneBlockOfCoast": 0,
+  "mismatchOnChunkBorder": 0
+ },
+ "blocks": {
+  "airBelowSurface": 0,
+  "bedrockAboveBottom5": 0,
+  "floatingSandInRock": 6,
+  "sandstoneAboveRockSurface": 8,
+  "wrongBlocks": {
+   "minecraft:sandstone above the rock surface": 8,
+   "islandcraft_dunesofarrakis:dune_sand where sandstone is due (at or below the rock surface)": 6
+  },
+  "columnsWithWrongBlock": 14
+ },
+ "rockSurfaceHeightAboveSand": {
+  "columns": 119592,
+  "p5": 11,
+  "p50": 33,
+  "p95": 57,
+  "max": 64
+ },
+ "terraces": {
+  "coastSectors": 53,
+  "withFullStepVisible": 12,
+  "rockRockPairs": 236970,
+  "stepsOfExactly2": 18
+ },
+ "banking": {
+  "coast_0_30m": {
+   "columns": 66143,
+   "duneSandTop": 59923,
+   "sandstoneTop": 6220,
+   "shareDuneSand": 0.906
+  },
+  "coast_30_100m": {
+   "columns": 120280,
+   "duneSandTop": 66620,
+   "sandstoneTop": 53660,
+   "shareDuneSand": 0.554
+  },
+  "inland_over_100m": {
+   "columns": 93201,
+   "duneSandTop": 33489,
+   "sandstoneTop": 59712,
+   "shareDuneSand": 0.359
+  }
+ },
+ "coastSectors64": {
+  "dunesBankOver": 48,
+  "rockStandsClear": 5
+ },
+ "steps": {
+  "neighbourPairs": 557026,
+  "over3": 0,
+  "over3WithDune": 0,
+  "over3RockOnly": 0,
+  "largest": 2,
+  "largestRockOnly": 2,
+  "rockOnlyExamples_x_z_step": []
+ },
+ "slope": {
+  "baselineBlocks": 8,
+  "rockColumns": 108363,
+  "share_over_20deg": 0.3277,
+  "share_over_35deg": 0.0001,
+  "steepestGradient": 0.73,
+  "within100mOfCoast": 53388,
+  "share_over_25deg_within100m": 0.0337
+ },
+ "duneMountains": {
+  "footprintColumnsWithDuneMoreThan10AboveRock": 114163,
+  "footprintShare": 0.4083,
+  "outsideWithin30mOfCoast": {
+   "columns": 66003,
+   "p50": 20,
+   "p95": 87,
+   "max": 97,
+   "shareAtLeast40": 0.29,
+   "shareAtLeast80": 0.084
+  }
+ },
+ "identityWithPrompt05Outside": {
+  "outsideColumns": 768952,
+  "differentColumns": 0,
+  "firstDifference_x_z_new_old": null
+ },
+ "layers": {
+  "mode": "on",
+  "unexpectedBlocks": [],
+  "bandShares": [
+   {
+    "band": "above 63",
+    "blocks": 268435456,
+    "shares": {
+     "air": 0.8736,
+     "dune_sand": 0.1001,
+     "sandstone": 0.0262,
+     "red_sandstone": 0
+    }
+   },
+   {
+    "band": "8..63",
+    "blocks": 58720256,
+    "shares": {
+     "stone": 0.5973,
+     "sandstone": 0.258,
+     "andesite": 0.0348,
+     "diorite": 0.0268,
+     "granite": 0.0258,
+     "smooth_sandstone": 0.0238,
+     "tuff": 0.0153,
+     "dune_sand": 0.0131,
+     "calcite": 0.0051
+    }
+   },
+   {
+    "band": "0..7 (gradient)",
+    "blocks": 8388608,
+    "shares": {
+     "deepslate": 0.5616,
+     "stone": 0.4355,
+     "tuff": 0.0029
+    }
+   },
+   {
+    "band": "-59..-1",
+    "blocks": 61865984,
+    "shares": {
+     "deepslate": 0.9947,
+     "tuff": 0.0053
+    }
+   },
+   {
+    "band": "-64..-60",
+    "blocks": 5242880,
+    "shares": {
+     "bedrock": 0.6001,
+     "deepslate": 0.3971,
+     "tuff": 0.0028
+    }
+   }
+  ],
+  "sandstoneThicknessBelow63": {
+   "inside": {
+    "columns": 279624,
+    "p5": 9,
+    "p50": 14,
+    "p95": 19
+   },
+   "outside": {
+    "columns": 768952,
+    "p5": 12,
+    "p50": 16,
+    "p95": 20
+   }
+  }
+ },
+ "pass": {
+  "noGaps": true,
+  "outlineIdentical": false,
+  "reliefMismatchBelow0_1pct": true,
+  "noAirBelowSurface": true,
+  "noFloatingSand": false,
+  "noRockWalls": true,
+  "noUnexpectedBlocks": true,
+  "duneIdentical": true
+ }
+}

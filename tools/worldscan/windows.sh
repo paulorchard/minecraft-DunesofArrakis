@@ -4,7 +4,7 @@
 # Appends "tag name seed chunks seconds ms_per_chunk" to build/worldscan/<tag>_timing.txt. Takes about a minute per window.
 set -e
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"; cd "$ROOT"
-TAG=$1; ONLY=${2:-}
+TAG=$1; ONLY=${2:-${ONLY:-}}
 mkdir -p build/worldscan
 grep -v '^#' tools/worldscan/windows.tsv | while IFS=$'\t' read -r name seed cx cz note; do
   [ -z "$name" ] && continue

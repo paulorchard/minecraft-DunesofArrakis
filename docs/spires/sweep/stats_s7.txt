@@ -1,0 +1,120 @@
+Note: tools\worldscan\java\ReliefScan.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+[islandcraft_dunesofarrakis] islands generated for a world: 210 (seed hash a17b4e432ef939e, mapped rock nodes 89346) in 470 ms, key 667447085
+seed 7, tough build/tough_k1.json, grid 25 m
+
+== purple: kind 1 rock 80.09 km2 (of 80.09 km2), spires 3142, wedges 1107
+   features per km2 of kind 1 rock: 53.1 (spires 39.2, wedges 13.8; wedge share 26%)
+   per km2 in cores: 320.8 (2432 features in 7.58 km2)
+   share of the kind 1 rock inside clusters: 23.2%
+   clusters: 84, area km2 (p5 0.0 p25 0.0 p50 0.1 p75 0.3 p95 0.7 max 1.2), of 0.05-0.5 km2: 38
+   density by distance from the core (features per km2 of rock): in core 320.8; 0-60 m 196.4; 60-120 m 69.9; 120-180 m 20.1; 180-240 m 2.5; 
+   largest cluster-free circle: diameter 1983 m (centre (-8450, -1225) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 28.6 p25 41.4 p50 58.8 p75 76.8 p95 95.6 max 110.0; above 90: 208 (6.6%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 7.8 p25 11.2 p50 13.8 p75 16.3 p95 19.9 max 22.0; top radius (m): p5 1.7 p25 2.2 p50 2.8 p75 3.4 p95 3.9 max 4.0; lean (deg): p5 0.4 p25 2.1 p50 3.8 p75 5.0 p95 7.0 max 8.0
+   nearest spire neighbour (m): p5 26.4 p25 35.1 p50 42.6 p75 52.3 p95 88.7 max 164.5; distance / (sum of base radii): p5 0.9 p25 1.2 p50 1.6 p75 2.1 p95 3.4 max 9.2; spires merging with a neighbour (base discs touch): 324 (10.3%); largest merged mass: 3 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 19.8; at 20 m: 14.2; at 40 m: 8.9 (spires that high: 3142, 3142, 2420)
+   wedge length (m): p5 51.1 p25 81.0 p50 120.7 p75 160.2 p95 192.0 max 200.0; crest width: p5 16.9 p25 24.1 p50 32.2 p75 41.3 p95 48.0 max 49.9; height: p5 16.7 p25 22.7 p50 30.6 p75 40.4 p95 50.9 max 55.0; back slope (m per block): p5 1.8 p25 2.1 p50 2.5 p75 2.9 p95 3.7 max 4.0; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 43.8 p25 66.1 p50 88.7 p75 113.0 p95 146.6 max 190.0; features made lower by the cap: 10
+
+== green: kind 1 rock 43.41 km2 (of 43.41 km2), spires 1470, wedges 485
+   features per km2 of kind 1 rock: 45.0 (spires 33.9, wedges 11.2; wedge share 25%)
+   per km2 in cores: 306.1 (1151 features in 3.76 km2)
+   share of the kind 1 rock inside clusters: 21.1%
+   clusters: 58, area km2 (p5 0.0 p25 0.0 p50 0.1 p75 0.2 p95 0.6 max 1.0), of 0.05-0.5 km2: 30
+   density by distance from the core (features per km2 of rock): in core 306.1; 0-60 m 174.9; 60-120 m 66.6; 120-180 m 23.1; 180-240 m 3.3; 
+   largest cluster-free circle: diameter 1676 m (centre (4975, -8650) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 28.4 p25 42.0 p50 60.6 p75 76.9 p95 91.1 max 110.0; above 90: 79 (5.4%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 7.9 p25 11.3 p50 13.8 p75 16.3 p95 19.8 max 22.0; top radius (m): p5 1.7 p25 2.2 p50 2.8 p75 3.4 p95 3.9 max 4.0; lean (deg): p5 0.3 p25 1.9 p50 3.7 p75 4.8 p95 6.8 max 8.0
+   nearest spire neighbour (m): p5 26.5 p25 35.5 p50 42.5 p75 52.1 p95 90.5 max 165.6; distance / (sum of base radii): p5 0.9 p25 1.3 p50 1.6 p75 2.0 p95 3.6 max 7.2; spires merging with a neighbour (base discs touch): 131 (8.9%); largest merged mass: 3 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 20.0; at 20 m: 14.4; at 40 m: 9.1 (spires that high: 1470, 1470, 1147)
+   wedge length (m): p5 47.1 p25 82.2 p50 118.0 p75 162.1 p95 193.2 max 199.8; crest width: p5 17.3 p25 24.2 p50 32.7 p75 41.1 p95 48.1 max 49.9; height: p5 17.2 p25 22.1 p50 29.4 p75 39.6 p95 50.5 max 54.9; back slope (m per block): p5 1.8 p25 2.1 p50 2.5 p75 3.0 p95 3.7 max 4.0; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 48.9 p25 73.0 p50 96.5 p75 116.6 p95 146.5 max 180.7; features made lower by the cap: 0
+
+== blue: kind 1 rock 77.41 km2 (of 77.41 km2), spires 2826, wedges 995
+   features per km2 of kind 1 rock: 49.4 (spires 36.5, wedges 12.9; wedge share 26%)
+   per km2 in cores: 327.2 (2190 features in 6.69 km2)
+   share of the kind 1 rock inside clusters: 21.1%
+   clusters: 71, area km2 (p5 0.0 p25 0.0 p50 0.1 p75 0.3 p95 0.8 max 1.3), of 0.05-0.5 km2: 44
+   density by distance from the core (features per km2 of rock): in core 327.2; 0-60 m 185.5; 60-120 m 75.7; 120-180 m 25.8; 180-240 m 3.4; 
+   largest cluster-free circle: diameter 1881 m (centre (1775, -6625) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 28.6 p25 42.0 p50 59.0 p75 76.9 p95 91.1 max 109.8; above 90: 149 (5.3%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 7.9 p25 11.2 p50 13.6 p75 16.3 p95 19.7 max 21.9; top radius (m): p5 1.7 p25 2.2 p50 2.8 p75 3.4 p95 3.9 max 4.0; lean (deg): p5 0.4 p25 2.0 p50 3.8 p75 5.0 p95 6.9 max 8.0
+   nearest spire neighbour (m): p5 26.5 p25 35.5 p50 43.4 p75 53.7 p95 91.6 max 179.7; distance / (sum of base radii): p5 0.9 p25 1.3 p50 1.6 p75 2.1 p95 3.5 max 10.2; spires merging with a neighbour (base discs touch): 248 (8.8%); largest merged mass: 4 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 19.8; at 20 m: 14.2; at 40 m: 8.8 (spires that high: 2826, 2826, 2196)
+   wedge length (m): p5 46.8 p25 78.7 p50 117.5 p75 159.3 p95 191.9 max 199.7; crest width: p5 16.3 p25 23.7 p50 33.3 p75 41.1 p95 48.2 max 50.0; height: p5 17.0 p25 22.5 p50 30.2 p75 39.9 p95 50.7 max 54.8; back slope (m per block): p5 1.8 p25 2.2 p50 2.5 p75 3.0 p95 3.7 max 4.0; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 49.1 p25 76.2 p50 99.1 p75 124.8 p95 161.8 max 190.0; features made lower by the cap: 24
+
+== brown: kind 1 rock 6.09 km2 (of 6.09 km2), spires 164, wedges 47
+   features per km2 of kind 1 rock: 34.6 (spires 26.9, wedges 7.7; wedge share 22%)
+   per km2 in cores: 301.5 (124 features in 0.41 km2)
+   share of the kind 1 rock inside clusters: 16.5%
+   clusters: 13, area km2 (p5 0.0 p25 0.0 p50 0.0 p75 0.1 p95 0.4 max 0.4), of 0.05-0.5 km2: 6
+   density by distance from the core (features per km2 of rock): in core 301.5; 0-60 m 185.1; 60-120 m 63.6; 120-180 m 28.9; 180-240 m 4.3; 
+   largest cluster-free circle: diameter 1278 m (centre (-3350, -1700) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 29.9 p25 38.8 p50 59.5 p75 75.4 p95 90.6 max 108.5; above 90: 9 (5.5%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 8.2 p25 11.3 p50 13.9 p75 15.9 p95 19.3 max 22.0; top radius (m): p5 1.7 p25 2.2 p50 2.7 p75 3.4 p95 3.8 max 4.0; lean (deg): p5 0.5 p25 2.1 p50 3.9 p75 4.9 p95 7.0 max 7.9
+   nearest spire neighbour (m): p5 28.9 p25 36.5 p50 43.2 p75 55.2 p95 102.4 max 144.7; distance / (sum of base radii): p5 1.0 p25 1.3 p50 1.6 p75 2.3 p95 3.9 max 6.5; spires merging with a neighbour (base discs touch): 6 (3.7%); largest merged mass: 2 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 20.1; at 20 m: 14.4; at 40 m: 8.9 (spires that high: 164, 164, 116)
+   wedge length (m): p5 56.3 p25 73.2 p50 134.6 p75 172.1 p95 191.5 max 197.0; crest width: p5 16.3 p25 21.1 p50 28.7 p75 35.9 p95 43.4 max 46.4; height: p5 16.8 p25 25.4 p50 31.2 p75 37.9 p95 46.1 max 52.3; back slope (m per block): p5 2.0 p25 2.2 p50 2.5 p75 2.9 p95 3.7 max 3.9; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 52.5 p25 72.4 p50 95.8 p75 114.5 p95 144.3 max 183.9; features made lower by the cap: 0
+
+== red: kind 1 rock 16.28 km2 (of 16.28 km2), spires 605, wedges 195
+   features per km2 of kind 1 rock: 49.1 (spires 37.2, wedges 12.0; wedge share 24%)
+   per km2 in cores: 305.7 (457 features in 1.50 km2)
+   share of the kind 1 rock inside clusters: 22.6%
+   clusters: 29, area km2 (p5 0.0 p25 0.0 p50 0.0 p75 0.1 p95 0.6 max 1.2), of 0.05-0.5 km2: 9
+   density by distance from the core (features per km2 of rock): in core 305.7; 0-60 m 190.5; 60-120 m 73.5; 120-180 m 21.1; 180-240 m 0.6; 
+   largest cluster-free circle: diameter 1888 m (centre (14350, -15075) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 27.9 p25 41.8 p50 62.0 p75 78.4 p95 93.4 max 109.7; above 90: 41 (6.8%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 7.8 p25 11.3 p50 14.0 p75 16.5 p95 19.7 max 22.0; top radius (m): p5 1.7 p25 2.2 p50 2.9 p75 3.4 p95 3.9 max 4.0; lean (deg): p5 0.5 p25 1.9 p50 3.7 p75 4.8 p95 6.6 max 7.9
+   nearest spire neighbour (m): p5 24.8 p25 34.9 p50 42.8 p75 54.2 p95 86.4 max 147.0; distance / (sum of base radii): p5 0.9 p25 1.2 p50 1.5 p75 2.1 p95 3.4 max 6.0; spires merging with a neighbour (base discs touch): 68 (11.2%); largest merged mass: 3 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 20.5; at 20 m: 14.9; at 40 m: 9.2 (spires that high: 605, 605, 471)
+   wedge length (m): p5 46.6 p25 71.1 p50 114.4 p75 157.4 p95 189.4 max 196.9; crest width: p5 17.5 p25 24.9 p50 33.5 p75 42.6 p95 47.5 max 49.8; height: p5 17.4 p25 21.7 p50 27.8 p75 38.9 p95 51.9 max 54.5; back slope (m per block): p5 1.7 p25 2.1 p50 2.5 p75 3.0 p95 3.7 max 4.0; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 60.4 p25 90.5 p50 114.0 p75 134.4 p95 169.3 max 190.0; features made lower by the cap: 5
+
+== ring isl: kind 1 rock 5.09 km2 (of 5.09 km2), spires 45, wedges 6
+   features per km2 of kind 1 rock: 10.0 (spires 8.8, wedges 1.2; wedge share 12%)
+   per km2 in cores: 173.7 (38 features in 0.22 km2)
+   share of the kind 1 rock inside clusters: 9.6%
+   clusters: 29, area km2 (p5 0.0 p25 0.0 p50 0.0 p75 0.0 p95 0.1 max 0.1), of 0.05-0.5 km2: 4
+   density by distance from the core (features per km2 of rock): in core 173.7; 0-60 m 30.4; 60-120 m 33.0; 120-180 m 16.4; 180-240 m 0.0; 
+   largest cluster-free circle: diameter 2412 m (centre (-10375, -9975) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 26.4 p25 32.8 p50 47.9 p75 71.2 p95 89.8 max 107.4; above 90: 2 (4.4%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 7.4 p25 11.5 p50 13.6 p75 15.9 p95 21.3 max 21.4; top radius (m): p5 1.8 p25 2.3 p50 3.0 p75 3.4 p95 3.9 max 4.0; lean (deg): p5 0.4 p25 1.8 p50 3.9 p75 5.2 p95 6.9 max 7.8
+   nearest spire neighbour (m): p5 26.1 p25 30.5 p50 40.8 p75 56.4 p95 121.2 max 131.1; distance / (sum of base radii): p5 1.0 p25 1.1 p50 1.6 p75 2.2 p95 3.6 max 4.3; spires merging with a neighbour (base discs touch): 6 (13.3%); largest merged mass: 2 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 18.8; at 20 m: 12.9; at 40 m: 9.1 (spires that high: 45, 45, 30)
+   wedge length (m): p5 47.2 p25 90.9 p50 109.3 p75 109.8 p95 114.1 max 114.1; crest width: p5 23.9 p25 27.5 p50 30.3 p75 32.8 p95 36.3 max 36.3; height: p5 19.8 p25 26.8 p50 37.0 p75 42.5 p95 43.8 max 43.8; back slope (m per block): p5 2.1 p25 2.1 p50 2.4 p75 2.8 p95 3.4 max 3.4; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 47.5 p25 56.3 p50 72.9 p75 94.5 p95 119.3 max 138.9; features made lower by the cap: 0
+
+== archi isl: kind 1 rock 6.71 km2 (of 6.71 km2), spires 277, wedges 87
+   features per km2 of kind 1 rock: 54.3 (spires 41.3, wedges 13.0; wedge share 24%)
+   per km2 in cores: 264.9 (226 features in 0.85 km2)
+   share of the kind 1 rock inside clusters: 28.7%
+   clusters: 29, area km2 (p5 0.0 p25 0.0 p50 0.0 p75 0.1 p95 0.3 max 0.5), of 0.05-0.5 km2: 7
+   density by distance from the core (features per km2 of rock): in core 264.9; 0-60 m 145.5; 60-120 m 73.0; 120-180 m 8.4; 180-240 m 5.4; 
+   largest cluster-free circle: diameter 2440 m (centre (14200, -18725) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 28.0 p25 39.2 p50 56.8 p75 76.0 p95 89.1 max 107.6; above 90: 12 (4.3%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 7.7 p25 10.9 p50 13.3 p75 15.7 p95 20.1 max 21.8; top radius (m): p5 1.8 p25 2.2 p50 2.8 p75 3.5 p95 3.9 max 4.0; lean (deg): p5 0.6 p25 2.3 p50 3.9 p75 5.2 p95 7.0 max 7.9
+   nearest spire neighbour (m): p5 26.5 p25 35.0 p50 41.9 p75 52.0 p95 81.5 max 172.8; distance / (sum of base radii): p5 0.9 p25 1.3 p50 1.6 p75 2.0 p95 3.3 max 6.4; spires merging with a neighbour (base discs touch): 25 (9.0%); largest merged mass: 3 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 18.8; at 20 m: 13.5; at 40 m: 8.7 (spires that high: 277, 277, 204)
+   wedge length (m): p5 48.1 p25 72.4 p50 115.3 p75 168.1 p95 193.1 max 199.2; crest width: p5 16.0 p25 21.5 p50 32.9 p75 40.4 p95 48.0 max 49.7; height: p5 17.0 p25 19.8 p50 26.9 p75 38.4 p95 52.6 max 54.9; back slope (m per block): p5 1.7 p25 2.2 p50 2.5 p75 3.1 p95 3.8 max 4.0; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 51.5 p25 69.4 p50 89.4 p75 108.8 p95 144.4 max 182.3; features made lower by the cap: 0
+
+== scatter isl: kind 1 rock 23.50 km2 (of 23.50 km2), spires 548, wedges 163
+   features per km2 of kind 1 rock: 30.3 (spires 23.3, wedges 6.9; wedge share 23%)
+   per km2 in cores: 259.9 (375 features in 1.44 km2)
+   share of the kind 1 rock inside clusters: 16.1%
+   clusters: 80, area km2 (p5 0.0 p25 0.0 p50 0.0 p75 0.0 p95 0.3 max 0.4), of 0.05-0.5 km2: 18
+   density by distance from the core (features per km2 of rock): in core 259.9; 0-60 m 169.6; 60-120 m 74.9; 120-180 m 22.0; 180-240 m 5.3; 
+   largest cluster-free circle: diameter 19046 m (centre (1800, 15625) on this rock, nearest cluster cell with density > 0.02)
+   spire height above the base (m): p5 27.5 p25 42.0 p50 59.6 p75 78.3 p95 97.8 max 108.7; above 90: 43 (7.8%), above 110: 0, under 25 (made lower by the cap): 0
+   spire base radius (m): p5 7.8 p25 11.3 p50 13.9 p75 16.5 p95 20.1 max 21.8; top radius (m): p5 1.7 p25 2.2 p50 2.8 p75 3.4 p95 3.9 max 4.0; lean (deg): p5 0.5 p25 2.1 p50 3.8 p75 5.0 p95 7.0 max 7.9
+   nearest spire neighbour (m): p5 26.4 p25 34.8 p50 42.1 p75 54.7 p95 90.4 max 146.2; distance / (sum of base radii): p5 0.9 p25 1.2 p50 1.6 p75 2.1 p95 3.3 max 6.7; spires merging with a neighbour (base discs touch): 66 (12.0%); largest merged mass: 3 spires
+   spire width (m, analytic, without ledges and wobble) at 10 m above the base: median 20.1; at 20 m: 14.6; at 40 m: 9.0 (spires that high: 548, 548, 425)
+   wedge length (m): p5 52.9 p25 81.3 p50 127.7 p75 158.8 p95 192.1 max 199.1; crest width: p5 16.7 p25 23.1 p50 32.3 p75 42.3 p95 47.7 max 49.9; height: p5 16.7 p25 21.2 p50 28.8 p75 37.9 p95 50.4 max 53.8; back slope (m per block): p5 1.8 p25 2.1 p50 2.5 p75 3.1 p95 3.7 max 4.0; cut by the cap: 0
+   top above sand (m, base at the centre + height): p5 47.5 p25 71.2 p50 91.0 p75 110.8 p95 143.1 max 176.4; features made lower by the cap: 0
+
+islands ring isl: 61 ellipses, of kind 1: 61, with at least one feature: 10
+islands archi isl: 42 ellipses, of kind 1: 42, with at least one feature: 9
+islands scatter isl: 107 ellipses, of kind 1: 107, with at least one feature: 29

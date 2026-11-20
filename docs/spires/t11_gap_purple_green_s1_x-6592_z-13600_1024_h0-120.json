@@ -1,0 +1,181 @@
+{
+  "area": {
+    "x0": -6592,
+    "z0": -13600,
+    "size": 1024,
+    "columns": 1048576,
+    "fullChunks": 4096,
+    "sandLevelTopBlockY": 63
+  },
+  "heightAboveSand": {
+    "min": 0,
+    "p5": 2,
+    "p50": 16,
+    "p95": 102,
+    "max": 119,
+    "mean": 27.86
+  },
+  "relief32": {
+    "windows": 1024,
+    "median": 11,
+    "p90": 25,
+    "max": 45
+  },
+  "steepestNeighbourStep": 2,
+  "fractionAtSandLevel": 0.016,
+  "fractionTopNotSand": 0,
+  "blocks": {
+    "airBelowSurface": 0,
+    "nonSandNonBedrockBlocks": 114826914,
+    "otherBlockTypes": {
+      "minecraft:granite": 1494430,
+      "minecraft:stone": 38107574,
+      "minecraft:diorite": 1604898,
+      "minecraft:andesite": 2017736,
+      "minecraft:deepslate": 68306039,
+      "minecraft:calcite": 248806,
+      "minecraft:tuff": 1373563,
+      "minecraft:smooth_sandstone": 1673868
+    },
+    "bedrockAboveBottomFiveLayers": 0,
+    "heightmapDisagreesWithBlocks": 0
+  },
+  "crests": {
+    "prevailingCrestDirectionDeg": 26,
+    "crossCrestAxisDeg": 116,
+    "orientationSpreadDeg_circularSd": 19.8,
+    "resultantLengthR": 0.788,
+    "note": "degrees from +x (east) toward +z (south), mod 180; spread = circular standard deviation of the gradient orientation, weighted by slope^2"
+  },
+  "slopes": {
+    "windDirectionTowardDeg": 115,
+    "windwardAlongWind": {
+      "columns": 602627,
+      "meanDeg": 16.6,
+      "p90Deg": 29.2
+    },
+    "leewardAlongWind": {
+      "columns": 325414,
+      "meanDeg": 20.9,
+      "p90Deg": 40
+    },
+    "windwardSteepestDescent": {
+      "meanDeg": 18.1
+    },
+    "leewardSteepestDescent": {
+      "meanDeg": 22.8
+    },
+    "note": "gradients over +-GR blocks (default 4); columns with |slope|>0.04 and height>0.5 above sand; \"along wind\" = directional derivative along the wind axis (cross-crest); windward = height rising along the wind, leeward = falling"
+  },
+  "autocorrelation": {
+    "alongCrests": {
+      "8": 1,
+      "16": 1,
+      "32": 0.99,
+      "48": 0.98,
+      "64": 0.97,
+      "80": 0.96,
+      "96": 0.95,
+      "128": 0.91,
+      "160": 0.87,
+      "192": 0.83,
+      "256": 0.72,
+      "320": 0.6,
+      "400": 0.38,
+      "512": 0.02
+    },
+    "acrossCrests": {
+      "8": 0.99,
+      "16": 0.98,
+      "32": 0.93,
+      "48": 0.88,
+      "64": 0.84,
+      "80": 0.8,
+      "96": 0.78,
+      "128": 0.76,
+      "160": 0.74,
+      "192": 0.63,
+      "256": 0.41,
+      "320": 0.35,
+      "400": 0.04,
+      "512": -0.05
+    }
+  },
+  "crestHeightAboveSand": {
+    "samples": 253,
+    "p10": 13,
+    "median": 28.7,
+    "p90": 118.1,
+    "max": 118.7
+  },
+  "crestSpacingBlocks": {
+    "samples": 137,
+    "p10": 137,
+    "median": 160,
+    "p90": 212
+  },
+  "chunkSeams": {
+    "meanStepAcrossXBorder": 0.1558,
+    "meanStepInsideX": 0.1548,
+    "meanStepAcrossZBorder": 0.2833,
+    "meanStepInsideZ": 0.2854,
+    "ratioX": 1.007,
+    "ratioZ": 0.992,
+    "note": "ratio ~1.0 = no visible 16-block seams"
+  },
+  "windows": {
+    "side": 256,
+    "tallest": [
+      {
+        "centerX": -6464,
+        "centerZ": -12704,
+        "p50": 101,
+        "p95": 118,
+        "max": 119,
+        "atSand": 0
+      },
+      {
+        "centerX": -6464,
+        "centerZ": -12832,
+        "p50": 98,
+        "p95": 118,
+        "max": 119,
+        "atSand": 0
+      },
+      {
+        "centerX": -6336,
+        "centerZ": -12704,
+        "p50": 92,
+        "p95": 117,
+        "max": 119,
+        "atSand": 0
+      }
+    ],
+    "flattest": [
+      {
+        "centerX": -6080,
+        "centerZ": -13344,
+        "p50": 5,
+        "p95": 12,
+        "max": 20,
+        "atSand": 0.07244873046875
+      },
+      {
+        "centerX": -6208,
+        "centerZ": -13088,
+        "p50": 5,
+        "p95": 19,
+        "max": 50,
+        "atSand": 0
+      },
+      {
+        "centerX": -6208,
+        "centerZ": -13216,
+        "p50": 7,
+        "p95": 19,
+        "max": 24,
+        "atSand": 0
+      }
+    ]
+  }
+}

@@ -57,6 +57,17 @@ public final class ToughModel {
     private final int cycle2;
     private final double cap2PatchWl, cap2PatchThr, fadeCoast, fadeBase, fadeHalf, topOffset, cW0, eDirMax, gDirA, gDirB, minCliff, minZone, sSharp;
 
+    // ---- kind 1 (spires and wedges, prompt 11)
+    private final int cellS, cellW, tileK1;
+    private final double capK1, cWl, cWl2, cW2, cGain, cThr, cThin, cTail, cTailD, cGs, cGMin;
+    private final double eMinBase, eMinDist, eRing;
+    private final double sP, sHMin, sHMax, sTallP, sTallMax, sRbMin, sRbMax, sRtMin, sRtMax, sCnMin, sCnMax, sLsMin, sLsMax, sLvMin, sLvMax, sWob, sWobWl, sLean, sLeanShift, sApWMin, sApWMax, sApH;
+    private final double wP, wLMin, wLMax, wWMin, wWMax, wHMin, wHMax, wBsMin, wBsMax, wBackMax, wFsMin, wFsMax, wEndSl, wFlat, wJit, wLsMin, wLsMax, wLv, wWob;
+    public final String stoneBlock, streakBlock;
+    private final double stWl, stThr, stTilt, paWl, paThr;
+    public final int stoneCapDepth;
+    private final ThreadLocal<FCache> fcache = ThreadLocal.withInitial(FCache::new);
+
     public ToughModel(ToughConfig c, ReliefModel relief, ContinentIndex idx, long seed) {
         this.c = c;
         this.relief = relief;
@@ -169,6 +180,72 @@ public final class ToughModel {
         topOffset = c.d("kind2_top", "top_offset");
         cap2PatchWl = c.d("kind2_bands", "cap_patch_wavelength");
         cap2PatchThr = c.d("kind2_bands", "cap_patch_threshold");
+        cellS = c.i("kind1", "cell_spire");
+        cellW = c.i("kind1", "cell_wedge");
+        tileK1 = c.i("kind1", "tile");
+        capK1 = c.d("kind1", "cap");
+        cWl = c.d("kind1_cluster", "wavelength");
+        cWl2 = c.d("kind1_cluster", "wavelength2");
+        cW2 = c.d("kind1_cluster", "weight2");
+        cGain = c.d("kind1_cluster", "gain");
+        cThr = c.d("kind1_cluster", "threshold");
+        cThin = c.d("kind1_cluster", "thin");
+        cTail = c.d("kind1_cluster", "tail");
+        cTailD = c.d("kind1_cluster", "tail_density");
+        cGs = c.d("kind1_cluster", "grad_step");
+        cGMin = c.d("kind1_cluster", "grad_min");
+        eMinBase = c.d("kind1_eligible", "min_base");
+        eMinDist = c.d("kind1_eligible", "min_coast_distance");
+        eRing = c.d("kind1_eligible", "ring_margin");
+        sP = c.d("kind1_spire", "p_max");
+        sHMin = c.d("kind1_spire", "height_min");
+        sHMax = c.d("kind1_spire", "height_max");
+        sTallP = c.d("kind1_spire", "tall_chance");
+        sTallMax = c.d("kind1_spire", "tall_max");
+        sRbMin = c.d("kind1_spire", "base_radius_min");
+        sRbMax = c.d("kind1_spire", "base_radius_max");
+        sRtMin = c.d("kind1_spire", "top_radius_min");
+        sRtMax = c.d("kind1_spire", "top_radius_max");
+        sCnMin = c.d("kind1_spire", "concave_min");
+        sCnMax = c.d("kind1_spire", "concave_max");
+        sLsMin = c.d("kind1_spire", "ledge_step_min");
+        sLsMax = c.d("kind1_spire", "ledge_step_max");
+        sLvMin = c.d("kind1_spire", "ledge_strength_min");
+        sLvMax = c.d("kind1_spire", "ledge_strength_max");
+        sWob = c.d("kind1_spire", "wobble");
+        sWobWl = c.d("kind1_spire", "wobble_wavelength");
+        sLean = Math.tan(Math.toRadians(c.d("kind1_spire", "lean_max_deg")));
+        sLeanShift = c.d("kind1_spire", "lean_shift_max");
+        sApWMin = c.d("kind1_spire", "apron_width_min");
+        sApWMax = c.d("kind1_spire", "apron_width_max");
+        sApH = c.d("kind1_spire", "apron_height");
+        wP = c.d("kind1_wedge", "p_max");
+        wLMin = c.d("kind1_wedge", "length_min");
+        wLMax = c.d("kind1_wedge", "length_max");
+        wWMin = c.d("kind1_wedge", "width_min");
+        wWMax = c.d("kind1_wedge", "width_max");
+        wHMin = c.d("kind1_wedge", "height_min");
+        wHMax = c.d("kind1_wedge", "height_max");
+        wBsMin = c.d("kind1_wedge", "back_slope_min");
+        wBsMax = c.d("kind1_wedge", "back_slope_max");
+        wBackMax = c.d("kind1_wedge", "back_max");
+        wFsMin = c.d("kind1_wedge", "face_slope_min");
+        wFsMax = c.d("kind1_wedge", "face_slope_max");
+        wEndSl = c.d("kind1_wedge", "end_slope");
+        wFlat = c.d("kind1_wedge", "crest_flat");
+        wJit = Math.toRadians(c.d("kind1_wedge", "axis_jitter_deg"));
+        wLsMin = c.d("kind1_wedge", "ledge_step_min");
+        wLsMax = c.d("kind1_wedge", "ledge_step_max");
+        wLv = c.d("kind1_wedge", "ledge_strength");
+        wWob = c.d("kind1_wedge", "wobble");
+        stoneBlock = c.s("kind1_bands", "stone");
+        streakBlock = c.s("kind1_bands", "streak");
+        stWl = c.d("kind1_bands", "streak_wavelength");
+        stThr = c.d("kind1_bands", "streak_threshold");
+        stTilt = c.d("kind1_bands", "streak_tilt");
+        paWl = c.d("kind1_bands", "patch_wavelength");
+        paThr = c.d("kind1_bands", "patch_threshold");
+        stoneCapDepth = c.i("kind1_bands", "cap_stone_depth");
         // the kind 2 band sequence: two thick colours alternating, now and then a thin accent band
         JsonArray p2 = c.arr("kind2_bands", "palette"), ac = c.arr("kind2_bands", "accents");
         paletteBlock2 = new String[p2.size() + ac.size()];
@@ -325,6 +402,10 @@ public final class ToughModel {
             evalPlain(x, z, r, nz, out);
             return;
         }
+        if (k == 1) {
+            evalSpires(x, z, r, nz, out);
+            return;
+        }
         if (k != 3) return;
         double d = relief.exactDistance(x, z, nz);
         if (d < minDist) return;
@@ -375,6 +456,327 @@ public final class ToughModel {
         out.baseTop = base;
         out.rt = rt;
         out.tough = rt > base + 0.5;
+    }
+
+    // ------------------------------------------------------------------ kind 1: spires and wedges (prompt 11)
+
+    /** One feature of the kind 1 lattice (a spire or a wedge), made from its lattice cell alone. Heights are above the local base R'. */
+    public static final class Feat {
+        public boolean exists, wedge, cut; // cut: the height was lowered to keep the top under the cap
+        public int ci, cj;
+        public double cx, cz, reach, h, h0; // h: height above the base (after the cap), h0: before the cap
+        public double base0, rmax; // base R' at the centre and the highest base under the footprint (above sand)
+        public double rb, rtop, conc, ls, lv, leanX, leanZ, apW; // spire
+        public double len, wid, bk, wf, te, ax, az, nx, nz, bOff, ext; // wedge: length, crest width, back length, face width, end taper, axis, normal toward the weather, offset, extent
+    }
+
+    private static final Feat NONE = new Feat();
+
+    private static final class FCache {
+        final long[] keys = new long[8192];
+        final Feat[] vals = new Feat[8192];
+        final long[] tk = new long[512];
+        final boolean[] tv = new boolean[512];
+        final CoastModel.Out out = new CoastModel.Out();
+        final double[] ap = new double[1];
+        final double[] rm = new double[1];
+
+        FCache() {
+            java.util.Arrays.fill(keys, Long.MIN_VALUE);
+            java.util.Arrays.fill(tk, Long.MIN_VALUE);
+        }
+    }
+
+    private static long mix(long h) {
+        h ^= h >>> 33;
+        h *= 0xFF51AFD7ED558CCDL;
+        h ^= h >>> 33;
+        h *= 0xC4CEB9FE1A85EC53L;
+        h ^= h >>> 33;
+        return h;
+    }
+
+    private static double u(long h, int k) {
+        return (mix(h + k * 0x9E3779B97F4A7C15L) >>> 11) * 0x1.0p-53;
+    }
+
+    public double clusterThreshold() {
+        return cThr;
+    }
+
+    /** The cluster mask value in [-1, 1]: two noise scales. */
+    public double clusterValue(CoastModel.Noise nz, double x, double z) {
+        return clamp1(cGain * ((1 - cW2) * n(nz, 40, x, z, cWl) + cW2 * n(nz, 41, x, z, cWl2)));
+    }
+
+    /**
+     * Cluster density D in [0, 1] at a place: the signed distance s to the cluster outline (first order, mask value over its gradient) gives a dense
+     * heart (D rises from tail_density at the outline to 1 over {@code thin} metres inside) and a sparse tail outside (tail_density falling to 0 over {@code tail} metres).
+     */
+    public double clusterDensity(CoastModel.Noise nz, double x, double z) {
+        double q = clusterValue(nz, x, z) - cThr;
+        double gx = (clusterValue(nz, x + cGs, z) - clusterValue(nz, x - cGs, z)) / (2 * cGs);
+        double gz = (clusterValue(nz, x, z + cGs) - clusterValue(nz, x, z - cGs)) / (2 * cGs);
+        double s = q / Math.max(Math.hypot(gx, gz), cGMin);
+        if (s >= 0) return cTailD + (1 - cTailD) * smooth01(s / cThin);
+        if (s > -cTail) return cTailD * smooth01((s + cTail) / cTail);
+        return 0;
+    }
+
+    private boolean inRock(double px, double pz, CoastModel.Noise nz, FCache fc) {
+        double f = relief.coast.field(px, pz, nz, fc.out);
+        if (!(f > 0) || kindOf(fc.out.winnerEllipse) != 1) return false;
+        if (relief.exactDistance(px, pz, nz) < eRing) return false;
+        double r = relief.rockFromField(f, px, pz, nz);
+        if (r > fc.rm[0]) fc.rm[0] = r;
+        return true;
+    }
+
+    /** The feature of lattice cell (i, j) of the given type (0 spire lattice, 1 wedge lattice), or NONE. */
+    private Feat makeFeat(int type, int i, int j, CoastModel.Noise nz, FCache fc) {
+        long h = mix(seed ^ (0x6A09E667F3BCC909L * (type + 1)) ^ (i * 0x9E3779B97F4A7C15L) ^ (j * 0xC2B2AE3D27D4EB4FL));
+        double cell = type == 0 ? cellS : cellW, pmax = type == 0 ? sP : wP;
+        double u2 = u(h, 2);
+        if (u2 >= pmax) return NONE; // cheap rejection before any noise
+        double cx = (i + 0.2 + 0.6 * u(h, 0)) * cell, cz = (j + 0.2 + 0.6 * u(h, 1)) * cell;
+        if (u2 >= pmax * clusterDensity(nz, cx, cz)) return NONE;
+        double f0 = relief.coast.field(cx, cz, nz, fc.out);
+        if (!(f0 > 0) || kindOf(fc.out.winnerEllipse) != 1) return NONE;
+        double d0 = relief.exactDistance(cx, cz, nz);
+        if (d0 < eMinDist) return NONE;
+        if (relief.broadReference(cx, cz, d0, nz) < eMinBase) return NONE;
+        double r0 = relief.rockFromField(f0, cx, cz, nz);
+        Feat F = new Feat();
+        F.exists = true;
+        F.wedge = type == 1;
+        F.ci = i;
+        F.cj = j;
+        F.cx = cx;
+        F.cz = cz;
+        F.base0 = r0;
+        fc.rm[0] = r0;
+        if (type == 0) {
+            double hh = sHMin + (sHMax - sHMin) * u(h, 3);
+            if (u(h, 4) < sTallP) hh = sHMax + (sTallMax - sHMax) * u(h, 5);
+            double hf = Math.max(0, Math.min(1, (hh - sHMin) / (sHMax - sHMin)));
+            F.rb = sRbMin + (sRbMax - sRbMin) * (0.5 * u(h, 6) + 0.5 * hf);
+            F.rtop = Math.min(sRtMin + (sRtMax - sRtMin) * u(h, 7), 0.5 * F.rb);
+            F.conc = sCnMin + (sCnMax - sCnMin) * u(h, 8);
+            F.ls = sLsMin + (sLsMax - sLsMin) * u(h, 9);
+            F.lv = sLvMin + (sLvMax - sLvMin) * u(h, 10);
+            double tl = Math.min(sLean * u(h, 11), sLeanShift / hh), dir = 2 * Math.PI * u(h, 12);
+            F.leanX = Math.cos(dir) * tl;
+            F.leanZ = Math.sin(dir) * tl;
+            F.apW = sApWMin + (sApWMax - sApWMin) * u(h, 13);
+            F.reach = F.rb * (1 + sWob) + F.apW + hh * tl + 2;
+            F.h0 = hh;
+            double rr = F.rb + F.apW + 1;
+            for (int k = 0; k < 8; k++) {
+                double a = k * Math.PI / 4;
+                if (!inRock(cx + rr * Math.cos(a), cz + rr * Math.sin(a), nz, fc)) return NONE;
+            }
+        } else {
+            double len = wLMin + (wLMax - wLMin) * u(h, 3), wid = wWMin + (wWMax - wWMin) * u(h, 4), hh = wHMin + (wHMax - wHMin) * u(h, 5);
+            hh = Math.min(hh, 0.9 * wEndSl * (1 - wFlat) * (len / 2) / 1.5);
+            double bs = wBsMin + (wBsMax - wBsMin) * u(h, 6);
+            double fs = wFsMin + (wFsMax - wFsMin) * u(h, 7);
+            double al = Math.atan2(wSin, wCos) - Math.PI / 2 + wJit * (2 * u(h, 8) - 1);
+            F.len = len;
+            F.wid = wid;
+            F.bk = Math.min(hh * bs, wBackMax);
+            F.wf = hh / fs;
+            F.te = 1;
+            F.ax = Math.cos(al);
+            F.az = Math.sin(al);
+            F.nx = -Math.sin(al);
+            F.nz = Math.cos(al);
+            F.ext = wid + F.bk + F.wf;
+            F.bOff = F.wf - F.ext / 2;
+            F.ls = wLsMin + (wLsMax - wLsMin) * u(h, 9);
+            F.lv = wLv;
+            F.reach = Math.max(len / 2, F.ext / 2) + 10;
+            F.h0 = hh;
+            double hl = 0.8 * len / 2, he = 0.9 * F.ext / 2;
+            for (int a = -1; a <= 1; a++) {
+                for (int b = -1; b <= 1; b++) {
+                    if (a == 0 && b == 0) continue;
+                    double pa = a * hl, pb = b * he;
+                    if (!inRock(cx + pa * F.ax + pb * F.nx, cz + pa * F.az + pb * F.nz, nz, fc)) return NONE;
+                }
+            }
+        }
+        F.rmax = fc.rm[0];
+        // the cap: lower the height (never flatten the top)
+        F.h = F.h0;
+        double room = capK1 - (type == 0 ? F.base0 : F.rmax); // a spire's top is level at base0 + h; a wedge follows the base, so its highest base counts
+        if (F.h > room) {
+            F.h = room;
+            F.cut = true;
+        }
+        if (F.h < 12) return NONE;
+        return F;
+    }
+
+    private Feat feat(FCache fc, int type, int i, int j, CoastModel.Noise nz) {
+        long key = (((long) i & 0xFFFFFFFFL) << 32) | (((long) j & 0x3FFFFFFFL) << 2) | type;
+        int slot = (int) (mix(key) >>> 51);
+        if (fc.keys[slot] == key) return fc.vals[slot];
+        Feat f = makeFeat(type, i, j, nz, fc);
+        fc.keys[slot] = key;
+        fc.vals[slot] = f;
+        return f;
+    }
+
+    /** Whether any feature can reach the tile (ti, tj) of {@code kind1.tile} metres (so open rock costs one lookup). */
+    private boolean tileHas(FCache fc, int ti, int tj, CoastModel.Noise nz) {
+        long key = ((long) ti << 32) ^ (tj & 0xFFFFFFFFL);
+        int slot = (int) (mix(key) >>> 55);
+        if (fc.tk[slot] == key) return fc.tv[slot];
+        double x0 = (double) ti * tileK1, z0 = (double) tj * tileK1;
+        double mS = sRbMax * (1 + sWob) + sApWMax + sLeanShift + 3, mW = Math.max(wLMax / 2, (wWMax + wBackMax + wHMax / wFsMin) / 2) + 12;
+        boolean any = false;
+        for (int type = 0; type < 2 && !any; type++) {
+            double cell = type == 0 ? cellS : cellW, m = type == 0 ? mS : mW;
+            int i0 = (int) Math.floor((x0 - m) / cell), i1 = (int) Math.floor((x0 + tileK1 + m) / cell);
+            int j0 = (int) Math.floor((z0 - m) / cell), j1 = (int) Math.floor((z0 + tileK1 + m) / cell);
+            for (int i = i0; i <= i1 && !any; i++) {
+                for (int j = j0; j <= j1; j++) {
+                    if (feat(fc, type, i, j, nz).exists) {
+                        any = true;
+                        break;
+                    }
+                }
+            }
+        }
+        fc.tk[slot] = key;
+        fc.tv[slot] = any;
+        return any;
+    }
+
+    /** Stair the height tt (0..hmax) in steps of {@code step}: ledges with risers between, blended in by {@code str}; the top (f = 1) is untouched. */
+    private static double ledge(double tt, double step, double str, double f) {
+        double w = str * smooth01((1 - f) / 0.12);
+        if (w <= 0) return tt;
+        double q = tt / step, fl = Math.floor(q), fr = q - fl;
+        double st = (fl + smooth01((fr - 0.35) / 0.3)) * step;
+        return tt + w * (st - tt);
+    }
+
+    /** Spire height above the local base at (x, z), or -1 outside its footprint; ap[0] receives the base-coloured foot apron (blocks). */
+    private double spireAt(Feat F, double x, double z, double r, CoastModel.Noise nz, double[] ap) {
+        double dx = x - F.cx, dz = z - F.cz, d0 = Math.hypot(dx, dz);
+        ap[0] = 0;
+        if (d0 > F.reach) return -1;
+        double wob = sWob * F.rb * clamp1(1.4 * n(nz, 44, x, z, sWobWl));
+        double wg0 = smooth01((d0 - F.rtop) / (0.5 * (F.rb - F.rtop)));
+        double dg = d0 + wob * wg0; // the foot, before the lean shifts the axis
+        if (dg < F.rb) ap[0] = sApH;
+        else if (dg < F.rb + F.apW) ap[0] = Math.round(sApH * (1 - (dg - F.rb) / F.apW));
+        double t = F.h, fk = 0;
+        for (int it = 0; it < 8; it++) { // the axis leans with height: from the top down, the height whose shifted axis gives this distance
+            double d = Math.hypot(dx - F.leanX * t, dz - F.leanZ * t);
+            double de = d + wob * smooth01((d - F.rtop) / (0.5 * (F.rb - F.rtop)));
+            if (de >= F.rb) {
+                t = 0;
+                fk = 0;
+                continue;
+            }
+            double uu = Math.max(0, Math.min(1, (de - F.rtop) / (F.rb - F.rtop)));
+            double f = 1 - Math.pow(uu, 1 / F.conc);
+            t = Math.max(0, ledge(f * F.h, F.ls, F.lv, f));
+            fk = f;
+        }
+        // the upper part is level at an absolute height (the base at the centre + h), the foot follows the local base: a flat top whatever the base does under it
+        return t > 0 ? Math.max(0, t + (F.base0 - r) * fk * fk) : 0;
+    }
+
+    /** Wedge height above the local base at (x, z), or -1 outside. */
+    private double wedgeAt(Feat F, double x, double z, CoastModel.Noise nz) {
+        double dx = x - F.cx, dz = z - F.cz;
+        if (dx * dx + dz * dz > F.reach * F.reach) return -1;
+        double a = dx * F.ax + dz * F.az, loc = dx * F.nx + dz * F.nz, half = F.len / 2, aa = Math.abs(a);
+        if (aa >= half) return -1;
+        double xa = aa / half, fa = xa <= wFlat ? 1 : 1 - Math.pow((xa - wFlat) / (1 - wFlat), 1.5); // the roof along the axis: flat in the middle, falling to the ends
+        double b = loc + F.bOff;
+        if (b > 0) b += 2.5 * clamp1(1.4 * n(nz, 46, x, z, 22)); // the face line wanders a little
+        double fb;
+        if (b >= 0) {
+            if (b >= F.wf) return -1;
+            fb = 1 - b / F.wf;
+        } else if (b >= -F.wid) {
+            fb = 1;
+        } else {
+            double e = -F.wid - b;
+            if (e >= F.bk) return -1;
+            fb = 1 - e / F.bk;
+        }
+        double f = fa * fb, tt = F.h * f;
+        if (b > 0) tt = ledge(tt, F.ls, F.lv, f);
+        tt += wWob * clamp1(1.4 * n(nz, 45, x, z, 16)) * 4 * f * (1 - f);
+        return Math.max(0, tt);
+    }
+
+    /** Kind 1: Rt = R' + T1, T1 the highest of the nearby spires and wedges (3 x 3 cells of each lattice); the base R' is untouched where no feature stands. */
+    private void evalSpires(double x, double z, double r, CoastModel.Noise nz, Col out) {
+        FCache fc = fcache.get();
+        int ix = (int) Math.floor(x), iz = (int) Math.floor(z);
+        if (!tileHas(fc, Math.floorDiv(ix, tileK1), Math.floorDiv(iz, tileK1), nz)) return;
+        double t1 = 0, apron = 0;
+        int ci = Math.floorDiv(ix, cellS), cj = Math.floorDiv(iz, cellS);
+        for (int di = -1; di <= 1; di++) {
+            for (int dj = -1; dj <= 1; dj++) {
+                Feat F = feat(fc, 0, ci + di, cj + dj, nz);
+                if (!F.exists) continue;
+                double t = spireAt(F, x, z, r, nz, fc.ap);
+                if (fc.ap[0] > apron) apron = fc.ap[0];
+                if (t > t1) t1 = t;
+            }
+        }
+        ci = Math.floorDiv(ix, cellW);
+        cj = Math.floorDiv(iz, cellW);
+        for (int di = -1; di <= 1; di++) {
+            for (int dj = -1; dj <= 1; dj++) {
+                Feat F = feat(fc, 1, ci + di, cj + dj, nz);
+                if (!F.exists) continue;
+                double t = wedgeAt(F, x, z, nz);
+                if (t > t1) t1 = t;
+            }
+        }
+        if (apron > t1) t1 = apron;
+        if (t1 <= 0) return;
+        out.baseTop = r + apron;
+        out.rt = r + t1;
+        out.face = t1;
+        out.tough = out.rt > out.baseTop + 0.5;
+    }
+
+    /** Height of one feature alone above the base r at (x, z) (0 outside it): for the tools, so a feature can be studied without its neighbours. */
+    public double heightOf(Feat F, double x, double z, double r, CoastModel.Noise nz) {
+        double[] ap = new double[1];
+        double t = F.wedge ? wedgeAt(F, x, z, nz) : spireAt(F, x, z, r, nz, ap);
+        return Math.max(0, Math.max(t, F.wedge ? 0 : ap[0]));
+    }
+
+    /** The features of both lattices whose cells lie in the box (for the tools). */
+    public java.util.List<Feat> featuresIn(CoastModel.Noise nz, double x0, double z0, double x1, double z1) {
+        FCache fc = fcache.get();
+        java.util.List<Feat> l = new java.util.ArrayList<>();
+        for (int type = 0; type < 2; type++) {
+            double cell = type == 0 ? cellS : cellW;
+            for (int i = (int) Math.floor(x0 / cell); i <= (int) Math.floor(x1 / cell); i++) {
+                for (int j = (int) Math.floor(z0 / cell); j <= (int) Math.floor(z1 / cell); j++) {
+                    Feat F = feat(fc, type, i, j, nz);
+                    if (F.exists) l.add(F);
+                }
+            }
+        }
+        return l;
+    }
+
+    /** Whether the block (x, y, z) of kind 1 rock is andesite: vertical streaks (a noise sampled with a slight drift along y) and a few patches. */
+    public boolean andesite(CoastModel.Noise nz, int x, int y, int z) {
+        if (clamp1(1.5 * n(nz, 47, x + stTilt * y, z + 0.6 * stTilt * y, stWl)) > stThr) return true;
+        return clamp1(1.5 * n(nz, 48, x + 0.35 * y, z + 0.9 * y, paWl)) > paThr;
     }
 
     private double mask2(CoastModel.Noise nz, double x, double z) {

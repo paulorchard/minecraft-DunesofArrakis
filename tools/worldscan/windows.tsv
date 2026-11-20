@@ -31,3 +31,8 @@ plain_south	1	9575	-7050	prompt 10: blue plain, south cliff (default kind map)
 plain_north	1	11375	-6625	prompt 10: blue plain from its north ramp (default kind map)
 plain_island	1	4900	11349	prompt 10: scatter island 1173 with a kind 2 plain (default kind map)
 plain_purple	1	-6700	-8975	prompt 10: purple with override 2 (compare with tough_mesa, kind 3)
+spire_heart	1	-18672	-12707	prompt 11: heart of a green spire cluster (default kind map)
+spire_edge	1	-18672	-12467	prompt 11: thinning edge of the same cluster
+spire_island	1	-23905	-7769	prompt 11: ring island 1052 (off green) with spires
+spire_purple	1	-21854	-7900	prompt 11: purple cluster heart with override 1 (compare with tough_mesa kind 3, plain_purple kind 2)
+spire_bare	1	-2625	-12775	prompt 11: kind 1 rock without features (the largest cluster-free circle of green)

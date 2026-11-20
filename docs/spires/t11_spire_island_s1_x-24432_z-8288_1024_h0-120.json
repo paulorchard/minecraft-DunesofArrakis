@@ -1,0 +1,184 @@
+{
+  "area": {
+    "x0": -24432,
+    "z0": -8288,
+    "size": 1024,
+    "columns": 1048576,
+    "fullChunks": 4096,
+    "sandLevelTopBlockY": 63
+  },
+  "heightAboveSand": {
+    "min": 0,
+    "p5": 2,
+    "p50": 18,
+    "p95": 52,
+    "max": 119,
+    "mean": 20.68
+  },
+  "relief32": {
+    "windows": 1024,
+    "median": 10,
+    "p90": 22,
+    "max": 103
+  },
+  "steepestNeighbourStep": 74,
+  "fractionAtSandLevel": 0.0185,
+  "fractionTopNotSand": 0.036312,
+  "blocks": {
+    "airBelowSurface": 0,
+    "nonSandNonBedrockBlocks": 115036381,
+    "otherBlockTypes": {
+      "minecraft:stone": 38220091,
+      "minecraft:andesite": 2179412,
+      "minecraft:tuff": 1307388,
+      "minecraft:deepslate": 68337789,
+      "minecraft:granite": 1655507,
+      "minecraft:diorite": 1511327,
+      "minecraft:smooth_sandstone": 1523630,
+      "minecraft:calcite": 294178,
+      "minecraft:red_sandstone": 3015,
+      "minecraft:brown_terracotta": 3014,
+      "minecraft:terracotta": 1030
+    },
+    "bedrockAboveBottomFiveLayers": 0,
+    "heightmapDisagreesWithBlocks": 0
+  },
+  "crests": {
+    "prevailingCrestDirectionDeg": 24.3,
+    "crossCrestAxisDeg": 114.3,
+    "orientationSpreadDeg_circularSd": 40.7,
+    "resultantLengthR": 0.364,
+    "note": "degrees from +x (east) toward +z (south), mod 180; spread = circular standard deviation of the gradient orientation, weighted by slope^2"
+  },
+  "slopes": {
+    "windDirectionTowardDeg": 115,
+    "windwardAlongWind": {
+      "columns": 525072,
+      "meanDeg": 13.5,
+      "p90Deg": 23.6
+    },
+    "leewardAlongWind": {
+      "columns": 371194,
+      "meanDeg": 19.9,
+      "p90Deg": 36.2
+    },
+    "windwardSteepestDescent": {
+      "meanDeg": 15.7
+    },
+    "leewardSteepestDescent": {
+      "meanDeg": 21.8
+    },
+    "note": "gradients over +-GR blocks (default 4); columns with |slope|>0.04 and height>0.5 above sand; \"along wind\" = directional derivative along the wind axis (cross-crest); windward = height rising along the wind, leeward = falling"
+  },
+  "autocorrelation": {
+    "alongCrests": {
+      "8": 0.99,
+      "16": 0.95,
+      "32": 0.9,
+      "48": 0.89,
+      "64": 0.84,
+      "80": 0.81,
+      "96": 0.74,
+      "128": 0.64,
+      "160": 0.53,
+      "192": 0.42,
+      "256": 0.24,
+      "320": 0.14,
+      "400": 0.05,
+      "512": 0
+    },
+    "acrossCrests": {
+      "8": 0.96,
+      "16": 0.91,
+      "32": 0.8,
+      "48": 0.68,
+      "64": 0.61,
+      "80": 0.56,
+      "96": 0.54,
+      "128": 0.61,
+      "160": 0.63,
+      "192": 0.48,
+      "256": 0.28,
+      "320": 0.42,
+      "400": 0.19,
+      "512": 0.06
+    }
+  },
+  "crestHeightAboveSand": {
+    "samples": 263,
+    "p10": 14.3,
+    "median": 30.2,
+    "p90": 62,
+    "max": 96.8
+  },
+  "crestSpacingBlocks": {
+    "samples": 149,
+    "p10": 83,
+    "median": 154,
+    "p90": 250
+  },
+  "chunkSeams": {
+    "meanStepAcrossXBorder": 0.1613,
+    "meanStepInsideX": 0.1567,
+    "meanStepAcrossZBorder": 0.25,
+    "meanStepInsideZ": 0.2501,
+    "ratioX": 1.029,
+    "ratioZ": 1,
+    "note": "ratio ~1.0 = no visible 16-block seams"
+  },
+  "windows": {
+    "side": 256,
+    "tallest": [
+      {
+        "centerX": -23920,
+        "centerZ": -8160,
+        "p50": 52,
+        "p95": 70,
+        "max": 79,
+        "atSand": 0
+      },
+      {
+        "centerX": -23920,
+        "centerZ": -8032,
+        "p50": 51,
+        "p95": 65,
+        "max": 79,
+        "atSand": 0
+      },
+      {
+        "centerX": -23792,
+        "centerZ": -8160,
+        "p50": 44,
+        "p95": 71,
+        "max": 79,
+        "atSand": 0
+      }
+    ],
+    "flattest": [
+      {
+        "centerX": -23920,
+        "centerZ": -7392,
+        "p50": 4,
+        "p95": 12,
+        "max": 20,
+        "atSand": 0.0469970703125
+      },
+      {
+        "centerX": -23536,
+        "centerZ": -7648,
+        "p50": 4,
+        "p95": 14,
+        "max": 25,
+        "atSand": 0.14996337890625
+      },
+      {
+        "centerX": -23792,
+        "centerZ": -7392,
+        "p50": 5,
+        "p95": 17,
+        "max": 25,
+        "atSand": 0.05908203125
+      }
+    ]
+  }
+}

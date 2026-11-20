@@ -73,11 +73,12 @@ public class ReliefScan {
         JsonObject io = JsonParser.parseString(Files.readString(Path.of(islandsPath.equals("off") ? RES + "arrakis/islands.json" : islandsPath), StandardCharsets.UTF_8)).getAsJsonObject();
         if (islandsPath.equals("off")) io.addProperty("mode", "off");
         icfg = new IslandConfig(io);
-        JsonObject tgo = JsonParser.parseString(Files.readString(Path.of(toughPath.equals("off") || toughPath.equals("layersoff") || toughPath.equals("override3") || toughPath.equals("override2") ? RES + "arrakis/tough.json" : toughPath), StandardCharsets.UTF_8)).getAsJsonObject();
+        JsonObject tgo = JsonParser.parseString(Files.readString(Path.of(toughPath.equals("off") || toughPath.equals("layersoff") || toughPath.equals("override3") || toughPath.equals("override2") || toughPath.equals("override1") ? RES + "arrakis/tough.json" : toughPath), StandardCharsets.UTF_8)).getAsJsonObject();
         if (toughPath.equals("off")) { tgo.addProperty("tough", "off"); tgo.addProperty("layers", "off"); }
         if (toughPath.equals("layersoff")) tgo.addProperty("layers", "off");
         if (toughPath.equals("override3")) tgo.addProperty("kind_override", 3);
         if (toughPath.equals("override2")) tgo.addProperty("kind_override", 2);
+        if (toughPath.equals("override1")) tgo.addProperty("kind_override", 1);
         wm = new WorldModels(ccfg, rcfg, tcfg, icfg, idx, new com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughConfig(tgo));
     }
 
