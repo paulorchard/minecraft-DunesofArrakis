@@ -35,7 +35,11 @@ const WW = W + LM;
 const px = Buffer.alloc(WW * H * 3);
 const set = (x, y, r, g, b) => { if (x < 0 || y < 0 || x >= WW || y >= H) return; const o = (y * WW + x) * 3; px[o] = r; px[o + 1] = g; px[o + 2] = b; };
 for (let y = 0; y < H; y++) for (let x = 0; x < WW; x++) set(x, y, 214, 232, 245);
-const col = { 'islandcraft_dunesofarrakis:dune_sand': [232, 205, 130], 'minecraft:sandstone': [168, 110, 62], 'minecraft:bedrock': [40, 40, 40] };
+// block colours (prompt 09: tough rock bands, stone and its blobs, deepslate, bedrock)
+const col = { 'islandcraft_dunesofarrakis:dune_sand': [232, 205, 130], 'minecraft:sandstone': [168, 110, 62], 'minecraft:smooth_sandstone': [222, 205, 152], 'minecraft:bedrock': [20, 20, 20],
+  'minecraft:red_sandstone': [188, 92, 43], 'minecraft:terracotta': [152, 94, 67], 'minecraft:orange_terracotta': [200, 100, 30], 'minecraft:yellow_terracotta': [210, 160, 40], 'minecraft:brown_terracotta': [100, 62, 40],
+  'minecraft:red_terracotta': [150, 50, 40], 'minecraft:white_terracotta': [230, 205, 190], 'minecraft:light_gray_terracotta': [150, 125, 115],
+  'minecraft:stone': [125, 125, 125], 'minecraft:andesite': [165, 165, 165], 'minecraft:diorite': [215, 215, 215], 'minecraft:granite': [150, 100, 85], 'minecraft:tuff': [95, 110, 90], 'minecraft:calcite': [240, 240, 235], 'minecraft:deepslate': [70, 70, 78] };
 const tops = [];
 for (let s = 0; s < n; s++) {
   const [x, z] = pts[s]; let top = null, topName = null, atSand = null;

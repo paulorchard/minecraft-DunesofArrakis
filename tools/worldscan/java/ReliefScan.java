@@ -49,6 +49,7 @@ public class ReliefScan {
     static TerraceConfig tcfg;
     static IslandConfig icfg;
     static WorldModels wm;
+    static String toughPath = RES + "arrakis/tough.json"; // or off | layersoff | override3
     static String islandsPath = RES + "arrakis/islands.json";
     static String coastPath = RES + "arrakis/coast.json", reliefPath = RES + "arrakis/relief.json", terracePath = RES + "arrakis/terrace.json";
     static int step = 4;
@@ -72,7 +73,11 @@ public class ReliefScan {
         JsonObject io = JsonParser.parseString(Files.readString(Path.of(islandsPath.equals("off") ? RES + "arrakis/islands.json" : islandsPath), StandardCharsets.UTF_8)).getAsJsonObject();
         if (islandsPath.equals("off")) io.addProperty("mode", "off");
         icfg = new IslandConfig(io);
-        wm = new WorldModels(ccfg, rcfg, tcfg, icfg, idx);
+        JsonObject tgo = JsonParser.parseString(Files.readString(Path.of(toughPath.equals("off") || toughPath.equals("layersoff") || toughPath.equals("override3") ? RES + "arrakis/tough.json" : toughPath), StandardCharsets.UTF_8)).getAsJsonObject();
+        if (toughPath.equals("off")) { tgo.addProperty("tough", "off"); tgo.addProperty("layers", "off"); }
+        if (toughPath.equals("layersoff")) tgo.addProperty("layers", "off");
+        if (toughPath.equals("override3")) tgo.addProperty("kind_override", 3);
+        wm = new WorldModels(ccfg, rcfg, tcfg, icfg, idx, new com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughConfig(tgo));
     }
 
     /** The world-seeded noise, built as RandomState does. */
@@ -105,6 +110,7 @@ public class ReliefScan {
                 case "--relief" -> reliefPath = a[p + 1];
                 case "--terrace" -> terracePath = a[p + 1];
                 case "--islands" -> islandsPath = a[p + 1];
+                case "--tough" -> toughPath = a[p + 1];
                 default -> throw new IllegalArgumentException(a[p]);
             }
             p += 2;
@@ -202,7 +208,11 @@ public class ReliefScan {
                 int x = x0 + i, z = z0 + j;
                 double f = coast.field(x, z, nz);
                 if (!(f > 0)) { m[j * size + i] = Short.MIN_VALUE; continue; }
-                double h = rcfg.sandLevel + relief.rockFromField(f, x, z, nz);
+                CoastModel.Out o = new CoastModel.Out();
+                f = coast.field(x, z, nz, o);
+                com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughModel.Col tc = new com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughModel.Col();
+                wm.of(nz).tough.eval(x, z, relief.rockFromField(f, x, z, nz), o.winnerEllipse, nz, tc);
+                double h = rcfg.sandLevel + tc.rt;
                 m[j * size + i] = (short) (Math.ceil(h + 0.5) - 1); // top solid block: the largest y with 0.5 + h - y > 0
             }
         });

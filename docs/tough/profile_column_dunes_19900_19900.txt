@@ -1,0 +1,15 @@
+column (19900, 19900), top to bottom (blocks above the sand level are y > 63):
+  y 85 .. 63  dune_sand  (23 blocks)
+  y 62 .. 61  sandstone  (2 blocks)
+  y 60 .. 49  smooth_sandstone  (12 blocks)
+  y 48 .. 35  stone  (14 blocks)
+  y 34 .. 33  diorite  (2 blocks)
+  y 32 .. 16  stone  (17 blocks)
+  y 15 .. 8  andesite  (8 blocks)
+  y 7 .. 6  stone  (2 blocks)
+  y 5 .. 5  deepslate  (1 blocks)
+  y 4 .. 4  stone  (1 blocks)
+  y 3 .. 3  deepslate  (1 blocks)
+  y 2 .. 2  stone  (1 blocks)
+  y 1 .. -61  deepslate  (63 blocks)
+  y -62 .. -64  bedrock

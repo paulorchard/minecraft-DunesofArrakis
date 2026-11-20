@@ -1,0 +1,26 @@
+tough off + layers off vs prompt 08: 25 windows, 0 differing columns
+default vs t08 coast_c0_s1              0
+default vs t08 coast_c1_s1              0
+default vs t08 coast_c2_s1              123491
+default vs t08 edge_58_s1               8487
+default vs t08 edge_81_s1               0
+default vs t08 gap_green_blue_s1        0
+default vs t08 gap_purple_blue_s1       59728
+default vs t08 gap_purple_blue_s2       81081
+default vs t08 gap_purple_blue_s3       53837
+default vs t08 gap_purple_brown_s1      110753
+default vs t08 gap_purple_green_s1      0
+default vs t08 isl_arch_s1              0
+default vs t08 isl_arch_s2              0
+default vs t08 isl_ring_s1              0
+default vs t08 isl_ring_s2              0
+default vs t08 isl_scatter_s1           0
+default vs t08 isl_scatter_s2           193
+default vs t08 open_desert_s1           0
+default vs t08 origin_s1                0
+default vs t08 origin_s2                0
+default vs t08 origin_s3                0
+default vs t08 rock_interior_81_s1      0
+default vs t08 slice_blue_s1            0
+default vs t08 slice_green_s1           0
+default vs t08 slice_purple_s1          228592

@@ -87,3 +87,9 @@ tools/worldscan/try.sh <name> <seed> <x0> <z0> <size>     # regenerates the dune
 - `island.sh <continents.json> <cmd> ...` (IslandScan): render, sheet, stats, sweep, heights, pick, list, testmode, bench, noise, islandmask.
 - `islandburial.js heights rockmap islandmask size`: dune cover of the islands in a generated window.
 - `windows.sh` / `checkrelief.sh`: `SKIP=<substr>` skips windows. `gen.sh`: `ORDER=reverse` reverses the tile order (order-independence test). `--islands off|path` on ReliefScan.
+
+## Tough rock and layers (prompt 09)
+- `tough.sh [--tough off|layersoff|override3|path] <continents.json> <cmd>` (ToughScan): `render <seed> <png> <x0> <z0> <sizeM> <mpp>` (hillshade, kind tint, tough rock red), `stats <seed>... [--res n]`, `steps <seed> x0 z0 size` (1 m steps on the face vs the base), `routes <seed> x0 z0 size` (walk-up routes), `pick <seed>` (window rows and tp commands), `bands <seed>...`, `diag`.
+- `toughsweep.js <stats sweep file>`: worst seed of each invariant over a sweep.
+- `profile.js <regionDir> column x z | bands x0 z0 size`: blocks of one column; block shares per vertical band.
+- `slice.js` now colours every block of the layers; `windowcheck_relief.js` reports layers (`LAYERS=off` expects the prompt 08 sandstone column).

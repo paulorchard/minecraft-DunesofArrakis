@@ -7,12 +7,12 @@ package com.paulorchard.islandcraft.dunesofarrakis.worldgen;
  * the tools. Pure Java, thread safe. See {@code docs/relief.md} and {@code docs/terraces.md}.
  */
 public final class ReliefModel {
-    public static final int BROAD = 6, MID = 7, FINE = 8, DETAIL = 9, T_STEP = 10, T_LEVEL = 11, T_STRENGTH = 12, MOUNTAIN = 13;
+    public static final int BROAD = 6, MID = 7, FINE = 8, DETAIL = 9, T_STEP = 10, T_LEVEL = 11, T_STRENGTH = 12, MOUNTAIN = 13, TOUGH = 14;
     /** Noise ids 0-5 are the coast noises (see {@link CoastModel#NOISE_NAMES}), 6-9 the relief noises, 10-12 the terrace noises, 13 the dune mountain noise (read only by the island generator: how high the dune mountains lie at a place). */
     public static final String[] NOISE_NAMES = {
         CoastModel.NOISE_NAMES[0], CoastModel.NOISE_NAMES[1], CoastModel.NOISE_NAMES[2], CoastModel.NOISE_NAMES[3], CoastModel.NOISE_NAMES[4],
         CoastModel.NOISE_NAMES[5], "arrakis_relief_broad", "arrakis_relief_mid", "arrakis_relief_fine", "arrakis_relief_detail",
-        "arrakis_terrace_step", "arrakis_terrace_level", "arrakis_terrace_strength", "arrakis_mountain"};
+        "arrakis_terrace_step", "arrakis_terrace_level", "arrakis_terrace_strength", "arrakis_mountain", "arrakis_tough"};
 
     public final CoastModel coast;
     public final ReliefConfig cfg;
@@ -33,6 +33,22 @@ public final class ReliefModel {
     private static double smooth01(double t) {
         t = t < 0 ? 0 : (t > 1 ? 1 : t);
         return t * t * (3 - 2 * t);
+    }
+
+    /** Exact distance to the sand (metres, clamped), the cached one the ramp uses. */
+    double exactDistance(double x, double z, CoastModel.Noise nz) {
+        return dist.distance(x, z, nz);
+    }
+
+    /** Local rock half-width (prompt 07). */
+    double halfWidth(double x, double z, CoastModel.Noise nz) {
+        return dist.thickness(x, z, nz);
+    }
+
+    /** Smooth base reference for the mesa tops: the ramp against the broad summit cap only (no mid or fine summits, terraces or detail). */
+    double broadReference(double x, double z, double d, CoastModel.Noise nz) {
+        double v = clamp1(cfg.weight[0] * clamp1(cfg.noiseGain * nz.get(BROAD, x / cfg.wavelength[0], z / cfg.wavelength[0])) * cfg.contrast);
+        return smin(ramp(d), cfg.spline(v));
     }
 
     /** The summit noise value in [-1, 1] before the spline. */

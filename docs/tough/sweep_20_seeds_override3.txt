@@ -1,0 +1,380 @@
+seed 1, res 25 m, tough override3
+  purple      rock     80.52 km2  tough     28.04 km2  =  34.8%
+  green       rock     42.22 km2  tough     11.28 km2  =  26.7%
+  blue        rock     78.90 km2  tough     25.92 km2  =  32.9%
+  brown       rock      6.23 km2  tough      0.92 km2  =  14.8%
+  red         rock     16.34 km2  tough      5.31 km2  =  32.5%
+  ring isl    rock      4.70 km2  tough      0.11 km2  =   2.3%
+  archi isl   rock     11.10 km2  tough      2.36 km2  =  21.3%
+  scatter isl rock     35.01 km2  tough      7.30 km2  =  20.9%
+  plateaus (flat top components, slope < 1:8): 936, with at least 20 x 20 m: 936, at least 100 x 100 m: 276
+  plateau top height above sand (m): min 11.7 p10 32.2 median 55.0 p90 72.9 max 103.7
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 142 of 934
+  cliff face height at the outline (columns): <12 2942, 12-20 2199, 20-30 2070, 30-45 1464, 45-60 233, >60 0
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.4% of 17780
+  highest rock surface 117.0 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 67, with tough rock 8; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 52, with tough rock 5; of those over 600 m across: 4, with tough rock 4
+  islands role 3: 135, with tough rock 26; of those over 600 m across: 17, with tough rock 16
+seed 2, res 25 m, tough override3
+  purple      rock     80.53 km2  tough     26.18 km2  =  32.5%
+  green       rock     42.30 km2  tough     11.48 km2  =  27.1%
+  blue        rock     78.58 km2  tough     28.65 km2  =  36.5%
+  brown       rock      6.15 km2  tough      1.39 km2  =  22.6%
+  red         rock     16.32 km2  tough      4.41 km2  =  27.0%
+  ring isl    rock      4.01 km2  tough      0.11 km2  =   2.8%
+  archi isl   rock      9.43 km2  tough      1.78 km2  =  18.9%
+  scatter isl rock     15.64 km2  tough      2.23 km2  =  14.3%
+  plateaus (flat top components, slope < 1:8): 766, with at least 20 x 20 m: 766, at least 100 x 100 m: 212
+  plateau top height above sand (m): min 13.2 p10 34.0 median 56.9 p90 75.5 max 94.5
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 104 of 765
+  cliff face height at the outline (columns): <12 2266, 12-20 1400, 20-30 1412, 30-45 1115, 45-60 209, >60 18
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.1% of 12684
+  highest rock surface 118.0 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 52, with tough rock 9; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 68, with tough rock 7; of those over 600 m across: 4, with tough rock 4
+  islands role 3: 97, with tough rock 15; of those over 600 m across: 11, with tough rock 11
+seed 3, res 25 m, tough override3
+  purple      rock     81.25 km2  tough     23.77 km2  =  29.3%
+  green       rock     43.16 km2  tough     10.84 km2  =  25.1%
+  blue        rock     79.05 km2  tough     28.86 km2  =  36.5%
+  brown       rock      5.75 km2  tough      1.21 km2  =  21.1%
+  red         rock     16.55 km2  tough      3.19 km2  =  19.3%
+  ring isl    rock      5.69 km2  tough      0.27 km2  =   4.7%
+  archi isl   rock      6.12 km2  tough      0.78 km2  =  12.8%
+  scatter isl rock     31.02 km2  tough      7.12 km2  =  23.0%
+  plateaus (flat top components, slope < 1:8): 782, with at least 20 x 20 m: 782, at least 100 x 100 m: 197
+  plateau top height above sand (m): min 14.6 p10 30.2 median 54.2 p90 75.7 max 102.0
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 113 of 779
+  cliff face height at the outline (columns): <12 2374, 12-20 1604, 20-30 1593, 30-45 1162, 45-60 213, >60 27
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.8% of 13965
+  highest rock surface 116.5 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 67, with tough rock 10; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 67, with tough rock 12; of those over 600 m across: 2, with tough rock 2
+  islands role 3: 99, with tough rock 21; of those over 600 m across: 15, with tough rock 14
+seed 4, res 25 m, tough override3
+  purple      rock     79.23 km2  tough     27.35 km2  =  34.5%
+  green       rock     42.94 km2  tough     10.83 km2  =  25.2%
+  blue        rock     77.35 km2  tough     29.95 km2  =  38.7%
+  brown       rock      6.07 km2  tough      0.97 km2  =  15.9%
+  red         rock     16.23 km2  tough      4.56 km2  =  28.1%
+  ring isl    rock      5.81 km2  tough      0.18 km2  =   3.1%
+  archi isl   rock      6.14 km2  tough      0.92 km2  =  15.0%
+  scatter isl rock     19.50 km2  tough      3.50 km2  =  17.9%
+  plateaus (flat top components, slope < 1:8): 742, with at least 20 x 20 m: 742, at least 100 x 100 m: 195
+  plateau top height above sand (m): min 14.6 p10 33.9 median 55.7 p90 72.9 max 103.5
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 110 of 740
+  cliff face height at the outline (columns): <12 2334, 12-20 1771, 20-30 1725, 30-45 1298, 45-60 203, >60 14
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.9% of 14727
+  highest rock surface 116.4 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 77, with tough rock 9; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 43, with tough rock 6; of those over 600 m across: 3, with tough rock 3
+  islands role 3: 111, with tough rock 21; of those over 600 m across: 13, with tough rock 13
+seed 5, res 25 m, tough override3
+  purple      rock     81.33 km2  tough     27.22 km2  =  33.5%
+  green       rock     42.81 km2  tough     11.19 km2  =  26.1%
+  blue        rock     78.05 km2  tough     27.81 km2  =  35.6%
+  brown       rock      6.11 km2  tough      2.01 km2  =  32.9%
+  red         rock     16.83 km2  tough      5.58 km2  =  33.2%
+  ring isl    rock      3.68 km2  tough      0.05 km2  =   1.5%
+  archi isl   rock     14.32 km2  tough      2.79 km2  =  19.5%
+  scatter isl rock     24.89 km2  tough      4.80 km2  =  19.3%
+  plateaus (flat top components, slope < 1:8): 751, with at least 20 x 20 m: 751, at least 100 x 100 m: 244
+  plateau top height above sand (m): min 14.6 p10 33.1 median 54.9 p90 71.3 max 104.6
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 96 of 750
+  cliff face height at the outline (columns): <12 2445, 12-20 1918, 20-30 1828, 30-45 1345, 45-60 268, >60 9
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.1% of 15625
+  highest rock surface 116.5 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 51, with tough rock 4; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 89, with tough rock 14; of those over 600 m across: 5, with tough rock 5
+  islands role 3: 139, with tough rock 26; of those over 600 m across: 14, with tough rock 13
+seed 6, res 25 m, tough override3
+  purple      rock     80.06 km2  tough     24.19 km2  =  30.2%
+  green       rock     42.71 km2  tough     11.31 km2  =  26.5%
+  blue        rock     79.23 km2  tough     27.07 km2  =  34.2%
+  brown       rock      6.12 km2  tough      1.37 km2  =  22.4%
+  red         rock     16.90 km2  tough      4.43 km2  =  26.2%
+  ring isl    rock      3.61 km2  tough      0.09 km2  =   2.4%
+  archi isl   rock      9.53 km2  tough      1.97 km2  =  20.7%
+  scatter isl rock     25.85 km2  tough      4.16 km2  =  16.1%
+  plateaus (flat top components, slope < 1:8): 804, with at least 20 x 20 m: 804, at least 100 x 100 m: 254
+  plateau top height above sand (m): min 12.5 p10 34.6 median 56.4 p90 75.3 max 101.8
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 92 of 800
+  cliff face height at the outline (columns): <12 2320, 12-20 1544, 20-30 1534, 30-45 1258, 45-60 271, >60 24
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.1% of 14110
+  highest rock surface 118.3 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 61, with tough rock 4; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 55, with tough rock 8; of those over 600 m across: 5, with tough rock 5
+  islands role 3: 106, with tough rock 26; of those over 600 m across: 15, with tough rock 15
+seed 7, res 25 m, tough override3
+  purple      rock     80.09 km2  tough     29.30 km2  =  36.6%
+  green       rock     43.41 km2  tough      9.85 km2  =  22.7%
+  blue        rock     77.41 km2  tough     26.99 km2  =  34.9%
+  brown       rock      6.10 km2  tough      1.16 km2  =  19.1%
+  red         rock     16.28 km2  tough      3.79 km2  =  23.3%
+  ring isl    rock      5.12 km2  tough      0.10 km2  =   1.9%
+  archi isl   rock      6.71 km2  tough      1.26 km2  =  18.7%
+  scatter isl rock     23.54 km2  tough      5.29 km2  =  22.5%
+  plateaus (flat top components, slope < 1:8): 823, with at least 20 x 20 m: 823, at least 100 x 100 m: 248
+  plateau top height above sand (m): min 11.8 p10 36.6 median 56.4 p90 76.0 max 103.3
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 112 of 820
+  cliff face height at the outline (columns): <12 2530, 12-20 2019, 20-30 2005, 30-45 1480, 45-60 277, >60 2
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.0% of 16553
+  highest rock surface 117.1 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 61, with tough rock 9; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 42, with tough rock 3; of those over 600 m across: 2, with tough rock 2
+  islands role 3: 107, with tough rock 24; of those over 600 m across: 11, with tough rock 11
+seed 8, res 25 m, tough override3
+  purple      rock     80.69 km2  tough     26.95 km2  =  33.4%
+  green       rock     43.18 km2  tough     13.46 km2  =  31.2%
+  blue        rock     78.08 km2  tough     28.93 km2  =  37.1%
+  brown       rock      6.24 km2  tough      1.81 km2  =  29.1%
+  red         rock     15.98 km2  tough      5.58 km2  =  34.9%
+  ring isl    rock      3.05 km2  tough      0.08 km2  =   2.6%
+  archi isl   rock     11.15 km2  tough      1.61 km2  =  14.4%
+  scatter isl rock     22.67 km2  tough      3.69 km2  =  16.3%
+  plateaus (flat top components, slope < 1:8): 778, with at least 20 x 20 m: 778, at least 100 x 100 m: 221
+  plateau top height above sand (m): min 10.7 p10 31.5 median 54.6 p90 72.4 max 100.2
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 94 of 776
+  cliff face height at the outline (columns): <12 2553, 12-20 1802, 20-30 1953, 30-45 1606, 45-60 180, >60 9
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.8% of 16209
+  highest rock surface 116.3 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 44, with tough rock 5; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 59, with tough rock 12; of those over 600 m across: 8, with tough rock 8
+  islands role 3: 103, with tough rock 15; of those over 600 m across: 8, with tough rock 8
+seed 9, res 25 m, tough override3
+  purple      rock     80.50 km2  tough     26.13 km2  =  32.5%
+  green       rock     42.96 km2  tough     11.24 km2  =  26.2%
+  blue        rock     77.99 km2  tough     28.04 km2  =  35.9%
+  brown       rock      6.06 km2  tough      1.10 km2  =  18.1%
+  red         rock     15.86 km2  tough      4.47 km2  =  28.2%
+  ring isl    rock      2.89 km2  tough      0.04 km2  =   1.5%
+  archi isl   rock      7.24 km2  tough      0.81 km2  =  11.2%
+  scatter isl rock     19.64 km2  tough      4.41 km2  =  22.5%
+  plateaus (flat top components, slope < 1:8): 697, with at least 20 x 20 m: 697, at least 100 x 100 m: 204
+  plateau top height above sand (m): min 9.9 p10 31.5 median 53.1 p90 71.2 max 105.8
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 110 of 693
+  cliff face height at the outline (columns): <12 2275, 12-20 1725, 20-30 1661, 30-45 1242, 45-60 185, >60 4
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.4% of 14291
+  highest rock surface 117.3 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 62, with tough rock 3; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 57, with tough rock 11; of those over 600 m across: 4, with tough rock 4
+  islands role 3: 113, with tough rock 18; of those over 600 m across: 9, with tough rock 9
+seed 10, res 25 m, tough override3
+  purple      rock     80.62 km2  tough     29.60 km2  =  36.7%
+  green       rock     42.51 km2  tough     12.31 km2  =  29.0%
+  blue        rock     78.02 km2  tough     25.52 km2  =  32.7%
+  brown       rock      6.15 km2  tough      1.33 km2  =  21.5%
+  red         rock     16.00 km2  tough      4.87 km2  =  30.5%
+  ring isl    rock      3.53 km2  tough      0.02 km2  =   0.5%
+  archi isl   rock      6.71 km2  tough      0.43 km2  =   6.4%
+  scatter isl rock     15.94 km2  tough      2.11 km2  =  13.3%
+  plateaus (flat top components, slope < 1:8): 704, with at least 20 x 20 m: 704, at least 100 x 100 m: 204
+  plateau top height above sand (m): min 12.4 p10 33.3 median 55.5 p90 73.2 max 103.0
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 98 of 700
+  cliff face height at the outline (columns): <12 2371, 12-20 1547, 20-30 1683, 30-45 1180, 45-60 278, >60 24
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.5% of 14141
+  highest rock surface 115.6 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 57, with tough rock 3; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 47, with tough rock 10; of those over 600 m across: 3, with tough rock 3
+  islands role 3: 117, with tough rock 22; of those over 600 m across: 8, with tough rock 7
+seed 11, res 25 m, tough override3
+  purple      rock     80.97 km2  tough     23.51 km2  =  29.0%
+  green       rock     42.64 km2  tough     10.64 km2  =  25.0%
+  blue        rock     78.65 km2  tough     35.07 km2  =  44.6%
+  brown       rock      6.08 km2  tough      1.51 km2  =  24.8%
+  red         rock     15.97 km2  tough      5.91 km2  =  37.0%
+  ring isl    rock      3.81 km2  tough      0.09 km2  =   2.5%
+  archi isl   rock      8.82 km2  tough      1.91 km2  =  21.6%
+  scatter isl rock     14.66 km2  tough      1.98 km2  =  13.5%
+  plateaus (flat top components, slope < 1:8): 671, with at least 20 x 20 m: 671, at least 100 x 100 m: 206
+  plateau top height above sand (m): min 12.3 p10 32.5 median 54.8 p90 73.2 max 96.2
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 80 of 667
+  cliff face height at the outline (columns): <12 2453, 12-20 1712, 20-30 1724, 30-45 1145, 45-60 206, >60 22
+  cliff length with a talus apron (outline columns with apron over 1 m): 24.4% of 14324
+  highest rock surface 115.7 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 59, with tough rock 4; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 60, with tough rock 9; of those over 600 m across: 5, with tough rock 5
+  islands role 3: 105, with tough rock 16; of those over 600 m across: 7, with tough rock 7
+seed 12, res 25 m, tough override3
+  purple      rock     81.32 km2  tough     27.77 km2  =  34.1%
+  green       rock     42.40 km2  tough     12.58 km2  =  29.7%
+  blue        rock     77.72 km2  tough     30.38 km2  =  39.1%
+  brown       rock      6.16 km2  tough      1.49 km2  =  24.2%
+  red         rock     16.42 km2  tough      5.16 km2  =  31.4%
+  ring isl    rock      3.75 km2  tough      0.05 km2  =   1.3%
+  archi isl   rock      7.01 km2  tough      0.58 km2  =   8.2%
+  scatter isl rock     24.42 km2  tough      4.55 km2  =  18.6%
+  plateaus (flat top components, slope < 1:8): 757, with at least 20 x 20 m: 757, at least 100 x 100 m: 223
+  plateau top height above sand (m): min 9.5 p10 31.4 median 54.0 p90 74.3 max 97.2
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 77 of 753
+  cliff face height at the outline (columns): <12 2493, 12-20 1944, 20-30 1995, 30-45 1766, 45-60 286, >60 13
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.0% of 16863
+  highest rock surface 115.8 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 53, with tough rock 6; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 57, with tough rock 9; of those over 600 m across: 4, with tough rock 4
+  islands role 3: 112, with tough rock 21; of those over 600 m across: 13, with tough rock 13
+seed 13, res 25 m, tough override3
+  purple      rock     80.88 km2  tough     27.57 km2  =  34.1%
+  green       rock     41.90 km2  tough     11.30 km2  =  27.0%
+  blue        rock     77.45 km2  tough     25.35 km2  =  32.7%
+  brown       rock      6.31 km2  tough      1.65 km2  =  26.2%
+  red         rock     16.02 km2  tough      4.26 km2  =  26.6%
+  ring isl    rock      5.08 km2  tough      0.05 km2  =   1.0%
+  archi isl   rock     12.94 km2  tough      2.66 km2  =  20.6%
+  scatter isl rock     24.28 km2  tough      3.13 km2  =  12.9%
+  plateaus (flat top components, slope < 1:8): 724, with at least 20 x 20 m: 724, at least 100 x 100 m: 203
+  plateau top height above sand (m): min 12.2 p10 31.9 median 56.5 p90 74.2 max 105.2
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 134 of 721
+  cliff face height at the outline (columns): <12 2236, 12-20 1629, 20-30 1609, 30-45 1310, 45-60 273, >60 25
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.2% of 14248
+  highest rock surface 117.0 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 78, with tough rock 7; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 56, with tough rock 5; of those over 600 m across: 4, with tough rock 4
+  islands role 3: 135, with tough rock 25; of those over 600 m across: 15, with tough rock 15
+seed 14, res 25 m, tough override3
+  purple      rock     80.13 km2  tough     26.37 km2  =  32.9%
+  green       rock     42.63 km2  tough     13.22 km2  =  31.0%
+  blue        rock     78.71 km2  tough     27.71 km2  =  35.2%
+  brown       rock      5.99 km2  tough      1.38 km2  =  23.0%
+  red         rock     16.66 km2  tough      4.80 km2  =  28.8%
+  ring isl    rock      4.03 km2  tough      0.10 km2  =   2.5%
+  archi isl   rock      9.12 km2  tough      1.91 km2  =  20.9%
+  scatter isl rock     25.39 km2  tough      4.75 km2  =  18.7%
+  plateaus (flat top components, slope < 1:8): 867, with at least 20 x 20 m: 867, at least 100 x 100 m: 239
+  plateau top height above sand (m): min 15.1 p10 39.5 median 57.0 p90 77.7 max 108.0
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 136 of 863
+  cliff face height at the outline (columns): <12 2904, 12-20 2019, 20-30 2135, 30-45 1518, 45-60 231, >60 3
+  cliff length with a talus apron (outline columns with apron over 1 m): 24.6% of 17393
+  highest rock surface 116.2 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 68, with tough rock 7; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 39, with tough rock 9; of those over 600 m across: 5, with tough rock 5
+  islands role 3: 128, with tough rock 25; of those over 600 m across: 12, with tough rock 12
+seed 15, res 25 m, tough override3
+  purple      rock     80.02 km2  tough     26.91 km2  =  33.6%
+  green       rock     42.52 km2  tough     11.42 km2  =  26.9%
+  blue        rock     78.38 km2  tough     27.66 km2  =  35.3%
+  brown       rock      6.23 km2  tough      1.49 km2  =  23.9%
+  red         rock     15.65 km2  tough      4.26 km2  =  27.2%
+  ring isl    rock      4.86 km2  tough      0.15 km2  =   3.1%
+  archi isl   rock      5.65 km2  tough      0.29 km2  =   5.2%
+  scatter isl rock     17.23 km2  tough      3.30 km2  =  19.2%
+  plateaus (flat top components, slope < 1:8): 790, with at least 20 x 20 m: 790, at least 100 x 100 m: 214
+  plateau top height above sand (m): min 11.5 p10 35.5 median 54.3 p90 71.5 max 102.9
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 96 of 787
+  cliff face height at the outline (columns): <12 2642, 12-20 1995, 20-30 1947, 30-45 1254, 45-60 160, >60 9
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.1% of 15853
+  highest rock surface 114.0 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 74, with tough rock 11; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 65, with tough rock 5; of those over 600 m across: 1, with tough rock 1
+  islands role 3: 109, with tough rock 18; of those over 600 m across: 8, with tough rock 8
+seed 16, res 25 m, tough override3
+  purple      rock     80.27 km2  tough     30.36 km2  =  37.8%
+  green       rock     43.23 km2  tough      9.52 km2  =  22.0%
+  blue        rock     77.63 km2  tough     25.68 km2  =  33.1%
+  brown       rock      5.96 km2  tough      1.39 km2  =  23.4%
+  red         rock     16.05 km2  tough      3.18 km2  =  19.8%
+  ring isl    rock      2.96 km2  tough      0.06 km2  =   2.2%
+  archi isl   rock      6.53 km2  tough      0.70 km2  =  10.7%
+  scatter isl rock     14.47 km2  tough      1.46 km2  =  10.1%
+  plateaus (flat top components, slope < 1:8): 728, with at least 20 x 20 m: 728, at least 100 x 100 m: 205
+  plateau top height above sand (m): min 11.0 p10 33.1 median 55.6 p90 75.1 max 100.7
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 113 of 725
+  cliff face height at the outline (columns): <12 2466, 12-20 1520, 20-30 1483, 30-45 1167, 45-60 193, >60 3
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.3% of 13644
+  highest rock surface 116.8 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 47, with tough rock 6; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 43, with tough rock 5; of those over 600 m across: 5, with tough rock 4
+  islands role 3: 126, with tough rock 21; of those over 600 m across: 10, with tough rock 10
+seed 17, res 25 m, tough override3
+  purple      rock     81.14 km2  tough     24.86 km2  =  30.6%
+  green       rock     43.14 km2  tough     10.59 km2  =  24.5%
+  blue        rock     78.67 km2  tough     30.99 km2  =  39.4%
+  brown       rock      5.93 km2  tough      1.42 km2  =  23.9%
+  red         rock     16.16 km2  tough      4.84 km2  =  30.0%
+  ring isl    rock      5.19 km2  tough      0.05 km2  =   1.0%
+  archi isl   rock      9.36 km2  tough      1.39 km2  =  14.9%
+  scatter isl rock     22.99 km2  tough      2.81 km2  =  12.2%
+  plateaus (flat top components, slope < 1:8): 806, with at least 20 x 20 m: 806, at least 100 x 100 m: 233
+  plateau top height above sand (m): min 12.0 p10 33.7 median 56.9 p90 75.1 max 97.5
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 104 of 799
+  cliff face height at the outline (columns): <12 2524, 12-20 1959, 20-30 1705, 30-45 1116, 45-60 193, >60 2
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.5% of 15094
+  highest rock surface 116.5 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 56, with tough rock 6; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 55, with tough rock 7; of those over 600 m across: 4, with tough rock 3
+  islands role 3: 120, with tough rock 26; of those over 600 m across: 13, with tough rock 13
+seed 18, res 25 m, tough override3
+  purple      rock     80.79 km2  tough     23.62 km2  =  29.2%
+  green       rock     42.82 km2  tough     10.54 km2  =  24.6%
+  blue        rock     77.74 km2  tough     29.82 km2  =  38.4%
+  brown       rock      6.10 km2  tough      1.58 km2  =  26.0%
+  red         rock     16.14 km2  tough      5.75 km2  =  35.6%
+  ring isl    rock      4.35 km2  tough      0.17 km2  =   3.8%
+  archi isl   rock     11.11 km2  tough      2.18 km2  =  19.6%
+  scatter isl rock     21.92 km2  tough      3.06 km2  =  14.0%
+  plateaus (flat top components, slope < 1:8): 811, with at least 20 x 20 m: 811, at least 100 x 100 m: 222
+  plateau top height above sand (m): min 10.9 p10 35.4 median 57.0 p90 75.3 max 104.7
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 118 of 803
+  cliff face height at the outline (columns): <12 2556, 12-20 1675, 20-30 1779, 30-45 1459, 45-60 222, >60 7
+  cliff length with a talus apron (outline columns with apron over 1 m): 24.2% of 15344
+  highest rock surface 117.5 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 53, with tough rock 6; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 83, with tough rock 9; of those over 600 m across: 4, with tough rock 4
+  islands role 3: 129, with tough rock 28; of those over 600 m across: 12, with tough rock 12
+seed 19, res 25 m, tough override3
+  purple      rock     79.76 km2  tough     28.65 km2  =  35.9%
+  green       rock     43.03 km2  tough     13.00 km2  =  30.2%
+  blue        rock     78.60 km2  tough     29.50 km2  =  37.5%
+  brown       rock      6.09 km2  tough      1.59 km2  =  26.1%
+  red         rock     16.81 km2  tough      5.53 km2  =  32.9%
+  ring isl    rock      4.65 km2  tough      0.23 km2  =   4.9%
+  archi isl   rock      3.75 km2  tough      0.21 km2  =   5.6%
+  scatter isl rock     17.79 km2  tough      2.78 km2  =  15.6%
+  plateaus (flat top components, slope < 1:8): 685, with at least 20 x 20 m: 685, at least 100 x 100 m: 192
+  plateau top height above sand (m): min 11.9 p10 32.3 median 53.9 p90 68.9 max 98.0
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 98 of 682
+  cliff face height at the outline (columns): <12 2626, 12-20 1793, 20-30 1886, 30-45 1253, 45-60 228, >60 14
+  cliff length with a talus apron (outline columns with apron over 1 m): 25.0% of 15382
+  highest rock surface 117.3 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 65, with tough rock 8; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 56, with tough rock 6; of those over 600 m across: 3, with tough rock 3
+  islands role 3: 120, with tough rock 23; of those over 600 m across: 10, with tough rock 10
+seed 20, res 25 m, tough override3
+  purple      rock     80.04 km2  tough     26.52 km2  =  33.1%
+  green       rock     41.89 km2  tough     10.43 km2  =  24.9%
+  blue        rock     78.42 km2  tough     34.85 km2  =  44.4%
+  brown       rock      5.96 km2  tough      1.31 km2  =  21.9%
+  red         rock     16.24 km2  tough      3.02 km2  =  18.6%
+  ring isl    rock      4.15 km2  tough      0.09 km2  =   2.1%
+  archi isl   rock      5.66 km2  tough      0.19 km2  =   3.3%
+  scatter isl rock     21.52 km2  tough      4.30 km2  =  20.0%
+  plateaus (flat top components, slope < 1:8): 765, with at least 20 x 20 m: 765, at least 100 x 100 m: 219
+  plateau top height above sand (m): min 14.2 p10 31.6 median 56.2 p90 76.4 max 109.7
+  plateaus whose nearest neighbour (within 3 km) has a top within 1 block: 112 of 760
+  cliff face height at the outline (columns): <12 2509, 12-20 1656, 20-30 1834, 30-45 1390, 45-60 290, >60 15
+  cliff length with a talus apron (outline columns with apron over 1 m): 26.9% of 15383
+  highest rock surface 117.0 m above sand (limit about 165)
+  holes (a non-tough rock column with all four neighbours tough): 0
+  islands role 1: 56, with tough rock 6; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 73, with tough rock 10; of those over 600 m across: 2, with tough rock 2
+  islands role 3: 93, with tough rock 20; of those over 600 m across: 13, with tough rock 12

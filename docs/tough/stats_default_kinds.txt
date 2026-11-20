@@ -1,0 +1,12 @@
+  purple      rock     80.52 km2  tough     28.04 km2  =  34.8%
+  islands role 1: 67, with tough rock 4; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 52, with tough rock 2; of those over 600 m across: 4, with tough rock 2
+  islands role 3: 135, with tough rock 7; of those over 600 m across: 17, with tough rock 4
+  purple      rock     80.53 km2  tough     26.18 km2  =  32.5%
+  islands role 1: 52, with tough rock 4; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 68, with tough rock 4; of those over 600 m across: 4, with tough rock 2
+  islands role 3: 97, with tough rock 4; of those over 600 m across: 11, with tough rock 2
+  purple      rock     81.25 km2  tough     23.77 km2  =  29.3%
+  islands role 1: 67, with tough rock 4; of those over 600 m across: 0, with tough rock 0
+  islands role 2: 67, with tough rock 4; of those over 600 m across: 2, with tough rock 0
+  islands role 3: 99, with tough rock 8; of those over 600 m across: 15, with tough rock 5

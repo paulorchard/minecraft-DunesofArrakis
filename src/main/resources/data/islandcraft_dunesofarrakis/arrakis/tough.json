@@ -1,0 +1,41 @@
+{
+  "_comment": "Tough rock (prompt 09) and the layered underground. Every number is here; loaded once at startup. Metres = blocks. docs/tough.md.",
+  "tough": "on",
+  "_tough_note": "off = T = 0 (prompt 08 exactly). layers off = pure sandstone below the surface (prompt 08 exactly)",
+  "layers": "on",
+  "kind_override": null,
+  "_kind_override_note": "null, or 3: kind 3 on every rock column (testing). Kinds 1 and 2 have no tough layer yet",
+  "kind_map": { "1": 3, "2": 1, "3": 2, "4": 2, "5": 1 },
+  "_kind_map_note": "mapped continent id (1 purple, 2 green, 3 blue, 4 brown, 5 red) -> kind. Ring and archipelago islands take the kind of the nearest mainland, scatter islands a seeded kind",
+  "scatter_kinds": [1, 2, 3],
+
+  "eligible": { "min_base": 12, "min_coast_distance": 150, "min_halfwidth": 150 },
+  "_eligible_note": "T = 0 where the base is under min_base above sand, within min_coast_distance of the coast, or where the local rock half-width is under min_halfwidth (bodies under 300 m across)",
+
+  "mask": { "wavelength": 900, "wavelength2": 380, "weight2": 0.3, "gain": 1.6, "threshold": -0.18, "q_far": 0.5, "grad_step": 6, "grad_min": 0.0004,
+            "edge_amp": 18, "edge_wavelength": 70, "edge_fade": 60 },
+  "_mask_note": "mesa mask value v from two noise scales; the plateau is v > threshold. The signed distance to the outline is s = (v - threshold) / |grad v| (metres, first order); the edge noise (metres) is added to s only within edge_fade of the outline, so the interior has no holes",
+
+  "top": { "ref_scale": 0.55, "height_min": 12, "height_max": 45, "height_wavelength": 600, "height_gain": 2.0, "tilt_amp": 20, "tilt_wavelength": 1800,
+           "undulation_amp": 3, "undulation_wavelength": 130, "max_top": 165 },
+  "_top_note": "plateau top above sand = ref_scale x broad base reference + height (12..45, a noise at 600 m) + slow tilt + gentle undulation, at most max_top; the surface inside a mesa is max(base, top) so base summits may stand through it",
+
+  "face": { "slope_min": 2.5, "slope_max": 5.5, "slope_wavelength": 300, "ledge_amp": 0.1, "ledge_wavelength": 14 },
+  "_face_note": "the cliff rises from the base to the top over (top - base) / slope metres, slope in blocks per column; ledges are a noise on the profile",
+
+  "talus": { "share": 0.4, "gate_wavelength": 160, "height_fraction_max": 0.33, "height_min": 3, "length": 40 },
+  "_talus_note": "an apron of base-coloured rock rises against the foot where a slow noise passes the gate (share of the cliff length); height from height_min to fraction x face height, over length metres",
+
+  "bands": { "palette": [["minecraft:red_sandstone", 4.0], ["minecraft:terracotta", 3.0], ["minecraft:orange_terracotta", 2.0], ["minecraft:yellow_terracotta", 1.2], ["minecraft:brown_terracotta", 1.5], ["minecraft:red_terracotta", 1.5], ["minecraft:white_terracotta", 1.0], ["minecraft:light_gray_terracotta", 0.8]],
+             "thickness_min": 1, "thickness_max": 5, "cycle_bands": 40,
+             "offset_amp_local": 1.5, "offset_wavelength_local": 200, "offset_amp_wide": 8, "offset_wavelength_wide": 1500,
+             "cap_depth_min": 1, "cap_depth_max": 3, "cap_patch_wavelength": 25, "cap_patch_threshold": 0.35, "cap_patch_block": "minecraft:terracotta" },
+  "_bands_note": "bands by height: a seeded sequence of palette blocks of 1..5 blocks, repeated every cycle_bands bands; the lookup height is shifted by two slow noises so bands are level within about 2 blocks over 100 m but differ between faces more than a kilometre apart. Cap: the top cap_depth blocks below the mesa top are red sandstone with terracotta patches",
+
+  "underground": { "sandstone_depth_min": 8, "sandstone_depth_max": 25, "sandstone_wavelength": 400, "sand_level": 63,
+                   "blob_cell": 26, "blob_chance": 0.9, "blob_radius_min": 5, "blob_radius_max": 12, "blob_flatten": 0.85,
+                   "blob_weights": [["minecraft:andesite", 3.0], ["minecraft:diorite", 2.5], ["minecraft:granite", 2.5], ["minecraft:tuff", 1.5], ["minecraft:calcite", 0.5]],
+                   "deepslate_blob": "minecraft:tuff", "deepslate_blob_chance": 0.25,
+                   "smooth_patch_wavelength": 60, "smooth_patch_threshold": 0.5 },
+  "_underground_note": "sandstone from the surface down to sand_level - depth (8..25 by a slow noise); then stone with ellipsoid blobs of other rock (about 10-20% of the stone); vanilla deepslate gradient y 8..0; vanilla bedrock floor"
+}

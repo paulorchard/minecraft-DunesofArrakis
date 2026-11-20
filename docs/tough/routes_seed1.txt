@@ -1,0 +1,16 @@
+seed 1 window -5400,-8000 size 1024: plateaus over 50 x 50 m: 1, with a walk-up route: 1 (100%); distinct entries (30 m): 113
+  entry 1: (-4512, -8000)
+  entry 2: (-4404, -8000)
+  entry 3: (-4763, -7998)
+seed 1 window -12000,-7000 size 1024: plateaus over 50 x 50 m: 3, with a walk-up route: 3 (100%); distinct entries (30 m): 35
+  entry 1: (-11800, -7000)
+  entry 2: (-11717, -7000)
+  entry 3: (-11956, -7000)
+seed 1 window -9000,-9000 size 1024: plateaus over 50 x 50 m: 4, with a walk-up route: 4 (100%); distinct entries (30 m): 79
+  entry 1: (-8174, -8464)
+  entry 2: (-8233, -8458)
+  entry 3: (-8263, -8429)
+seed 1 window -2500,-12500 size 1024: plateaus over 50 x 50 m: 0, with a walk-up route: 0 (0%); distinct entries (30 m): 0
+seed 2 window -9000,-9000 size 1024: plateaus over 50 x 50 m: 2, with a walk-up route: 2 (100%); distinct entries (30 m): 40
+  entry 1: (-8072, -8646)
+  entry 2: (-8096, -8616)

@@ -11,7 +11,13 @@ for (let i = 0; i < args.length; i++) { if (args[i].startsWith('--')) { opt[args
 const [dir, maskFile, rockFile, X0, Z0, SIZE, outPrefix] = pos;
 const x0 = +X0, z0 = +Z0, S = +SIZE, SAND = 63;
 if (!dir || !maskFile || !rockFile || !outPrefix || !S) { console.error('usage: node windowcheck_relief.js <regionDir> <mask.bin> <rockmap.i16> <x0> <z0> <size> <outPrefix> [--save f] [--baseline f]'); process.exit(1); }
-const ROCK = 'minecraft:sandstone', DUNE = 'islandcraft_dunesofarrakis:dune_sand';
+const ROCK = 'minecraft:sandstone', DUNE = 'islandcraft_dunesofarrakis:dune_sand', SMOOTH = 'minecraft:smooth_sandstone';
+// prompt 09: LAYERS=off expects the pure sandstone below the surface of prompt 08; otherwise any rock block below the surface (sandstone, tough rock, stone, blobs, deepslate)
+const LAYERS = process.env.LAYERS !== 'off';
+const ALLOWED = new Set([DUNE, ROCK, SMOOTH, 'minecraft:air', 'minecraft:bedrock', 'minecraft:red_sandstone', 'minecraft:terracotta', 'minecraft:orange_terracotta', 'minecraft:yellow_terracotta', 'minecraft:brown_terracotta', 'minecraft:red_terracotta', 'minecraft:white_terracotta', 'minecraft:light_gray_terracotta', 'minecraft:stone', 'minecraft:deepslate', 'minecraft:andesite', 'minecraft:diorite', 'minecraft:granite', 'minecraft:tuff', 'minecraft:calcite']);
+const isRockBlock = n => !!n && n !== DUNE && n !== 'minecraft:air' && n !== 'minecraft:bedrock';
+const OUTLINE_Y = LAYERS ? SAND : SAND - 1; // with layers there is sandstone below the dunes at y 62, so the outline is read at y 63 (dune sand outside, rock inside)
+const bandNames = [{}, {}, {}, {}, {}], wdCount = new Uint8Array(S * S);
 const mask = fs.readFileSync(maskFile); if (mask.length !== S * S) { console.error('mask size mismatch'); process.exit(1); }
 const rb = fs.readFileSync(rockFile); if (rb.length !== S * S * 2) { console.error('rockmap size mismatch'); process.exit(1); }
 const rtop = new Int16Array(rb.buffer.slice(rb.byteOffset, rb.byteOffset + rb.length));
@@ -47,11 +53,12 @@ for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mca'))) {
     const check = (n, y, i) => {
       const wx = bx + (i & 15) - x0, wz = bz + (i >> 4) - z0; if (wx < 0 || wz < 0 || wx >= S || wz >= S) return;
       const k = wz * S + wx, m = mask[k], rt = rtop[k];
-      if (y === SAND - 1) sand62[k] = n === ROCK ? 1 : 0;
+      if (y === OUTLINE_Y) sand62[k] = (LAYERS ? isRockBlock(n) : n === ROCK) ? 1 : 0;
+      if (LAYERS) { const bnd = y > 63 ? 0 : y >= 8 ? 1 : y >= 0 ? 2 : y >= minY + 5 ? 3 : 4; bandNames[bnd][n] = (bandNames[bnd][n] || 0) + 1; if (y <= 62 && (n === ROCK || n === SMOOTH)) wdCount[k]++; }
       if (n === 'minecraft:air') { if (y < colTop[i]) c.airBelowSurface++; return; }
       if (n === 'minecraft:bedrock') { if (y > minY + 4) c.bedrockAbove++; return; }
-      const expect = (m && rt !== NO && y <= rt) ? ROCK : DUNE;
-      if (n !== expect) {
+      const expect = (m && rt !== NO && y <= rt) || (LAYERS && y < SAND) ? ROCK : DUNE;
+      if (LAYERS ? (expect === ROCK ? n === DUNE : n !== DUNE) : n !== expect) {
         const key = n + (expect === ROCK ? ' where sandstone is due (at or below the rock surface)' : (m ? ' above the rock surface' : ' in a dune column'));
         c.wrongBlocks[key] = (c.wrongBlocks[key] || 0) + 1; wrongCols.add(k);
         if (expect === ROCK && n === DUNE) c.floatingSand++; else if (expect === DUNE && n === ROCK) c.sandstoneAboveRock++;
@@ -65,7 +72,7 @@ for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mca'))) {
     for (let i = 0; i < 256; i++) {
       const wx = bx + (i & 15) - x0, wz = bz + (i >> 4) - z0; if (wx < 0 || wz < 0 || wx >= S || wz >= S) continue;
       const k = wz * S + wx; top[k] = colTop[i];
-      topKind[k] = colName[i] === DUNE ? 1 : colName[i] === ROCK ? 2 : colName[i] ? 3 : 0;
+      topKind[k] = colName[i] === DUNE ? 1 : (LAYERS ? isRockBlock(colName[i]) : colName[i] === ROCK) ? 2 : colName[i] ? 3 : 0;
       c.columns++;
     }
   }
@@ -179,6 +186,17 @@ if (opt.baseline) {
 }
 if (opt.save) fs.writeFileSync(opt.save, Buffer.from(top.buffer));
 
+// ---- layers (prompt 09): block shares per vertical band, thickness of the weathered sandstone below y 63 (inside the footprint and under the dunes outside it)
+const layerOut = { mode: LAYERS ? 'on' : 'off' };
+if (LAYERS) {
+  const names = new Set(); for (const b of bandNames) for (const n of Object.keys(b)) names.add(n);
+  layerOut.unexpectedBlocks = [...names].filter(n => !ALLOWED.has(n));
+  layerOut.bandShares = bandNames.map((b, i) => { const tot = Object.values(b).reduce((a, v) => a + v, 0); const sh = {}; for (const [n, v] of Object.entries(b).sort((a, c) => c[1] - a[1])) sh[n.replace('minecraft:', '').replace('islandcraft_dunesofarrakis:', '')] = +(v / tot).toFixed(4); return { band: ['above 63', '8..63', '0..7 (gradient)', '-59..-1', '-64..-60'][i], blocks: tot, shares: sh }; });
+  const pc = (arr, q) => arr.length ? arr[Math.min(arr.length - 1, Math.floor(q * arr.length))] : null;
+  const wi = [], wo = []; for (let k = 0; k < S * S; k++) if (top[k] !== NO) (inside[k] ? wi : wo).push(wdCount[k]);
+  wi.sort((a, b) => a - b); wo.sort((a, b) => a - b);
+  layerOut.sandstoneThicknessBelow63 = { inside: { columns: wi.length, p5: pc(wi, .05), p50: pc(wi, .5), p95: pc(wi, .95) }, outside: { columns: wo.length, p5: pc(wo, .05), p50: pc(wo, .5), p95: pc(wo, .95) } };
+}
 const reliefMism = mism.length;
 const r = {
   window: { x0, z0, size: S },
@@ -194,6 +212,7 @@ const r = {
   slope: { baselineBlocks: 2 * B, rockColumns: slopeN, share_over_20deg: slopeN ? +(slope20 / slopeN).toFixed(4) : null, share_over_35deg: slopeN ? +(slope35 / slopeN).toFixed(4) : null, steepestGradient: +slopeMax.toFixed(2), within100mOfCoast: n100, share_over_25deg_within100m: n100 ? +(slope25 / n100).toFixed(4) : null },
   duneMountains: { footprintColumnsWithDuneMoreThan10AboveRock: duneOver10, footprintShare: insideCols ? +(duneOver10 / insideCols).toFixed(4) : null, outsideWithin30mOfCoast: duneBesideCoast },
   identityWithPrompt05Outside: cmp,
+  layers: layerOut,
 };
 r.pass = {
   noGaps: c.columns === S * S,
@@ -202,11 +221,13 @@ r.pass = {
   noAirBelowSurface: c.airBelowSurface === 0 && c.bedrockAbove === 0,
   noFloatingSand: c.floatingSand === 0 && c.sandstoneAboveRock === 0 && Object.keys(c.wrongBlocks).length === 0,
   noRockWalls: wallsRock === 0,
+  noUnexpectedBlocks: !LAYERS || layerOut.unexpectedBlocks.length === 0,
   duneIdentical: cmp ? cmp.differentColumns === 0 : null,
 };
 fs.writeFileSync(`${outPrefix}.json`, JSON.stringify(r, null, 1));
 console.log(`window x ${x0}..${x0 + S - 1} z ${z0}..${z0 + S - 1}: footprint ${(100 * insideCols / (S * S)).toFixed(1)}% (${insideCols} columns), full chunks ${c.fullChunks}`);
-console.log(`outline (sandstone at y=62 vs footprint): ${outlineMismatch} differing columns (${outlineRing} within 1 block of the coast)`);
+if (LAYERS) console.log(`layers: ${JSON.stringify(layerOut.sandstoneThicknessBelow63)} unexpected blocks ${JSON.stringify(layerOut.unexpectedBlocks)}`);
+console.log(`outline (rock at y=${OUTLINE_Y} vs footprint): ${outlineMismatch} differing columns (${outlineRing} within 1 block of the coast)`);
 console.log(`relief vs analytic: ${reliefMism} mismatching columns (${(100 * reliefMism / (S * S)).toExponential(2)}%): top below ${below}, top at analytic but not sandstone ${equalNotRock}, sandstone above ${aboveRock}; within 1 block of coast ${relMismatchRing}, on chunk borders ${relMismatchOnGrid}; dune over rock ${duneAbove} (largest ${maxDuneOver})`);
 console.log(`blocks: air below surface ${c.airBelowSurface}, bedrock above bottom 5 ${c.bedrockAbove}, floating sand in rock ${c.floatingSand}, sandstone above rock ${c.sandstoneAboveRock}, wrong ${JSON.stringify(c.wrongBlocks)}`);
 console.log(`rock surface above sand: ${JSON.stringify(rockHeights)}`);

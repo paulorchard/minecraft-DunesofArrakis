@@ -30,6 +30,7 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
         DensityFunction.NoiseHolder.CODEC.fieldOf("terrace_level").forGetter(f -> f.n[11]),
         DensityFunction.NoiseHolder.CODEC.fieldOf("terrace_strength").forGetter(f -> f.n[12]),
         DensityFunction.NoiseHolder.CODEC.fieldOf("mountain").forGetter(f -> f.n[13]),
+        DensityFunction.NoiseHolder.CODEC.fieldOf("tough").forGetter(f -> f.n[14]),
         DensityFunction.HOLDER_HELPER_CODEC.fieldOf("dunes").forGetter(f -> f.dunes)
     ).apply(i, ArrakisSurface::new)));
 
@@ -45,13 +46,15 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
     private final DensityFunction.NoiseHolder[] n = new DensityFunction.NoiseHolder[ReliefModel.NOISE_NAMES.length];
     private final DensityFunction dunes;
     private volatile WorldModels.Models models; // the footprint of this world (mapped land plus its seeded islands), built on first use
+    private final ThreadLocal<CoastModel.Out> out = ThreadLocal.withInitial(CoastModel.Out::new);
+    private final ThreadLocal<ToughModel.Col> col = ThreadLocal.withInitial(ToughModel.Col::new);
     private final ThreadLocal<Cache> cache = ThreadLocal.withInitial(Cache::new);
 
     public ArrakisSurface(DensityFunction.NoiseHolder a, DensityFunction.NoiseHolder b, DensityFunction.NoiseHolder c, DensityFunction.NoiseHolder d,
                           DensityFunction.NoiseHolder e, DensityFunction.NoiseHolder f, DensityFunction.NoiseHolder g, DensityFunction.NoiseHolder h,
                           DensityFunction.NoiseHolder i, DensityFunction.NoiseHolder j, DensityFunction.NoiseHolder k, DensityFunction.NoiseHolder l,
-                          DensityFunction.NoiseHolder m, DensityFunction.NoiseHolder o, DensityFunction dunes) {
-        n[0] = a; n[1] = b; n[2] = c; n[3] = d; n[4] = e; n[5] = f; n[6] = g; n[7] = h; n[8] = i; n[9] = j; n[10] = k; n[11] = l; n[12] = m; n[13] = o;
+                          DensityFunction.NoiseHolder m, DensityFunction.NoiseHolder o, DensityFunction.NoiseHolder p, DensityFunction dunes) {
+        n[0] = a; n[1] = b; n[2] = c; n[3] = d; n[4] = e; n[5] = f; n[6] = g; n[7] = h; n[8] = i; n[9] = j; n[10] = k; n[11] = l; n[12] = m; n[13] = o; n[14] = p;
         this.dunes = dunes;
     }
 
@@ -75,10 +78,14 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
         WorldModels.Models wm = models;
         if (wm == null) models = wm = WorldModels.shared().of(this);
         ReliefModel model = wm.relief;
-        double f = model.coast.field(x, z, this);
+        CoastModel.Out out = this.out.get();
+        double f = model.coast.field(x, z, this, out);
         double v;
         if (f > 0) {
             double r = model.rockFromField(f, x, z, this);
+            ToughModel.Col col = this.col.get();
+            wm.tough.eval(x, z, r, out.winnerEllipse, this, col);
+            r = col.rt;
             v = model.cfg.relief ? Math.max(r, dunes.compute(context)) : r;
         } else {
             v = dunes.compute(context);
@@ -92,7 +99,7 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
     public DensityFunction mapAll(Visitor visitor) {
         DensityFunction.NoiseHolder[] m = new DensityFunction.NoiseHolder[n.length];
         for (int i = 0; i < m.length; i++) m[i] = visitor.visitNoise(n[i]);
-        return visitor.apply(new ArrakisSurface(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], dunes.mapAll(visitor)));
+        return visitor.apply(new ArrakisSurface(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], dunes.mapAll(visitor)));
     }
 
     @Override

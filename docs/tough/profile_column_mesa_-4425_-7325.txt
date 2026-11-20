@@ -1,0 +1,17 @@
+column (-4425, -7325), top to bottom (blocks above the sand level are y > 63):
+  y 96 .. 96  red_sandstone  (1 blocks)
+  y 95 .. 93  brown_terracotta  (3 blocks)
+  y 92 .. 92  orange_terracotta  (1 blocks)
+  y 91 .. 89  red_sandstone  (3 blocks)
+  y 88 .. 86  light_gray_terracotta  (3 blocks)
+  y 85 .. 83  red_sandstone  (3 blocks)
+  y 82 .. 50  sandstone  (33 blocks)
+  y 49 .. 7  stone  (43 blocks)
+  y 6 .. 5  deepslate  (2 blocks)
+  y 4 .. 4  stone  (1 blocks)
+  y 3 .. 3  deepslate  (1 blocks)
+  y 2 .. 2  stone  (1 blocks)
+  y 1 .. -60  deepslate  (62 blocks)
+  y -61 .. -62  bedrock  (2 blocks)
+  y -63 .. -63  deepslate  (1 blocks)
+  y -64 .. -64  bedrock

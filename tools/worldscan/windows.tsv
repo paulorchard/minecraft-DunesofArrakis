@@ -24,3 +24,6 @@ isl_arch	1	-21870	3579	prompt 08: archipelago group 7 (12 islands), seed 1
 isl_arch	2	-10177	-13275	prompt 08: archipelago group 4 (11 islands), seed 2
 isl_scatter	1	-5562	-23820	prompt 08: scatter island 1135 (390 m across), 8.7 km from the mainland, seed 1
 isl_scatter	2	6346	-23875	prompt 08: scatter island 1175 (790 m across), 8.6 km from the mainland, seed 2
+tough_mesa	1	-4425	-7325	prompt 09: purple mesa interior with cliffs (override on)
+tough_coast	1	-4975	-12700	prompt 09: purple coast with a mesa behind it (override on)
+tough_island	1	-723	-18773	prompt 09: archipelago island 1081 with a mesa (override on)

@@ -16,12 +16,14 @@ public final class WorldModels {
         public final ReliefModel relief;
         public final IslandGenerator.Result islands;
         public final ContinentIndex index;
+        public final ToughModel tough;
 
-        Models(CoastModel coast, ReliefModel relief, IslandGenerator.Result islands) {
+        Models(CoastModel coast, ReliefModel relief, IslandGenerator.Result islands, ToughModel tough) {
             this.coast = coast;
             this.relief = relief;
             this.islands = islands;
             this.index = coast.idx;
+            this.tough = tough;
         }
     }
 
@@ -37,12 +39,23 @@ public final class WorldModels {
     private final ReliefConfig rc;
     private final TerraceConfig tc;
     private final IslandConfig ic;
+    private final ToughConfig tgc;
     private final ContinentIndex mappedIdx;
     private final CoastModel mappedCoast;
     private ReliefModel mappedRelief;
+    static final long TOUGH_SALT = 0x544F554748L;
     private final Map<Object, Models> worlds = new WeakHashMap<>();
 
     public WorldModels(CoastConfig cc, ReliefConfig rc, TerraceConfig tc, IslandConfig ic, ContinentIndex mappedIdx) {
+        this(cc, rc, tc, ic, mappedIdx, ToughConfig.shared());
+    }
+
+    public ToughConfig toughConfig() {
+        return tgc;
+    }
+
+    public WorldModels(CoastConfig cc, ReliefConfig rc, TerraceConfig tc, IslandConfig ic, ContinentIndex mappedIdx, ToughConfig tgc) {
+        this.tgc = tgc;
         this.cc = cc;
         this.rc = rc;
         this.tc = tc;
@@ -83,7 +96,7 @@ public final class WorldModels {
     private Models build(CoastModel.Noise nz) {
         if (!ic.enabled || !cc.noisy) {
             if (mappedRelief == null) mappedRelief = new ReliefModel(mappedCoast, rc, tc);
-            return new Models(mappedCoast, mappedRelief, null);
+            return new Models(mappedCoast, mappedRelief, null, new ToughModel(tgc, mappedRelief, mappedIdx, IslandGenerator.seedOf(nz, TOUGH_SALT)));
         }
         long t0 = System.nanoTime();
         IslandGenerator.Result r = IslandGenerator.generate(mappedCoast, nz, ic, rc);
@@ -92,6 +105,7 @@ public final class WorldModels {
         System.out.println("[islandcraft_dunesofarrakis] islands generated for a world: " + r.ellipses.size() + " (seed hash " + Long.toHexString(r.seed) + ", mapped rock nodes " + rockNodes + ") in " + (System.nanoTime() - t0) / 1000000 + " ms, key " + System.identityHashCode(nz.worldKey()));
         ContinentIndex idx = ContinentIndex.withExtra(mappedIdx, new ArrayList<>(r.ellipses), cc.gridMargin);
         CoastModel coast = new CoastModel(idx, cc);
-        return new Models(coast, new ReliefModel(coast, rc, tc), r);
+        ReliefModel relief = new ReliefModel(coast, rc, tc);
+        return new Models(coast, relief, r, new ToughModel(tgc, relief, idx, IslandGenerator.seedOf(nz, TOUGH_SALT)));
     }
 }
