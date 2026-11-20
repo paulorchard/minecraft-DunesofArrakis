@@ -27,3 +27,7 @@ isl_scatter	2	6346	-23875	prompt 08: scatter island 1175 (790 m across), 8.6 km 
 tough_mesa	1	-4425	-7325	prompt 09: purple mesa interior with cliffs (override on)
 tough_coast	1	-4975	-12700	prompt 09: purple coast with a mesa behind it (override on)
 tough_island	1	-723	-18773	prompt 09: archipelago island 1081 with a mesa (override on)
+plain_south	1	9575	-7050	prompt 10: blue plain, south cliff (default kind map)
+plain_north	1	11375	-6625	prompt 10: blue plain from its north ramp (default kind map)
+plain_island	1	4900	11349	prompt 10: scatter island 1173 with a kind 2 plain (default kind map)
+plain_purple	1	-6700	-8975	prompt 10: purple with override 2 (compare with tough_mesa, kind 3)

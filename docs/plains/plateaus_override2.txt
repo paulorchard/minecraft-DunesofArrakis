@@ -1,0 +1,54 @@
+s1 seed 1, res 10 m, tough override2
+s1   kind 2 plateaus (flat tops, at least 20 x 20 m): 850, at least 100 x 100 m: 163; area km2 p10 0.000 p50 0.001 p90 0.038 max 6.89; equivalent diameter m p10 23 p50 42 p90 221 max 2961
+s1   kind 2 plateau top above sand (m): min 10.7 p10 21.6 median 56.7 p90 98.7 max 122.2
+s1   kind 2 plateau pairs (nearest neighbour within 3 km) with tops within 1 block: all 91 of 847 (10.7%); pieces of one mesa 86 of 776; separate mesas 5 of 71 (7.0%)
+s1   kind 2 tilt: top change per 100 m against the weather direction: mean -1.17 blocks (p10 -4.09 p50 -1.42 p90 2.11) over 317465 columns = 1 block per 85 m
+s1   kind 3: no plateaus
+s1   coverage:
+s1   purple      rock    80.51 km2, of it kind 2 100.0%, tough    31.50 km2 =  39.1% of the rock
+s1   green       rock    42.23 km2, of it kind 2 100.0%, tough     9.40 km2 =  22.3% of the rock
+s1   blue        rock    78.91 km2, of it kind 2 100.0%, tough    34.95 km2 =  44.3% of the rock
+s1   brown       rock     6.23 km2, of it kind 2 100.0%, tough     1.86 km2 =  29.9% of the rock
+s1   red         rock    16.35 km2, of it kind 2 100.0%, tough     5.80 km2 =  35.5% of the rock
+s1   ring isl    rock     4.71 km2, of it kind 2 100.0%, tough     0.02 km2 =   0.4% of the rock
+s1   archi isl   rock    11.09 km2, of it kind 2 100.0%, tough     2.55 km2 =  23.0% of the rock
+s1   scatter isl rock    35.00 km2, of it kind 2 100.0%, tough     6.18 km2 =  17.6% of the rock
+s1   islands role 1: 67, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+s1   islands role 2: 52, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+s1   islands role 3: 135, of kind 2: 51, of those over 600 m across: 8, with a plain: 7
+s2 seed 2, res 10 m, tough override2
+s2   kind 2 plateaus (flat tops, at least 20 x 20 m): 808, at least 100 x 100 m: 129; area km2 p10 0.000 p50 0.001 p90 0.038 max 6.87; equivalent diameter m p10 23 p50 39 p90 220 max 2959
+s2   kind 2 plateau top above sand (m): min 10.5 p10 25.1 median 62.5 p90 98.0 max 123.8
+s2   kind 2 plateau pairs (nearest neighbour within 3 km) with tops within 1 block: all 71 of 807 (8.8%); pieces of one mesa 61 of 714; separate mesas 10 of 93 (10.8%)
+s2   kind 2 tilt: top change per 100 m against the weather direction: mean -1.45 blocks (p10 -4.75 p50 -1.74 p90 2.30) over 269594 columns = 1 block per 69 m
+s2   kind 3: no plateaus
+s2   coverage:
+s2   purple      rock    80.51 km2, of it kind 2 100.0%, tough    28.27 km2 =  35.1% of the rock
+s2   green       rock    42.31 km2, of it kind 2 100.0%, tough    10.33 km2 =  24.4% of the rock
+s2   blue        rock    78.59 km2, of it kind 2 100.0%, tough    31.21 km2 =  39.7% of the rock
+s2   brown       rock     6.15 km2, of it kind 2 100.0%, tough     1.32 km2 =  21.5% of the rock
+s2   red         rock    16.33 km2, of it kind 2 100.0%, tough     5.57 km2 =  34.1% of the rock
+s2   ring isl    rock     4.01 km2, of it kind 2 100.0%, tough     0.00 km2 =   0.1% of the rock
+s2   archi isl   rock     9.45 km2, of it kind 2 100.0%, tough     1.15 km2 =  12.2% of the rock
+s2   scatter isl rock    15.63 km2, of it kind 2 100.0%, tough     0.86 km2 =   5.5% of the rock
+s2   islands role 1: 52, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+s2   islands role 2: 68, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+s2   islands role 3: 97, of kind 2: 32, of those over 600 m across: 4, with a plain: 3
+s3 seed 3, res 10 m, tough override2
+s3   kind 2 plateaus (flat tops, at least 20 x 20 m): 828, at least 100 x 100 m: 143; area km2 p10 0.000 p50 0.001 p90 0.032 max 7.39; equivalent diameter m p10 23 p50 41 p90 202 max 3067
+s3   kind 2 plateau top above sand (m): min 9.2 p10 19.8 median 61.3 p90 100.1 max 122.1
+s3   kind 2 plateau pairs (nearest neighbour within 3 km) with tops within 1 block: all 65 of 824 (7.9%); pieces of one mesa 59 of 739; separate mesas 6 of 85 (7.1%)
+s3   kind 2 tilt: top change per 100 m against the weather direction: mean -0.77 blocks (p10 -3.79 p50 -0.90 p90 2.40) over 258625 columns = 1 block per 129 m
+s3   kind 3: no plateaus
+s3   coverage:
+s3   purple      rock    81.25 km2, of it kind 2 100.0%, tough    30.29 km2 =  37.3% of the rock
+s3   green       rock    43.17 km2, of it kind 2 100.0%, tough     9.99 km2 =  23.1% of the rock
+s3   blue        rock    79.06 km2, of it kind 2 100.0%, tough    29.69 km2 =  37.5% of the rock
+s3   brown       rock     5.75 km2, of it kind 2 100.0%, tough     0.92 km2 =  16.0% of the rock
+s3   red         rock    16.54 km2, of it kind 2 100.0%, tough     2.86 km2 =  17.3% of the rock
+s3   ring isl    rock     5.69 km2, of it kind 2 100.0%, tough     0.00 km2 =   0.0% of the rock
+s3   archi isl   rock     6.12 km2, of it kind 2 100.0%, tough     0.42 km2 =   6.8% of the rock
+s3   scatter isl rock    31.00 km2, of it kind 2 100.0%, tough     5.66 km2 =  18.3% of the rock
+s3   islands role 1: 67, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+s3   islands role 2: 67, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+s3   islands role 3: 99, of kind 2: 34, of those over 600 m across: 3, with a plain: 2

@@ -1,0 +1,21 @@
+seed 1, res 10 m, tough src/main/resources/data/islandcraft_dunesofarrakis/arrakis/tough.json
+  kind 2 plateaus (flat tops, at least 20 x 20 m): 340, at least 100 x 100 m: 58; area km2 p10 0.000 p50 0.001 p90 0.028 max 6.89; equivalent diameter m p10 23 p50 39 p90 188 max 2961
+  kind 2 plateau top above sand (m): min 11.9 p10 22.3 median 54.7 p90 98.1 max 116.8
+  kind 2 plateau pairs (nearest neighbour within 3 km) with tops within 1 block: all 36 of 340 (10.6%); pieces of one mesa 36 of 317; separate mesas 0 of 23 (0.0%)
+  kind 2 tilt: top change per 100 m against the weather direction: mean -1.21 blocks (p10 -3.97 p50 -1.58 p90 2.12) over 152251 columns = 1 block per 83 m
+  kind 3 plateaus (flat tops, at least 20 x 20 m): 191, at least 100 x 100 m: 75; area km2 p10 0.001 p50 0.006 p90 0.319 max 3.26; equivalent diameter m p10 30 p50 89 p90 638 max 2036
+  kind 3 plateau top above sand (m): min 15.7 p10 35.8 median 55.7 p90 79.6 max 103.7
+  kind 3 plateau pairs (nearest neighbour within 3 km) with tops within 1 block: all 15 of 188 (8.0%); pieces of one mesa 3 of 73; separate mesas 12 of 115 (10.4%)
+  kind 3 tilt: top change per 100 m against the weather direction: mean -0.17 blocks (p10 -6.01 p50 -0.17 p90 5.60) over 178163 columns = 1 block per 595 m
+  coverage:
+  purple      rock    80.51 km2, of it kind 2   0.0%, tough    28.05 km2 =  34.8% of the rock
+  green       rock    42.23 km2, of it kind 2   0.0%, tough     0.00 km2 =   0.0% of the rock
+  blue        rock    78.91 km2, of it kind 2 100.0%, tough    34.95 km2 =  44.3% of the rock
+  brown       rock     6.23 km2, of it kind 2 100.0%, tough     1.86 km2 =  29.9% of the rock
+  red         rock    16.35 km2, of it kind 2   0.0%, tough     0.00 km2 =   0.0% of the rock
+  ring isl    rock     4.71 km2, of it kind 2   0.0%, tough     0.03 km2 =   0.7% of the rock
+  archi isl   rock    11.09 km2, of it kind 2   0.0%, tough     0.34 km2 =   3.1% of the rock
+  scatter isl rock    35.00 km2, of it kind 2  51.8%, tough     5.01 km2 =  14.3% of the rock
+  islands role 1: 67, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+  islands role 2: 52, of kind 2: 0, of those over 600 m across: 0, with a plain: 0
+  islands role 3: 135, of kind 2: 51, of those over 600 m across: 8, with a plain: 7

@@ -23,6 +23,8 @@ public final class ToughModel {
         public double rt; // top of the rock including the tough layer
         public double s; // signed distance to the mesa outline in metres (diagnostic; NaN when not evaluated)
         public double face; // cliff height (top - base) at this column (diagnostic)
+        public double w; // kind 2: cliff weight 0..1 (1 = facing the weather direction); diagnostic and used by the profile
+        public double nx, nz; // kind 2: outward unit normal of the plateau outline (diagnostic)
     }
 
     public final ToughConfig c;
@@ -41,6 +43,19 @@ public final class ToughModel {
     private final double tShare, tWl, tFrac, tMin, tLen, gateThr;
     private final double offAmpL, offWlL, offAmpW, offWlW, capPatchWl, capPatchThr;
     private final int capMin, capMax;
+
+    // ---- kind 2 (plains, prompt 10)
+    private final double wCos, wSin, coneFull, coneZero;
+    private final double m2Wl, m2Wl2, m2W2, m2Gain, m2Thr, m2QFar, m2Gs, m2GMin, eAmp2, eWl2, eFade2, eGs2, eDirW;
+    private final double refScale2, h2Min, h2Max, h2Wl, h2Gain, und2Amp, und2Wl, maxTop2, tl0, tl1, tlWl, tStep, tSoft;
+    private final int tSamples;
+    private final double cs0, cs1, csWl, led2Amp, led2Wl, leanMax, leanWl;
+    private final double rs0, rs1, rsWl, rEase;
+    private final double sShare, sWl, sFrac, sMin, sLen, sC0, sC1, gate2Thr;
+    public final String[] paletteBlock2;
+    private final int[] bandPal2, bandEnd2;
+    private final int cycle2;
+    private final double cap2PatchWl, cap2PatchThr, fadeCoast, fadeBase, fadeHalf, topOffset, cW0, eDirMax, gDirA, gDirB, minCliff, minZone, sSharp;
 
     public ToughModel(ToughConfig c, ReliefModel relief, ContinentIndex idx, long seed) {
         this.c = c;
@@ -90,6 +105,97 @@ public final class ToughModel {
         capMin = c.i("bands", "cap_depth_min");
         capMax = c.i("bands", "cap_depth_max");
         kind = kinds(c, idx, seed);
+        double ang = Math.toRadians(c.d("kind2", "weather_angle"));
+        wCos = Math.cos(ang);
+        wSin = Math.sin(ang);
+        coneFull = c.d("kind2", "cone_full");
+        coneZero = c.d("kind2", "cone_zero");
+        m2Wl = c.d("kind2_mask", "wavelength");
+        m2Wl2 = c.d("kind2_mask", "wavelength2");
+        m2W2 = c.d("kind2_mask", "weight2");
+        m2Gain = c.d("kind2_mask", "gain");
+        m2Thr = c.d("kind2_mask", "threshold");
+        m2QFar = c.d("kind2_mask", "q_far");
+        m2Gs = c.d("kind2_mask", "grad_step");
+        m2GMin = c.d("kind2_mask", "grad_min");
+        eAmp2 = c.d("kind2_mask", "edge_amp");
+        eWl2 = c.d("kind2_mask", "edge_wavelength");
+        eFade2 = c.d("kind2_mask", "edge_fade");
+        eGs2 = c.d("kind2_mask", "edge_grad_step");
+        eDirW = c.d("kind2_mask", "edge_dir_weight");
+        refScale2 = c.d("kind2_top", "ref_scale");
+        h2Min = c.d("kind2_top", "height_min");
+        h2Max = c.d("kind2_top", "height_max");
+        h2Wl = c.d("kind2_top", "height_wavelength");
+        h2Gain = c.d("kind2_top", "height_gain");
+        und2Amp = c.d("kind2_top", "undulation_amp");
+        und2Wl = c.d("kind2_top", "undulation_wavelength");
+        maxTop2 = c.d("kind2_top", "max_top");
+        tl0 = c.d("kind2_top", "tilt_length_min");
+        tl1 = c.d("kind2_top", "tilt_length_max");
+        tlWl = c.d("kind2_top", "tilt_length_wavelength");
+        tSamples = c.i("kind2_top", "tilt_samples");
+        tStep = c.d("kind2_top", "tilt_step");
+        tSoft = c.d("kind2_top", "tilt_softness");
+        cs0 = c.d("kind2_cliff", "slope_min");
+        cs1 = c.d("kind2_cliff", "slope_max");
+        csWl = c.d("kind2_cliff", "slope_wavelength");
+        led2Amp = c.d("kind2_cliff", "ledge_amp");
+        led2Wl = c.d("kind2_cliff", "ledge_wavelength");
+        leanMax = c.d("kind2_cliff", "lean_max");
+        leanWl = c.d("kind2_cliff", "lean_wavelength");
+        rs0 = c.d("kind2_ramp", "slope_min");
+        rs1 = c.d("kind2_ramp", "slope_max");
+        rsWl = c.d("kind2_ramp", "slope_wavelength");
+        rEase = c.d("kind2_ramp", "ease");
+        sShare = c.d("kind2_scree", "share");
+        sWl = c.d("kind2_scree", "gate_wavelength");
+        sFrac = c.d("kind2_scree", "height_fraction_max");
+        sMin = c.d("kind2_scree", "height_min");
+        sLen = c.d("kind2_scree", "length");
+        sSharp = c.d("kind2_scree", "gate_sharpness");
+        sC0 = c.d("kind2_scree", "cone_weight_start");
+        sC1 = c.d("kind2_scree", "cone_weight_full");
+        gate2Thr = quantile(1 - sShare);
+        cW0 = c.d("kind2_cliff", "cliff_weight_start");
+        minCliff = c.d("kind2_cliff", "min_height");
+        minZone = c.d("kind2_cliff", "min_height_zone");
+        eDirMax = c.d("kind2_mask", "edge_dir_max");
+        gDirA = c.d("kind2_mask", "dir_grad_min");
+        gDirB = c.d("kind2_mask", "dir_grad_full");
+        fadeCoast = c.d("kind2_fade", "coast");
+        fadeBase = c.d("kind2_fade", "base");
+        fadeHalf = c.d("kind2_fade", "halfwidth");
+        topOffset = c.d("kind2_top", "top_offset");
+        cap2PatchWl = c.d("kind2_bands", "cap_patch_wavelength");
+        cap2PatchThr = c.d("kind2_bands", "cap_patch_threshold");
+        // the kind 2 band sequence: two thick colours alternating, now and then a thin accent band
+        JsonArray p2 = c.arr("kind2_bands", "palette"), ac = c.arr("kind2_bands", "accents");
+        paletteBlock2 = new String[p2.size() + ac.size()];
+        for (int i = 0; i < p2.size(); i++) paletteBlock2[i] = p2.get(i).getAsString();
+        for (int i = 0; i < ac.size(); i++) paletteBlock2[p2.size() + i] = ac.get(i).getAsString();
+        int n2 = c.i("kind2_bands", "cycle_bands"), t2min = c.i("kind2_bands", "thickness_min"), t2max = c.i("kind2_bands", "thickness_max");
+        int a2min = c.i("kind2_bands", "accent_thickness_min"), a2max = c.i("kind2_bands", "accent_thickness_max");
+        double aCh = c.d("kind2_bands", "accent_chance");
+        SplittableRandom r2 = new SplittableRandom(seed ^ 0x2B7E151628AED2A6L);
+        bandPal2 = new int[n2];
+        bandEnd2 = new int[n2];
+        int acc2 = 0, colr = r2.nextInt(2);
+        boolean prevAccent = true;
+        for (int i = 0; i < n2; i++) {
+            if (!prevAccent && ac.size() > 0 && r2.nextDouble() < aCh) {
+                bandPal2[i] = p2.size() + r2.nextInt(ac.size());
+                acc2 += a2min + r2.nextInt(a2max - a2min + 1);
+                prevAccent = true;
+            } else {
+                colr = (colr + 1) % p2.size();
+                bandPal2[i] = colr;
+                acc2 += t2min + r2.nextInt(t2max - t2min + 1);
+                prevAccent = false;
+            }
+            bandEnd2[i] = acc2;
+        }
+        cycle2 = acc2;
         // the band sequence of this world
         JsonArray pal = c.arr("bands", "palette");
         paletteBlock = new String[pal.size()];
@@ -211,7 +317,15 @@ public final class ToughModel {
         out.face = 0;
         int k = kindOf(e);
         out.kind = k;
-        if (!c.tough || k != 3) return;
+        out.w = 0;
+        out.nx = 0;
+        out.nz = 0;
+        if (!c.tough) return;
+        if (k == 2) {
+            evalPlain(x, z, r, nz, out);
+            return;
+        }
+        if (k != 3) return;
         double d = relief.exactDistance(x, z, nz);
         if (d < minDist) return;
         double ref = relief.broadReference(x, z, d, nz);
@@ -261,6 +375,130 @@ public final class ToughModel {
         out.baseTop = base;
         out.rt = rt;
         out.tough = rt > base + 0.5;
+    }
+
+    private double mask2(CoastModel.Noise nz, double x, double z) {
+        return clamp1(m2Gain * ((1 - m2W2) * n(nz, 20, x, z, m2Wl) + m2W2 * n(nz, 21, x, z, m2Wl2)));
+    }
+
+    /**
+     * Kind 2, plains: wide smooth plateaus that end in a cliff only on the sides facing the weather direction and run out in a long ramp elsewhere.
+     * The outline comes from a mask (as kind 3) with edge noise; the outward normal is the gradient of the mask plus the gradient of the edge noise, both by
+     * finite differences over 10-14 m, so the facing is smooth along an edge. The cliff weight w (1 within coneFull degrees of the weather direction, 0 beyond
+     * coneZero) sets the steepness of the single profile p(s) by interpolating its logarithm between the cliff and the ramp, so the profile never has a
+     * step on a side that should be a ramp. The top dips against the weather direction: top = reference + height - (plateau length to the weather side) / L,
+     * the length being a soft run along the weather direction (continuous, so no fault inside a plain).
+     */
+    private void evalPlain(double x, double z, double r, CoastModel.Noise nz, Col out) {
+        double d = relief.exactDistance(x, z, nz);
+        if (d < minDist) return;
+        double ref = relief.broadReference(x, z, d, nz);
+        if (ref < minBase) return;
+        double v = mask2(nz, x, z), q = v - m2Thr;
+        if (q < -m2QFar) return;
+        double half = relief.halfWidth(x, z, nz);
+        if (half < minHalf) return;
+        // the eligibility limits of kind 3 as soft limits: the rise of the plain grows from 0 over a margin, so a limit never makes a wall
+        double fe = smooth01((d - minDist) / fadeCoast) * smooth01((ref - minBase) / fadeBase) * smooth01((half - minHalf) / fadeHalf);
+        double gx = (mask2(nz, x + m2Gs, z) - v) / m2Gs, gz = (mask2(nz, x, z + m2Gs) - v) / m2Gs;
+        double g = Math.hypot(gx, gz);
+        double s = q / Math.max(g, m2GMin);
+        double ix = g > 1e-9 ? gx / g : 0, iz = g > 1e-9 ? gz / g : 0; // inward unit normal of the mask
+        if (s < eFade2) { // edge noise near the outline only; its gradient turns the facing too
+            double fade = s < 0 ? 1 : 1 - smooth01(s / eFade2);
+            double e0 = clamp1(1.4 * n(nz, 22, x, z, eWl2));
+            s += eAmp2 * e0 * fade;
+            double ex = eAmp2 * fade * eDirW * (clamp1(1.4 * n(nz, 22, x + eGs2, z, eWl2)) - e0) / eGs2;
+            double ez = eAmp2 * fade * eDirW * (clamp1(1.4 * n(nz, 22, x, z + eGs2, eWl2)) - e0) / eGs2;
+            double em = Math.hypot(ex, ez);
+            if (em > eDirMax) { // the edge noise may turn the facing, never flip it
+                ex *= eDirMax / em;
+                ez *= eDirMax / em;
+            }
+            ix += ex;
+            iz += ez;
+        }
+        out.s = s;
+        double mag = Math.hypot(ix, iz);
+        double w = 0, ox = 0, oz = 0;
+        if (mag > 0.05) {
+            ox = -ix / mag; // outward
+            oz = -iz / mag;
+            out.nx = ox;
+            out.nz = oz;
+            w = coneWeight(ox, oz);
+        }
+        out.w = w;
+        // top: reference + height - dip along the weather direction + undulation
+        double h = h2Min + 0.5 * (h2Max - h2Min) * (1 + clamp1(h2Gain * n(nz, 23, x, z, h2Wl)));
+        double tl = tl0 + 0.5 * (tl1 - tl0) * (1 + clamp1(1.5 * n(nz, 34, x, z, tlWl)));
+        double run = 1, len = 0;
+        for (int k = 1; k <= tSamples; k++) {
+            double vk = clamp1(m2Gain * n(nz, 20, x + k * tStep * wCos, z + k * tStep * wSin, m2Wl));
+            run *= 1 / (1 + Math.exp(-(vk - m2Thr) / tSoft));
+            len += tStep * run;
+        }
+        // the reference is that of the weather-side edge of the plain (len metres ahead), so the dip is not mixed with the inland rise of the base
+        double sx = x + len * wCos, sz = z + len * wSin;
+        double refS = relief.broadReference(sx, sz, relief.exactDistance(sx, sz, nz), nz);
+        double top = refScale2 * refS + h + topOffset - len / tl + und2Amp * clamp1(1.5 * n(nz, 24, x, z, und2Wl));
+        if (top > maxTop2) top = maxTop2;
+        // the cliff fraction c: 0 on gentle sides, 1 within the cone of the weather direction (a smooth function of the facing, so a cliff fades into a ramp along the edge)
+        double c = smooth01((w - cW0) / (1 - cW0)) * smooth01((g - gDirA) / (gDirB - gDirA)); // no cliff where the mask is nearly flat (no edge, no direction)
+        out.w = c;
+        // near a cliff edge the plain stands at least minCliff above the local base (where a base ridge meets the plateau level the top follows it a little); the fading ends of a cliff stay low
+        double rise = Math.max(top - r, minCliff * c * (s > 0 ? smooth01(1 - s / minZone) : 1)) * fe;
+        if (rise < 1) rise = 0;
+        double gate = smooth01((clamp1(1.5 * n(nz, 25, x, z, sWl)) - gate2Thr) * sSharp + 0.5) * smooth01((c - sC0) / (sC1 - sC0));
+        double ah = rise >= 2 * sMin ? Math.max(sMin, sFrac * rise) * gate : 0;
+        double apron = 0;
+        if (ah > 0 && s > -sLen && s <= 0) apron = ah * smooth01((s + sLen) / sLen);
+        // the two profiles over the same rise: a cliff (steep, ledges, lean) and a ramp (1:6..1:14 at its middle, eased at both ends), mixed by c; the mix never has a
+        // step on a side with c = 0, and the sensitivity to c is bounded (no amplification with the distance from the edge)
+        double sigC = cs0 + 0.5 * (cs1 - cs0) * (1 + clamp1(1.5 * n(nz, 26, x, z, csWl)));
+        double rampSl = rs0 + 0.5 * (rs1 - rs0) * (1 + clamp1(1.5 * n(nz, 35, x, z, rsWl)));
+        double rr = Math.max(rise, 1);
+        double wr = rr * rampSl * (1 + 0.5 * rEase);
+        double lean = leanMax * (0.5 + 0.5 * clamp1(1.5 * n(nz, 28, x, z, leanWl)));
+        double wc = rr / sigC + lean * c;
+        double ur = s <= 0 ? 0 : (s >= wr ? 1 : s / wr);
+        double pr = ur + rEase * (smooth01(ur) - ur);
+        double uc = s <= 0 ? 0 : (s >= wc ? 1 : s / wc);
+        double pc = uc;
+        if (uc > 0 && uc < 1) pc += led2Amp * clamp1(1.4 * n(nz, 27, x, z, led2Wl)) * 4 * uc * (1 - uc);
+        double p = (1 - c) * pr + c * (pc < 0 ? 0 : (pc > 1 ? 1 : pc));
+        p = p < 0 ? 0 : (p > 1 ? 1 : p);
+        double lift = rise > 0 ? p * rise : 0;
+        if (s > 0 && rise > 0 && uc < 1) apron = ah * (1 - uc);
+        double base = r + Math.min(apron, rise > 0 ? rise * 0.9 : apron);
+        double rt = Math.max(base, r + lift);
+        out.face = rise;
+        out.baseTop = base;
+        out.rt = rt;
+        out.tough = rt > base + 0.5;
+    }
+
+    private double coneWeight(double ox, double oz) {
+        double cosA = ox * wCos + oz * wSin;
+        double phi = Math.toDegrees(Math.acos(cosA > 1 ? 1 : (cosA < -1 ? -1 : cosA)));
+        return smooth01((coneZero - phi) / (coneZero - coneFull));
+    }
+
+    /** Kind 2 band index (into {@link #paletteBlock2}) at block height y for a column with band shift {@code shift}. */
+    public int bandAt2(double y, double shift) {
+        int m = Math.floorMod((int) Math.floor(y + shift), cycle2);
+        int lo = 0, hi = bandEnd2.length - 1;
+        while (lo < hi) {
+            int mid = (lo + hi) >>> 1;
+            if (m < bandEnd2[mid]) hi = mid;
+            else lo = mid + 1;
+        }
+        return bandPal2[lo];
+    }
+
+    /** Whether this kind 2 column's cap carries a patch of the lighter rock. */
+    public boolean capPatch2(CoastModel.Noise nz, double x, double z) {
+        return clamp1(1.5 * n(nz, 12, x, z, cap2PatchWl)) > cap2PatchThr;
     }
 
     /** The apron under the foot of the face (s > 0 and u < 1): its height at the outline, tapering to nothing at the top of the face. */

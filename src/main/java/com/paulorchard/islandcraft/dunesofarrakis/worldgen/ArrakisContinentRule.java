@@ -55,6 +55,7 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             case "minecraft:calcite" -> Blocks.CALCITE.defaultBlockState();
             case "minecraft:smooth_sandstone" -> Blocks.SMOOTH_SANDSTONE.defaultBlockState();
             case "minecraft:sandstone" -> Blocks.SANDSTONE.defaultBlockState();
+            case "minecraft:cut_sandstone" -> Blocks.CUT_SANDSTONE.defaultBlockState();
             default -> throw new IllegalArgumentException("unknown block in tough.json: " + name);
         };
     }
@@ -69,9 +70,9 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
         private boolean layers;
         private int cs; // blob cell size
         private double dMin, dMax, dWl, sWl, sThr, rMin, rMax, flat, chance, deepChance;
-        private BlockState[] band, blobStates;
+        private BlockState[] band, band2, blobStates;
         private double[] blobCum;
-        private BlockState capBlock, patchBlock, smooth, deepBlob;
+        private BlockState capBlock, patchBlock, patchBlock2, smooth, deepBlob;
         private final BlockState stone = Blocks.STONE.defaultBlockState(), deepslate = Blocks.DEEPSLATE.defaultBlockState();
         private final SurfaceRules.SurfaceRule gradient; // vanilla vertical gradient, deepslate for y <= 0, stone from y 8, a seeded mix between
         private final BlockState inside, outside;
@@ -83,7 +84,7 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
         private double rockTop, baseTop; // absolute heights (NaN rockTop: not rock)
         private double shift;
         private int capDepth = -1;
-        private boolean capPatch;
+        private boolean capPatch, capPatch2;
         private int wdBottom = Integer.MIN_VALUE; // absolute y: sandstone above it (inclusive of the layer), stone and deeper below; set lazily
         private boolean smoothPatch, smoothKnown;
         private final long[] blobKey = new long[8];
@@ -129,6 +130,9 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             deepChance = tc.d("underground", "deepslate_blob_chance");
             band = new BlockState[tough.paletteBlock.length];
             for (int i = 0; i < band.length; i++) band[i] = state(tough.paletteBlock[i]);
+            band2 = new BlockState[tough.paletteBlock2.length];
+            for (int i = 0; i < band2.length; i++) band2[i] = state(tough.paletteBlock2[i]);
+            patchBlock2 = state(tc.s("kind2_bands", "cap_patch_block"));
             capBlock = state("minecraft:red_sandstone");
             patchBlock = state(tc.s("bands", "cap_patch_block"));
             smooth = state("minecraft:smooth_sandstone");
@@ -265,9 +269,14 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             if (capDepth < 0) {
                 capDepth = tough.capDepth(this, x, z);
                 capPatch = tough.capPatch(this, x, z);
+                capPatch2 = tough.capPatch2(this, x, z);
                 shift = tough.bandShift(this, x, z);
             }
             int topBlock = (int) Math.ceil(rockTop + 0.5) - 1;
+            if (col.kind == 2) { // plains: red sandstone cap with sandstone patches, then sandstone and red sandstone bands
+                if (y > topBlock - capDepth) return capPatch2 && y == topBlock ? patchBlock2 : capBlock;
+                return band2[tough.bandAt2(y, shift)];
+            }
             if (y > topBlock - capDepth) return capPatch && y == topBlock ? patchBlock : capBlock;
             return band[tough.bandAt(y, shift)];
         }

@@ -1,0 +1,5 @@
+seed 1 continent 3 (blue): box 400,-15400 size 19800 x 10900 m at 10 m per cell, tough src/main/resources/data/islandcraft_dunesofarrakis/arrakis/tough.json
+  entry from the non-south sides only: plateaus of at least 50 x 50 m: 39, with a walk-up route: 38 (97.4%); distinct entries (30 m) 3870
+    without a route: (7960, -7150) 13700 m2
+    first entries: (10710, -14960) (10590, -14950) (10620, -14950)
+  entry anywhere (scree included): plateaus of at least 50 x 50 m: 39, with a walk-up route: 39 (100.0%); distinct entries (30 m) 4001

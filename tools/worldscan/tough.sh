@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Tough-rock tool (prompt 09): ToughModel on the mod world models, world-seeded noise, no chunk generation.
-#   tools/worldscan/tough.sh [--tough off|layersoff|override3|path] [--islands off|path] <continents.json> <command> [args]
+#   tools/worldscan/tough.sh [--tough off|layersoff|override3|override2|path] [--islands off|path] <continents.json> <command> [args]
 #   commands: render <seed> <png> <x0> <z0> <sizeM> <mpp> | stats <seed>... [--res N] | steps <seed> <x0> <z0> <size>
 set -e
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"; cd "$ROOT"

@@ -8,8 +8,8 @@ TAG=$1; BASE=${2:-c08}; mkdir -p build/worldscan "${OUT:-docs/relief}"
 CONT=src/main/resources/data/islandcraft_dunesofarrakis/arrakis/continents.json
 grep -v '^#' tools/worldscan/windows.tsv | while IFS=$'\t' read -r name seed cx cz note; do
   [ -z "$name" ] && continue
-  [[ -n "$ONLY" && "$name" != *$ONLY* ]] && continue
-  [[ -n "$SKIP" && "$name" == *$SKIP* ]] && continue
+  [[ -n "$ONLY" && ! "$name" =~ $ONLY ]] && continue
+  [[ -n "$SKIP" && "$name" =~ $SKIP ]] && continue
   x0=$(( (cx - 512) / 16 * 16 )); z0=$(( (cz - 512) / 16 * 16 ))
   [ $(( (cx - 512) % 16 )) -lt 0 ] && x0=$(( x0 - 16 )); [ $(( (cz - 512) % 16 )) -lt 0 ] && z0=$(( z0 - 16 ))
   W="${TAG}_${name}_s${seed}"; R="run-server/$W/dimensions/islandcraft_dunesofarrakis/arrakis/region"

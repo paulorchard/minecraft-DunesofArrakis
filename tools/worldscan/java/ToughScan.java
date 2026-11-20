@@ -23,7 +23,7 @@ public class ToughScan {
 
     static final class Grid {
         int w, h, x0, z0, res;
-        float[] rt, base, r, s, face;
+        float[] rt, base, r, s, face, cw;
         byte[] kind;
         boolean[] rock, tough;
         short[] cont;
@@ -79,6 +79,7 @@ public class ToughScan {
         g.r = new float[n];
         g.s = new float[n];
         g.face = new float[n];
+        g.cw = new float[n];
         g.kind = new byte[n];
         g.rock = new boolean[n];
         g.tough = new boolean[n];
@@ -99,6 +100,7 @@ public class ToughScan {
                 g.base[k] = (float) c.baseTop;
                 g.s[k] = (float) c.s;
                 g.face[k] = (float) c.face;
+                g.cw[k] = (float) c.w;
                 g.kind[k] = (byte) c.kind;
                 g.tough[k] = c.tough;
                 g.cont[k] = (short) o.continent;

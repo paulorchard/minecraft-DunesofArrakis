@@ -14,7 +14,7 @@ if (!dir || !maskFile || !rockFile || !outPrefix || !S) { console.error('usage: 
 const ROCK = 'minecraft:sandstone', DUNE = 'islandcraft_dunesofarrakis:dune_sand', SMOOTH = 'minecraft:smooth_sandstone';
 // prompt 09: LAYERS=off expects the pure sandstone below the surface of prompt 08; otherwise any rock block below the surface (sandstone, tough rock, stone, blobs, deepslate)
 const LAYERS = process.env.LAYERS !== 'off';
-const ALLOWED = new Set([DUNE, ROCK, SMOOTH, 'minecraft:air', 'minecraft:bedrock', 'minecraft:red_sandstone', 'minecraft:terracotta', 'minecraft:orange_terracotta', 'minecraft:yellow_terracotta', 'minecraft:brown_terracotta', 'minecraft:red_terracotta', 'minecraft:white_terracotta', 'minecraft:light_gray_terracotta', 'minecraft:stone', 'minecraft:deepslate', 'minecraft:andesite', 'minecraft:diorite', 'minecraft:granite', 'minecraft:tuff', 'minecraft:calcite']);
+const ALLOWED = new Set([DUNE, ROCK, SMOOTH, 'minecraft:cut_sandstone', 'minecraft:air', 'minecraft:bedrock', 'minecraft:red_sandstone', 'minecraft:terracotta', 'minecraft:orange_terracotta', 'minecraft:yellow_terracotta', 'minecraft:brown_terracotta', 'minecraft:red_terracotta', 'minecraft:white_terracotta', 'minecraft:light_gray_terracotta', 'minecraft:stone', 'minecraft:deepslate', 'minecraft:andesite', 'minecraft:diorite', 'minecraft:granite', 'minecraft:tuff', 'minecraft:calcite']);
 const isRockBlock = n => !!n && n !== DUNE && n !== 'minecraft:air' && n !== 'minecraft:bedrock';
 const OUTLINE_Y = LAYERS ? SAND : SAND - 1; // with layers there is sandstone below the dunes at y 62, so the outline is read at y 63 (dune sand outside, rock inside)
 const bandNames = [{}, {}, {}, {}, {}], wdCount = new Uint8Array(S * S);

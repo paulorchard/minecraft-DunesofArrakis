@@ -1,0 +1,140 @@
+s1 ALL: columns with a step of 3+ on tough rock: 7600; descent within 60 deg of south: 7591 (99.88%), outside: 9 (worst: step 4 at (19588, -11963) kind 2 cliff weight 0.92 direction 152); in the base: 0; on the scree apron: 16
+s1    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:2 30-60:1416 60-90:946 90-120:1397 120-150:3832 150-180:7 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s1    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.4 p50 11.0 p95 30.3 (the steepest 5% are steeper than 1:3.4)
+s1    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.3 p50 6.2 p95 25.5 (p95 of the slope is 1:1.3); neighbour pairs 2559100, step of 2: 0.05%, of 3+: 0
+s1    cliff face height at the foot (913 columns): <8 1.6%, 8-12 26.9%, 12-20 22.8%, 20-30 25.1%, 30-40 21.0%, 40+ 2.5%; south cliff length with a face under 8 m: 1.6%; scree (apron over 1 m at the foot): 57.1%
+s1    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.46 p75 3.83 p90 6.51
+s1    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 169 faces: p50 2.41 p95 17.72; face width 20-80% p50 6.5 m p95 42.5 m
+s2 ALL: columns with a step of 3+ on tough rock: 2696; descent within 60 deg of south: 2346 (87.02%), outside: 350 (worst: step 4 at (12055, -7131) kind 2 cliff weight 0.81 direction 154); in the base: 0; on the scree apron: 13
+s2    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:0 30-60:172 60-90:2 90-120:525 120-150:1647 150-180:344 180-210:0 210-240:0 240-270:0 270-300:6 300-330:0 330-360:0
+s2    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.5 p50 11.4 p95 43.6 (the steepest 5% are steeper than 1:3.5)
+s2    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 5.3 p95 22.0 (p95 of the slope is 1:1.4); neighbour pairs 2046451, step of 2: 0.03%, of 3+: 0
+s2    cliff face height at the foot (106 columns): <8 58.5%, 8-12 16.0%, 12-20 23.6%, 20-30 1.9%, 30-40 0.0%, 40+ 0.0%; south cliff length with a face under 8 m: 58.5%; scree (apron over 1 m at the foot): 38.7%
+s2    apron height at the foot (m): p10 0.00 p25 0.00 p50 0.00 p75 1.68 p90 3.15
+s2    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 12 faces: p50 0.83 p95 1.43; face width 20-80% p50 2.0 m p95 3.5 m
+s3 ALL: columns with a step of 3+ on tough rock: 5444; descent within 60 deg of south: 5403 (99.25%), outside: 41 (worst: step 3 at (5414, -13927) kind 2 cliff weight 0.00 direction 278); in the base: 0; on the scree apron: 79
+s3    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:0 30-60:0 60-90:706 90-120:4323 120-150:374 150-180:40 180-210:0 210-240:0 240-270:0 270-300:1 300-330:0 330-360:0
+s3    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 5.2 p50 11.9 p95 29.3 (the steepest 5% are steeper than 1:5.2)
+s3    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 5.7 p95 23.0 (p95 of the slope is 1:1.4); neighbour pairs 1384865, step of 2: 0.02%, of 3+: 0
+s3    cliff face height at the foot (978 columns): <8 2.8%, 8-12 11.7%, 12-20 35.3%, 20-30 12.3%, 30-40 21.8%, 40+ 16.3%; south cliff length with a face under 8 m: 2.8%; scree (apron over 1 m at the foot): 62.6%
+s3    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.60 p75 2.92 p90 6.35
+s3    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 171 faces: p50 2.06 p95 4.53; face width 20-80% p50 5.0 m p95 11.5 m
+s4 ALL: columns with a step of 3+ on tough rock: 11727; descent within 60 deg of south: 11311 (96.45%), outside: 416 (worst: step 5 at (-4017, -9130) kind 2 cliff weight 0.76 direction 155); in the base: 0; on the scree apron: 159
+s4    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:306 30-60:2792 60-90:2589 90-120:3772 120-150:2158 150-180:110 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s4    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.1 p50 11.8 p95 31.1 (the steepest 5% are steeper than 1:4.1)
+s4    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.5 p50 6.0 p95 25.4 (p95 of the slope is 1:1.5); neighbour pairs 2145551, step of 2: 0.04%, of 3+: 0
+s4    cliff face height at the foot (3718 columns): <8 3.7%, 8-12 6.5%, 12-20 47.4%, 20-30 22.2%, 30-40 19.8%, 40+ 0.5%; south cliff length with a face under 8 m: 3.7%; scree (apron over 1 m at the foot): 58.6%
+s4    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.90 p75 3.17 p90 4.32
+s4    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 646 faces: p50 1.35 p95 9.18; face width 20-80% p50 3.5 m p95 22.0 m
+s5 ALL: columns with a step of 3+ on tough rock: 12375; descent within 60 deg of south: 12283 (99.26%), outside: 92 (worst: step 4 at (15280, -7742) kind 2 cliff weight 0.92 direction 29); in the base: 0; on the scree apron: 223
+s5    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:57 30-60:1346 60-90:4282 90-120:5869 120-150:786 150-180:33 180-210:1 210-240:0 240-270:1 270-300:0 300-330:0 330-360:0
+s5    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.6 p50 11.2 p95 38.7 (the steepest 5% are steeper than 1:3.6)
+s5    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.5 p50 7.5 p95 29.9 (p95 of the slope is 1:1.5); neighbour pairs 1903029, step of 2: 0.03%, of 3+: 0
+s5    cliff face height at the foot (4364 columns): <8 34.9%, 8-12 15.3%, 12-20 24.6%, 20-30 12.8%, 30-40 12.1%, 40+ 0.3%; south cliff length with a face under 8 m: 34.9%; scree (apron over 1 m at the foot): 50.0%
+s5    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.00 p75 2.58 p90 4.66
+s5    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 501 faces: p50 1.29 p95 7.25; face width 20-80% p50 3.5 m p95 18.0 m
+s6 ALL: columns with a step of 3+ on tough rock: 12972; descent within 60 deg of south: 12828 (98.89%), outside: 144 (worst: step 5 at (18667, -13370) kind 2 cliff weight 0.99 direction 27); in the base: 0; on the scree apron: 255
+s6    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:143 30-60:7045 60-90:4597 90-120:939 120-150:247 150-180:0 180-210:0 210-240:0 240-270:0 270-300:0 300-330:1 330-360:0
+s6    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.9 p50 11.3 p95 34.8 (the steepest 5% are steeper than 1:3.9)
+s6    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 6.1 p95 26.1 (p95 of the slope is 1:1.4); neighbour pairs 2842487, step of 2: 0.04%, of 3+: 0
+s6    cliff face height at the foot (3060 columns): <8 8.5%, 8-12 3.1%, 12-20 61.4%, 20-30 11.1%, 30-40 3.8%, 40+ 12.2%; south cliff length with a face under 8 m: 8.5%; scree (apron over 1 m at the foot): 53.5%
+s6    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.63 p75 2.87 p90 3.38
+s6    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 623 faces: p50 1.19 p95 6.48; face width 20-80% p50 3.0 m p95 16.0 m
+s7 ALL: columns with a step of 3+ on tough rock: 8846; descent within 60 deg of south: 8577 (96.96%), outside: 269 (worst: step 4 at (14514, -6300) kind 2 cliff weight 0.83 direction 20); in the base: 0; on the scree apron: 138
+s7    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:128 30-60:3097 60-90:972 90-120:2294 120-150:2214 150-180:141 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s7    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.7 p50 10.0 p95 32.4 (the steepest 5% are steeper than 1:3.7)
+s7    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.5 p50 6.2 p95 24.7 (p95 of the slope is 1:1.5); neighbour pairs 2601221, step of 2: 0.03%, of 3+: 0
+s7    cliff face height at the foot (2251 columns): <8 6.1%, 8-12 5.7%, 12-20 49.9%, 20-30 24.7%, 30-40 13.7%, 40+ 0.0%; south cliff length with a face under 8 m: 6.1%; scree (apron over 1 m at the foot): 73.4%
+s7    apron height at the foot (m): p10 0.00 p25 0.55 p50 2.51 p75 3.24 p90 4.87
+s7    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 384 faces: p50 1.29 p95 17.11; face width 20-80% p50 3.5 m p95 40.5 m
+s8 ALL: columns with a step of 3+ on tough rock: 10331; descent within 60 deg of south: 10221 (98.94%), outside: 110 (worst: step 3 at (-16582, -7295) kind 2 cliff weight 1.00 direction 150); in the base: 0; on the scree apron: 57
+s8    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:66 30-60:2175 60-90:1885 90-120:4181 120-150:1980 150-180:44 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s8    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.3 p50 10.8 p95 28.7 (the steepest 5% are steeper than 1:4.3)
+s8    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 6.5 p95 24.8 (p95 of the slope is 1:1.4); neighbour pairs 2542453, step of 2: 0.03%, of 3+: 0
+s8    cliff face height at the foot (2885 columns): <8 2.7%, 8-12 3.5%, 12-20 54.5%, 20-30 25.0%, 30-40 7.8%, 40+ 6.5%; south cliff length with a face under 8 m: 2.7%; scree (apron over 1 m at the foot): 72.2%
+s8    apron height at the foot (m): p10 0.00 p25 0.09 p50 2.61 p75 3.80 p90 6.61
+s8    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 433 faces: p50 1.29 p95 17.77; face width 20-80% p50 3.5 m p95 42.0 m
+s9 ALL: columns with a step of 3+ on tough rock: 25666; descent within 60 deg of south: 23481 (91.49%), outside: 2185 (worst: step 4 at (-5036, -7273) kind 2 cliff weight 0.68 direction 168); in the base: 0; on the scree apron: 183
+s9    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:1 30-60:1037 60-90:5015 90-120:9860 120-150:7569 150-180:912 180-210:64 210-240:1 240-270:1110 270-300:97 300-330:0 330-360:0
+s9    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 2.8 p50 11.2 p95 34.2 (the steepest 5% are steeper than 1:2.8)
+s9    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.5 p50 6.2 p95 22.4 (p95 of the slope is 1:1.5); neighbour pairs 1430133, step of 2: 0.03%, of 3+: 0
+s9    cliff face height at the foot (5060 columns): <8 7.9%, 8-12 6.4%, 12-20 42.1%, 20-30 31.1%, 30-40 7.1%, 40+ 5.4%; south cliff length with a face under 8 m: 7.9%; scree (apron over 1 m at the foot): 72.0%
+s9    apron height at the foot (m): p10 0.00 p25 0.00 p50 2.74 p75 4.50 p90 5.62
+s9    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 810 faces: p50 1.80 p95 15.34; face width 20-80% p50 5.0 m p95 37.0 m
+s10 ALL: columns with a step of 3+ on tough rock: 9748; descent within 60 deg of south: 9616 (98.65%), outside: 132 (worst: step 4 at (20836, -12503) kind 2 cliff weight 0.97 direction 151); in the base: 0; on the scree apron: 51
+s10    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:65 30-60:1810 60-90:1931 90-120:1936 120-150:3939 150-180:29 180-210:0 210-240:0 240-270:0 270-300:38 300-330:0 330-360:0
+s10    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.1 p50 11.5 p95 29.8 (the steepest 5% are steeper than 1:4.1)
+s10    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 6.3 p95 24.8 (p95 of the slope is 1:1.4); neighbour pairs 2660599, step of 2: 0.05%, of 3+: 0
+s10    cliff face height at the foot (2907 columns): <8 0.9%, 8-12 6.9%, 12-20 69.9%, 20-30 17.1%, 30-40 5.0%, 40+ 0.2%; south cliff length with a face under 8 m: 0.9%; scree (apron over 1 m at the foot): 66.6%
+s10    apron height at the foot (m): p10 0.00 p25 0.00 p50 2.31 p75 3.38 p90 4.99
+s10    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 503 faces: p50 1.12 p95 13.87; face width 20-80% p50 3.0 m p95 33.0 m
+s11 ALL: columns with a step of 3+ on tough rock: 16913; descent within 60 deg of south: 16714 (98.82%), outside: 199 (worst: step 4 at (-23893, -10805) kind 2 cliff weight 1.00 direction 151); in the base: 0; on the scree apron: 87
+s11    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:178 30-60:6437 60-90:4137 90-120:4362 120-150:1778 150-180:21 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s11    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.8 p50 11.7 p95 29.7 (the steepest 5% are steeper than 1:3.8)
+s11    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 5.5 p95 24.8 (p95 of the slope is 1:1.4); neighbour pairs 1530761, step of 2: 0.02%, of 3+: 0
+s11    cliff face height at the foot (4399 columns): <8 3.1%, 8-12 1.7%, 12-20 54.9%, 20-30 18.3%, 30-40 20.6%, 40+ 1.5%; south cliff length with a face under 8 m: 3.1%; scree (apron over 1 m at the foot): 72.8%
+s11    apron height at the foot (m): p10 0.00 p25 0.00 p50 2.64 p75 3.99 p90 6.48
+s11    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 736 faces: p50 1.29 p95 17.86; face width 20-80% p50 3.0 m p95 42.5 m
+s12 ALL: columns with a step of 3+ on tough rock: 9683; descent within 60 deg of south: 9590 (99.04%), outside: 93 (worst: step 3 at (-20895, -12958) kind 2 cliff weight 0.62 direction 158); in the base: 0; on the scree apron: 21
+s12    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:69 30-60:1211 60-90:1481 90-120:4970 120-150:1928 150-180:24 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s12    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.4 p50 11.4 p95 43.5 (the steepest 5% are steeper than 1:4.4)
+s12    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.7 p50 6.9 p95 30.0 (p95 of the slope is 1:1.7); neighbour pairs 2320322, step of 2: 0.02%, of 3+: 0
+s12    cliff face height at the foot (2647 columns): <8 0.9%, 8-12 3.6%, 12-20 76.1%, 20-30 16.0%, 30-40 3.4%, 40+ 0.0%; south cliff length with a face under 8 m: 0.9%; scree (apron over 1 m at the foot): 95.4%
+s12    apron height at the foot (m): p10 1.78 p25 2.34 p50 2.93 p75 3.67 p90 4.68
+s12    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 475 faces: p50 1.22 p95 15.60; face width 20-80% p50 3.0 m p95 37.0 m
+s13 ALL: columns with a step of 3+ on tough rock: 6603; descent within 60 deg of south: 6601 (99.97%), outside: 2 (worst: step 3 at (-20152, -13384) kind 2 cliff weight 1.00 direction 262); in the base: 0; on the scree apron: 134
+s13    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:0 30-60:151 60-90:2530 90-120:2720 120-150:1200 150-180:0 180-210:0 210-240:1 240-270:1 270-300:0 300-330:0 330-360:0
+s13    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.2 p50 10.5 p95 36.7 (the steepest 5% are steeper than 1:4.2)
+s13    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.5 p50 6.6 p95 26.4 (p95 of the slope is 1:1.5); neighbour pairs 2984169, step of 2: 0.03%, of 3+: 0
+s13    cliff face height at the foot (2221 columns): <8 20.5%, 8-12 26.2%, 12-20 27.7%, 20-30 23.0%, 30-40 2.6%, 40+ 0.0%; south cliff length with a face under 8 m: 20.5%; scree (apron over 1 m at the foot): 56.5%
+s13    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.50 p75 3.29 p90 5.03
+s13    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 308 faces: p50 1.12 p95 10.23; face width 20-80% p50 3.0 m p95 25.0 m
+s14 ALL: columns with a step of 3+ on tough rock: 9223; descent within 60 deg of south: 9179 (99.52%), outside: 44 (worst: step 3 at (18366, -14379) kind 2 cliff weight 0.72 direction 150); in the base: 0; on the scree apron: 144
+s14    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:0 30-60:0 60-90:1305 90-120:3566 120-150:4308 150-180:44 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s14    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.3 p50 11.6 p95 38.1 (the steepest 5% are steeper than 1:4.3)
+s14    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.3 p50 5.8 p95 23.7 (p95 of the slope is 1:1.3); neighbour pairs 2638212, step of 2: 0.03%, of 3+: 0
+s14    cliff face height at the foot (1619 columns): <8 2.9%, 8-12 6.2%, 12-20 59.4%, 20-30 10.5%, 30-40 14.4%, 40+ 6.6%; south cliff length with a face under 8 m: 2.9%; scree (apron over 1 m at the foot): 67.6%
+s14    apron height at the foot (m): p10 0.00 p25 0.00 p50 2.22 p75 3.18 p90 6.15
+s14    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 235 faces: p50 0.83 p95 2.88; face width 20-80% p50 2.0 m p95 7.5 m
+s15 ALL: columns with a step of 3+ on tough rock: 20266; descent within 60 deg of south: 20099 (99.18%), outside: 167 (worst: step 4 at (19359, -12412) kind 2 cliff weight 1.00 direction 30); in the base: 0; on the scree apron: 143
+s15    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:81 30-60:2331 60-90:6364 90-120:6788 120-150:4616 150-180:85 180-210:0 210-240:1 240-270:0 270-300:0 300-330:0 330-360:0
+s15    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.0 p50 9.2 p95 23.0 (the steepest 5% are steeper than 1:3.0)
+s15    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.3 p50 5.3 p95 23.8 (p95 of the slope is 1:1.3); neighbour pairs 2196813, step of 2: 0.04%, of 3+: 0
+s15    cliff face height at the foot (4009 columns): <8 15.3%, 8-12 9.5%, 12-20 37.2%, 20-30 25.7%, 30-40 9.2%, 40+ 3.1%; south cliff length with a face under 8 m: 15.3%; scree (apron over 1 m at the foot): 74.5%
+s15    apron height at the foot (m): p10 0.00 p25 0.95 p50 2.58 p75 4.41 p90 7.29
+s15    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 520 faces: p50 1.75 p95 19.07; face width 20-80% p50 4.5 m p95 46.0 m
+s16 ALL: columns with a step of 3+ on tough rock: 13658; descent within 60 deg of south: 13631 (99.80%), outside: 27 (worst: step 3 at (20820, -11036) kind 2 cliff weight 0.61 direction 10); in the base: 0; on the scree apron: 230
+s16    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:27 30-60:1158 60-90:9347 90-120:2449 120-150:677 150-180:0 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s16    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.0 p50 10.3 p95 31.4 (the steepest 5% are steeper than 1:3.0)
+s16    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 5.4 p95 24.0 (p95 of the slope is 1:1.4); neighbour pairs 1572831, step of 2: 0.05%, of 3+: 0
+s16    cliff face height at the foot (2931 columns): <8 9.2%, 8-12 20.3%, 12-20 33.6%, 20-30 12.1%, 30-40 16.4%, 40+ 8.4%; south cliff length with a face under 8 m: 9.2%; scree (apron over 1 m at the foot): 63.8%
+s16    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.90 p75 3.03 p90 4.65
+s16    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 459 faces: p50 1.12 p95 3.96; face width 20-80% p50 3.0 m p95 10.0 m
+s17 ALL: columns with a step of 3+ on tough rock: 18539; descent within 60 deg of south: 18477 (99.67%), outside: 62 (worst: step 3 at (-14076, -6180) kind 2 cliff weight 0.94 direction 29); in the base: 0; on the scree apron: 166
+s17    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:22 30-60:1961 60-90:1924 90-120:8169 120-150:6423 150-180:40 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s17    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.1 p50 9.4 p95 29.5 (the steepest 5% are steeper than 1:3.1)
+s17    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.5 p50 5.5 p95 25.6 (p95 of the slope is 1:1.5); neighbour pairs 1947835, step of 2: 0.01%, of 3+: 0
+s17    cliff face height at the foot (4931 columns): <8 6.0%, 8-12 5.5%, 12-20 59.0%, 20-30 16.9%, 30-40 8.7%, 40+ 3.8%; south cliff length with a face under 8 m: 6.0%; scree (apron over 1 m at the foot): 75.0%
+s17    apron height at the foot (m): p10 0.00 p25 0.99 p50 2.59 p75 3.57 p90 5.81
+s17    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 912 faces: p50 1.12 p95 16.90; face width 20-80% p50 3.0 m p95 40.0 m
+s18 ALL: columns with a step of 3+ on tough rock: 14139; descent within 60 deg of south: 14000 (99.02%), outside: 139 (worst: step 4 at (10954, -10499) kind 2 cliff weight 0.85 direction 30); in the base: 0; on the scree apron: 3
+s18    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:136 30-60:2861 60-90:3223 90-120:5206 120-150:2710 150-180:1 180-210:0 210-240:0 240-270:1 270-300:1 300-330:0 330-360:0
+s18    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.3 p50 11.6 p95 37.0 (the steepest 5% are steeper than 1:4.3)
+s18    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 6.9 p95 27.1 (p95 of the slope is 1:1.4); neighbour pairs 3562493, step of 2: 0.06%, of 3+: 0
+s18    cliff face height at the foot (2678 columns): <8 7.0%, 8-12 5.5%, 12-20 75.8%, 20-30 6.2%, 30-40 5.5%, 40+ 0.0%; south cliff length with a face under 8 m: 7.0%; scree (apron over 1 m at the foot): 53.7%
+s18    apron height at the foot (m): p10 0.00 p25 0.00 p50 1.46 p75 2.64 p90 3.24
+s18    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 473 faces: p50 0.83 p95 9.80; face width 20-80% p50 2.0 m p95 24.5 m
+s19 ALL: columns with a step of 3+ on tough rock: 6575; descent within 60 deg of south: 6571 (99.94%), outside: 4 (worst: step 3 at (15297, -5606) kind 2 cliff weight 0.95 direction 162); in the base: 0; on the scree apron: 100
+s19    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:2 30-60:1120 60-90:2731 90-120:2244 120-150:476 150-180:2 180-210:0 210-240:0 240-270:0 270-300:0 300-330:0 330-360:0
+s19    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 3.6 p50 10.7 p95 34.8 (the steepest 5% are steeper than 1:3.6)
+s19    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.5 p50 6.6 p95 27.8 (p95 of the slope is 1:1.5); neighbour pairs 1516931, step of 2: 0.02%, of 3+: 0
+s19    cliff face height at the foot (1686 columns): <8 18.0%, 8-12 12.9%, 12-20 46.1%, 20-30 18.4%, 30-40 4.6%, 40+ 0.0%; south cliff length with a face under 8 m: 18.0%; scree (apron over 1 m at the foot): 48.3%
+s19    apron height at the foot (m): p10 0.00 p25 0.00 p50 0.75 p75 2.61 p90 5.30
+s19    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 286 faces: p50 1.12 p95 9.40; face width 20-80% p50 3.0 m p95 23.5 m
+s20 ALL: columns with a step of 3+ on tough rock: 10695; descent within 60 deg of south: 10515 (98.32%), outside: 180 (worst: step 4 at (-4297, -4247) kind 2 cliff weight 1.00 direction 151); in the base: 0; on the scree apron: 98
+s20    compass histogram of the descent direction (degrees from +X toward +Z, 90 = south): 0-30:39 30-60:532 60-90:2363 90-120:4968 120-150:2652 150-180:127 180-210:13 210-240:0 240-270:0 270-300:1 300-330:0 330-360:0
+s20    gentle sides, slope of the added rock layer alone (rt - r), 1:N: N p5 4.5 p50 11.5 p95 33.0 (the steepest 5% are steeper than 1:4.5)
+s20    gentle sides, total surface including the base relief under it (kind 2, cliff fraction under 0.02, on the ramp): slope 1:N, N p5 1.4 p50 6.4 p95 23.8 (p95 of the slope is 1:1.4); neighbour pairs 2082292, step of 2: 0.03%, of 3+: 0
+s20    cliff face height at the foot (2414 columns): <8 45.7%, 8-12 8.2%, 12-20 30.5%, 20-30 8.2%, 30-40 6.8%, 40+ 0.7%; south cliff length with a face under 8 m: 45.7%; scree (apron over 1 m at the foot): 34.3%
+s20    apron height at the foot (m): p10 0.00 p25 0.00 p50 0.00 p75 2.29 p90 4.62
+s20    face irregularity (std of the horizontal position of the 20/40/60/80% height lines, m) over 243 faces: p50 1.12 p95 2.61; face width 20-80% p50 3.0 m p95 7.0 m

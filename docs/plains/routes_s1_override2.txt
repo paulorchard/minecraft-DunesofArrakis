@@ -1,0 +1,29 @@
+c1 seed 1 continent 1 (purple): box -24500,-13000 size 25600 x 12000 m at 10 m per cell, tough override2
+c1   entry from the non-south sides only: plateaus of at least 50 x 50 m: 79, with a walk-up route: 67 (84.8%); distinct entries (30 m) 4001
+c1     without a route: (-14830, -12750) 4400 m2; (-6030, -12410) 69700 m2; (-20940, -9880) 32200 m2; (-20470, -7130) 20900 m2; (-11860, -6650) 26700 m2; (-16540, -6480) 3700 m2; (-13900, -6110) 35500 m2; (-4720, -4490) 6000 m2; (-12860, -3860) 6200 m2; (-4130, -2940) 3600 m2; (-3980, -2830) 32200 m2; (-4010, -2620) 14400 m2
+c1     first entries: (-21190, -13000) (-20850, -13000) (-20160, -13000)
+c1   entry anywhere (scree included): plateaus of at least 50 x 50 m: 79, with a walk-up route: 76 (96.2%); distinct entries (30 m) 4001
+c1     without a route: (-20470, -7130) 20900 m2; (-16540, -6480) 3700 m2; (-4720, -4490) 6000 m2
+c2 seed 1 continent 2 (green): box -21800,-15900 size 30600 x 8500 m at 10 m per cell, tough override2
+c2   entry from the non-south sides only: plateaus of at least 50 x 50 m: 61, with a walk-up route: 53 (86.9%); distinct entries (30 m) 3392
+c2     without a route: (-14050, -14760) 14400 m2; (-14470, -14630) 2900 m2; (3630, -13610) 2500 m2; (-1830, -13550) 3400 m2; (-14830, -12750) 4400 m2; (-6030, -12410) 69700 m2; (1470, -11990) 38700 m2; (-20940, -9880) 32200 m2
+c2     first entries: (-10350, -15600) (-10320, -15600) (-10400, -15600)
+c2   entry anywhere (scree included): plateaus of at least 50 x 50 m: 61, with a walk-up route: 61 (100.0%); distinct entries (30 m) 4001
+c3 seed 1 continent 3 (blue): box 400,-15400 size 19800 x 10900 m at 10 m per cell, tough override2
+c3   entry from the non-south sides only: plateaus of at least 50 x 50 m: 67, with a walk-up route: 63 (94.0%); distinct entries (30 m) 4001
+c3     without a route: (3630, -13610) 2500 m2; (18680, -13110) 2600 m2; (1470, -11990) 38700 m2; (7960, -7150) 13700 m2
+c3     first entries: (6310, -15110) (6390, -15110) (6400, -15080)
+c3   entry anywhere (scree included): plateaus of at least 50 x 50 m: 67, with a walk-up route: 66 (98.5%); distinct entries (30 m) 4001
+c3     without a route: (18680, -13110) 2600 m2
+c4 seed 1 continent 4 (brown): box -6000,-6000 size 6400 x 6500 m at 10 m per cell, tough override2
+c4   entry from the non-south sides only: plateaus of at least 50 x 50 m: 12, with a walk-up route: 8 (66.7%); distinct entries (30 m) 229
+c4     without a route: (-4720, -4490) 6000 m2; (-4130, -2940) 3600 m2; (-3980, -2830) 32200 m2; (-4010, -2620) 14400 m2
+c4     first entries: (-5500, -5660) (-5540, -5640) (-5540, -5510)
+c4   entry anywhere (scree included): plateaus of at least 50 x 50 m: 12, with a walk-up route: 11 (91.7%); distinct entries (30 m) 420
+c4     without a route: (-4720, -4490) 6000 m2
+c5 seed 1 continent 5 (red): box 14200,-15300 size 10300 x 13700 m at 10 m per cell, tough override2
+c5   entry from the non-south sides only: plateaus of at least 50 x 50 m: 29, with a walk-up route: 27 (93.1%); distinct entries (30 m) 2037
+c5     without a route: (18680, -13110) 2600 m2; (14280, -9240) 32700 m2
+c5     first entries: (14730, -14990) (14760, -14980) (14680, -14970)
+c5   entry anywhere (scree included): plateaus of at least 50 x 50 m: 29, with a walk-up route: 27 (93.1%); distinct entries (30 m) 2526
+c5     without a route: (18680, -13110) 2600 m2; (14280, -9240) 32700 m2

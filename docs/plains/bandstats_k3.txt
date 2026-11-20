@@ -1,0 +1,5 @@
+Note: tools\worldscan\java\ReliefScan.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+[islandcraft_dunesofarrakis] islands generated for a world: 254 (seed hash e1c7bcb0cead2b4a, mapped rock nodes 89699) in 455 ms, key 26728049
+seed 1 kind 3: 257 face columns sampled; distinct bands per face p10 3 p50 6 p90 10; band thickness (complete bands) p5 1 p50 3 p95 5 max 5; colours [brown_terracotta, light_gray_terracotta, orange_terracotta, red_sandstone, red_terracotta, terracotta, white_terracotta, yellow_terracotta]
+  band level difference over 100 m (blocks): p50 0.64 p95 1.71 max 2.59; faces more than 1 km apart: share of heights with a different band colour p5 0.00 p50 0.71 p95 0.89 (4000 pairs)
