@@ -15,18 +15,32 @@
   "effects": {
     "water_color": "#3f76e4"
   },
-  "features": [],
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    []
+  ],
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
+    "monster": [],
+    "creature": [],
     "ambient": [],
     "axolotls": [],
-    "creature": [],
-    "misc": [],
-    "monster": [],
     "underground_water_creature": [],
+    "water_creature": [],
     "water_ambient": [],
-    "water_creature": []
+    "misc": []
   },
-  "temperature": 2
+  "temperature": 2,
+  "temperature_modifier": "none",
+  "creature_spawn_probability": 0
 }

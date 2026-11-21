@@ -42,21 +42,17 @@
   "vanilla_biome": "desert",
   "box": "T[0.55,1] H[-1,-0.35] C[-0.11,1] E[0.05,0.45] W[-1,-0.9333]", "continentalness": 0.445, "erosion": 0.25, "weirdness": -0.96665, "temperature": 0.775, "humidity": -0.675
  },
- "removed_features": [
-  "minecraft:lake_lava_underground",
-  "minecraft:amethyst_geode",
-  "minecraft:fossil_upper",
-  "minecraft:fossil_lower",
-  "minecraft:monster_room",
-  "minecraft:monster_room_deep",
-  "minecraft:spring_water",
-  "minecraft:spring_lava",
-  "minecraft:spring_lava_frozen",
-  "minecraft:glow_lichen"
- ],
+ "kept_features": ["minecraft:ore_coal_upper","minecraft:ore_coal_lower","minecraft:ore_iron_upper","minecraft:ore_iron_middle","minecraft:ore_iron_small","minecraft:ore_gold","minecraft:ore_gold_lower","minecraft:ore_gold_extra","minecraft:ore_redstone","minecraft:ore_redstone_lower","minecraft:ore_diamond","minecraft:ore_diamond_medium","minecraft:ore_diamond_large","minecraft:ore_diamond_buried","minecraft:ore_lapis","minecraft:ore_lapis_buried","minecraft:ore_copper","minecraft:ore_emerald"],
+ "bands": {
+  "from_below_sand": 8,
+  "wobble_scale": 64,
+  "wobble_step": 0.25
+ },
  "biomes": [
   {
    "biome": "windswept_hills",
+   "palette": [["minecraft:stone",4],["minecraft:sandstone",1],["minecraft:stone",3],["minecraft:sandstone",1],["minecraft:stone",2]],
+   "band_wobble": 2,
    "max_rise": 28,
    "relief_scale": 160,
    "relief_gain": 1.4,
@@ -67,6 +63,8 @@
   },
   {
    "biome": "windswept_gravelly_hills",
+   "palette": [["minecraft:stone",3],["minecraft:sandstone",2],["minecraft:stone",4],["minecraft:sandstone",1]],
+   "band_wobble": 2,
    "max_rise": 28,
    "relief_scale": 120,
    "relief_gain": 1.6,
@@ -77,6 +75,8 @@
   },
   {
    "biome": "ice_spikes",
+   "palette": [["minecraft:sandstone",3],["minecraft:stone",2],["minecraft:sandstone",2],["minecraft:stone",1]],
+   "band_wobble": 2,
    "max_rise": 34,
    "relief_scale": 48,
    "relief_gain": 4,
@@ -87,6 +87,8 @@
   },
   {
    "biome": "jagged_peaks",
+   "palette": [["minecraft:stone",5],["minecraft:sandstone",1],["minecraft:stone",4],["minecraft:sandstone",1]],
+   "band_wobble": 2,
    "max_rise": 42,
    "relief_scale": 110,
    "relief_gain": 3,
@@ -97,6 +99,8 @@
   },
   {
    "biome": "stony_peaks",
+   "palette": [["minecraft:stone",4],["minecraft:sandstone",2],["minecraft:stone",3],["minecraft:red_sandstone",1]],
+   "band_wobble": 2,
    "max_rise": 38,
    "relief_scale": 130,
    "relief_gain": 2.6,
@@ -107,6 +111,8 @@
   },
   {
    "biome": "windswept_savanna",
+   "palette": [["minecraft:sandstone",3],["minecraft:red_sandstone",1],["minecraft:sandstone",2],["minecraft:stone",1]],
+   "band_wobble": 2,
    "max_rise": 24,
    "relief_scale": 180,
    "relief_gain": 1.2,
@@ -117,6 +123,8 @@
   },
   {
    "biome": "badlands",
+   "palette": [["minecraft:red_sandstone",3],["minecraft:sandstone",1],["minecraft:red_sandstone",2],["minecraft:stone",1],["minecraft:red_sandstone",1],["minecraft:sandstone",2]],
+   "band_wobble": 2,
    "max_rise": 24,
    "relief_scale": 150,
    "relief_gain": 1.5,
@@ -127,6 +135,8 @@
   },
   {
    "biome": "eroded_badlands",
+   "palette": [["minecraft:red_sandstone",2],["minecraft:sandstone",2],["minecraft:stone",1],["minecraft:red_sandstone",3],["minecraft:sandstone",1]],
+   "band_wobble": 2,
    "max_rise": 28,
    "relief_scale": 100,
    "relief_gain": 2,

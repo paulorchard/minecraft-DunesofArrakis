@@ -287,6 +287,35 @@ const BIOMES = islands.map(i => i.biome);
 const ownBiome = s => (typeof s === 'string' && s.startsWith('minecraft:') && BIOMES.includes(s.slice(10))) ? NS + ':' + s.slice(10) : s;
 const mapStr = (n, f) => Array.isArray(n) ? n.map(x => mapStr(x, f)) : (n && typeof n === 'object') ? Object.fromEntries(Object.entries(n).map(([k, v]) => [k, mapStr(v, f)])) : f(n);
 const DUNE_SURFACE = { type: 'minecraft:condition', if_true: { type: 'minecraft:biome', biome_is: [NS + ':' + d0.biome] }, then_run: { type: 'minecraft:block', result_state: { Name: NS + ':dune_sand' } } };   // the Dune Sand block (no gravity, harvest-only), not vanilla sand
+// ---- prompt 19: banded rock (data only: y_above ladders, a few shifted copies chosen by a wobble noise), per island biome
+const BAND_STATS = [];
+let BAND_RULE = null;
+if (NOISE) {
+  const BD = ISL.bands, MATS = ['minecraft:stone', 'minecraft:sandstone', 'minecraft:red_sandstone'];
+  const sandLevel = JSON.parse(fs.readFileSync(path.join(OUT, 'worldgen/density_function/arrakis_sand_level.json'), 'utf8'));   // the named constant of the dune data
+  if (typeof sandLevel !== 'number') throw new Error('arrakis_sand_level must be a constant');
+  const y0 = sandLevel - BD.from_below_sand, topY = sandLevel + ISL.height.cap_above_sand + 8;
+  const badP = m => { throw new Error('palette error: ' + m); };
+  write('worldgen/noise/band_wobble.json', { firstOctave: -Math.round(Math.log2(BD.wobble_scale)), amplitudes: [1, 1] });
+  const block = name => ({ type: 'minecraft:block', result_state: { Name: name } });
+  const yAbove = y => ({ type: 'minecraft:y_above', anchor: { absolute: y }, surface_depth_multiplier: 0, add_stone_depth: false });
+  const perBiome = ISL.biomes.map(b => {
+    const p = b.palette, m = b.band_wobble;
+    if (!Array.isArray(p) || p.length === 0) badP(b.biome + ': empty palette');
+    for (const [mat, th] of p) { if (!MATS.includes(mat)) badP(b.biome + ': ' + mat + ' is not stone, sandstone or red_sandstone'); if (!Number.isInteger(th) || th < 1 || th > 5) badP(b.biome + ': thickness ' + th + ' not an integer 1..5'); }
+    if (![0, 1, 2].includes(m)) badP(b.biome + ': band_wobble must be 0, 1 or 2');
+    const cyc = p.map(([mat, th]) => ({ mat, th })), P = cyc.reduce((s, x) => s + x.th, 0);
+    const bands = [];   // [start, material], merged where neighbours share a material
+    for (let y = y0, k = 0; y < topY + 8; k++) { const x = cyc[k % cyc.length]; if (bands.length && bands[bands.length - 1][1] === x.mat) { /* merge */ } else bands.push([y, x.mat]); y += x.th; }
+    const ladder = s => { const arr = bands.slice(1).reverse().map(([y, mat]) => ({ type: 'minecraft:condition', if_true: yAbove(y + s), then_run: block(mat) })); arr.push(block(bands[0][1])); return { type: 'minecraft:sequence', sequence: arr }; };
+    const buckets = []; for (let s = -m; s <= m; s++) buckets.push(s);
+    const sel = buckets.map(s => ({ type: 'minecraft:condition', if_true: { type: 'minecraft:noise_threshold', noise: NS + ':band_wobble', min_threshold: s === -m ? -10 : (s - 0.5) * BD.wobble_step, max_threshold: s === m ? 10 : (s + 0.5) * BD.wobble_step }, then_run: ladder(s) }));
+    const body = m === 0 ? ladder(0) : { type: 'minecraft:sequence', sequence: sel };
+    BAND_STATS.push({ biome: b.biome, cycle: P, bands: bands.length, y_above_per_ladder: bands.length - 1, ladders: buckets.length, y_above_total: (bands.length - 1) * buckets.length, noise_threshold: m === 0 ? 0 : buckets.length, blocks: [...new Set(p.map(x => x[0]))] });
+    return { type: 'minecraft:condition', if_true: { type: 'minecraft:biome', biome_is: [NS + ':' + b.biome] }, then_run: body };
+  });
+  BAND_RULE = { type: 'minecraft:condition', if_true: yAbove(y0), then_run: { type: 'minecraft:sequence', sequence: perBiome } };
+}
 function noiseSettings(mode) {
   const ns = readV('noise_settings/overworld.json'), router = rw(ns.noise_router);
   const vanillaFinal = OC.enabled ? null : gateInterpolated(vanillaNoCaves(router));
@@ -306,8 +335,12 @@ function noiseSettings(mode) {
   }
   ns.noise_router = router;
   ns.aquifers_enabled = false;
+  if (NOISE) {   // prompt 19: bedrock floor, Dune Sand in the dune biome, banded stone / sandstone / red sandstone in the island biomes, vanilla's deepslate gradient; vanilla's biome-specific rules are dropped
+    const v = ns.surface_rule.sequence; ns.surface_rule = { type: 'minecraft:sequence', sequence: [v[0], DUNE_SURFACE, BAND_RULE, v[2]] };
+  } else {
   ns.surface_rule = mapStr(ns.surface_rule, ownBiome);
   ns.surface_rule.sequence.splice(1, 0, DUNE_SURFACE);        // right after the bedrock gradient, ahead of vanilla's rules
+  }
   return ns;
 }
 if (!NOISE) { write('worldgen/noise_settings/arrakis_native.json', noiseSettings('native')); write('worldgen/noise_settings/arrakis_sharp.json', noiseSettings('sharp')); }
@@ -315,12 +348,24 @@ write('worldgen/noise_settings/arrakis.json', noiseSettings(NOISE ? 'noise' : MO
 
 // ---- biome copies of the eight islands: carvers emptied, cave-style features removed
 const removed = new Set(grid.removed_features);
+// prompt 19: desert weather and look in every biome, no spawns, only the kept (ore) features
+const DESERT = readV('biome/desert.json'), FEATURE_REPORT = [];
+function desertBiome(j, keep, name) {
+  const kept = new Set(keep); let nRemoved = 0; const was = j.features.flat().length;
+  j.features = j.features.map(step => step.filter(f => kept.has(f)));
+  nRemoved = was - j.features.flat().length; FEATURE_REPORT.push({ biome: name, kept: j.features.flat(), removed: nRemoved });
+  j.has_precipitation = false; j.temperature = 2.0; j.downfall = 0.0; j.temperature_modifier = 'none';
+  j.attributes = JSON.parse(JSON.stringify(DESERT.attributes)); j.effects = JSON.parse(JSON.stringify(DESERT.effects));
+  j.spawners = Object.fromEntries(['monster', 'creature', 'ambient', 'axolotls', 'underground_water_creature', 'water_creature', 'water_ambient', 'misc'].map(k => [k, []]));
+  j.creature_spawn_probability = 0.0; j.spawn_costs = {};
+}
 for (const b of BIOMES) {
   const j = readV(`biome/${b}.json`);
   j.carvers = [];
-  j.features = j.features.map(step => step.filter(f => !removed.has(f)));
+  if (NOISE) desertBiome(j, ISL.kept_features, b); else j.features = j.features.map(step => step.filter(f => !removed.has(f)));
   write(`worldgen/biome/${b}.json`, j);
 }
+if (NOISE) { const j = readV('biome/desert.json'); j.carvers = []; desertBiome(j, [], d0.biome); write(`worldgen/biome/${d0.biome}.json`, j); }   // the dune biome: no features at all (an ore has no stone to replace in Dune Sand)
 
 // ---- biome source: vanilla's parameter points of these biomes (the Desert boxes now select the dune biome)
 const all = JSON.parse(fs.readFileSync(path.join(ROOT, 'build/rw/params.json'), 'utf8'));
@@ -366,4 +411,5 @@ const geo = { radius_semi_axes: [A, B], mean_radius: RM, transition_end_q: +QEND
   min_clear_gap_between_zones: +minGap.toFixed(1), radial_distance_worst_error_blocks: +worstErr.toFixed(2), worst_error_at: worstAt };
 console.log(JSON.stringify(geo));
 if (FIELD_SUMMARY) console.log(JSON.stringify(FIELD_SUMMARY));
+if (NOISE) { console.log('BANDS ' + JSON.stringify(BAND_STATS)); console.log('FEATURES ' + JSON.stringify(FEATURE_REPORT)); }
 console.log(`wrote ${islands.length} islands (biome mode of the default world type: ${MODE}), ${mine.length} parameter points`);
