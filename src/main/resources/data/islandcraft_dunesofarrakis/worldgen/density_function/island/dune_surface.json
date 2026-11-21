@@ -1,5 +1,25 @@
 {
-  "type": "minecraft:add",
-  "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
-  "argument2": "islandcraft_dunesofarrakis:island/dune_height"
+  "type": "minecraft:max",
+  "argument1": {
+    "type": "minecraft:add",
+    "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
+    "argument2": -5
+  },
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
+    "argument2": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:add",
+          "argument1": "islandcraft_dunesofarrakis:arrakis_dune_height",
+          "argument2": "islandcraft_dunesofarrakis:island/bank"
+        },
+        "argument2": "islandcraft_dunesofarrakis:island/tail"
+      },
+      "argument2": "islandcraft_dunesofarrakis:island/scour"
+    }
+  }
 }

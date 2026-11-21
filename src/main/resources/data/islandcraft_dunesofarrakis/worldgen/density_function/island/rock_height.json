@@ -3,14 +3,11 @@
   "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
   "argument2": {
     "type": "minecraft:min",
-    "argument1": 100,
+    "argument1": 60,
     "argument2": {
       "type": "minecraft:mul",
       "argument1": "islandcraft_dunesofarrakis:island/t",
-      "argument2": {
-        "type": "minecraft:interpolated",
-        "argument": "islandcraft_dunesofarrakis:island/rise_raw"
-      }
+      "argument2": "islandcraft_dunesofarrakis:island/rise"
     }
   }
 }

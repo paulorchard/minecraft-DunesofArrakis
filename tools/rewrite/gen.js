@@ -151,58 +151,92 @@ if (OC.enabled && !NOISE) {
   write(`${DF}island/rock_mask.json`, rc(W, 1e-9, 2.0, rc(add(ROCK, mul(-1.0, SURF)), 0.5, 1e6, 1.0, 0.0), 0.0));
 }
 
-// ---- noise-shaped islands (prompt 17): one land field F, no circles
+// ---- noise-shaped islands (prompt 17, rock and sand reworked in prompt 18): one land field F, no circles
 const ROUTER_NOISE = { continentalness: 'continents', erosion: 'erosion', weirdness: 'ridges', temperature: 'temperature', humidity: 'vegetation' };
 const CLIM_NOISE = ['continentalness', 'erosion', 'weirdness', 'temperature', 'humidity'];
 let FIELD_SUMMARY = null;
 if (NOISE) {
-  const F = ISL.field, H = ISL.height, FD = ISL.dune_fade, BN = ISL.biome_noise, AR = F.archipelago, SP = F.spawn;
+  const F = ISL.field, H = ISL.height, BN = ISL.biome_noise, AR = F.archipelago, SP = F.spawn, WD = ISL.wind, WS = ISL.wind_sand;
   const bad = m => { throw new Error('islands.json: ' + m); };
   if (ISL.biomes.length !== 8) bad('eight biomes expected');
   if (!(BN.cuts.length === 7 && BN.cuts.every((c, k) => k === 0 || c > BN.cuts[k - 1]))) bad('biome_noise.cuts needs 7 strictly increasing values');
-  if (!(H.ramp > 0 && FD.pad > 0 && AR.ridge_width > 0 && AR.band_half_width > 0 && SP.radius > 0)) bad('ramp, dune_fade.pad, ridge_width, band_half_width and spawn.radius must be positive');
+  if (!(H.ramp > 0 && H.big_ramp > 0 && AR.ridge_width > 0 && AR.band_half_width > 0 && SP.radius > 0 && WS.edge_ramp > 0 && WS.scour_pad > 0)) bad('ramp, big_ramp, ridge_width, band_half_width, spawn.radius, wind_sand.edge_ramp and scour_pad must be positive');
   for (const k of ['scale_large', 'scale_mid', 'scale_fine', 'warp_scale']) if (!(F[k] >= 16 && F[k] <= 65536)) bad(k + ' must be 16..65536 blocks');
-  for (const b of ISL.biomes) { if (b.max_rise > H.cap_above_sand || b.max_rise < H.min_rise) bad(`${b.biome}: max_rise must be between min_rise and cap_above_sand`); if (!(b.vanilla_high >= b.vanilla_low)) bad(b.biome + ': vanilla_high < vanilla_low'); }
+  for (const k of ['stretch_large', 'stretch_mid', 'stretch_fine']) if (!(WD[k] >= 0.5 && WD[k] <= 6)) bad('wind.' + k + ' must be 0.5..6');
+  for (const b of ISL.biomes) {
+    if (b.max_rise < H.min_rise) bad(`${b.biome}: max_rise must be at least min_rise`);
+    if (!(b.relief_scale >= 16 && b.relief_gain > 0)) bad(`${b.biome}: relief_scale >= 16 and relief_gain > 0 needed`);
+  }
+  if (H.min_rise < 0 || H.cap_above_sand < H.min_rise || H.big_bonus < 0) bad('min_rise, cap_above_sand, big_bonus out of range');
   if (!(F.threshold > -1 && F.threshold < 2) || F.a < 0 || F.b < 0 || F.c < 0) bad('threshold / a / b / c out of range');
-  if (SP.strength < F.threshold + 1.0) console.warn("WARNING spawn.strength is small: the origin may fall on sand where the noise is low (guaranteed land needs about threshold + 1.0 or more)");
+  if (SP.strength < F.threshold + 1.0) console.warn('WARNING spawn.strength is small: the origin may fall on sand where the noise is low (guaranteed land needs about threshold + 1.0 or more)');
   const fo = size => -Math.round(Math.log2(size));
   const nf = (name, size, amps) => write(`worldgen/noise/${name}.json`, { firstOctave: fo(size), amplitudes: amps });
   nf('islands_large', F.scale_large, F.amplitudes); nf('islands_mid', F.scale_mid, F.amplitudes); nf('islands_fine', F.scale_fine, F.amplitudes);
   nf('islands_warp_x', F.warp_scale, [1, 0.5]); nf('islands_warp_z', F.warp_scale, [1, 0.5]); nf('islands_ridge', AR.scale, F.amplitudes); nf('islands_biome', BN.scale, BN.amplitudes);
+  for (const b of ISL.biomes) nf(`islands_relief_${b.biome}`, b.relief_scale, [1, 0.5]);
   const plain = name => ({ type: 'minecraft:noise', noise: `${NS}:${name}`, xz_scale: 1.0, y_scale: 0.0 });
   const IS = n => `${NS}:island/${n}`;
+  const clampN = (x, lo, hi) => ({ type: 'minecraft:clamp', input: x, min: lo, max: hi });
+  const smoothFn = x => mul(sq(x), add(3.0, mul(-2.0, x)));
   write(`${DF}island/warp_x.json`, c2d(mul(F.warp_amplitude, plain('islands_warp_x'))));
   write(`${DF}island/warp_z.json`, c2d(mul(F.warp_amplitude, plain('islands_warp_z'))));
-  const warped = name => c2d({ type: 'minecraft:shifted_noise', noise: `${NS}:${name}`, xz_scale: 1.0, y_scale: 0.0, shift_x: IS('warp_x'), shift_y: 0.0, shift_z: IS('warp_z') });
-  for (const [n, nm] of [['n_large', 'islands_large'], ['n_mid', 'islands_mid'], ['n_fine', 'islands_fine'], ['n_ridge', 'islands_ridge'], ['n_biome', 'islands_biome']]) write(`${DF}island/${n}.json`, warped(nm));
-  const clampN = (x, lo, hi) => ({ type: 'minecraft:clamp', input: x, min: lo, max: hi });
-  write(`${DF}island/ridge.json`, clampN(add(1.0, mul(-1 / AR.ridge_width, { type: 'minecraft:abs', argument: IS('n_ridge') })), 0.0, 1.0));
-  write(`${DF}island/band.json`, clampN(add(1.0, mul(-1 / (AR.band_half_width * AR.band_half_width), sq(add(IS('n_large'), -AR.band_centre)))), 0.0, 1.0));
-  write(`${DF}island/spawn_bump.json`, mul(SP.strength, sq(clampN(add(1.0, mul(-1 / (SP.radius * SP.radius), add(sq(BX), sq(BZ)))), 0.0, 1.0))));
-  write(`${DF}island/f.json`, c2d(add(add(add(mul(F.a, IS('n_large')), mul(F.b, IS('n_mid'))), mul(F.c, IS('n_fine'))), add(mul(AR.d, mul(IS('ridge'), IS('band'))), IS('spawn_bump')))));
-  write(`${DF}island/w.json`, rc(IS('f'), F.threshold, 99.0, 1.0, 0.0));   // land (F above the threshold); the lazy gate for everything below
-  const smoothFn = x => mul(sq(x), add(3.0, mul(-2.0, x)));
-  // dune mountains and hills fade over the islands; the sawtooth dunes and the sand level are untouched
-  const fs0 = clampN(mul(1 / (2 * FD.pad), add(IS('f'), -(F.threshold - FD.pad))), 0.0, 1.0);
-  write(`${DF}island/dune_fade.json`, c2d(add(1.0, mul(-1.0, smoothFn(fs0)))));
-  const dh = JSON.parse(fs.readFileSync(path.join(OUT, 'worldgen/density_function/arrakis_dune_height.json'), 'utf8')).argument;
-  if (!(dh.type === 'minecraft:add' && dh.argument1.type === 'minecraft:add')) throw new Error('arrakis_dune_height has changed shape');
-  write(`${DF}island/dune_height.json`, c2d(add(add(dh.argument1.argument1, mul(IS('dune_fade'), dh.argument1.argument2)), mul(IS('dune_fade'), dh.argument2))));
-  write(`${DF}island/dune_surface.json`, add(`${NS}:arrakis_sand_level`, IS('dune_height')));
+  // wind-aligned coordinates: u along the wind (divided by the stretch, so features are longer downwind), v across it; off = shift of the sample along the wind in blocks
+  const wr = WD.toward_degrees * Math.PI / 180, cw = Math.cos(wr), sw = Math.sin(wr);
+  const lin = (cx, cz) => ({ type: `${NS}:arrakis_linear`, x_coefficient: r9(cx), z_coefficient: r9(cz) });
+  const wnoise = (name, stretch, off) => c2d({ type: 'minecraft:shifted_noise', noise: `${NS}:${name}`, xz_scale: 0.0, y_scale: 0.0,
+    shift_x: add(lin(cw / stretch, sw / stretch), off ? add(IS('warp_x'), r9(off / stretch)) : IS('warp_x')), shift_y: 0.0, shift_z: add(lin(-sw, cw), IS('warp_z')) });
+  // the land field F at the point shifted by off blocks along the wind (suffix names the copy); each node is cached once per column
+  function emitField(sfx, off) {
+    for (const [n, nm, st] of [['n_large', 'islands_large', WD.stretch_large], ['n_mid', 'islands_mid', WD.stretch_mid], ['n_fine', 'islands_fine', WD.stretch_fine], ['n_ridge', 'islands_ridge', WD.stretch_mid]]) write(`${DF}island/${n}${sfx}.json`, wnoise(nm, st, off));
+    write(`${DF}island/ridge${sfx}.json`, clampN(add(1.0, mul(-1 / AR.ridge_width, { type: 'minecraft:abs', argument: IS('n_ridge' + sfx) })), 0.0, 1.0));
+    write(`${DF}island/band${sfx}.json`, clampN(add(1.0, mul(-1 / (AR.band_half_width * AR.band_half_width), sq(add(IS('n_large' + sfx), -AR.band_centre)))), 0.0, 1.0));
+    const sdx = add(BX, r9(off * cw)), sdz = add(BZ, r9(off * sw));
+    write(`${DF}island/spawn_bump${sfx}.json`, mul(SP.strength, sq(clampN(add(1.0, mul(-1 / (SP.radius * SP.radius), add(sq(sdx), sq(sdz)))), 0.0, 1.0))));
+    write(`${DF}island/f${sfx}.json`, c2d(add(add(add(mul(F.a, IS('n_large' + sfx)), mul(F.b, IS('n_mid' + sfx))), mul(F.c, IS('n_fine' + sfx))), add(mul(AR.d, mul(IS('ridge' + sfx), IS('band' + sfx))), IS('spawn_bump' + sfx)))));
+  }
+  emitField('', 0);
+  write(`${DF}island/n_biome.json`, wnoise('islands_biome', 1.0, 0));
+  write(`${DF}island/w.json`, rc(IS('f'), F.threshold, 99.0, 1.0, 0.0));   // land: the lazy gate for the rock, the vein toggle and the biome
+  // sand wraps the rock: windward bank (rock lies downwind of the point), lee tail (rock lies upwind), scour moat at the foot where neither applies
+  if (WS.bank_height > 0 || WS.tail_height > 0 || WS.scour_depth > 0) {
+    if (WS.bank_height > 0) emitField('_bank', WS.bank_distance);
+    if (WS.tail_height > 0) emitField('_tail', -WS.tail_distance);
+  }
+  const inside = (sfx, ramp) => smoothFn(clampN(mul(1 / ramp, add(IS('f' + sfx), -F.threshold)), 0.0, 1.0));
+  const terms = [`${NS}:arrakis_dune_height`];
+  if (WS.bank_height > 0) { write(`${DF}island/bank.json`, c2d(mul(WS.bank_height, inside('_bank', WS.edge_ramp)))); terms.push(IS('bank')); }
+  if (WS.tail_height > 0) { write(`${DF}island/tail.json`, c2d(mul(WS.tail_height, inside('_tail', WS.edge_ramp)))); terms.push(IS('tail')); }
+  if (WS.scour_depth > 0) {
+    const s = clampN(mul(1 / (1.3 * WS.scour_pad), add(IS('f'), -(F.threshold - WS.scour_pad))), 0.0, 1.0);
+    let sc = mul(WS.scour_depth, mul(4.0, mul(s, add(1.0, mul(-1.0, s)))));
+    if (WS.bank_height > 0) sc = mul(sc, add(1.0, mul(-1.0, clampN(mul(1 / 0.03, add(IS('f_bank'), -F.threshold)), 0.0, 1.0))));
+    if (WS.tail_height > 0) sc = mul(sc, add(1.0, mul(-1.0, clampN(mul(1 / 0.03, add(IS('f_tail'), -F.threshold)), 0.0, 1.0))));
+    write(`${DF}island/scour.json`, c2d(mul(-1.0, sc))); terms.push(IS('scour'));
+  }
+  const sum = terms.reduce((e, t) => e === null ? t : add(e, t), null);
+  // the sand surface: sand level + dunes - dips + bank + tail - scour, never below sand level - dip depth
+  write(`${DF}island/dune_surface.json`, { type: 'minecraft:max', argument1: add(`${NS}:arrakis_sand_level`, -ISL.dune_floor_below_sand), argument2: add(`${NS}:arrakis_sand_level`, sum) });
+  // rock height: a smoothstep of the land field above the threshold times the rise (2D, cached once per column)
   write(`${DF}island/t.json`, c2d(smoothFn(clampN(mul(1 / H.ramp, add(IS('f'), -F.threshold)), 0.0, 1.0))));
-  // eight bands of the biome noise, nested range_choice (3 comparisons): the constant of band k
+  write(`${DF}island/t2.json`, c2d(clampN(mul(1 / H.big_ramp, add(IS('f'), -(F.threshold + H.ramp))), 0.0, 1.0)));
   const bandTree = vals => { const go = (lo, hi) => lo === hi ? vals[lo] : (m => rc(IS('n_biome'), BN.cuts[m - 1], 1e3, go(m, hi), go(lo, m - 1)))(Math.floor((lo + hi + 1) / 2)); return go(0, 7); };
-  const eff = i => { const mid = (i.vanilla_low + i.vanilla_high) / 2, span = Math.max(i.vanilla_high - i.vanilla_low, H.min_span); return { low: mid - span / 2, span }; };
-  write(`${DF}island/vanilla_top.json`, { type: 'minecraft:find_top_surface', density: `${NS}:overworld/sloped_cheese`, upper_bound: H.search_top, lower_bound: H.search_bottom, cell_height: H.cell_height });
-  write(`${DF}island/relief_n.json`, clampN(mul(add(IS('vanilla_top'), mul(-1.0, bandTree(ISL.biomes.map(i => r9(eff(i).low))))), bandTree(ISL.biomes.map(i => r9(1 / eff(i).span)))), 0.0, 1.0));
-  write(`${DF}island/rise_raw.json`, flat(rc(IS('f'), F.threshold - 0.1, 99.0, add(H.min_rise, mul(add(bandTree(ISL.biomes.map(i => i.max_rise)), -H.min_rise), IS('relief_n'))), 0.0)));
-  write(`${DF}island/rock_height.json`, add(`${NS}:arrakis_sand_level`, { type: 'minecraft:min', argument1: H.cap_above_sand, argument2: mul(IS('t'), { type: 'minecraft:interpolated', argument: IS('rise_raw') }) }));
+  // relief shape n in 0..1 per biome from its own 2D noise (smooth, ridged, sharpened, terraced)
+  const terrace = m => { const pts = [], P = 0.18; for (let i = 0; i < m; i++) { const v = m === 1 ? 0 : i / (m - 1); pts.push({ location: r9((i + P) / m), value: r9(v), derivative: 0.0 }); pts.push({ location: r9((i + 1 - P) / m), value: r9(v), derivative: 0.0 }); } pts.unshift({ location: 0.0, value: 0.0, derivative: 0.0 }); pts.push({ location: 1.0, value: 1.0, derivative: 0.0 }); return pts; };
+  for (const b of ISL.biomes) {
+    let n = b.relief_ridged ? clampN(add(1.0, mul(-b.relief_gain, { type: 'minecraft:abs', argument: plain('islands_relief_' + b.biome) })), 0.0, 1.0) : clampN(add(0.5, mul(b.relief_gain, plain('islands_relief_' + b.biome))), 0.0, 1.0);
+    for (let k = 1; k < (b.relief_power || 1); k++) n = sq(n);
+    if (b.relief_terrace > 0) n = { type: 'minecraft:spline', spline: { coordinate: n, points: terrace(b.relief_terrace) } };
+    write(`${DF}island/relief_${b.biome}.json`, c2d(n));
+  }
+  write(`${DF}island/rise.json`, c2d(rc(IS('f'), F.threshold, 99.0, add(add(H.min_rise, mul(add(bandTree(ISL.biomes.map(i => i.max_rise)), -H.min_rise), bandTree(ISL.biomes.map(i => IS('relief_' + i.biome))))), mul(H.big_bonus, IS('t2'))), 0.0)));
+  write(`${DF}island/rock_height.json`, add(`${NS}:arrakis_sand_level`, { type: 'minecraft:min', argument1: H.cap_above_sand, argument2: mul(IS('t'), IS('rise')) }));
   write(`${DF}island/surface.json`, { type: 'minecraft:max', argument1: IS('dune_surface'), argument2: IS('rock_height') });
   write(`${DF}island/final_density.json`, add(0.5, add(IS('surface'), mul(-1.0, 'minecraft:y'))));
   write(`${DF}island/rock_mask.json`, rc(IS('f'), F.threshold, 99.0, rc(add(IS('rock_height'), mul(-1.0, IS('dune_surface'))), 0.5, 1e6, 1.0, 0.0), 0.0));
   for (const key of ['continentalness', 'erosion', 'weirdness']) write(`${DF}overworld/${ROUTER_NOISE[key]}.json`, flat(bandTree(ISL.biomes.map(i => i[key]))));
   for (const key of CLIM_NOISE) write(`${DF}biome_noise/${ROUTER_NOISE[key]}.json`, flat(add(grid.desert[key], mul(IS('rock_mask'), add(bandTree(ISL.biomes.map(i => i[key])), -grid.desert[key])))));
-  FIELD_SUMMARY = { first_octaves: { large: fo(F.scale_large), mid: fo(F.scale_mid), fine: fo(F.scale_fine), warp: fo(F.warp_scale), ridge: fo(AR.scale), biome: fo(BN.scale) }, biome_cuts: BN.cuts, threshold: F.threshold };
+  FIELD_SUMMARY = { first_octaves: { large: fo(F.scale_large), mid: fo(F.scale_mid), fine: fo(F.scale_fine), warp: fo(F.warp_scale), ridge: fo(AR.scale), biome: fo(BN.scale) }, biome_cuts: BN.cuts, threshold: F.threshold, wind_degrees: WD.toward_degrees };
 }
 
 // ---- climate functions
@@ -252,7 +286,7 @@ function gateInterpolated(n) {
 const BIOMES = islands.map(i => i.biome);
 const ownBiome = s => (typeof s === 'string' && s.startsWith('minecraft:') && BIOMES.includes(s.slice(10))) ? NS + ':' + s.slice(10) : s;
 const mapStr = (n, f) => Array.isArray(n) ? n.map(x => mapStr(x, f)) : (n && typeof n === 'object') ? Object.fromEntries(Object.entries(n).map(([k, v]) => [k, mapStr(v, f)])) : f(n);
-const DUNE_SURFACE = { type: 'minecraft:condition', if_true: { type: 'minecraft:biome', biome_is: [NS + ':' + d0.biome] }, then_run: { type: 'minecraft:block', result_state: { Name: 'minecraft:sand' } } };
+const DUNE_SURFACE = { type: 'minecraft:condition', if_true: { type: 'minecraft:biome', biome_is: [NS + ':' + d0.biome] }, then_run: { type: 'minecraft:block', result_state: { Name: NS + ':dune_sand' } } };   // the Dune Sand block (no gravity, harvest-only), not vanilla sand
 function noiseSettings(mode) {
   const ns = readV('noise_settings/overworld.json'), router = rw(ns.noise_router);
   const vanillaFinal = OC.enabled ? null : gateInterpolated(vanillaNoCaves(router));
@@ -266,6 +300,10 @@ function noiseSettings(mode) {
   else router.preliminary_surface_level = add(mul(W, rc(W, 1e-9, 2.0, router.preliminary_surface_level, 0.0)), mul(add(1.0, mul(-1.0, W)), `${NS}:arrakis_surface_height`));
   // no ore veins in the dunes (they would replace the sand): the vein toggle is 0 wherever the mask is 0
   router.vein_toggle = rc(W, 1e-9, 2.0, router.vein_toggle, 0.0);
+  if (NOISE) {   // nothing 3D reaches the final density or the cheap router entries: veins, fluids, barrier and the initial density are constants
+    for (const k of ['barrier', 'fluid_level_floodedness', 'fluid_level_spread', 'lava', 'vein_toggle', 'vein_ridged', 'vein_gap', 'initial_density_without_jaggedness']) router[k] = 0.0;
+    ns.ore_veins_enabled = false;
+  }
   ns.noise_router = router;
   ns.aquifers_enabled = false;
   ns.surface_rule = mapStr(ns.surface_rule, ownBiome);

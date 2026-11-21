@@ -1,0 +1,99 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:spline",
+    "spline": {
+      "coordinate": {
+        "type": "minecraft:clamp",
+        "input": {
+          "type": "minecraft:add",
+          "argument1": 0.5,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": 2,
+            "argument2": {
+              "type": "minecraft:noise",
+              "noise": "islandcraft_dunesofarrakis:islands_relief_eroded_badlands",
+              "xz_scale": 1,
+              "y_scale": 0
+            }
+          }
+        },
+        "min": 0,
+        "max": 1
+      },
+      "points": [
+        {
+          "location": 0,
+          "value": 0,
+          "derivative": 0
+        },
+        {
+          "location": 0.03,
+          "value": 0,
+          "derivative": 0
+        },
+        {
+          "location": 0.136666667,
+          "value": 0,
+          "derivative": 0
+        },
+        {
+          "location": 0.196666667,
+          "value": 0.2,
+          "derivative": 0
+        },
+        {
+          "location": 0.303333333,
+          "value": 0.2,
+          "derivative": 0
+        },
+        {
+          "location": 0.363333333,
+          "value": 0.4,
+          "derivative": 0
+        },
+        {
+          "location": 0.47,
+          "value": 0.4,
+          "derivative": 0
+        },
+        {
+          "location": 0.53,
+          "value": 0.6,
+          "derivative": 0
+        },
+        {
+          "location": 0.636666667,
+          "value": 0.6,
+          "derivative": 0
+        },
+        {
+          "location": 0.696666667,
+          "value": 0.8,
+          "derivative": 0
+        },
+        {
+          "location": 0.803333333,
+          "value": 0.8,
+          "derivative": 0
+        },
+        {
+          "location": 0.863333333,
+          "value": 1,
+          "derivative": 0
+        },
+        {
+          "location": 0.97,
+          "value": 1,
+          "derivative": 0
+        },
+        {
+          "location": 1,
+          "value": 1,
+          "derivative": 0
+        }
+      ]
+    }
+  }
+}

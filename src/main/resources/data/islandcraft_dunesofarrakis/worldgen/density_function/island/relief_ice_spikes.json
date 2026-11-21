@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:square",
+    "argument": {
+      "type": "minecraft:clamp",
+      "input": {
+        "type": "minecraft:add",
+        "argument1": 1,
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": -4,
+          "argument2": {
+            "type": "minecraft:abs",
+            "argument": {
+              "type": "minecraft:noise",
+              "noise": "islandcraft_dunesofarrakis:islands_relief_ice_spikes",
+              "xz_scale": 1,
+              "y_scale": 0
+            }
+          }
+        }
+      },
+      "min": 0,
+      "max": 1
+    }
+  }
+}

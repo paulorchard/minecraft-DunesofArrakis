@@ -26,16 +26,11 @@
   }
  },
  "height": {
-  "ramp": 0.35,
-  "min_rise": 30,
-  "cap_above_sand": 100,
-  "search_top": 320,
-  "search_bottom": -64,
-  "cell_height": 1,
-  "min_span": 16
- },
- "dune_fade": {
-  "pad": 0.12
+  "ramp": 0.15,
+  "min_rise": 18,
+  "cap_above_sand": 60,
+  "big_bonus": 20,
+  "big_ramp": 0.3
  },
  "biome_noise": {
   "scale": 1000,
@@ -61,60 +56,102 @@
  ],
  "biomes": [
   {
-   "max_rise": 45,
-   "vanilla_low": 78,
-   "vanilla_high": 97,
    "biome": "windswept_hills",
+   "max_rise": 28,
+   "relief_scale": 160,
+   "relief_gain": 1.4,
+   "relief_ridged": false,
+   "relief_power": 1,
+   "relief_terrace": 0,
    "box": "T[-0.15,0.2] H[-0.1,0.1] C[0.03,1] E[0.45,0.55] W[-0.7666,-0.5666]", "continentalness": 0.515, "erosion": 0.5, "weirdness": -0.6666, "temperature": 0.025, "humidity": 0
   },
   {
-   "max_rise": 45,
-   "vanilla_low": 82,
-   "vanilla_high": 128,
    "biome": "windswept_gravelly_hills",
+   "max_rise": 28,
+   "relief_scale": 120,
+   "relief_gain": 1.6,
+   "relief_ridged": false,
+   "relief_power": 1,
+   "relief_terrace": 0,
    "box": "T[-0.45,-0.15] H[-0.35,-0.1] C[0.03,1] E[0.45,0.55] W[-0.7666,-0.5666]", "continentalness": 0.515, "erosion": 0.5, "weirdness": -0.6666, "temperature": -0.3, "humidity": -0.225
   },
   {
-   "max_rise": 55,
-   "vanilla_low": 63,
-   "vanilla_high": 73,
    "biome": "ice_spikes",
+   "max_rise": 34,
+   "relief_scale": 48,
+   "relief_gain": 4,
+   "relief_ridged": true,
+   "relief_power": 2,
+   "relief_terrace": 0,
    "box": "T[-1,-0.45] H[-1,-0.35] C[-0.11,1] E[0.05,0.45] W[0.05,0.2666]", "continentalness": 0.445, "erosion": 0.25, "weirdness": 0.1583, "temperature": -0.725, "humidity": -0.675
   },
   {
-   "max_rise": 80,
-   "vanilla_low": 206,
-   "vanilla_high": 254,
    "biome": "jagged_peaks",
+   "max_rise": 42,
+   "relief_scale": 110,
+   "relief_gain": 3,
+   "relief_ridged": true,
+   "relief_power": 1,
+   "relief_terrace": 0,
    "box": "T[-1,-0.45] H[-1,-0.35] C[-0.19,1] E[-1,-0.7799] W[-0.7666,-0.5666]", "continentalness": 0.405, "erosion": -0.88995, "weirdness": -0.6666, "temperature": -0.725, "humidity": -0.675
   },
   {
-   "max_rise": 70,
-   "vanilla_low": 207,
-   "vanilla_high": 254,
    "biome": "stony_peaks",
+   "max_rise": 38,
+   "relief_scale": 130,
+   "relief_gain": 2.6,
+   "relief_ridged": true,
+   "relief_power": 1,
+   "relief_terrace": 0,
    "box": "T[0.2,0.55] H[-0.1,0.1] C[-0.19,1] E[-1,-0.7799] W[-0.7666,-0.5666]", "continentalness": 0.405, "erosion": -0.88995, "weirdness": -0.6666, "temperature": 0.375, "humidity": 0
   },
   {
-   "max_rise": 40,
-   "vanilla_low": 66,
-   "vanilla_high": 137,
    "biome": "windswept_savanna",
+   "max_rise": 24,
+   "relief_scale": 180,
+   "relief_gain": 1.2,
+   "relief_ridged": false,
+   "relief_power": 1,
+   "relief_terrace": 0,
    "box": "T[0.2,0.55] H[-0.1,0.1] C[-0.19,0.03] E[0.45,0.55] W[0.5666,0.7666]", "continentalness": -0.08, "erosion": 0.5, "weirdness": 0.6666, "temperature": 0.375, "humidity": 0
   },
   {
-   "max_rise": 40,
-   "vanilla_low": 117,
-   "vanilla_high": 120,
    "biome": "badlands",
+   "max_rise": 24,
+   "relief_scale": 150,
+   "relief_gain": 1.5,
+   "relief_ridged": false,
+   "relief_power": 1,
+   "relief_terrace": 5,
    "box": "T[0.55,1] H[-0.35,-0.1] C[0.3,1] E[-0.375,-0.2225] W[-1,-0.9333]", "continentalness": 0.65, "erosion": -0.29875, "weirdness": -0.96665, "temperature": 0.775, "humidity": -0.225
   },
   {
-   "max_rise": 45,
-   "vanilla_low": 69,
-   "vanilla_high": 72,
    "biome": "eroded_badlands",
+   "max_rise": 28,
+   "relief_scale": 100,
+   "relief_gain": 2,
+   "relief_ridged": false,
+   "relief_power": 1,
+   "relief_terrace": 6,
    "box": "T[0.55,1] H[-0.35,-0.1] C[0.03,1] E[-0.375,0.05] W[0.05,0.2666]", "continentalness": 0.515, "erosion": -0.1625, "weirdness": 0.1583, "temperature": 0.775, "humidity": -0.225
   }
- ]
+ ],
+ "dune_floor_below_sand": 5,
+ "wind": {
+  "toward_degrees": 115,
+  "stretch_large": 1.3,
+  "stretch_mid": 1.8,
+  "stretch_fine": 1.8,
+  "_comment": "The wind blows toward this angle (the same as the dunes, tools/dunes/generate.js wind_toward_degrees). The land field is sampled in wind-aligned coordinates divided by the stretch along the wind, so rock is elongated downwind."
+ },
+ "wind_sand": {
+  "bank_height": 8,
+  "bank_distance": 30,
+  "tail_height": 4,
+  "tail_distance": 60,
+  "scour_depth": 4,
+  "scour_pad": 0.06,
+  "edge_ramp": 0.12,
+  "_comment": "Sand wraps the rock: windward bank, lee tail, scour moat at the foot. 0 height/depth turns a term off."
+ }
 }

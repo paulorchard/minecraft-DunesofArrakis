@@ -8,7 +8,7 @@
         "type": "minecraft:clamp",
         "input": {
           "type": "minecraft:mul",
-          "argument1": 2.857142857142857,
+          "argument1": 6.666666666666667,
           "argument2": {
             "type": "minecraft:add",
             "argument1": "islandcraft_dunesofarrakis:island/f",
@@ -29,7 +29,7 @@
           "type": "minecraft:clamp",
           "input": {
             "type": "minecraft:mul",
-            "argument1": 2.857142857142857,
+            "argument1": 6.666666666666667,
             "argument2": {
               "type": "minecraft:add",
               "argument1": "islandcraft_dunesofarrakis:island/f",

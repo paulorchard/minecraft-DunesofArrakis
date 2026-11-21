@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:find_top_surface",
-  "density": "islandcraft_dunesofarrakis:overworld/sloped_cheese",
-  "upper_bound": 320,
-  "lower_bound": -64,
-  "cell_height": 1
-}

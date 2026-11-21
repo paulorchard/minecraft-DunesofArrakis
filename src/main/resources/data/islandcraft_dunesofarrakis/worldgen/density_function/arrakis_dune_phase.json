@@ -2,8 +2,8 @@
   "type": "minecraft:add",
   "argument1": {
     "type": "islandcraft_dunesofarrakis:arrakis_linear",
-    "x_coefficient": -0.002641364,
-    "z_coefficient": 0.005664424
+    "x_coefficient": -0.003521819,
+    "z_coefficient": 0.007552565
   },
   "argument2": {
     "type": "minecraft:add",

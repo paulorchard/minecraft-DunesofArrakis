@@ -3,3 +3,9 @@
 One land field F(x,z) = a*N_large + b*N_mid + c*N_fine + d*ridge*band + spawn_bump (domain-warped vanilla noises, 2D, cache_2d). Rock stands above the sand where F > threshold; its height is sand + smoothstep((F-threshold)/ramp) * rise (rise from the normalised vanilla relief as in prompt 16). The dune mountains and hills (not the sawtooth dunes) are multiplied by 1 - smoothstep(F, threshold-pad, threshold+pad). Biome bands come from a 1000-block noise cut at its octile points.
 Config: `tools/rewrite/islands.json` (`"layout": "circles"` returns to `grid.json`). Generate: `node tools/rewrite/gen.js`. Tune without a server: `tools/worldscan/islandfield.sh field 1 -1024 -1024 2048 4 build/if/x`. Report: `tools/worldscan/noisereport.js` -> `docs/noise-islands/` (report.json, land_mask.png, hillshade.png, biomes.png, f_ramp_model.png = the field from the Java model, threshold in red).
 Run: seed 1, window x,z -1024..1024 (2048 x 2048, 16,384 chunks), 861.7 s = 52.6 ms/chunk (the 4,000 window would have been about 55 minutes, so it was shrunk).
+
+## Prompt 18: sand sea, 2D relief, wind-shaped rock
+- Dunes: wavelength 120, max_height 20, hills and mountains off (terms not emitted), dips 0..5 (dip_cover 0.08, dip_scale 90) in `tools/dunes/generate.js`; sand is `islandcraft_dunesofarrakis:dune_sand` in the dune biome rule; the dune biome's spawner lists are empty again.
+- Rock: no find_top_surface, no 3D node; per-biome 2D relief noise (`islands.json`: relief_*), taper ramp 0.15 (it was 0.35: median land column had t = 0.21, so median rock stood 4.7 above the sand), min_rise 18, per-biome max_rise, big_bonus 20, cap 60.
+- Wind: land field in wind-aligned coordinates (`wind`), sand bank / tail / scour from the field shifted along the wind (`wind_sand`).
+- Model tools (no server): `tools/worldscan/dfeval.sh dune|rock|slopes|count` evaluates the generated data with vanilla's noise.

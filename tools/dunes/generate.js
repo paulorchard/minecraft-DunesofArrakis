@@ -11,9 +11,9 @@ const KNOBS = {
   // Direction the wind blows TOWARD, degrees from +x (east) towards +z (south). Crests run perpendicular to it.
   wind_toward_degrees: 115,
   // Crest-to-crest distance along the wind direction, in blocks.
-  wavelength: 160,
+  wavelength: 120,
   // Height a "typical" crest reaches (used only to turn the leeward slope into a windward fraction).
-  reference_crest_height: 24,
+  reference_crest_height: 16,
   // Leeward (steep) slope in degrees at the reference crest height. Windward slope is derived and printed.
   leeward_slope_deg: 28,
   // Optional override of the windward fraction (0.05..0.95). null = derive from the two knobs above.
@@ -22,7 +22,7 @@ const KNOBS = {
   crest_rounding: 0.04,
   toe_rounding: 0.07,
   // Height of a dune whose envelope is 1.
-  max_height: 40,
+  max_height: 20,
   // Crest bending ("shear"): how far crest lines are pushed sideways by a low-frequency noise, in cycles
   // (1 cycle = one wavelength). 0 = ruler-straight parallel crests.
   warp_cycles: 0.26,
@@ -43,10 +43,13 @@ const KNOBS = {
   // factor = clamp(break_gain * noise + break_offset, 0, 1) multiplies the dune height. Lower offset = more gaps.
   break_gain: 1.6, break_offset: 1.05, break_first_octave: -8,
   // Low rolling hills with no direction, strongest where the dunes are absent (fill the flat floor).
-  hill_height: 5, hill_first_octave: -7, hill_gain: 1.4, hill_offset: 0.45,
+  hill_height: 0,   /* 0 = off (prompt 18: no hills; the term is not emitted) */ hill_first_octave: -7, hill_gain: 1.4, hill_offset: 0.45,
   // Mountains: broad smooth massifs with no direction, dunes still ripple on top of them.
   // mask = clamp(mountain_gain * noise + mountain_offset, 0, 1)^2; higher offset = more/larger mountains.
-  mountain_height: 80, mountain_first_octave: -10, mountain_gain: 2.5, mountain_offset: 0.05,
+  mountain_height: 0,   /* 0 = off (prompt 18: no mountains; the term is not emitted) */ mountain_first_octave: -10, mountain_gain: 2.5, mountain_offset: 0.05,
+  // --- Dips (prompt 18): shallow bowls on the floor between the dunes, 0..dip_depth blocks below the sand level ---
+  // dip = dip_depth * smoothstep((noise - T) / dip_edge) * (1 - dune_envelope); T is set so about dip_cover of the area is above it (noise sigma dip_sigma).
+  dip_depth: 5, dip_cover: 0.08, dip_scale: 90, dip_edge: 0.14, dip_sigma: 0.30,
 };
 // ──────────────────────── end knobs ───────────────────────
 
@@ -97,16 +100,23 @@ put('density_function/arrakis_dune_envelope.json', {
 put('density_function/arrakis_dune_break.json', clamp01(K.break_gain, K.break_offset, 'arrakis_dune_break'));
 put('density_function/arrakis_mountain_mask.json', { type: 'minecraft:square', argument: clamp01(K.mountain_gain, K.mountain_offset, 'arrakis_mountain') });
 // dune height above sand level, in blocks, 2D, computed once per column
-put('density_function/arrakis_dune_height.json', {
-  type: 'minecraft:cache_2d',
-  argument: { type: 'minecraft:add',
-    argument1: { type: 'minecraft:add',
-      // dunes, cut into segments by the break-up noise
-      argument1: { type: 'minecraft:mul', argument1: K.max_height, argument2: { type: 'minecraft:mul', argument1: ref('arrakis_dune_break'), argument2: { type: 'minecraft:mul', argument1: ref('arrakis_dune_envelope'), argument2: ref('arrakis_dune_profile') } } },
-      // low hills, mostly where the dune envelope is low
-      argument2: { type: 'minecraft:mul', argument1: K.hill_height, argument2: { type: 'minecraft:mul', argument1: clamp01(K.hill_gain, K.hill_offset, 'arrakis_hills'), argument2: { type: 'minecraft:add', argument1: 1.0, argument2: { type: 'minecraft:mul', argument1: -0.8, argument2: ref('arrakis_dune_envelope') } } } } },
-    argument2: { type: 'minecraft:mul', argument1: K.mountain_height, argument2: ref('arrakis_mountain_mask') } },
-});
+const zOf = p => { let lo = -6, hi = 6; for (let k = 0; k < 80; k++) { const m = (lo + hi) / 2, cdf = 0.5 * (1 + erf(m / Math.SQRT2)); if (cdf < p) lo = m; else hi = m; } return (lo + hi) / 2; };
+function erf(x) { const t = 1 / (1 + 0.3275911 * Math.abs(x)), y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x); return x >= 0 ? y : -y; }
+const dipT = K.dip_sigma * zOf(1 - K.dip_cover);
+put('noise/arrakis_dip.json', { firstOctave: -Math.round(Math.log2(K.dip_scale)), amplitudes: [1, 0.5] });
+const sat = x => ({ type: 'minecraft:clamp', input: x, min: 0.0, max: 1.0 });
+const gx = sat({ type: 'minecraft:mul', argument1: 1 / K.dip_edge, argument2: { type: 'minecraft:add', argument1: iso('arrakis_dip'), argument2: -dipT } });
+// dip in blocks (0..dip_depth): smoothstep bowl, mostly on the floor (the same envelope factor the hills used)
+put('density_function/arrakis_dip.json', { type: 'minecraft:cache_2d', argument: { type: 'minecraft:mul', argument1: K.dip_depth, argument2: { type: 'minecraft:mul',
+  argument1: { type: 'minecraft:mul', argument1: { type: 'minecraft:square', argument: gx }, argument2: { type: 'minecraft:add', argument1: 3.0, argument2: { type: 'minecraft:mul', argument1: -2.0, argument2: gx } } },
+  argument2: { type: 'minecraft:add', argument1: 1.0, argument2: { type: 'minecraft:mul', argument1: -1.0, argument2: ref('arrakis_dune_envelope') } } } } });
+// dune height above the sand level, in blocks, 2D, computed once per column: dunes (cut into segments by the break-up noise) [+ hills] [+ mountains] - dip
+let terms = { type: 'minecraft:mul', argument1: K.max_height, argument2: { type: 'minecraft:mul', argument1: ref('arrakis_dune_break'), argument2: { type: 'minecraft:mul', argument1: ref('arrakis_dune_envelope'), argument2: ref('arrakis_dune_profile') } } };
+const addT = t => { terms = { type: 'minecraft:add', argument1: terms, argument2: t }; };
+if (K.hill_height > 0) addT({ type: 'minecraft:mul', argument1: K.hill_height, argument2: { type: 'minecraft:mul', argument1: clamp01(K.hill_gain, K.hill_offset, 'arrakis_hills'), argument2: { type: 'minecraft:add', argument1: 1.0, argument2: { type: 'minecraft:mul', argument1: -0.8, argument2: ref('arrakis_dune_envelope') } } } });
+if (K.mountain_height > 0) addT({ type: 'minecraft:mul', argument1: K.mountain_height, argument2: ref('arrakis_mountain_mask') });
+if (K.dip_depth > 0) addT({ type: 'minecraft:mul', argument1: -1.0, argument2: ref('arrakis_dip') });
+put('density_function/arrakis_dune_height.json', { type: 'minecraft:cache_2d', argument: terms });
 
 const lw = K.wavelength * a, ll = K.wavelength * (1 - a);
 console.log(`knobs: wavelength ${K.wavelength}, wind toward ${K.wind_toward_degrees}deg (crests run ${(K.wind_toward_degrees + 90) % 180}deg), max_height ${K.max_height}`);
