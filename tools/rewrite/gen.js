@@ -9,6 +9,7 @@ const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const grid = JSON.parse(fs.readFileSync(process.env.GRID_FILE || path.join(__dirname, 'grid.json'), 'utf8'));
 const NS = grid.namespace;
+const OC = grid.outcrop || { enabled: false };   // prompt 16: normalised outcrop heights (a heightfield in each circle)
 const VAN = path.join(ROOT, 'build/vanilla/data/minecraft/worldgen');
 const RES = path.join(ROOT, 'src/main/resources');
 const OUT = path.join(RES, 'data', NS);
@@ -97,23 +98,50 @@ const DF = 'worldgen/density_function/';
 // transition 0 / ramp 0: a true step at the circle (1 where the squared normalised distance q < 1, else 0), no degenerate spline.
 const stepMask = i => rc(qFn(i), 0.0, 1.0, 1.0, 0.0);
 for (const i of islands) {
-  write(`${DF}island/w_${i.biome}.json`, T > 0 ? splineOver(i, terrainPts()) : stepMask(i));
-  write(`${DF}island/wb_${i.biome}.json`, (T > 0 && grid.sharp_ramp > 0) ? splineOver(i, sharpPts()) : stepMask(i));
+  write(`${DF}island/w_${i.biome}.json`, (T > 0 && !OC.enabled) ? splineOver(i, terrainPts()) : stepMask(i));
+  write(`${DF}island/wb_${i.biome}.json`, (T > 0 && grid.sharp_ramp > 0 && !OC.enabled) ? splineOver(i, sharpPts()) : stepMask(i));
 }
 // total terrain mask, exact per block (cache_2d, never flat_cache). The zones never overlap (checked above), so instead of summing all
 // eight masks it picks the one island whose bounding box holds the block: a nested range_choice on block_x (columns), then block_z (rows).
 // A dune column then costs about four comparisons, not eight splines (the terrain graph re-evaluates this once per vertical cell).
 const pick = (coord, lo, hi, inner, outer) => rc(coord, Math.floor(lo), Math.ceil(hi) + 1, inner, outer);
 const cols = [...new Set(islands.map(i => i.col))].sort((p, q) => p - q);
-let tree = 0.0;
-for (const c of cols.slice().reverse()) {
-  const inCol = islands.filter(i => i.col === c).sort((p, q) => p.row - q.row);
-  let rowTree = 0.0;
-  for (const i of inCol.slice().reverse()) rowTree = pick(BZ, i.cz - B * REND, i.cz + B * REND, `${NS}:island/w_${i.biome}`, rowTree);
-  tree = pick(BX, inCol[0].cx - A * REND, inCol[0].cx + A * REND, rowTree, tree);
+function pickTree(prefix) {   // the island's own function (prefix_<biome>) inside its bounding box, 0 elsewhere
+  let tree = 0.0;
+  for (const c of cols.slice().reverse()) {
+    const inCol = islands.filter(i => i.col === c).sort((p, q) => p.row - q.row);
+    let rowTree = 0.0;
+    for (const i of inCol.slice().reverse()) rowTree = pick(BZ, i.cz - B * REND, i.cz + B * REND, `${NS}:island/${prefix}_${i.biome}`, rowTree);
+    tree = pick(BX, inCol[0].cx - A * REND, inCol[0].cx + A * REND, rowTree, tree);
+  }
+  return tree;
 }
-write(`${DF}island/w.json`, c2d(tree));
+write(`${DF}island/w.json`, c2d(pickTree('w')));
 const W = `${NS}:island/w`;
+
+// ---- outcrop heights (prompt 16)
+const SAND = NS + ':arrakis_sand_level', SURF = NS + ':arrakis_surface_height';
+const ROCK = NS + ':island/rock_height', MASK = NS + ':island/rock_mask';
+if (OC.enabled) {
+  const sel = fn => islands.reduce((e, i) => add(e, mul(rc(`${NS}:island/w_${i.biome}`, 1e-9, 2.0, 1.0, 0.0), r9(fn(i)))), 0.0);   // the selected island's constant
+  const eff = i => { const mid = (i.vanilla_low + i.vanilla_high) / 2, span = Math.max(i.vanilla_high - i.vanilla_low, OC.min_span); return { low: mid - span / 2, span }; };
+  write(`${DF}island/vanilla_top.json`, { type: 'minecraft:find_top_surface', density: `${NS}:overworld/sloped_cheese`, upper_bound: OC.search_top, lower_bound: OC.search_bottom, cell_height: OC.cell_height });
+  write(`${DF}island/relief_n.json`, { type: 'minecraft:clamp', input: mul(add(`${NS}:island/vanilla_top`, mul(-1.0, sel(i => eff(i).low))), sel(i => 1 / eff(i).span)), min: 0.0, max: 1.0 });
+  // the rise before the taper, evaluated on the 4-block grid and only where a circle is (range_choice is lazy inside the cache)
+  write(`${DF}island/rise_raw.json`, flat(rc(W, 1e-9, 2.0, add(OC.min_rise, mul(add(sel(i => i.max_rise), -OC.min_rise), `${NS}:island/relief_n`)), 0.0)));
+  for (const i of islands) {   // taper: 1 inside core_fraction of the radius, smoothstep to 0 at the edge; spline on the squared distance
+    const c = OC.core_fraction, pts = [];
+    for (let k = 0; k <= 24; k++) { const r = c + (1 - c) * k / 24, st = 1 - (r - c) / (1 - c); pts.push({ location: r9(r * r), value: r9(smooth(st)), derivative: r9((-dsmooth(st) / (1 - c)) / (2 * r)) }); }
+    write(`${DF}island/taper_${i.biome}.json`, { type: 'minecraft:spline', spline: { coordinate: qFn(i), points: pts } });
+  }
+  write(`${DF}island/taper.json`, c2d(pickTree('taper')));
+  // rise: the 4-block values are interpolated between the cell corners, so the relief is smooth, not terraced
+  write(`${DF}island/rock_height.json`, add(SAND, mul(`${NS}:island/taper`, { type: 'minecraft:interpolated', argument: `${NS}:island/rise_raw` })));
+  write(`${DF}island/surface.json`, { type: 'minecraft:max', argument1: SURF, argument2: ROCK });
+  write(`${DF}island/final_density.json`, add(0.5, add(`${NS}:island/surface`, mul(-1.0, 'minecraft:y'))));
+  // 1 where the rock stands at least half a block above the dune surface (data for the biome), 0 where the sand covers it
+  write(`${DF}island/rock_mask.json`, rc(W, 1e-9, 2.0, rc(add(ROCK, mul(-1.0, SURF)), 0.5, 1e6, 1.0, 0.0), 0.0));
+}
 
 // ---- climate functions
 const CLIM = ['continentalness', 'erosion', 'weirdness', 'temperature', 'humidity'];
@@ -128,9 +156,10 @@ for (const key of ['continentalness', 'erosion', 'weirdness']) {
 }
 // (b) biome-sampler functions, two modes: native = ramp with the terrain mask; sharp = island values out to edge + 100, short ramp
 for (const [mode, prefix] of [['native', 'w_'], ['sharp', 'wb_']]) for (const key of CLIM) {
-  let e = d0[key];
+  let e = 0.0;
   for (const i of islands) e = add(e, mul(`${NS}:island/${prefix}${i.biome}`, r9(i[key] - d0[key])));
-  write(`${DF}biome_${mode}/${ROUTER[key]}.json`, flat(e));
+  // outcrop mode: the island's climate only where its rock stands above the sand (mask m), the dune biome elsewhere in the circle
+  write(`${DF}biome_${mode}/${ROUTER[key]}.json`, flat(add(d0[key], OC.enabled ? rc(W, 1e-9, 2.0, mul(MASK, e), 0.0) : e)));
 }
 
 // ---- copy of vanilla's overworld density function graph (every minecraft:overworld/... reference becomes ours)
@@ -164,13 +193,15 @@ const mapStr = (n, f) => Array.isArray(n) ? n.map(x => mapStr(x, f)) : (n && typ
 const DUNE_SURFACE = { type: 'minecraft:condition', if_true: { type: 'minecraft:biome', biome_is: [NS + ':' + d0.biome] }, then_run: { type: 'minecraft:block', result_state: { Name: 'minecraft:sand' } } };
 function noiseSettings(mode) {
   const ns = readV('noise_settings/overworld.json'), router = rw(ns.noise_router);
-  const vanillaFinal = gateInterpolated(vanillaNoCaves(router));
+  const vanillaFinal = OC.enabled ? null : gateInterpolated(vanillaNoCaves(router));
   for (const key of CLIM) router[ROUTER[key]] = `${NS}:biome_${mode}/${ROUTER[key]}`;
   router.depth = `${NS}:overworld/depth`;
   // terrain: final = w * vanilla + (1 - w) * dune, the dune part exact per block and outside every interpolated / flat cache
-  router.final_density = add(mul(W, vanillaFinal), mul(add(1.0, mul(-1.0, W)), `${NS}:arrakis_final_density`));
+  if (OC.enabled) router.final_density = `${NS}:island/final_density`;   // prompt 16: one exact heightfield, dunes and rock together
+  else router.final_density = add(mul(W, vanillaFinal), mul(add(1.0, mul(-1.0, W)), `${NS}:arrakis_final_density`));
   // preliminary surface height (read by the surface rule): the same blend, of heights
-  router.preliminary_surface_level = add(mul(W, rc(W, 1e-9, 2.0, router.preliminary_surface_level, 0.0)), mul(add(1.0, mul(-1.0, W)), `${NS}:arrakis_surface_height`));
+  if (OC.enabled) router.preliminary_surface_level = `${NS}:island/surface`;
+  else router.preliminary_surface_level = add(mul(W, rc(W, 1e-9, 2.0, router.preliminary_surface_level, 0.0)), mul(add(1.0, mul(-1.0, W)), `${NS}:arrakis_surface_height`));
   // no ore veins in the dunes (they would replace the sand): the vein toggle is 0 wherever the mask is 0
   router.vein_toggle = rc(W, 1e-9, 2.0, router.vein_toggle, 0.0);
   ns.noise_router = router;

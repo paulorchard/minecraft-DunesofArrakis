@@ -2,11 +2,16 @@
   "type": "minecraft:flat_cache",
   "argument": {
     "type": "minecraft:add",
-    "argument1": {
-      "type": "minecraft:add",
-      "argument1": {
-        "type": "minecraft:add",
-        "argument1": {
+    "argument1": -0.675,
+    "argument2": {
+      "type": "minecraft:range_choice",
+      "input": "islandcraft_dunesofarrakis:island/w",
+      "min_inclusive": 1e-9,
+      "max_exclusive": 2,
+      "when_in_range": {
+        "type": "minecraft:mul",
+        "argument1": "islandcraft_dunesofarrakis:island/rock_mask",
+        "argument2": {
           "type": "minecraft:add",
           "argument1": {
             "type": "minecraft:add",
@@ -16,53 +21,63 @@
                 "type": "minecraft:add",
                 "argument1": {
                   "type": "minecraft:add",
-                  "argument1": -0.675,
+                  "argument1": {
+                    "type": "minecraft:add",
+                    "argument1": {
+                      "type": "minecraft:add",
+                      "argument1": {
+                        "type": "minecraft:add",
+                        "argument1": 0,
+                        "argument2": {
+                          "type": "minecraft:mul",
+                          "argument1": "islandcraft_dunesofarrakis:island/w_windswept_hills",
+                          "argument2": 0.675
+                        }
+                      },
+                      "argument2": {
+                        "type": "minecraft:mul",
+                        "argument1": "islandcraft_dunesofarrakis:island/w_windswept_gravelly_hills",
+                        "argument2": 0.45
+                      }
+                    },
+                    "argument2": {
+                      "type": "minecraft:mul",
+                      "argument1": "islandcraft_dunesofarrakis:island/w_ice_spikes",
+                      "argument2": 0
+                    }
+                  },
                   "argument2": {
                     "type": "minecraft:mul",
-                    "argument1": "islandcraft_dunesofarrakis:island/w_windswept_hills",
-                    "argument2": 0.675
+                    "argument1": "islandcraft_dunesofarrakis:island/w_jagged_peaks",
+                    "argument2": 0
                   }
                 },
                 "argument2": {
                   "type": "minecraft:mul",
-                  "argument1": "islandcraft_dunesofarrakis:island/w_windswept_gravelly_hills",
-                  "argument2": 0.45
+                  "argument1": "islandcraft_dunesofarrakis:island/w_stony_peaks",
+                  "argument2": 0.675
                 }
               },
               "argument2": {
                 "type": "minecraft:mul",
-                "argument1": "islandcraft_dunesofarrakis:island/w_ice_spikes",
-                "argument2": 0
+                "argument1": "islandcraft_dunesofarrakis:island/w_windswept_savanna",
+                "argument2": 0.675
               }
             },
             "argument2": {
               "type": "minecraft:mul",
-              "argument1": "islandcraft_dunesofarrakis:island/w_jagged_peaks",
-              "argument2": 0
+              "argument1": "islandcraft_dunesofarrakis:island/w_badlands",
+              "argument2": 0.45
             }
           },
           "argument2": {
             "type": "minecraft:mul",
-            "argument1": "islandcraft_dunesofarrakis:island/w_stony_peaks",
-            "argument2": 0.675
+            "argument1": "islandcraft_dunesofarrakis:island/w_eroded_badlands",
+            "argument2": 0.45
           }
-        },
-        "argument2": {
-          "type": "minecraft:mul",
-          "argument1": "islandcraft_dunesofarrakis:island/w_windswept_savanna",
-          "argument2": 0.675
         }
       },
-      "argument2": {
-        "type": "minecraft:mul",
-        "argument1": "islandcraft_dunesofarrakis:island/w_badlands",
-        "argument2": 0.45
-      }
-    },
-    "argument2": {
-      "type": "minecraft:mul",
-      "argument1": "islandcraft_dunesofarrakis:island/w_eroded_badlands",
-      "argument2": 0.45
+      "when_out_of_range": 0
     }
   }
 }

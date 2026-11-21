@@ -115,7 +115,7 @@ for (let k = 0; k < islands.length; k++) {
 }
 // ---- holes in the ring: void columns (open overhangs and sealed pockets)
 {
-  const v = new Int32Array(fs.readFileSync(scanPrefix + '.vox').buffer.slice(0)), N = v.length / 3, key = (x, y, z) => (y + 64) * n + z * W + x;
+  const vb = fs.readFileSync(scanPrefix + '.vox'), v = new Int32Array(vb.buffer.slice(vb.byteOffset, vb.byteOffset + vb.length)), N = v.length / 3, key = (x, y, z) => (y + 64) * n + z * W + x;
   const set = new Map(); for (let i = 0; i < N; i++) set.set(key(v[i * 3], v[i * 3 + 1], v[i * 3 + 2]), i);
   const open = new Uint8Array(N), st = [], Dd = [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]];
   const outside = (x, y, z) => x < 0 || z < 0 || x >= W || z >= H || y > S.top[z * W + x];

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:range_choice",
+  "input": "islandcraft_dunesofarrakis:island/w",
+  "min_inclusive": 1e-9,
+  "max_exclusive": 2,
+  "when_in_range": {
+    "type": "minecraft:range_choice",
+    "input": {
+      "type": "minecraft:add",
+      "argument1": "islandcraft_dunesofarrakis:island/rock_height",
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": -1,
+        "argument2": "islandcraft_dunesofarrakis:arrakis_surface_height"
+      }
+    },
+    "min_inclusive": 0.5,
+    "max_exclusive": 1000000,
+    "when_in_range": 1,
+    "when_out_of_range": 0
+  },
+  "when_out_of_range": 0
+}

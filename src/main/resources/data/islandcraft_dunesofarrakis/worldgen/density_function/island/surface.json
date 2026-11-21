@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:max",
+  "argument1": "islandcraft_dunesofarrakis:arrakis_surface_height",
+  "argument2": "islandcraft_dunesofarrakis:island/rock_height"
+}

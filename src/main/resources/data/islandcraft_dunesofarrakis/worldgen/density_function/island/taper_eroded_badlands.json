@@ -1,0 +1,163 @@
+{
+  "type": "minecraft:spline",
+  "spline": {
+    "coordinate": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": 0.0004,
+        "argument2": {
+          "type": "minecraft:square",
+          "argument": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "islandcraft_dunesofarrakis:block_x"
+            },
+            "argument2": -1200
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": 0.0004,
+        "argument2": {
+          "type": "minecraft:square",
+          "argument": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "islandcraft_dunesofarrakis:block_z"
+            },
+            "argument2": -600
+          }
+        }
+      }
+    },
+    "points": [
+      {
+        "location": 0.25,
+        "value": 1,
+        "derivative": 0
+      },
+      {
+        "location": 0.271267361,
+        "value": 0.994936343,
+        "derivative": -0.46
+      },
+      {
+        "location": 0.293402778,
+        "value": 0.980324074,
+        "derivative": -0.846153846
+      },
+      {
+        "location": 0.31640625,
+        "value": 0.95703125,
+        "derivative": -1.166666667
+      },
+      {
+        "location": 0.340277778,
+        "value": 0.925925926,
+        "derivative": -1.428571429
+      },
+      {
+        "location": 0.365017361,
+        "value": 0.887876157,
+        "derivative": -1.637931034
+      },
+      {
+        "location": 0.390625,
+        "value": 0.84375,
+        "derivative": -1.8
+      },
+      {
+        "location": 0.417100694,
+        "value": 0.794415509,
+        "derivative": -1.919354839
+      },
+      {
+        "location": 0.444444444,
+        "value": 0.740740741,
+        "derivative": -2
+      },
+      {
+        "location": 0.47265625,
+        "value": 0.68359375,
+        "derivative": -2.045454545
+      },
+      {
+        "location": 0.501736111,
+        "value": 0.623842593,
+        "derivative": -2.058823529
+      },
+      {
+        "location": 0.531684028,
+        "value": 0.562355324,
+        "derivative": -2.042857143
+      },
+      {
+        "location": 0.5625,
+        "value": 0.5,
+        "derivative": -2
+      },
+      {
+        "location": 0.594184028,
+        "value": 0.437644676,
+        "derivative": -1.932432432
+      },
+      {
+        "location": 0.626736111,
+        "value": 0.376157407,
+        "derivative": -1.842105263
+      },
+      {
+        "location": 0.66015625,
+        "value": 0.31640625,
+        "derivative": -1.730769231
+      },
+      {
+        "location": 0.694444444,
+        "value": 0.259259259,
+        "derivative": -1.6
+      },
+      {
+        "location": 0.729600694,
+        "value": 0.205584491,
+        "derivative": -1.451219512
+      },
+      {
+        "location": 0.765625,
+        "value": 0.15625,
+        "derivative": -1.285714286
+      },
+      {
+        "location": 0.802517361,
+        "value": 0.112123843,
+        "derivative": -1.104651163
+      },
+      {
+        "location": 0.840277778,
+        "value": 0.074074074,
+        "derivative": -0.909090909
+      },
+      {
+        "location": 0.87890625,
+        "value": 0.04296875,
+        "derivative": -0.7
+      },
+      {
+        "location": 0.918402778,
+        "value": 0.019675926,
+        "derivative": -0.47826087
+      },
+      {
+        "location": 0.958767361,
+        "value": 0.005063657,
+        "derivative": -0.244680851
+      },
+      {
+        "location": 1,
+        "value": 0,
+        "derivative": 0
+      }
+    ]
+  }
+}

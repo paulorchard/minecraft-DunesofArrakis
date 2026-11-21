@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:add",
+  "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
+  "argument2": {
+    "type": "minecraft:mul",
+    "argument1": "islandcraft_dunesofarrakis:island/taper",
+    "argument2": {
+      "type": "minecraft:interpolated",
+      "argument": "islandcraft_dunesofarrakis:island/rise_raw"
+    }
+  }
+}
