@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "islandcraft_dunesofarrakis:arrakis",
-    "islandcraft_dunesofarrakis:arrakis_native"
+    "islandcraft_dunesofarrakis:arrakis"
   ]
 }

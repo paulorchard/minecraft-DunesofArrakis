@@ -24,9 +24,9 @@
       "xz_scale": 1,
       "y_scale": 0.5
     },
-    "continents": "islandcraft_dunesofarrakis:biome_sharp/continents",
+    "continents": "islandcraft_dunesofarrakis:biome_noise/continents",
     "depth": "islandcraft_dunesofarrakis:overworld/depth",
-    "erosion": "islandcraft_dunesofarrakis:biome_sharp/erosion",
+    "erosion": "islandcraft_dunesofarrakis:biome_noise/erosion",
     "final_density": "islandcraft_dunesofarrakis:island/final_density",
     "fluid_level_floodedness": {
       "type": "minecraft:noise",
@@ -47,9 +47,9 @@
       "y_scale": 1
     },
     "preliminary_surface_level": "islandcraft_dunesofarrakis:island/surface",
-    "ridges": "islandcraft_dunesofarrakis:biome_sharp/ridges",
-    "temperature": "islandcraft_dunesofarrakis:biome_sharp/temperature",
-    "vegetation": "islandcraft_dunesofarrakis:biome_sharp/vegetation",
+    "ridges": "islandcraft_dunesofarrakis:biome_noise/ridges",
+    "temperature": "islandcraft_dunesofarrakis:biome_noise/temperature",
+    "vegetation": "islandcraft_dunesofarrakis:biome_noise/vegetation",
     "vein_gap": {
       "type": "minecraft:noise",
       "noise": "minecraft:ore_gap",

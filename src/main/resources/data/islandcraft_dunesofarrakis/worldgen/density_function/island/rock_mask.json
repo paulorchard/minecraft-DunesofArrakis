@@ -1,8 +1,8 @@
 {
   "type": "minecraft:range_choice",
-  "input": "islandcraft_dunesofarrakis:island/w",
-  "min_inclusive": 1e-9,
-  "max_exclusive": 2,
+  "input": "islandcraft_dunesofarrakis:island/f",
+  "min_inclusive": 0.33,
+  "max_exclusive": 99,
   "when_in_range": {
     "type": "minecraft:range_choice",
     "input": {
@@ -11,7 +11,7 @@
       "argument2": {
         "type": "minecraft:mul",
         "argument1": -1,
-        "argument2": "islandcraft_dunesofarrakis:arrakis_surface_height"
+        "argument2": "islandcraft_dunesofarrakis:island/dune_surface"
       }
     },
     "min_inclusive": 0.5,

@@ -1,0 +1,70 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:mul",
+        "argument1": 40,
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": "islandcraft_dunesofarrakis:arrakis_dune_break",
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": "islandcraft_dunesofarrakis:arrakis_dune_envelope",
+            "argument2": "islandcraft_dunesofarrakis:arrakis_dune_profile"
+          }
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": "islandcraft_dunesofarrakis:island/dune_fade",
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": 5,
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": {
+              "type": "minecraft:clamp",
+              "input": {
+                "type": "minecraft:add",
+                "argument1": 0.45,
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": 1.4,
+                  "argument2": {
+                    "type": "minecraft:noise",
+                    "noise": "islandcraft_dunesofarrakis:arrakis_hills",
+                    "xz_scale": 1,
+                    "y_scale": 0
+                  }
+                }
+              },
+              "min": 0,
+              "max": 1
+            },
+            "argument2": {
+              "type": "minecraft:add",
+              "argument1": 1,
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": -0.8,
+                "argument2": "islandcraft_dunesofarrakis:arrakis_dune_envelope"
+              }
+            }
+          }
+        }
+      }
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": "islandcraft_dunesofarrakis:island/dune_fade",
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": 80,
+        "argument2": "islandcraft_dunesofarrakis:arrakis_mountain_mask"
+      }
+    }
+  }
+}

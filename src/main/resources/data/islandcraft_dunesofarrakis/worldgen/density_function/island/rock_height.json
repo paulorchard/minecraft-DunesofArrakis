@@ -2,11 +2,15 @@
   "type": "minecraft:add",
   "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
   "argument2": {
-    "type": "minecraft:mul",
-    "argument1": "islandcraft_dunesofarrakis:island/taper",
+    "type": "minecraft:min",
+    "argument1": 100,
     "argument2": {
-      "type": "minecraft:interpolated",
-      "argument": "islandcraft_dunesofarrakis:island/rise_raw"
+      "type": "minecraft:mul",
+      "argument1": "islandcraft_dunesofarrakis:island/t",
+      "argument2": {
+        "type": "minecraft:interpolated",
+        "argument": "islandcraft_dunesofarrakis:island/rise_raw"
+      }
     }
   }
 }

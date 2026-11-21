@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:add",
+  "argument1": "islandcraft_dunesofarrakis:arrakis_sand_level",
+  "argument2": "islandcraft_dunesofarrakis:island/dune_height"
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:shifted_noise",
+    "noise": "islandcraft_dunesofarrakis:islands_ridge",
+    "xz_scale": 1,
+    "y_scale": 0,
+    "shift_x": "islandcraft_dunesofarrakis:island/warp_x",
+    "shift_y": 0,
+    "shift_z": "islandcraft_dunesofarrakis:island/warp_z"
+  }
+}

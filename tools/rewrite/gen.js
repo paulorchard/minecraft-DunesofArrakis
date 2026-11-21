@@ -7,9 +7,16 @@
 // Nothing under data/minecraft is overridden (the world-type list is a tag with replace:false, which merges).
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
-const grid = JSON.parse(fs.readFileSync(process.env.GRID_FILE || path.join(__dirname, 'grid.json'), 'utf8'));
+const ISL_FILE = path.join(__dirname, 'islands.json');
+const ISL = fs.existsSync(ISL_FILE) ? JSON.parse(fs.readFileSync(ISL_FILE, 'utf8')) : null;
+const LAYOUT = process.env.LAYOUT || (ISL && !process.env.GRID_FILE ? ISL.layout : 'circles');   // "noise" (prompt 17, default) | "circles" (prompts 14-16, tools/rewrite/grid.json)
+if (!['noise', 'circles'].includes(LAYOUT)) throw new Error('layout must be noise or circles');
+const NOISE = LAYOUT === 'noise';
+const grid = NOISE ? Object.assign({ namespace: ISL.namespace, desert: ISL.desert, removed_features: ISL.removed_features, biome_transition: 'noise', transition: 0, sharp_ramp: 0,
+  diameter_x: 100, diameter_z: 100, pitch: 300, origin_x: 0, origin_z: 0, islands: ISL.biomes.map((b, k) => Object.assign({ col: k, row: 0 }, b)) }, {})
+  : JSON.parse(fs.readFileSync(process.env.GRID_FILE || path.join(__dirname, 'grid.json'), 'utf8'));
 const NS = grid.namespace;
-const OC = grid.outcrop || { enabled: false };   // prompt 16: normalised outcrop heights (a heightfield in each circle)
+const OC = NOISE ? { enabled: true } : (grid.outcrop || { enabled: false });   // prompt 16: normalised outcrop heights (a heightfield in each circle)
 const VAN = path.join(ROOT, 'build/vanilla/data/minecraft/worldgen');
 const RES = path.join(ROOT, 'src/main/resources');
 const OUT = path.join(RES, 'data', NS);
@@ -19,8 +26,9 @@ function write(rel, obj, base = OUT) {
   fs.writeFileSync(p, JSON.stringify(obj, null, 2) + '\n');
 }
 // remove only what this script generates (the dune files are not ours to delete)
-for (const d of ['island', 'overworld', 'biome_native', 'biome_sharp', 'patch']) fs.rmSync(path.join(OUT, 'worldgen/density_function', d), { recursive: true, force: true });
+for (const d of ['island', 'overworld', 'biome_native', 'biome_sharp', 'biome_noise', 'patch']) fs.rmSync(path.join(OUT, 'worldgen/density_function', d), { recursive: true, force: true });
 for (const f of ['arrakis', 'arrakis_native', 'arrakis_sharp', 'arrakis_test']) { fs.rmSync(path.join(OUT, 'worldgen/noise_settings', f + '.json'), { force: true }); fs.rmSync(path.join(OUT, 'worldgen/world_preset', f + '.json'), { force: true }); }
+if (fs.existsSync(path.join(OUT, 'worldgen/noise'))) for (const n of fs.readdirSync(path.join(OUT, 'worldgen/noise'))) if (n.startsWith('islands_')) fs.rmSync(path.join(OUT, 'worldgen/noise', n));
 const keepBiome = new Set(['arrakis_desert.json']);
 if (fs.existsSync(path.join(OUT, 'worldgen/biome'))) for (const f of fs.readdirSync(path.join(OUT, 'worldgen/biome'))) if (!keepBiome.has(f)) fs.rmSync(path.join(OUT, 'worldgen/biome', f));
 
@@ -31,11 +39,11 @@ const distOfQ = q => (Math.sqrt(q) - 1) * RM;                // the radial dista
 const qOfDist = d => (1 + d / RM) * (1 + d / RM);
 const islands = grid.islands.map(p => Object.assign({ cx: grid.origin_x + grid.pitch * p.col, cz: grid.origin_z + grid.pitch * p.row }, p));
 const MODE = grid.biome_transition;
-if (!['native', 'sharp'].includes(MODE)) throw new Error('biome_transition must be native or sharp');
+if (!NOISE && !['native', 'sharp'].includes(MODE)) throw new Error('biome_transition must be native or sharp');
 // refuse overlapping transition zones: sample each zone boundary and test it against every other zone
 const qAt = (i, x, z) => ((x - i.cx) / A) ** 2 + ((z - i.cz) / B) ** 2;
 let minGap = Infinity;
-for (const i of islands) for (const j of islands) {
+for (const i of NOISE ? [] : islands) for (const j of islands) {
   if (i === j) continue;
   for (let k = 0; k < 7200; k++) {
     const t = 2 * Math.PI * k / 7200, x = i.cx + A * Math.sqrt(QEND) * Math.cos(t), z = i.cz + B * Math.sqrt(QEND) * Math.sin(t);
@@ -57,7 +65,7 @@ function trueDist(px, pz) {   // px, pz relative to the centre, outside the elli
   return Math.hypot(px - A * Math.cos((lo + hi) / 2), pz - B * Math.sin((lo + hi) / 2));
 }
 let worstErr = 0, worstAt = null;
-for (let k = 0; k < 360; k++) for (let m = 1; m <= 40; m++) {
+for (let k = 0; k < (NOISE ? 0 : 360); k++) for (let m = 1; m <= 40; m++) {
   const t = 2 * Math.PI * k / 360, r = 1 + (REND - 1) * m / 40, px = A * r * Math.cos(t), pz = B * r * Math.sin(t);
   const err = distOfQ(r * r) - trueDist(px, pz);
   if (Math.abs(err) > Math.abs(worstErr)) { worstErr = err; worstAt = { angle_deg: +(t * 180 / Math.PI).toFixed(0), approx: +distOfQ(r * r).toFixed(1), true: +trueDist(px, pz).toFixed(1) }; }
@@ -97,7 +105,7 @@ function sharpPts() {
 const DF = 'worldgen/density_function/';
 // transition 0 / ramp 0: a true step at the circle (1 where the squared normalised distance q < 1, else 0), no degenerate spline.
 const stepMask = i => rc(qFn(i), 0.0, 1.0, 1.0, 0.0);
-for (const i of islands) {
+for (const i of NOISE ? [] : islands) {
   write(`${DF}island/w_${i.biome}.json`, (T > 0 && !OC.enabled) ? splineOver(i, terrainPts()) : stepMask(i));
   write(`${DF}island/wb_${i.biome}.json`, (T > 0 && grid.sharp_ramp > 0 && !OC.enabled) ? splineOver(i, sharpPts()) : stepMask(i));
 }
@@ -116,13 +124,13 @@ function pickTree(prefix) {   // the island's own function (prefix_<biome>) insi
   }
   return tree;
 }
-write(`${DF}island/w.json`, c2d(pickTree('w')));
+if (!NOISE) write(`${DF}island/w.json`, c2d(pickTree('w')));
 const W = `${NS}:island/w`;
 
 // ---- outcrop heights (prompt 16)
 const SAND = NS + ':arrakis_sand_level', SURF = NS + ':arrakis_surface_height';
 const ROCK = NS + ':island/rock_height', MASK = NS + ':island/rock_mask';
-if (OC.enabled) {
+if (OC.enabled && !NOISE) {
   const sel = fn => islands.reduce((e, i) => add(e, mul(rc(`${NS}:island/w_${i.biome}`, 1e-9, 2.0, 1.0, 0.0), r9(fn(i)))), 0.0);   // the selected island's constant
   const eff = i => { const mid = (i.vanilla_low + i.vanilla_high) / 2, span = Math.max(i.vanilla_high - i.vanilla_low, OC.min_span); return { low: mid - span / 2, span }; };
   write(`${DF}island/vanilla_top.json`, { type: 'minecraft:find_top_surface', density: `${NS}:overworld/sloped_cheese`, upper_bound: OC.search_top, lower_bound: OC.search_bottom, cell_height: OC.cell_height });
@@ -143,19 +151,73 @@ if (OC.enabled) {
   write(`${DF}island/rock_mask.json`, rc(W, 1e-9, 2.0, rc(add(ROCK, mul(-1.0, SURF)), 0.5, 1e6, 1.0, 0.0), 0.0));
 }
 
+// ---- noise-shaped islands (prompt 17): one land field F, no circles
+const ROUTER_NOISE = { continentalness: 'continents', erosion: 'erosion', weirdness: 'ridges', temperature: 'temperature', humidity: 'vegetation' };
+const CLIM_NOISE = ['continentalness', 'erosion', 'weirdness', 'temperature', 'humidity'];
+let FIELD_SUMMARY = null;
+if (NOISE) {
+  const F = ISL.field, H = ISL.height, FD = ISL.dune_fade, BN = ISL.biome_noise, AR = F.archipelago, SP = F.spawn;
+  const bad = m => { throw new Error('islands.json: ' + m); };
+  if (ISL.biomes.length !== 8) bad('eight biomes expected');
+  if (!(BN.cuts.length === 7 && BN.cuts.every((c, k) => k === 0 || c > BN.cuts[k - 1]))) bad('biome_noise.cuts needs 7 strictly increasing values');
+  if (!(H.ramp > 0 && FD.pad > 0 && AR.ridge_width > 0 && AR.band_half_width > 0 && SP.radius > 0)) bad('ramp, dune_fade.pad, ridge_width, band_half_width and spawn.radius must be positive');
+  for (const k of ['scale_large', 'scale_mid', 'scale_fine', 'warp_scale']) if (!(F[k] >= 16 && F[k] <= 65536)) bad(k + ' must be 16..65536 blocks');
+  for (const b of ISL.biomes) { if (b.max_rise > H.cap_above_sand || b.max_rise < H.min_rise) bad(`${b.biome}: max_rise must be between min_rise and cap_above_sand`); if (!(b.vanilla_high >= b.vanilla_low)) bad(b.biome + ': vanilla_high < vanilla_low'); }
+  if (!(F.threshold > -1 && F.threshold < 2) || F.a < 0 || F.b < 0 || F.c < 0) bad('threshold / a / b / c out of range');
+  if (SP.strength < F.threshold + 1.0) console.warn("WARNING spawn.strength is small: the origin may fall on sand where the noise is low (guaranteed land needs about threshold + 1.0 or more)");
+  const fo = size => -Math.round(Math.log2(size));
+  const nf = (name, size, amps) => write(`worldgen/noise/${name}.json`, { firstOctave: fo(size), amplitudes: amps });
+  nf('islands_large', F.scale_large, F.amplitudes); nf('islands_mid', F.scale_mid, F.amplitudes); nf('islands_fine', F.scale_fine, F.amplitudes);
+  nf('islands_warp_x', F.warp_scale, [1, 0.5]); nf('islands_warp_z', F.warp_scale, [1, 0.5]); nf('islands_ridge', AR.scale, F.amplitudes); nf('islands_biome', BN.scale, BN.amplitudes);
+  const plain = name => ({ type: 'minecraft:noise', noise: `${NS}:${name}`, xz_scale: 1.0, y_scale: 0.0 });
+  const IS = n => `${NS}:island/${n}`;
+  write(`${DF}island/warp_x.json`, c2d(mul(F.warp_amplitude, plain('islands_warp_x'))));
+  write(`${DF}island/warp_z.json`, c2d(mul(F.warp_amplitude, plain('islands_warp_z'))));
+  const warped = name => c2d({ type: 'minecraft:shifted_noise', noise: `${NS}:${name}`, xz_scale: 1.0, y_scale: 0.0, shift_x: IS('warp_x'), shift_y: 0.0, shift_z: IS('warp_z') });
+  for (const [n, nm] of [['n_large', 'islands_large'], ['n_mid', 'islands_mid'], ['n_fine', 'islands_fine'], ['n_ridge', 'islands_ridge'], ['n_biome', 'islands_biome']]) write(`${DF}island/${n}.json`, warped(nm));
+  const clampN = (x, lo, hi) => ({ type: 'minecraft:clamp', input: x, min: lo, max: hi });
+  write(`${DF}island/ridge.json`, clampN(add(1.0, mul(-1 / AR.ridge_width, { type: 'minecraft:abs', argument: IS('n_ridge') })), 0.0, 1.0));
+  write(`${DF}island/band.json`, clampN(add(1.0, mul(-1 / (AR.band_half_width * AR.band_half_width), sq(add(IS('n_large'), -AR.band_centre)))), 0.0, 1.0));
+  write(`${DF}island/spawn_bump.json`, mul(SP.strength, sq(clampN(add(1.0, mul(-1 / (SP.radius * SP.radius), add(sq(BX), sq(BZ)))), 0.0, 1.0))));
+  write(`${DF}island/f.json`, c2d(add(add(add(mul(F.a, IS('n_large')), mul(F.b, IS('n_mid'))), mul(F.c, IS('n_fine'))), add(mul(AR.d, mul(IS('ridge'), IS('band'))), IS('spawn_bump')))));
+  write(`${DF}island/w.json`, rc(IS('f'), F.threshold, 99.0, 1.0, 0.0));   // land (F above the threshold); the lazy gate for everything below
+  const smoothFn = x => mul(sq(x), add(3.0, mul(-2.0, x)));
+  // dune mountains and hills fade over the islands; the sawtooth dunes and the sand level are untouched
+  const fs0 = clampN(mul(1 / (2 * FD.pad), add(IS('f'), -(F.threshold - FD.pad))), 0.0, 1.0);
+  write(`${DF}island/dune_fade.json`, c2d(add(1.0, mul(-1.0, smoothFn(fs0)))));
+  const dh = JSON.parse(fs.readFileSync(path.join(OUT, 'worldgen/density_function/arrakis_dune_height.json'), 'utf8')).argument;
+  if (!(dh.type === 'minecraft:add' && dh.argument1.type === 'minecraft:add')) throw new Error('arrakis_dune_height has changed shape');
+  write(`${DF}island/dune_height.json`, c2d(add(add(dh.argument1.argument1, mul(IS('dune_fade'), dh.argument1.argument2)), mul(IS('dune_fade'), dh.argument2))));
+  write(`${DF}island/dune_surface.json`, add(`${NS}:arrakis_sand_level`, IS('dune_height')));
+  write(`${DF}island/t.json`, c2d(smoothFn(clampN(mul(1 / H.ramp, add(IS('f'), -F.threshold)), 0.0, 1.0))));
+  // eight bands of the biome noise, nested range_choice (3 comparisons): the constant of band k
+  const bandTree = vals => { const go = (lo, hi) => lo === hi ? vals[lo] : (m => rc(IS('n_biome'), BN.cuts[m - 1], 1e3, go(m, hi), go(lo, m - 1)))(Math.floor((lo + hi + 1) / 2)); return go(0, 7); };
+  const eff = i => { const mid = (i.vanilla_low + i.vanilla_high) / 2, span = Math.max(i.vanilla_high - i.vanilla_low, H.min_span); return { low: mid - span / 2, span }; };
+  write(`${DF}island/vanilla_top.json`, { type: 'minecraft:find_top_surface', density: `${NS}:overworld/sloped_cheese`, upper_bound: H.search_top, lower_bound: H.search_bottom, cell_height: H.cell_height });
+  write(`${DF}island/relief_n.json`, clampN(mul(add(IS('vanilla_top'), mul(-1.0, bandTree(ISL.biomes.map(i => r9(eff(i).low))))), bandTree(ISL.biomes.map(i => r9(1 / eff(i).span)))), 0.0, 1.0));
+  write(`${DF}island/rise_raw.json`, flat(rc(IS('f'), F.threshold - 0.1, 99.0, add(H.min_rise, mul(add(bandTree(ISL.biomes.map(i => i.max_rise)), -H.min_rise), IS('relief_n'))), 0.0)));
+  write(`${DF}island/rock_height.json`, add(`${NS}:arrakis_sand_level`, { type: 'minecraft:min', argument1: H.cap_above_sand, argument2: mul(IS('t'), { type: 'minecraft:interpolated', argument: IS('rise_raw') }) }));
+  write(`${DF}island/surface.json`, { type: 'minecraft:max', argument1: IS('dune_surface'), argument2: IS('rock_height') });
+  write(`${DF}island/final_density.json`, add(0.5, add(IS('surface'), mul(-1.0, 'minecraft:y'))));
+  write(`${DF}island/rock_mask.json`, rc(IS('f'), F.threshold, 99.0, rc(add(IS('rock_height'), mul(-1.0, IS('dune_surface'))), 0.5, 1e6, 1.0, 0.0), 0.0));
+  for (const key of ['continentalness', 'erosion', 'weirdness']) write(`${DF}overworld/${ROUTER_NOISE[key]}.json`, flat(bandTree(ISL.biomes.map(i => i[key]))));
+  for (const key of CLIM_NOISE) write(`${DF}biome_noise/${ROUTER_NOISE[key]}.json`, flat(add(grid.desert[key], mul(IS('rock_mask'), add(bandTree(ISL.biomes.map(i => i[key])), -grid.desert[key])))));
+  FIELD_SUMMARY = { first_octaves: { large: fo(F.scale_large), mid: fo(F.scale_mid), fine: fo(F.scale_fine), warp: fo(F.warp_scale), ridge: fo(AR.scale), biome: fo(BN.scale) }, biome_cuts: BN.cuts, threshold: F.threshold };
+}
+
 // ---- climate functions
 const CLIM = ['continentalness', 'erosion', 'weirdness', 'temperature', 'humidity'];
 const ROUTER = { continentalness: 'continents', erosion: 'erosion', weirdness: 'ridges', temperature: 'temperature', humidity: 'vegetation' };
 const d0 = grid.desert;
 // (a) terrain graph leaves: the island's full values wherever its mask is above 0 (a step, not a ramp), desert values elsewhere.
 //     The vanilla density is only ever used where the mask is above 0, so those are the only places they matter.
-for (const key of ['continentalness', 'erosion', 'weirdness']) {
+for (const key of NOISE ? [] : ['continentalness', 'erosion', 'weirdness']) {
   let e = d0[key];
   for (const i of islands) e = add(e, mul(rc(`${NS}:island/w_${i.biome}`, 1e-9, 2.0, 1.0, 0.0), r9(i[key] - d0[key])));
   write(`${DF}overworld/${ROUTER[key]}.json`, flat(e));
 }
 // (b) biome-sampler functions, two modes: native = ramp with the terrain mask; sharp = island values out to edge + 100, short ramp
-for (const [mode, prefix] of [['native', 'w_'], ['sharp', 'wb_']]) for (const key of CLIM) {
+for (const [mode, prefix] of NOISE ? [] : [['native', 'w_'], ['sharp', 'wb_']]) for (const key of CLIM) {
   let e = 0.0;
   for (const i of islands) e = add(e, mul(`${NS}:island/${prefix}${i.biome}`, r9(i[key] - d0[key])));
   // outcrop mode: the island's climate only where its rock stands above the sand (mask m), the dune biome elsewhere in the circle
@@ -210,9 +272,8 @@ function noiseSettings(mode) {
   ns.surface_rule.sequence.splice(1, 0, DUNE_SURFACE);        // right after the bedrock gradient, ahead of vanilla's rules
   return ns;
 }
-write('worldgen/noise_settings/arrakis_native.json', noiseSettings('native'));
-write('worldgen/noise_settings/arrakis_sharp.json', noiseSettings('sharp'));
-write('worldgen/noise_settings/arrakis.json', noiseSettings(MODE));
+if (!NOISE) { write('worldgen/noise_settings/arrakis_native.json', noiseSettings('native')); write('worldgen/noise_settings/arrakis_sharp.json', noiseSettings('sharp')); }
+write('worldgen/noise_settings/arrakis.json', noiseSettings(NOISE ? 'noise' : MODE));
 
 // ---- biome copies of the eight islands: carvers emptied, cave-style features removed
 const removed = new Set(grid.removed_features);
@@ -253,10 +314,9 @@ const preset = settings => ({
   }
 });
 write('worldgen/world_preset/arrakis.json', preset('arrakis'));
-write('worldgen/world_preset/arrakis_native.json', preset('arrakis_native'));
-write('worldgen/world_preset/arrakis_sharp.json', preset('arrakis_sharp'));
+if (!NOISE) { write('worldgen/world_preset/arrakis_native.json', preset('arrakis_native')); write('worldgen/world_preset/arrakis_sharp.json', preset('arrakis_sharp')); }
 // the world-type list: "Arrakis" (the mode of grid.json) and the other mode as a second entry (a tag with replace:false merges with vanilla's)
-write('tags/worldgen/world_preset/normal.json', { replace: false, values: [`${NS}:arrakis`, `${NS}:arrakis_${MODE === 'native' ? 'sharp' : 'native'}`] }, path.join(RES, 'data/minecraft'));
+write('tags/worldgen/world_preset/normal.json', { replace: false, values: NOISE ? [`${NS}:arrakis`] : [`${NS}:arrakis`, `${NS}:arrakis_${MODE === 'native' ? 'sharp' : 'native'}`] }, path.join(RES, 'data/minecraft'));
 // TEST ONLY (TEST_PRESETS=1): the dune terrain alone under the same world type, to know the dune height under every island exactly.
 if (process.env.TEST_PRESETS) {
   const nd = noiseSettings('native'); nd.noise_router.final_density = `${NS}:arrakis_final_density`; nd.noise_router.preliminary_surface_level = `${NS}:arrakis_surface_height`;
@@ -267,4 +327,5 @@ if (process.env.TEST_PRESETS) {
 const geo = { radius_semi_axes: [A, B], mean_radius: RM, transition_end_q: +QEND.toFixed(4), transition_end_semi_axes: [+(A * REND).toFixed(1), +(B * REND).toFixed(1)],
   min_clear_gap_between_zones: +minGap.toFixed(1), radial_distance_worst_error_blocks: +worstErr.toFixed(2), worst_error_at: worstAt };
 console.log(JSON.stringify(geo));
+if (FIELD_SUMMARY) console.log(JSON.stringify(FIELD_SUMMARY));
 console.log(`wrote ${islands.length} islands (biome mode of the default world type: ${MODE}), ${mine.length} parameter points`);

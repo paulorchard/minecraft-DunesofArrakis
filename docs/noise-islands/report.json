@@ -1,0 +1,257 @@
+{
+ "scan": "build/rw/ni_s1",
+ "window": {
+  "x0": -1024,
+  "z0": -1024,
+  "size": [
+   2048,
+   2048
+  ],
+  "chunks": 16384
+ },
+ "rock_columns": 737066,
+ "land_share": 0.1757,
+ "islands_ge_64_columns": 45,
+ "size_histogram_columns": {
+  "under_5k": 29,
+  "5k_to_50k": 12,
+  "50k_to_500k": 4,
+  "over_500k": 0
+ },
+ "largest": [
+  {
+   "area": 159936,
+   "longest_axis_bbox_diagonal": 1199,
+   "roundness": 8.3,
+   "centre": [
+    -881,
+    -206
+   ],
+   "touches_window_edge": true
+  },
+  {
+   "area": 157712,
+   "longest_axis_bbox_diagonal": 1098,
+   "roundness": 6.77,
+   "centre": [
+    886,
+    -656
+   ],
+   "touches_window_edge": true
+  },
+  {
+   "area": 137856,
+   "longest_axis_bbox_diagonal": 1028,
+   "roundness": 8.48,
+   "centre": [
+    28,
+    52
+   ],
+   "touches_window_edge": false
+  },
+  {
+   "area": 64480,
+   "longest_axis_bbox_diagonal": 613,
+   "roundness": 5.6,
+   "centre": [
+    606,
+    -428
+   ],
+   "touches_window_edge": false
+  },
+  {
+   "area": 29936,
+   "longest_axis_bbox_diagonal": 294,
+   "roundness": 1.54,
+   "centre": [
+    -315,
+    908
+   ],
+   "touches_window_edge": false
+  },
+  {
+   "area": 28656,
+   "longest_axis_bbox_diagonal": 598,
+   "roundness": 7.64,
+   "centre": [
+    -629,
+    737
+   ],
+   "touches_window_edge": true
+  }
+ ],
+ "roundness": {
+  "big_islands_ge_50k_all": {
+   "n": 4,
+   "median": 8.3,
+   "min": 5.6
+  },
+  "big_islands_not_touching_the_window_edge": {
+   "n": 2,
+   "median": 8.48,
+   "min": 5.6
+  },
+  "small_500_to_50k": {
+   "n": 27,
+   "median": 1.96
+  }
+ },
+ "origin": {
+  "is_rock": true,
+  "island": {
+   "area": 137856,
+   "diagonal": 1028,
+   "roundness": 8.48,
+   "centre": [
+    28,
+    52
+   ]
+  },
+  "top_above_sand": 36
+ },
+ "satellites_under_50k": 41,
+ "chains_of_3_or_more": 3,
+ "chains_top": [
+  {
+   "islands": 19,
+   "centre": [
+    -400,
+    418
+   ]
+  },
+  {
+   "islands": 11,
+   "centre": [
+    -155,
+    -609
+   ]
+  },
+  {
+   "islands": 3,
+   "centre": [
+    664,
+    -583
+   ]
+  }
+ ],
+ "highest_block_above_sand_overall": 80,
+ "over_cap": 0,
+ "five_largest_tops": [
+  80,
+  80,
+  43,
+  78,
+  45
+ ],
+ "five_largest_top_ratio": 1.86,
+ "tallest_island": {
+  "area": 159936,
+  "top": 80,
+  "centre": [
+   -881,
+   -206
+  ]
+ },
+ "coast_step": {
+  "largest": 40,
+  "mean": 0.7,
+  "boundary_pairs": 45205
+ },
+ "oddities": {
+  "columns_with_air_below_surface": 2531,
+  "air_blocks_below_surface_capped": 7117,
+  "columns_with_water_or_lava_on_top": 80,
+  "columns_with_plants_leaves_logs_below_top": 886
+ },
+ "rock_biome_share_pct": {
+  "stony_peaks": 24.1,
+  "eroded_badlands": 15.5,
+  "windswept_savanna": 14.2,
+  "badlands": 13.2,
+  "jagged_peaks": 13.1,
+  "windswept_gravelly_hills": 9.6,
+  "ice_spikes": 6.7,
+  "arrakis_desert": 1.8,
+  "windswept_hills": 1.7
+ },
+ "rock_columns_with_an_island_biome_pct": 98.24,
+ "sand_columns_with_dune_biome_pct": 99.64,
+ "islands_ge_500_columns": 31,
+ "islands_with_more_than_one_biome": 22,
+ "mean_biomes_per_island": 2.13,
+ "band_edge_examples": [
+  {
+   "area": 159936,
+   "centre": [
+    -881,
+    -206
+   ],
+   "biomes": {
+    "jagged_peaks": 40493,
+    "stony_peaks": 81152,
+    "arrakis_desert": 132,
+    "windswept_savanna": 30355,
+    "ice_spikes": 6271
+   }
+  },
+  {
+   "area": 157712,
+   "centre": [
+    886,
+    -656
+   ],
+   "biomes": {
+    "windswept_hills": 4063,
+    "windswept_gravelly_hills": 14951,
+    "ice_spikes": 16200,
+    "arrakis_desert": 93,
+    "jagged_peaks": 20348,
+    "stony_peaks": 28583,
+    "windswept_savanna": 25709,
+    "badlands": 31796,
+    "eroded_badlands": 14476
+   }
+  },
+  {
+   "area": 137856,
+   "centre": [
+    28,
+    52
+   ],
+   "biomes": {
+    "badlands": 32616,
+    "windswept_savanna": 13697,
+    "arrakis_desert": 85,
+    "stony_peaks": 1067,
+    "eroded_badlands": 88656
+   }
+  },
+  {
+   "area": 64480,
+   "centre": [
+    606,
+    -428
+   ],
+   "biomes": {
+    "windswept_savanna": 8463,
+    "stony_peaks": 21495,
+    "jagged_peaks": 20133,
+    "arrakis_desert": 87,
+    "ice_spikes": 13226,
+    "windswept_gravelly_hills": 172
+   }
+  },
+  {
+   "area": 29936,
+   "centre": [
+    -315,
+    908
+   ],
+   "biomes": {
+    "windswept_gravelly_hills": 25415,
+    "arrakis_desert": 18,
+    "windswept_hills": 4215
+   }
+  }
+ ]
+}
