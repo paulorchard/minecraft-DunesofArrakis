@@ -12,7 +12,7 @@ const MPP = +opt('mpp', 2), DUNES = opt('dunes', null);
 const [scanPrefix, outPrefix] = args;
 const grid = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'rewrite', 'grid.json'), 'utf8'));
 const NS = grid.namespace, SEA = 63;
-const A = grid.diameter_x / 2, B = grid.diameter_z / 2, T = grid.transition, RM = (A + B) / 2, REND = 1 + T / RM;
+const A = grid.diameter_x / 2, B = grid.diameter_z / 2, T = grid.transition, RM = (A + B) / 2, TT = Math.max(T, 12), REND = 1 + TT / RM;   // TT: with a hard edge (T = 0) the analysis band outside the edge is 12 blocks
 const islands = grid.islands.map(p => Object.assign({ cx: grid.origin_x + grid.pitch * p.col, cz: grid.origin_z + grid.pitch * p.row }, p));
 const DUNE_BIOME = NS + ':' + grid.desert.biome;
 const load = prefix => {
@@ -41,7 +41,7 @@ const radialRows = [];
 for (let k = 0; k < islands.length; k++) {
   const i = islands[k], ti = hdr.biomes.indexOf(NS + ':' + i.biome), rec = {};
   let inner = 0, innerTot = 0; const others = {}, ringB = {}, ringBins = Array.from({ length: 10 }, () => ({})), ellipseH = [], ringH = [];
-  let ringTot = 0, water = { ellipse: 0, ring: 0 };
+  let edgeStep = 0; const outsideH = []; let ringTot = 0, water = { ellipse: 0, ring: 0 };
   const stepMax = { ellipse: 0, ring: 0 }, stepList = { ellipse: [], ring: [] };
   for (let z = Math.floor(i.cz - B * REND - 2); z <= Math.ceil(i.cz + B * REND + 2); z++) for (let x = Math.floor(i.cx - A * REND - 2); x <= Math.ceil(i.cx + A * REND + 2); x++) {
     if (x < x0 || x >= x0 + W || z < z0 || z >= z0 + H) continue;
@@ -52,18 +52,19 @@ for (let k = 0; k < islands.length; k++) {
     if (!region) continue;
     if (region === 'ellipse') ellipseH.push(S.top[o]); else {
       ringTot++; ringH.push(S.top[o]); const b = bname(S.bio[o]); ringB[b] = (ringB[b] || 0) + 1;
-      const bin = Math.min(9, Math.floor(dist(q) / (T / 10))); ringBins[bin][b] = (ringBins[bin][b] || 0) + 1;
+      const bin = Math.min(9, Math.floor(dist(q) / (TT / 10))); ringBins[bin][b] = (ringBins[bin][b] || 0) + 1;
     }
+    if (region === 'ring' && dist(q) <= 6) outsideH.push(S.top[o]);
     if (S.top[o] < SEA && /water/.test(hdr.blocks[S.cover[o]])) water[region]++;
-    for (const [dx, dz] of [[1, 0], [0, 1]]) { if (x + dx >= x0 + W || z + dz >= z0 + H) continue; const s = Math.abs(S.top[o] - S.top[o + dz * W + dx]); if (s > stepMax[region]) stepMax[region] = s; stepList[region].push(s); }
+    for (const [dx, dz] of [[1, 0], [0, 1]]) { if (x + dx >= x0 + W || z + dz >= z0 + H) continue; const s = Math.abs(S.top[o] - S.top[o + dz * W + dx]); if (s > stepMax[region]) stepMax[region] = s; { const o2 = o + dz * W + dx, in1 = q <= 1, in2 = who[o2] === k ? qmin[o2] <= 1 : false; if (in1 !== in2 && s > edgeStep) edgeStep = s; } stepList[region].push(s); }
   }
   rec.inner_target_share_pct = pct(inner, innerTot); rec.inner_other_biomes = others; worstInner = Math.min(worstInner, rec.inner_target_share_pct);
   rec.ring_columns = ringTot; rec.ring_biomes_pct = Object.fromEntries(Object.entries(ringB).sort((a, b) => b[1] - a[1]).map(([b, c]) => [b, pct(c, ringTot)]));
-  rec.ring_biomes_by_distance_pct = ringBins.map((bin, bi) => { const t = Object.values(bin).reduce((a, b) => a + b, 0); return { from: bi * T / 10, to: (bi + 1) * T / 10, biomes: Object.fromEntries(Object.entries(bin).map(([b, c]) => [b, pct(c, t)])) }; });
+  rec.ring_biomes_by_distance_pct = ringBins.map((bin, bi) => { const t = Object.values(bin).reduce((a, b) => a + b, 0); return { from: bi * TT / 10, to: (bi + 1) * TT / 10, biomes: Object.fromEntries(Object.entries(bin).map(([b, c]) => [b, pct(c, t)])) }; });
   const qt = quant(ellipseH, [0.05, 0.5, 0.95]); rec.ellipse_height_p5_p50_p95_max = [...qt, ellipseH.reduce((a, b) => a > b ? a : b, -999)];
   const sq = l => { const s = Int32Array.from(l).sort(); return s.length ? s[Math.floor(s.length * 0.999)] : 0; };
   rec.max_neighbour_step = { ellipse: stepMax.ellipse, ring: stepMax.ring, ellipse_p99_9: sq(stepList.ellipse), ring_p99_9: sq(stepList.ring) };
-  rec.water_columns = water;
+  rec.water_columns = water; rec.edge_step_max = edgeStep; rec.height_just_outside_p5_p50_p95 = quant(outsideH, [0.05, 0.5, 0.95]);
   // radial profile: east-going line from the centre, every 20 blocks to 450
   const prof = [];
   for (let d = 0; d <= 450; d += 20) {
@@ -145,7 +146,7 @@ function writePng(file, w, h, rgb) {
 }
 const PW = Math.floor(W / MPP), PH = Math.floor(H / MPP);
 function overlay(img, w) {   // thin lines: edge (black), edge + 100 (red), edge + 200 (grey)
-  const rings = [[1, [0, 0, 0]], [(1 + 100 / RM) ** 2, [200, 0, 0]], [QEND, [110, 110, 110]]];
+  const rings = T > 0 ? [[1, [0, 0, 0]], [(1 + 100 / RM) ** 2, [200, 0, 0]], [QEND, [110, 110, 110]]] : [[1, [220, 0, 0]]];
   for (const i of islands) for (const [q, c] of rings) for (let a = 0; a < 3600; a++) {
     const t = a * Math.PI / 1800, x = i.cx + A * Math.sqrt(q) * Math.cos(t), z = i.cz + B * Math.sqrt(q) * Math.sin(t), px = Math.floor((x - x0) / MPP), py = Math.floor((z - z0) / MPP);
     if (px < 0 || py < 0 || px >= PW || py >= PH) continue; const o = (py * w + px) * 3; img[o] = c[0]; img[o + 1] = c[1]; img[o + 2] = c[2];
@@ -155,7 +156,7 @@ function overlay(img, w) {   // thin lines: edge (black), edge + 100 (red), edge
   const LEG = 70, h = PH + LEG, img = new Uint8Array(PW * h * 3).fill(255);
   for (let py = 0; py < PH; py++) for (let px = 0; px < PW; px++) { const k = (py * MPP + (MPP >> 1)) * W + px * MPP + (MPP >> 1), c = COL[bname(S.bio[k])] || [255, 0, 255], o = (py * PW + px) * 3; img[o] = c[0]; img[o + 1] = c[1]; img[o + 2] = c[2]; }
   overlay(img, PW);
-  text(img, PW, 'BIOME MAP ' + MPP + ' BLOCKS PER PIXEL  X EAST Z SOUTH  ORIGIN ' + x0 + ' ' + z0 + '  LINES: BLACK = ELLIPSE EDGE  RED = EDGE+100  GREY = EDGE+200', 8, PH + 8, [0, 0, 0], 2);
+  text(img, PW, 'BIOME MAP ' + MPP + ' BLOCKS PER PIXEL  X EAST Z SOUTH  ORIGIN ' + x0 + ' ' + z0 + '  LINES: ' + (T > 0 ? 'BLACK = ELLIPSE EDGE  RED = EDGE+100  GREY = EDGE+200' : 'RED = CIRCLE EDGE'), 8, PH + 8, [0, 0, 0], 2);
   Object.keys(COL).forEach((nm, i) => { const cx = 8 + (i % 5) * 200, cy = PH + 28 + Math.floor(i / 5) * 16; for (let a = 0; a < 12; a++) for (let b = 0; b < 12; b++) { const o = ((cy + b) * PW + cx + a) * 3; img[o] = COL[nm][0]; img[o + 1] = COL[nm][1]; img[o + 2] = COL[nm][2]; } text(img, PW, nm.replace('windswept_', 'WS_').replace('arrakis_', 'DUNE_'), cx + 16, cy + 1, [0, 0, 0], 1); });
   writePng(outPrefix + '_biomes.png', PW, h, img);
 }

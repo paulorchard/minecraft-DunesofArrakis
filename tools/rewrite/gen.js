@@ -7,7 +7,7 @@
 // Nothing under data/minecraft is overridden (the world-type list is a tag with replace:false, which merges).
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
-const grid = JSON.parse(fs.readFileSync(path.join(__dirname, 'grid.json'), 'utf8'));
+const grid = JSON.parse(fs.readFileSync(process.env.GRID_FILE || path.join(__dirname, 'grid.json'), 'utf8'));
 const NS = grid.namespace;
 const VAN = path.join(ROOT, 'build/vanilla/data/minecraft/worldgen');
 const RES = path.join(ROOT, 'src/main/resources');
@@ -94,9 +94,11 @@ function sharpPts() {
   return pts;
 }
 const DF = 'worldgen/density_function/';
+// transition 0 / ramp 0: a true step at the circle (1 where the squared normalised distance q < 1, else 0), no degenerate spline.
+const stepMask = i => rc(qFn(i), 0.0, 1.0, 1.0, 0.0);
 for (const i of islands) {
-  write(`${DF}island/w_${i.biome}.json`, splineOver(i, terrainPts()));
-  write(`${DF}island/wb_${i.biome}.json`, splineOver(i, sharpPts()));
+  write(`${DF}island/w_${i.biome}.json`, T > 0 ? splineOver(i, terrainPts()) : stepMask(i));
+  write(`${DF}island/wb_${i.biome}.json`, (T > 0 && grid.sharp_ramp > 0) ? splineOver(i, sharpPts()) : stepMask(i));
 }
 // total terrain mask, exact per block (cache_2d, never flat_cache). The zones never overlap (checked above), so instead of summing all
 // eight masks it picks the one island whose bounding box holds the block: a nested range_choice on block_x (columns), then block_z (rows).

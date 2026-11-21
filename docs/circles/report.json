@@ -1,0 +1,2366 @@
+{
+ "scan": "build/rw/circ_s1",
+ "mode_note": "biome mode is a property of the world type used for the scan",
+ "window": {
+  "x0": 96,
+  "z0": 96,
+  "width": 1312,
+  "height": 720
+ },
+ "chunks": 3690,
+ "islands": {
+  "windswept_hills": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "windswept_hills": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "windswept_hills": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "windswept_hills": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "windswept_hills": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    78,
+    86,
+    97,
+    125
+   ],
+   "max_neighbour_step": {
+    "ellipse": 39,
+    "ring": 34,
+    "ellipse_p99_9": 33,
+    "ring_p99_9": 28
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 39,
+   "height_just_outside_p5_p50_p95": [
+    82,
+    102,
+    124
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 88,
+     "block": "grass_block",
+     "biome": "windswept_hills"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 97,
+     "block": "stone",
+     "biome": "windswept_hills"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 90,
+     "block": "stone",
+     "biome": "windswept_hills"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 127,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 126,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 123,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 120,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 117,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 113,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 109,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 105,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 220,
+     "q": 19.36,
+     "beyond_edge": 170,
+     "y": 100,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 240,
+     "q": 23.04,
+     "beyond_edge": 190,
+     "y": 95,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 260,
+     "q": 27.04,
+     "beyond_edge": 210,
+     "y": 104,
+     "block": "gravel",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 280,
+     "q": 31.36,
+     "beyond_edge": 230,
+     "y": 122,
+     "block": "grass_block",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 300,
+     "q": 36,
+     "beyond_edge": 250,
+     "y": 124,
+     "block": "gravel",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 320,
+     "q": 40.96,
+     "beyond_edge": 270,
+     "y": 122,
+     "block": "grass_block",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 340,
+     "q": 46.24,
+     "beyond_edge": 290,
+     "y": 85,
+     "block": "grass_block",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 360,
+     "q": 51.84,
+     "beyond_edge": 310,
+     "y": 76,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 380,
+     "q": 57.76,
+     "beyond_edge": 330,
+     "y": 72,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 400,
+     "q": 64,
+     "beyond_edge": 350,
+     "y": 70,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 420,
+     "q": 70.56,
+     "beyond_edge": 370,
+     "y": 68,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 440,
+     "q": 77.44,
+     "beyond_edge": 390,
+     "y": 66,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    301.5,
+    301.5
+   ],
+   "configured_centre": [
+    300,
+    300
+   ]
+  },
+  "windswept_gravelly_hills": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "windswept_gravelly_hills": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "windswept_gravelly_hills": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "windswept_gravelly_hills": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "windswept_gravelly_hills": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    82,
+    116,
+    128,
+    131
+   ],
+   "max_neighbour_step": {
+    "ellipse": 43,
+    "ring": 32,
+    "ellipse_p99_9": 38,
+    "ring_p99_9": 31
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 42,
+   "height_just_outside_p5_p50_p95": [
+    77,
+    90,
+    107
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 124,
+     "block": "gravel",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 122,
+     "block": "grass_block",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 85,
+     "block": "grass_block",
+     "biome": "windswept_gravelly_hills"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 76,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 72,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 70,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 68,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 66,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 64,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 64,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 65,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 220,
+     "q": 19.36,
+     "beyond_edge": 170,
+     "y": 65,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 240,
+     "q": 23.04,
+     "beyond_edge": 190,
+     "y": 65,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 260,
+     "q": 27.04,
+     "beyond_edge": 210,
+     "y": 70,
+     "block": "snow_block",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 280,
+     "q": 31.36,
+     "beyond_edge": 230,
+     "y": 80,
+     "block": "packed_ice",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 300,
+     "q": 36,
+     "beyond_edge": 250,
+     "y": 74,
+     "block": "packed_ice",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 320,
+     "q": 40.96,
+     "beyond_edge": 270,
+     "y": 67,
+     "block": "packed_ice",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 340,
+     "q": 46.24,
+     "beyond_edge": 290,
+     "y": 65,
+     "block": "snow_block",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 360,
+     "q": 51.84,
+     "beyond_edge": 310,
+     "y": 67,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 380,
+     "q": 57.76,
+     "beyond_edge": 330,
+     "y": 66,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 400,
+     "q": 64,
+     "beyond_edge": 350,
+     "y": 65,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 420,
+     "q": 70.56,
+     "beyond_edge": 370,
+     "y": 64,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 440,
+     "q": 77.44,
+     "beyond_edge": 390,
+     "y": 64,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    601.5,
+    301.5
+   ],
+   "configured_centre": [
+    600,
+    300
+   ]
+  },
+  "ice_spikes": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "ice_spikes": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "ice_spikes": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "ice_spikes": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "ice_spikes": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    63,
+    68,
+    73,
+    113
+   ],
+   "max_neighbour_step": {
+    "ellipse": 42,
+    "ring": 8,
+    "ellipse_p99_9": 38,
+    "ring_p99_9": 6
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 9,
+   "height_just_outside_p5_p50_p95": [
+    64,
+    66,
+    68
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 74,
+     "block": "packed_ice",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 67,
+     "block": "packed_ice",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 65,
+     "block": "snow_block",
+     "biome": "ice_spikes"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 67,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 66,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 65,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 64,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 64,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 65,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 70,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 77,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 220,
+     "q": 19.36,
+     "beyond_edge": 170,
+     "y": 88,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 240,
+     "q": 23.04,
+     "beyond_edge": 190,
+     "y": 100,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 260,
+     "q": 27.04,
+     "beyond_edge": 210,
+     "y": 228,
+     "block": "snow_block",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 280,
+     "q": 31.36,
+     "beyond_edge": 230,
+     "y": 221,
+     "block": "snow_block",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 300,
+     "q": 36,
+     "beyond_edge": 250,
+     "y": 231,
+     "block": "snow_block",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 320,
+     "q": 40.96,
+     "beyond_edge": 270,
+     "y": 236,
+     "block": "stone",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 340,
+     "q": 46.24,
+     "beyond_edge": 290,
+     "y": 201,
+     "block": "stone",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 360,
+     "q": 51.84,
+     "beyond_edge": 310,
+     "y": 105,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 380,
+     "q": 57.76,
+     "beyond_edge": 330,
+     "y": 105,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 400,
+     "q": 64,
+     "beyond_edge": 350,
+     "y": 106,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 420,
+     "q": 70.56,
+     "beyond_edge": 370,
+     "y": 106,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 440,
+     "q": 77.44,
+     "beyond_edge": 390,
+     "y": 107,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    901.5,
+    301.5
+   ],
+   "configured_centre": [
+    900,
+    300
+   ]
+  },
+  "jagged_peaks": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "jagged_peaks": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "jagged_peaks": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "jagged_peaks": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "jagged_peaks": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    206,
+    225,
+    254,
+    255
+   ],
+   "max_neighbour_step": {
+    "ellipse": 169,
+    "ring": 168,
+    "ellipse_p99_9": 160,
+    "ring_p99_9": 159
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 169,
+   "height_just_outside_p5_p50_p95": [
+    82,
+    100,
+    109
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 231,
+     "block": "snow_block",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 236,
+     "block": "stone",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 201,
+     "block": "stone",
+     "biome": "jagged_peaks"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 105,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 105,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 106,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 106,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 107,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 107,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 107,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 110,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    1201.5,
+    301.5
+   ],
+   "configured_centre": [
+    1200,
+    300
+   ]
+  },
+  "stony_peaks": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "stony_peaks": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "stony_peaks": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "stony_peaks": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "stony_peaks": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    207,
+    226,
+    254,
+    255
+   ],
+   "max_neighbour_step": {
+    "ellipse": 158,
+    "ring": 156,
+    "ellipse_p99_9": 149,
+    "ring_p99_9": 149
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 158,
+   "height_just_outside_p5_p50_p95": [
+    85,
+    116,
+    123
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 221,
+     "block": "stone",
+     "biome": "stony_peaks"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 220,
+     "block": "stone",
+     "biome": "stony_peaks"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 229,
+     "block": "stone",
+     "biome": "stony_peaks"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 115,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 110,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 104,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 97,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 90,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 90,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 96,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 104,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 220,
+     "q": 19.36,
+     "beyond_edge": 170,
+     "y": 111,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 240,
+     "q": 23.04,
+     "beyond_edge": 190,
+     "y": 113,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 260,
+     "q": 27.04,
+     "beyond_edge": 210,
+     "y": 77,
+     "block": "coarse_dirt",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 280,
+     "q": 31.36,
+     "beyond_edge": 230,
+     "y": 87,
+     "block": "grass_block",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 300,
+     "q": 36,
+     "beyond_edge": 250,
+     "y": 68,
+     "block": "grass_block",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 320,
+     "q": 40.96,
+     "beyond_edge": 270,
+     "y": 73,
+     "block": "grass_block",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 340,
+     "q": 46.24,
+     "beyond_edge": 290,
+     "y": 138,
+     "block": "grass_block",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 360,
+     "q": 51.84,
+     "beyond_edge": 310,
+     "y": 85,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 380,
+     "q": 57.76,
+     "beyond_edge": 330,
+     "y": 80,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 400,
+     "q": 64,
+     "beyond_edge": 350,
+     "y": 76,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 420,
+     "q": 70.56,
+     "beyond_edge": 370,
+     "y": 73,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 440,
+     "q": 77.44,
+     "beyond_edge": 390,
+     "y": 70,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    301.5,
+    601.5
+   ],
+   "configured_centre": [
+    300,
+    600
+   ]
+  },
+  "windswept_savanna": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "windswept_savanna": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "windswept_savanna": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "windswept_savanna": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "windswept_savanna": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    66,
+    74,
+    137,
+    140
+   ],
+   "max_neighbour_step": {
+    "ellipse": 61,
+    "ring": 61,
+    "ellipse_p99_9": 60,
+    "ring_p99_9": 60
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 61,
+   "height_just_outside_p5_p50_p95": [
+    77,
+    90,
+    111
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 68,
+     "block": "grass_block",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 73,
+     "block": "grass_block",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 138,
+     "block": "grass_block",
+     "biome": "windswept_savanna"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 85,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 80,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 76,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 73,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 70,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 68,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 66,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 65,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 220,
+     "q": 19.36,
+     "beyond_edge": 170,
+     "y": 64,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 240,
+     "q": 23.04,
+     "beyond_edge": 190,
+     "y": 66,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 260,
+     "q": 27.04,
+     "beyond_edge": 210,
+     "y": 118,
+     "block": "terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 280,
+     "q": 31.36,
+     "beyond_edge": 230,
+     "y": 119,
+     "block": "terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 300,
+     "q": 36,
+     "beyond_edge": 250,
+     "y": 119,
+     "block": "terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 320,
+     "q": 40.96,
+     "beyond_edge": 270,
+     "y": 118,
+     "block": "white_terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 340,
+     "q": 46.24,
+     "beyond_edge": 290,
+     "y": 117,
+     "block": "light_gray_terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 360,
+     "q": 51.84,
+     "beyond_edge": 310,
+     "y": 82,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 380,
+     "q": 57.76,
+     "beyond_edge": 330,
+     "y": 81,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 400,
+     "q": 64,
+     "beyond_edge": 350,
+     "y": 81,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 420,
+     "q": 70.56,
+     "beyond_edge": 370,
+     "y": 81,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 440,
+     "q": 77.44,
+     "beyond_edge": 390,
+     "y": 80,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    601.5,
+    601.5
+   ],
+   "configured_centre": [
+    600,
+    600
+   ]
+  },
+  "badlands": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "badlands": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "badlands": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "badlands": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "badlands": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    117,
+    118,
+    120,
+    120
+   ],
+   "max_neighbour_step": {
+    "ellipse": 56,
+    "ring": 56,
+    "ellipse_p99_9": 54,
+    "ring_p99_9": 54
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 56,
+   "height_just_outside_p5_p50_p95": [
+    65,
+    74,
+    83
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 119,
+     "block": "terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 118,
+     "block": "white_terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 117,
+     "block": "light_gray_terracotta",
+     "biome": "badlands"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 82,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 81,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 81,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 81,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 80,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 80,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 79,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 78,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 220,
+     "q": 19.36,
+     "beyond_edge": 170,
+     "y": 76,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 240,
+     "q": 23.04,
+     "beyond_edge": 190,
+     "y": 73,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 260,
+     "q": 27.04,
+     "beyond_edge": 210,
+     "y": 71,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 280,
+     "q": 31.36,
+     "beyond_edge": 230,
+     "y": 71,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 300,
+     "q": 36,
+     "beyond_edge": 250,
+     "y": 70,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 320,
+     "q": 40.96,
+     "beyond_edge": 270,
+     "y": 69,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 340,
+     "q": 46.24,
+     "beyond_edge": 290,
+     "y": 69,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 360,
+     "q": 51.84,
+     "beyond_edge": 310,
+     "y": 83,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 380,
+     "q": 57.76,
+     "beyond_edge": 330,
+     "y": 91,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 400,
+     "q": 64,
+     "beyond_edge": 350,
+     "y": 97,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 420,
+     "q": 70.56,
+     "beyond_edge": 370,
+     "y": 98,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 440,
+     "q": 77.44,
+     "beyond_edge": 390,
+     "y": 94,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    901.5,
+    601.5
+   ],
+   "configured_centre": [
+    900,
+    600
+   ]
+  },
+  "eroded_badlands": {
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 4212,
+   "ring_biomes_pct": {
+    "arrakis_desert": 94.63,
+    "eroded_badlands": 5.37
+   },
+   "ring_biomes_by_distance_pct": [
+    {
+     "from": 0,
+     "to": 1.2,
+     "biomes": {
+      "arrakis_desert": 63.5,
+      "eroded_badlands": 36.5
+     }
+    },
+    {
+     "from": 1.2,
+     "to": 2.4,
+     "biomes": {
+      "arrakis_desert": 82.65,
+      "eroded_badlands": 17.35
+     }
+    },
+    {
+     "from": 2.4,
+     "to": 3.6,
+     "biomes": {
+      "arrakis_desert": 96.77,
+      "eroded_badlands": 3.23
+     }
+    },
+    {
+     "from": 3.6,
+     "to": 4.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 4.8,
+     "to": 6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 6,
+     "to": 7.2,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 7.2,
+     "to": 8.4,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 8.4,
+     "to": 9.6,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 9.6,
+     "to": 10.8,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    },
+    {
+     "from": 10.8,
+     "to": 12,
+     "biomes": {
+      "arrakis_desert": 100
+     }
+    }
+   ],
+   "ellipse_height_p5_p50_p95_max": [
+    69,
+    71,
+    72,
+    99
+   ],
+   "max_neighbour_step": {
+    "ellipse": 29,
+    "ring": 30,
+    "ellipse_p99_9": 27,
+    "ring_p99_9": 29
+   },
+   "water_columns": {
+    "ellipse": 0,
+    "ring": 0
+   },
+   "edge_step_max": 30,
+   "height_just_outside_p5_p50_p95": [
+    67,
+    81,
+    101
+   ],
+   "radial_east": [
+    {
+     "r": 0,
+     "q": 0,
+     "beyond_edge": -50,
+     "y": 70,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 20,
+     "q": 0.16,
+     "beyond_edge": -30,
+     "y": 69,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 40,
+     "q": 0.64,
+     "beyond_edge": -10,
+     "y": 69,
+     "block": "red_sand",
+     "biome": "eroded_badlands"
+    },
+    {
+     "r": 60,
+     "q": 1.44,
+     "beyond_edge": 10,
+     "y": 83,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 80,
+     "q": 2.56,
+     "beyond_edge": 30,
+     "y": 91,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 100,
+     "q": 4,
+     "beyond_edge": 50,
+     "y": 97,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 120,
+     "q": 5.76,
+     "beyond_edge": 70,
+     "y": 98,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 140,
+     "q": 7.84,
+     "beyond_edge": 90,
+     "y": 94,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 160,
+     "q": 10.24,
+     "beyond_edge": 110,
+     "y": 88,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 180,
+     "q": 12.96,
+     "beyond_edge": 130,
+     "y": 85,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    },
+    {
+     "r": 200,
+     "q": 16,
+     "beyond_edge": 150,
+     "y": 85,
+     "block": "sand",
+     "biome": "arrakis_desert"
+    }
+   ],
+   "biome_outer_boundary_beyond_edge": {
+    "mean": -0.7,
+    "sd": 1.87,
+    "min": -5,
+    "max": 3,
+    "rays": 360
+   },
+   "target_biome_extent_through_centre": {
+    "east_west": 100,
+    "north_south": 100
+   },
+   "target_biome_centroid": [
+    1201.5,
+    601.5
+   ],
+   "configured_centre": [
+    1200,
+    600
+   ]
+  }
+ },
+ "dunes": {
+  "columns": 775832,
+  "dune_biome_share_pct": 100,
+  "other_biomes": {},
+  "top_block_sand_pct": 100,
+  "columns_with_void_below_top": 0,
+  "water_columns": 0,
+  "height_above_sand_p5_p50_p95_max": [
+   2,
+   18,
+   66,
+   117
+  ]
+ },
+ "caves": {
+  "void_blocks": 39328,
+  "sealed_void_blocks": 1,
+  "sealed_examples": [
+   [
+    938,
+    66,
+    309
+   ]
+  ],
+  "void_blocks_by_area": {
+   "windswept_gravelly_hills:ellipse:open": 3678,
+   "ice_spikes:ellipse:open": 862,
+   "ice_spikes:ring:open": 34,
+   "ice_spikes:ellipse:sealed": 1,
+   "windswept_savanna:ellipse:open": 34753
+  },
+  "columns_with_void_below_top_by_area": {
+   "windswept_gravelly_hills:ellipse": 258,
+   "ice_spikes:ellipse": 310,
+   "ice_spikes:ring": 22,
+   "windswept_savanna:ellipse": 1193
+  }
+ },
+ "layout": {},
+ "census": {
+  "ores_total": 177693,
+  "fluids": {
+   "minecraft:lava": 107
+  }
+ },
+ "biome_sections": {
+  "islandcraft_dunesofarrakis:arrakis_desert": 84384,
+  "islandcraft_dunesofarrakis:windswept_hills": 936,
+  "islandcraft_dunesofarrakis:stony_peaks": 984,
+  "islandcraft_dunesofarrakis:windswept_gravelly_hills": 984,
+  "islandcraft_dunesofarrakis:ice_spikes": 984,
+  "islandcraft_dunesofarrakis:windswept_savanna": 984,
+  "islandcraft_dunesofarrakis:badlands": 984,
+  "islandcraft_dunesofarrakis:jagged_peaks": 936,
+  "islandcraft_dunesofarrakis:eroded_badlands": 984
+ },
+ "worst_inner_target_share_pct": 100
+}
