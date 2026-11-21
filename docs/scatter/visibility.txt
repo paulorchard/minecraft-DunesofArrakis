@@ -1,0 +1,11 @@
+masses wholly inside the windows: 7
+small        5 masses; more than 80% dune-covered: 0; not visible at all (no rock on the surface): 0; median dune-covered share 9%; smallest visible: 98 m across, peak 14 m above the sand
+spawn        2 masses; more than 80% dune-covered: 0; not visible at all (no rock on the surface): 0; median dune-covered share 29%; smallest visible: 377 m across, peak 46 m above the sand
+smallest visible island overall: 98 m across (small), peak 14 m above y 63
+masses wholly inside the windows: 22
+large        3 masses; more than 80% dune-covered: 0; not visible at all (no rock on the surface): 0; median dune-covered share 3%; smallest visible: 7881 m across, peak 73 m above the sand
+medium       8 masses; more than 80% dune-covered: 0; not visible at all (no rock on the surface): 0; median dune-covered share 5%; smallest visible: 1132 m across, peak 140 m above the sand
+small        7 masses; more than 80% dune-covered: 0; not visible at all (no rock on the surface): 0; median dune-covered share 9%; smallest visible: 98 m across, peak 14 m above the sand
+satellite    2 masses; more than 80% dune-covered: 1; not visible at all (no rock on the surface): 1; median dune-covered share 100%; smallest visible: 326 m across, peak 10 m above the sand
+spawn        2 masses; more than 80% dune-covered: 0; not visible at all (no rock on the surface): 0; median dune-covered share 29%; smallest visible: 377 m across, peak 46 m above the sand
+smallest visible island overall: 98 m across (small), peak 14 m above y 63

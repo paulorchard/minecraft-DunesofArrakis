@@ -36,3 +36,23 @@ spire_edge	1	-18672	-12467	prompt 11: thinning edge of the same cluster
 spire_island	1	-23905	-7769	prompt 11: ring island 1052 (off green) with spires
 spire_purple	1	-21854	-7900	prompt 11: purple cluster heart with override 1 (compare with tough_mesa kind 3, plain_purple kind 2)
 spire_bare	1	-2625	-12775	prompt 11: kind 1 rock without features (the largest cluster-free circle of green)
+sc_spawn	1	0	0	spawn island
+sc_dest	1	-770	842	first destination, small across 670 m, kind 1
+sc_large	1	8753	-6807	coast and interior of the largest large mass (12081 m across), kind 2
+sc_kind1	1	12669	3739	kind 1, medium 2101 m across at 13595 m from the origin
+sc_kind2	1	-5377	-1422	kind 2, medium 3402 m across at 6288 m from the origin
+sc_kind3	1	-3083	4392	kind 3, medium 2604 m across at 6531 m from the origin
+sc_medium	1	1412	10368	medium island 1626 m across, kind 3
+sc_small	1	-3400	875	small island 361 m across, kind 2
+sc_dense	1	-15000	16500	densest 0.9 km square: 4 masses (a 4 km square around -6000 14000 holds 11)
+sc_bare	1	9525	24975	centre of the largest empty circle, 16455 m across
+sc_spawn	2	0	0	spawn island
+sc_dest	2	1292	-640	first destination, small across 803 m, kind 1
+sc_large	2	9462	-8924	coast and interior of the largest large mass (10950 m across), kind 1
+sc_kind1	2	10889	-5656	kind 1, medium 1597 m across at 12760 m from the origin
+sc_kind2	2	5101	-234	kind 2, large 7881 m across at 7538 m from the origin
+sc_kind3	2	-6209	-3283	kind 3, medium 3152 m across at 7960 m from the origin
+sc_medium	2	2588	2877	medium island 1132 m across, kind 1
+sc_small	2	-242	-2428	small island 504 m across, kind 1
+sc_dense	2	-6000	18500	densest 0.9 km square: 5 masses (a 4 km square around -16000 4000 holds 14)
+sc_bare	2	550	-18775	centre of the largest empty circle, 10144 m across

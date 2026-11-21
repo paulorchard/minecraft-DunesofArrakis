@@ -1,0 +1,15 @@
+t12m_open_desert_s1: columns 1048576; dune height above y 63: p50 32 p95 86 max 113; share above 20 m 67.8%; share within +-1 of y 63 1.0%; crests 334, spacing along x median 91 m (along the wind about 82 m), crest prominence median 13, wavelength / height 6.3
+t12dm33_open_desert_s1: columns 1048576; dune height above y 63: p50 11 p95 28 max 37; share above 20 m 21.5%; share within +-1 of y 63 7.0%; crests 439, spacing along x median 20 m (along the wind about 18 m), crest prominence median 6, wavelength / height 3.0
+t12d1_sc_bare_s1: columns 1048576; dune height above y 63: p50 28 p95 86 max 108; share above 20 m 60.3%; share within +-1 of y 63 2.3%; crests 391, spacing along x median 67 m (along the wind about 61 m), crest prominence median 12, wavelength / height 5.1
+t12_sc_bare_s1: columns 1048576; dune height above y 63: p50 10 p95 28 max 36; share above 20 m 24.3%; share within +-1 of y 63 9.8%; crests 350, spacing along x median 26 m (along the wind about 24 m), crest prominence median 6, wavelength / height 3.9
+t12d1_sc_bare_s2: columns 1048576; dune height above y 63: p50 26 p95 94 max 119; share above 20 m 59.3%; share within +-1 of y 63 2.1%; crests 247, spacing along x median 193 m (along the wind about 175 m), crest prominence median 16, wavelength / height 10.9
+t12_sc_bare_s2: columns 1048576; dune height above y 63: p50 9 p95 31 max 39; share above 20 m 17.3%; share within +-1 of y 63 8.8%; crests 320, spacing along x median 26 m (along the wind about 24 m), crest prominence median 7, wavelength / height 3.4
+crest displacement A to B (crests of A at least 12 high, nearest crest of B on the row): n 304, median 13, p90 230, max 642, share within 4 blocks 15.5%
+crest displacement A to B (crests of A at least 12 high, nearest crest of B on the row): n 368, median 15, p90 283, max 616, share within 4 blocks 21.5%
+crest displacement A to B (crests of A at least 12 high, nearest crest of B on the row): n 220, median 10, p90 220, max 756, share within 4 blocks 23.6%
+highest point per 64 m cell (cells with a 1.0 crest >= 15 m): n 228, displacement median 5.0, p90 16.6, share <4 blocks 38%
+highest point per 64 m cell (cells with a 1.0 crest >= 15 m): n 232, displacement median 4.0, p90 27.0, share <4 blocks 42%
+highest point per 64 m cell (cells with a 1.0 crest >= 15 m): n 229, displacement median 4.0, p90 20.1, share <4 blocks 45%
+dune columns 1045636: |h(0.33) - 0.33*h(1.0)| mean 0.26, max 0.7, within 1 block 100.0%; correlation of the two height fields 0.9994
+dune columns 1041167: |h(0.33) - 0.33*h(1.0)| mean 0.53, max 23.4, within 1 block 97.8%; correlation of the two height fields 0.9755
+dune columns 1041695: |h(0.33) - 0.33*h(1.0)| mean 0.26, max 0.7, within 1 block 100.0%; correlation of the two height fields 0.9995

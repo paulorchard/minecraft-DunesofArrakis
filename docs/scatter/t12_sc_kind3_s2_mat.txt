@@ -1,0 +1,14 @@
+columns 1048576, air below the surface 0; base columns 382981, tough-rock columns 232116
+forbidden blocks inside the footprint: none
+census inside the footprint by band:
+  above63 stone 60.8%, islandcraft_dunesofarrakis:dune_sand 14.2%, sandstone 13.6%, andesite 5.5%, diorite 2.3%, granite 2.2%, tuff 1.1%, calcite 0.4%
+  8..63   stone 86.1%, andesite 4.3%, granite 3.3%, diorite 3.3%, tuff 2.2%, calcite 0.8%, sandstone 0.0%, islandcraft_dunesofarrakis:dune_sand 0.0%
+  0..7    deepslate 56.1%, stone 43.5%, tuff 0.3%
+  below0  deepslate 94.8%, bedrock 4.7%, tuff 0.5%
+census outside the footprint by band:
+  above63 islandcraft_dunesofarrakis:dune_sand 100.0%
+  8..63   stone 55.4%, sandstone 29.9%, andesite 3.0%, granite 2.8%, smooth_sandstone 2.8%, diorite 2.4%, islandcraft_dunesofarrakis:dune_sand 1.8%, tuff 1.5%
+  0..7    deepslate 56.2%, stone 43.5%, tuff 0.3%
+  below0  deepslate 94.8%, bedrock 4.7%, tuff 0.5%
+base rock columns with the rock surface exposed: skin of 3 sandstone then stone or blob: 382788 ok, 181 not; first: (-6127,-3497) minecraft:sandstone minecraft:sandstone minecraft:diorite minecraft:diorite | (-6103,-3499) minecraft:sandstone minecraft:sandstone minecraft:stone minecraft:stone | (-6118,-3371) minecraft:sandstone minecraft:sandstone minecraft:stone minecraft:stone | (-6091,-3353) minecraft:sandstone minecraft:sandstone minecraft:stone minecraft:stone | (-6082,-3325) minecraft:sandstone minecraft:sandstone minecraft:stone minecraft:stone; exposed stone on the base surface: 0
+kind 3 tough rock (232114 foot columns): sandstone share by block above the base top (h 1..12, %): 91 75 51 27 10 2 0 0 0 0 0 0; below 50% at h 4, below 5% at h 6; unbroken sandstone foot height per tall column p10/p50/p90: 1/2/4

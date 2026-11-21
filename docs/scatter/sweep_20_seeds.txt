@@ -1,0 +1,214 @@
+Note: tools\worldscan\java\ReliefScan.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14269 land masses, 15076 ellipses (seed hash 3fd01705cbc722ca) in 1317 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14269 land masses, 15076 ellipses (seed hash 3fd01705cbc722ca) in 1010 ms
+seed 1: scatter, 14269 masses (15076 ellipses) in 1317 ms; raster 25 m
+  masses by level (whole extent): large 323, medium 1871, small 8950, satellite 3124, spawn 1, islet 0; inside the 50 km square: large 11, medium 46, small+satellite+islet 333
+  across-diameter histogram in the square (m): <250 204, 250-500 99, 500-1k 29, 1-2k 27, 2-4k 19, 4-8k 6, 8-12k 3, >12k 2; largest large mass 14694 m
+  kinds (masses): 1 4656, 2 4784, 3 4828, 0 1; area share: 1 0.29, 2 0.48, 3 0.24; median kind-zone diameter 5.5 km
+  land share of the 50 km square 13.0%; 5x5 regions (10 km): max 42.0% min 0.0% ratio 4204.0, cells under 4%: 7
+  components 401, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 104 m (coarse 106 m at 25 m raster, close pairs refined at 1 m); largest empty circle 16455 m across
+    closest pair of different masses near (-23850, 1875): large 115 (across 8865, parent -1) and medium 3931 (across 1262, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 157 m; nearest other land 640 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 15716 land masses, 16521 ellipses (seed hash c671a501020bd35b) in 1243 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 15716 land masses, 16521 ellipses (seed hash c671a501020bd35b) in 1247 ms
+seed 2: scatter, 15716 masses (16521 ellipses) in 1243 ms; raster 25 m
+  masses by level (whole extent): large 339, medium 2017, small 9633, satellite 3726, spawn 1, islet 0; inside the 50 km square: large 12, medium 67, small+satellite+islet 420
+  across-diameter histogram in the square (m): <250 258, 250-500 123, 500-1k 38, 1-2k 48, 2-4k 19, 4-8k 7, 8-12k 3, >12k 2; largest large mass 14901 m
+  kinds (masses): 1 4836, 2 5485, 3 5394, 0 1; area share: 1 0.53, 2 0.27, 3 0.20; median kind-zone diameter 5.4 km
+  land share of the 50 km square 14.8%; 5x5 regions (10 km): max 34.6% min 0.5% ratio 76.0, cells under 4%: 6
+  components 517, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 100 m (coarse 91 m at 25 m raster, close pairs refined at 1 m); largest empty circle 10144 m across
+    closest pair of different masses near (21075, -5100): medium 3380 (across 1225, parent -1) and large 1232 (across 4677, parent -1); closest split of one mass (neck cut by the coast noise): 60 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 140 m; nearest other land 802 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14505 land masses, 15279 ellipses (seed hash b92aee93d63ea8e0) in 975 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14505 land masses, 15279 ellipses (seed hash b92aee93d63ea8e0) in 992 ms
+seed 3: scatter, 14505 masses (15279 ellipses) in 975 ms; raster 25 m
+  masses by level (whole extent): large 302, medium 1882, small 9149, satellite 3171, spawn 1, islet 0; inside the 50 km square: large 9, medium 60, small+satellite+islet 338
+  across-diameter histogram in the square (m): <250 202, 250-500 93, 500-1k 42, 1-2k 34, 2-4k 26, 4-8k 5, 8-12k 3, >12k 1; largest large mass 14972 m
+  kinds (masses): 1 4860, 2 5041, 3 4603, 0 1; area share: 1 0.39, 2 0.39, 3 0.22; median kind-zone diameter 6.2 km
+  land share of the 50 km square 14.1%; 5x5 regions (10 km): max 30.1% min 0.1% ratio 362.1, cells under 4%: 4
+  components 415, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 100 m (coarse 85 m at 25 m raster, close pairs refined at 1 m); largest empty circle 11434 m across
+    closest pair of different masses near (-15175, 20325): medium 2571 (across 1006, parent -1) and medium 1797 (across 1081, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 180 m; nearest other land 700 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14961 land masses, 15817 ellipses (seed hash 84130b94b68608c4) in 1065 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14961 land masses, 15817 ellipses (seed hash 84130b94b68608c4) in 1227 ms
+seed 4: scatter, 14961 masses (15817 ellipses) in 1065 ms; raster 25 m
+  masses by level (whole extent): large 330, medium 1927, small 9218, satellite 3485, spawn 1, islet 0; inside the 50 km square: large 11, medium 70, small+satellite+islet 395
+  across-diameter histogram in the square (m): <250 240, 250-500 103, 500-1k 51, 1-2k 48, 2-4k 22, 4-8k 5, 8-12k 6, >12k 0; largest large mass 14818 m
+  kinds (masses): 1 4460, 2 5154, 3 5346, 0 1; area share: 1 0.22, 2 0.52, 3 0.26; median kind-zone diameter 4.3 km
+  land share of the 50 km square 15.8%; 5x5 regions (10 km): max 41.0% min 0.5% ratio 75.8, cells under 4%: 4
+  components 482, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 124 m (coarse 112 m at 25 m raster, close pairs refined at 1 m); largest empty circle 14446 m across
+    closest pair of different masses near (20200, -19500): small 13058 (across 898, parent -1) and medium 3498 (across 3535, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 191 m; nearest other land 760 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14942 land masses, 15732 ellipses (seed hash edbd711ae46634ec) in 1031 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14942 land masses, 15732 ellipses (seed hash edbd711ae46634ec) in 1116 ms
+seed 5: scatter, 14942 masses (15732 ellipses) in 1031 ms; raster 25 m
+  masses by level (whole extent): large 310, medium 1911, small 9399, satellite 3321, spawn 1, islet 0; inside the 50 km square: large 10, medium 38, small+satellite+islet 271
+  across-diameter histogram in the square (m): <250 151, 250-500 83, 500-1k 36, 1-2k 18, 2-4k 20, 4-8k 8, 8-12k 1, >12k 1; largest large mass 14993 m
+  kinds (masses): 1 4743, 2 5199, 3 4999, 0 1; area share: 1 0.40, 2 0.55, 3 0.05; median kind-zone diameter 4.1 km
+  land share of the 50 km square 12.2%; 5x5 regions (10 km): max 44.3% min 0.0% ratio 4427.2, cells under 4%: 9
+  components 328, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 100 m (coarse 91 m at 25 m raster, close pairs refined at 1 m); largest empty circle 17826 m across
+    closest pair of different masses near (-16600, -625): large 861 (across 5119, parent -1) and medium 1393 (across 1472, parent -1); closest split of one mass (neck cut by the coast noise): 60 m, masses in more than one piece: 3
+  spawn island: origin clearance (nearest coast over 72 rays) 154 m; nearest other land 893 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14728 land masses, 15553 ellipses (seed hash 3d02c458d90fce29) in 1255 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14728 land masses, 15553 ellipses (seed hash 3d02c458d90fce29) in 1209 ms
+seed 6: scatter, 14728 masses (15553 ellipses) in 1255 ms; raster 25 m
+  masses by level (whole extent): large 329, medium 1948, small 9232, satellite 3218, spawn 1, islet 0; inside the 50 km square: large 4, medium 52, small+satellite+islet 312
+  across-diameter histogram in the square (m): <250 199, 250-500 82, 500-1k 30, 1-2k 29, 2-4k 23, 4-8k 4, 8-12k 0, >12k 0; largest large mass 14972 m
+  kinds (masses): 1 4608, 2 5409, 3 4710, 0 1; area share: 1 0.46, 2 0.44, 3 0.10; median kind-zone diameter 6.1 km
+  land share of the 50 km square 8.2%; 5x5 regions (10 km): max 27.3% min 0.0% ratio 2725.1, cells under 4%: 9
+  components 381, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 100 m (coarse 85 m at 25 m raster, close pairs refined at 1 m); largest empty circle 15833 m across
+    closest pair of different masses near (-3425, 16175): medium 3816 (across 1134, parent -1) and medium 2498 (across 3094, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 89 m; nearest other land 621 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14734 land masses, 15521 ellipses (seed hash 2544d25cd9766db1) in 1150 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14734 land masses, 15521 ellipses (seed hash 2544d25cd9766db1) in 1159 ms
+seed 7: scatter, 14734 masses (15521 ellipses) in 1150 ms; raster 25 m
+  masses by level (whole extent): large 320, medium 1840, small 9302, satellite 3271, spawn 1, islet 0; inside the 50 km square: large 7, medium 60, small+satellite+islet 386
+  across-diameter histogram in the square (m): <250 239, 250-500 112, 500-1k 34, 1-2k 41, 2-4k 19, 4-8k 5, 8-12k 0, >12k 2; largest large mass 14907 m
+  kinds (masses): 1 4577, 2 5323, 3 4833, 0 1; area share: 1 0.59, 2 0.24, 3 0.17; median kind-zone diameter 6.1 km
+  land share of the 50 km square 12.2%; 5x5 regions (10 km): max 34.3% min 0.1% ratio 383.7, cells under 4%: 5
+  components 464, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 101 m (coarse 91 m at 25 m raster, close pairs refined at 1 m); largest empty circle 16210 m across
+    closest pair of different masses near (20925, 13725): large 278 (across 5827, parent -1) and medium 3656 (across 1295, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 1
+  spawn island: origin clearance (nearest coast over 72 rays) 137 m; nearest other land 916 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14302 land masses, 15063 ellipses (seed hash 8f6a7f57d4ee40e) in 1029 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14302 land masses, 15063 ellipses (seed hash 8f6a7f57d4ee40e) in 1093 ms
+seed 8: scatter, 14302 masses (15063 ellipses) in 1029 ms; raster 25 m
+  masses by level (whole extent): large 301, medium 1871, small 9004, satellite 3125, spawn 1, islet 0; inside the 50 km square: large 10, medium 62, small+satellite+islet 386
+  across-diameter histogram in the square (m): <250 243, 250-500 103, 500-1k 39, 1-2k 39, 2-4k 23, 4-8k 8, 8-12k 2, >12k 0; largest large mass 14948 m
+  kinds (masses): 1 4863, 2 5088, 3 4350, 0 1; area share: 1 0.45, 2 0.24, 3 0.31; median kind-zone diameter 7.4 km
+  land share of the 50 km square 12.9%; 5x5 regions (10 km): max 28.1% min 0.2% ratio 178.5, cells under 4%: 3
+  components 463, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 100 m (coarse 91 m at 25 m raster, close pairs refined at 1 m); largest empty circle 11460 m across
+    closest pair of different masses near (-21700, -20725): satellite 806 (across 380, parent 805) and large 801 (across 5752, parent -1); closest split of one mass (neck cut by the coast noise): 179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 m, masses in more than one piece: 0
+  spawn island: origin clearance (nearest coast over 72 rays) 190 m; nearest other land 584 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14316 land masses, 15105 ellipses (seed hash bc3deb43ae494918) in 1095 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14316 land masses, 15105 ellipses (seed hash bc3deb43ae494918) in 1080 ms
+seed 9: scatter, 14316 masses (15105 ellipses) in 1095 ms; raster 25 m
+  masses by level (whole extent): large 310, medium 1916, small 8913, satellite 3176, spawn 1, islet 0; inside the 50 km square: large 9, medium 60, small+satellite+islet 390
+  across-diameter histogram in the square (m): <250 239, 250-500 110, 500-1k 40, 1-2k 38, 2-4k 22, 4-8k 7, 8-12k 1, >12k 1; largest large mass 14808 m
+  kinds (masses): 1 4289, 2 4623, 3 5403, 0 1; area share: 1 0.11, 2 0.22, 3 0.67; median kind-zone diameter 6.1 km
+  land share of the 50 km square 12.3%; 5x5 regions (10 km): max 41.4% min 2.4% ratio 17.1, cells under 4%: 3
+  components 475, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 113 m (coarse 112 m at 25 m raster, close pairs refined at 1 m); largest empty circle 23452 m across
+    closest pair of different masses near (-925, -15425): large 389 (across 9370, parent -1) and satellite 392 (across 250, parent 389); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 3
+  spawn island: origin clearance (nearest coast over 72 rays) 125 m; nearest other land 851 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14929 land masses, 15727 ellipses (seed hash 9b1a3907c18aff9) in 1078 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14929 land masses, 15727 ellipses (seed hash 9b1a3907c18aff9) in 1126 ms
+seed 10: scatter, 14929 masses (15727 ellipses) in 1078 ms; raster 25 m
+  masses by level (whole extent): large 340, medium 1894, small 9540, satellite 3154, spawn 1, islet 0; inside the 50 km square: large 10, medium 66, small+satellite+islet 404
+  across-diameter histogram in the square (m): <250 248, 250-500 120, 500-1k 35, 1-2k 44, 2-4k 22, 4-8k 5, 8-12k 3, >12k 2; largest large mass 14996 m
+  kinds (masses): 1 4517, 2 5466, 3 4945, 0 1; area share: 1 0.44, 2 0.35, 3 0.21; median kind-zone diameter 2.6 km
+  land share of the 50 km square 16.7%; 5x5 regions (10 km): max 39.0% min 1.9% ratio 20.0, cells under 4%: 3
+  components 488, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 103 m (coarse 100 m at 25 m raster, close pairs refined at 1 m); largest empty circle 10890 m across
+    closest pair of different masses near (-16325, -15100): large 129 (across 12848, parent -1) and medium 4029 (across 1814, parent -1); closest split of one mass (neck cut by the coast noise): 179769313486231570000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 m, masses in more than one piece: 0
+  spawn island: origin clearance (nearest coast over 72 rays) 142 m; nearest other land 767 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14400 land masses, 15187 ellipses (seed hash ae259c7ad4608bd1) in 1059 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14400 land masses, 15187 ellipses (seed hash ae259c7ad4608bd1) in 1081 ms
+seed 11: scatter, 14400 masses (15187 ellipses) in 1059 ms; raster 25 m
+  masses by level (whole extent): large 303, medium 1880, small 9136, satellite 3080, spawn 1, islet 0; inside the 50 km square: large 6, medium 52, small+satellite+islet 351
+  across-diameter histogram in the square (m): <250 204, 250-500 102, 500-1k 44, 1-2k 38, 2-4k 14, 4-8k 5, 8-12k 0, >12k 1; largest large mass 14963 m
+  kinds (masses): 1 5113, 2 4655, 3 4631, 0 1; area share: 1 0.14, 2 0.21, 3 0.65; median kind-zone diameter 3.2 km
+  land share of the 50 km square 9.2%; 5x5 regions (10 km): max 33.9% min 0.5% ratio 68.2, cells under 4%: 9
+  components 418, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 104 m (coarse 106 m at 25 m raster, close pairs refined at 1 m); largest empty circle 13463 m across
+    closest pair of different masses near (16375, -10350): satellite 486 (across 453, parent 485) and large 484 (across 6989, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 189 m; nearest other land 510 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14513 land masses, 15315 ellipses (seed hash 68438485253fab73) in 1082 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14513 land masses, 15315 ellipses (seed hash 68438485253fab73) in 1064 ms
+seed 12: scatter, 14513 masses (15315 ellipses) in 1082 ms; raster 25 m
+  masses by level (whole extent): large 333, medium 1832, small 9157, satellite 3190, spawn 1, islet 0; inside the 50 km square: large 5, medium 52, small+satellite+islet 305
+  across-diameter histogram in the square (m): <250 193, 250-500 85, 500-1k 26, 1-2k 30, 2-4k 22, 4-8k 1, 8-12k 4, >12k 0; largest large mass 14935 m
+  kinds (masses): 1 4621, 2 4942, 3 4949, 0 1; area share: 1 0.52, 2 0.27, 3 0.21; median kind-zone diameter 3.8 km
+  land share of the 50 km square 8.9%; 5x5 regions (10 km): max 23.2% min 0.3% ratio 87.6, cells under 4%: 7
+  components 371, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 111 m (coarse 100 m at 25 m raster, close pairs refined at 1 m); largest empty circle 13003 m across
+    closest pair of different masses near (4275, 5400): satellite 902 (across 297, parent 899) and large 899 (across 8556, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 130 m; nearest other land 791 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14573 land masses, 15394 ellipses (seed hash fb2fc331dbcdcaec) in 1106 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14573 land masses, 15394 ellipses (seed hash fb2fc331dbcdcaec) in 1083 ms
+seed 13: scatter, 14573 masses (15394 ellipses) in 1106 ms; raster 25 m
+  masses by level (whole extent): large 330, medium 1906, small 9246, satellite 3090, spawn 1, islet 0; inside the 50 km square: large 11, medium 36, small+satellite+islet 324
+  across-diameter histogram in the square (m): <250 202, 250-500 82, 500-1k 39, 1-2k 22, 2-4k 14, 4-8k 9, 8-12k 2, >12k 0; largest large mass 14814 m
+  kinds (masses): 1 4452, 2 5040, 3 5080, 0 1; area share: 1 0.17, 2 0.50, 3 0.34; median kind-zone diameter 3.9 km
+  land share of the 50 km square 11.1%; 5x5 regions (10 km): max 38.5% min 0.0% ratio 3845.4, cells under 4%: 8
+  components 378, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 108 m (coarse 100 m at 25 m raster, close pairs refined at 1 m); largest empty circle 20757 m across
+    closest pair of different masses near (9600, -4200): satellite 1088 (across 359, parent 1087) and medium 1087 (across 3453, parent -1); closest split of one mass (neck cut by the coast noise): 60 m, masses in more than one piece: 1
+  spawn island: origin clearance (nearest coast over 72 rays) 165 m; nearest other land 880 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14470 land masses, 15224 ellipses (seed hash 7de49f0232b46bd3) in 1111 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14470 land masses, 15224 ellipses (seed hash 7de49f0232b46bd3) in 1078 ms
+seed 14: scatter, 14470 masses (15224 ellipses) in 1111 ms; raster 25 m
+  masses by level (whole extent): large 308, medium 1906, small 8912, satellite 3343, spawn 1, islet 0; inside the 50 km square: large 9, medium 55, small+satellite+islet 377
+  across-diameter histogram in the square (m): <250 226, 250-500 110, 500-1k 40, 1-2k 38, 2-4k 17, 4-8k 5, 8-12k 3, >12k 1; largest large mass 14925 m
+  kinds (masses): 1 4957, 2 5150, 3 4362, 0 1; area share: 1 0.48, 2 0.44, 3 0.08; median kind-zone diameter 4.2 km
+  land share of the 50 km square 12.0%; 5x5 regions (10 km): max 45.7% min 0.2% ratio 286.8, cells under 4%: 7
+  components 453, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 104 m (coarse 106 m at 25 m raster, close pairs refined at 1 m); largest empty circle 12863 m across
+    closest pair of different masses near (-23800, -20050): satellite 1047 (across 468, parent 1045) and satellite 1045 (across 409, parent 1044); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 77 m; nearest other land 868 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14606 land masses, 15441 ellipses (seed hash ec8cbada4cc9c2c1) in 1036 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14606 land masses, 15441 ellipses (seed hash ec8cbada4cc9c2c1) in 1036 ms
+seed 15: scatter, 14606 masses (15441 ellipses) in 1036 ms; raster 25 m
+  masses by level (whole extent): large 319, medium 1873, small 9178, satellite 3235, spawn 1, islet 0; inside the 50 km square: large 5, medium 41, small+satellite+islet 251
+  across-diameter histogram in the square (m): <250 152, 250-500 64, 500-1k 34, 1-2k 26, 2-4k 15, 4-8k 5, 8-12k 0, >12k 0; largest large mass 14900 m
+  kinds (masses): 1 4765, 2 4910, 3 4930, 0 1; area share: 1 0.32, 2 0.39, 3 0.29; median kind-zone diameter 5.5 km
+  land share of the 50 km square 8.3%; 5x5 regions (10 km): max 30.7% min 0.0% ratio 1820.8, cells under 4%: 14
+  components 306, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 102 m (coarse 91 m at 25 m raster, close pairs refined at 1 m); largest empty circle 14923 m across
+    closest pair of different masses near (-2250, -20650): large 665 (across 11120, parent -1) and medium 1710 (across 3691, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 1
+  spawn island: origin clearance (nearest coast over 72 rays) 105 m; nearest other land 814 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14842 land masses, 15602 ellipses (seed hash 29da04e9d5dfa1c7) in 1003 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14842 land masses, 15602 ellipses (seed hash 29da04e9d5dfa1c7) in 1047 ms
+seed 16: scatter, 14842 masses (15602 ellipses) in 1003 ms; raster 25 m
+  masses by level (whole extent): large 310, medium 1913, small 9307, satellite 3311, spawn 1, islet 0; inside the 50 km square: large 7, medium 43, small+satellite+islet 275
+  across-diameter histogram in the square (m): <250 169, 250-500 77, 500-1k 28, 1-2k 26, 2-4k 17, 4-8k 3, 8-12k 3, >12k 1; largest large mass 14950 m
+  kinds (masses): 1 4801, 2 5437, 3 4603, 0 1; area share: 1 0.44, 2 0.11, 3 0.45; median kind-zone diameter 4.9 km
+  land share of the 50 km square 11.2%; 5x5 regions (10 km): max 38.4% min 0.0% ratio 903.2, cells under 4%: 9
+  components 332, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 106 m (coarse 100 m at 25 m raster, close pairs refined at 1 m); largest empty circle 17400 m across
+    closest pair of different masses near (11800, -19950): satellite 3689 (across 452, parent 3688) and medium 3688 (across 1246, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 154 m; nearest other land 515 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14501 land masses, 15321 ellipses (seed hash f96ad475c9a8d34c) in 1034 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14501 land masses, 15321 ellipses (seed hash f96ad475c9a8d34c) in 1040 ms
+seed 17: scatter, 14501 masses (15321 ellipses) in 1034 ms; raster 25 m
+  masses by level (whole extent): large 353, medium 1845, small 9165, satellite 3137, spawn 1, islet 0; inside the 50 km square: large 11, medium 47, small+satellite+islet 311
+  across-diameter histogram in the square (m): <250 180, 250-500 97, 500-1k 33, 1-2k 31, 2-4k 16, 4-8k 5, 8-12k 5, >12k 1; largest large mass 14964 m
+  kinds (masses): 1 5105, 2 4985, 3 4410, 0 1; area share: 1 0.59, 2 0.10, 3 0.32; median kind-zone diameter 7.0 km
+  land share of the 50 km square 14.7%; 5x5 regions (10 km): max 45.8% min 0.8% ratio 56.6, cells under 4%: 4
+  components 380, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 100 m (coarse 100 m at 25 m raster, close pairs refined at 1 m); largest empty circle 13410 m across
+    closest pair of different masses near (-9375, 10825): satellite 3165 (across 337, parent 3159) and medium 3159 (across 2673, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 1
+  spawn island: origin clearance (nearest coast over 72 rays) 165 m; nearest other land 856 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14903 land masses, 15729 ellipses (seed hash 2580c2b4b5cd6918) in 1155 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14903 land masses, 15729 ellipses (seed hash 2580c2b4b5cd6918) in 1185 ms
+seed 18: scatter, 14903 masses (15729 ellipses) in 1155 ms; raster 25 m
+  masses by level (whole extent): large 324, medium 1901, small 9324, satellite 3353, spawn 1, islet 0; inside the 50 km square: large 11, medium 39, small+satellite+islet 292
+  across-diameter histogram in the square (m): <250 154, 250-500 99, 500-1k 38, 1-2k 26, 2-4k 13, 4-8k 5, 8-12k 4, >12k 2; largest large mass 14497 m
+  kinds (masses): 1 4841, 2 5253, 3 4808, 0 1; area share: 1 0.23, 2 0.37, 3 0.40; median kind-zone diameter 5.0 km
+  land share of the 50 km square 14.1%; 5x5 regions (10 km): max 36.5% min 0.0% ratio 3645.4, cells under 4%: 6
+  components 350, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 123 m (coarse 112 m at 25 m raster, close pairs refined at 1 m); largest empty circle 16301 m across
+    closest pair of different masses near (-12550, 5425): large 452 (across 11343, parent -1) and satellite 453 (across 224, parent 452); closest split of one mass (neck cut by the coast noise): 60 m, masses in more than one piece: 1
+  spawn island: origin clearance (nearest coast over 72 rays) 146 m; nearest other land 656 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 13793 land masses, 14514 ellipses (seed hash 1afb6952dda90f64) in 1096 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 13793 land masses, 14514 ellipses (seed hash 1afb6952dda90f64) in 945 ms
+seed 19: scatter, 13793 masses (14514 ellipses) in 1096 ms; raster 25 m
+  masses by level (whole extent): large 297, medium 1796, small 8744, satellite 2955, spawn 1, islet 0; inside the 50 km square: large 9, medium 52, small+satellite+islet 337
+  across-diameter histogram in the square (m): <250 188, 250-500 103, 500-1k 45, 1-2k 33, 2-4k 19, 4-8k 6, 8-12k 3, >12k 0; largest large mass 14855 m
+  kinds (masses): 1 4177, 2 4701, 3 4914, 0 1; area share: 1 0.56, 2 0.23, 3 0.20; median kind-zone diameter 7.4 km
+  land share of the 50 km square 11.0%; 5x5 regions (10 km): max 26.8% min 0.7% ratio 38.1, cells under 4%: 5
+  components 407, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 103 m (coarse 100 m at 25 m raster, close pairs refined at 1 m); largest empty circle 16451 m across
+    closest pair of different masses near (-13325, -2400): satellite 3301 (across 407, parent 3300) and medium 3300 (across 1347, parent -1); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 2
+  spawn island: origin clearance (nearest coast over 72 rays) 186 m; nearest other land 772 m; kind 0: true
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14252 land masses, 15050 ellipses (seed hash 5d1f6f9d7fd52738) in 1051 ms
+[islandcraft_dunesofarrakis] scattered footprint generated for a world: 14252 land masses, 15050 ellipses (seed hash 5d1f6f9d7fd52738) in 1201 ms
+seed 20: scatter, 14252 masses (15050 ellipses) in 1051 ms; raster 25 m
+  masses by level (whole extent): large 341, medium 1783, small 8833, satellite 3294, spawn 1, islet 0; inside the 50 km square: large 13, medium 52, small+satellite+islet 334
+  across-diameter histogram in the square (m): <250 207, 250-500 96, 500-1k 30, 1-2k 34, 2-4k 18, 4-8k 10, 8-12k 3, >12k 0; largest large mass 14937 m
+  kinds (masses): 1 3955, 2 4943, 3 5353, 0 1; area share: 1 0.35, 2 0.42, 3 0.24; median kind-zone diameter 5.6 km
+  land share of the 50 km square 12.9%; 5x5 regions (10 km): max 44.7% min 0.4% ratio 121.1, cells under 4%: 6
+  components 415, accidental merges (a component with more than one mass) 0; minimum sand gap after the noise 119 m (coarse 106 m at 25 m raster, close pairs refined at 1 m); largest empty circle 14568 m across
+    closest pair of different masses near (-22725, -2225): large 1133 (across 11647, parent -1) and satellite 2074 (across 470, parent 2073); closest split of one mass (neck cut by the coast noise): 50 m, masses in more than one piece: 3
+  spawn island: origin clearance (nearest coast over 72 rays) 145 m; nearest other land 625 m; kind 0: true
+---- sweep summary over seeds 1..20
+land share (%)                     min 8.2 (seed 6)  median 12.3  max 16.7 (seed 10)
+min gap (m)                        min 100.1 (seed 5)  median 103.6  max 123.6 (seed 4)
+spawn nearest land (m)             min 509.9 (seed 11)  median 772.1  max 915.7 (seed 7)
+spawn rock clearance (m)           min 77.0 (seed 14)  median 154.0  max 191.0 (seed 4)
+empty circle diameter (m)          min 10143.6 (seed 2)  median 14923.3  max 23452.3 (seed 9)
+region density ratio max/min       min 17.1 (seed 9)  median 286.8  max 4427.2 (seed 5)
+large masses in the square         min 4.0 (seed 6)  median 10.0  max 13.0 (seed 20)
+regions under 4% land              min 3.0 (seed 8)  median 6.0  max 14.0 (seed 15)
+accidental merges                  min 0.0 (seed 1)  median 0.0  max 0.0 (seed 1)
+largest large mass across (m)      min 14496.9 (seed 18)  median 14935.3  max 14995.9 (seed 10)
+done

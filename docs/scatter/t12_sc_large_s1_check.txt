@@ -1,0 +1,11 @@
+=== t12_sc_large_s1 (x0 8240 z0 -7328) coast and interior of the largest large mass (12081 m across), kind 2
+window x 8240..9263 z -7328..-6305: footprint 63.3% (664132 columns), full chunks 4096
+layers: {"inside":{"columns":664132,"p5":0,"p50":0,"p95":0},"outside":{"columns":384444,"p5":12,"p50":17,"p95":22}} unexpected blocks []
+outline (rock at y=63 vs footprint): 1 differing columns (1 within 1 block of the coast)
+relief vs analytic: 190 mismatching columns (1.81e-2%): top below 133, top at analytic but not sandstone 0, sandstone above 57; within 1 block of coast 1, on chunk borders 34; dune over rock 9817 (largest 8)
+blocks: air below surface 0, bedrock above bottom 5 0, floating sand in rock 0, sandstone above rock 37, wrong {"minecraft:sandstone above the rock surface":36,"minecraft:sandstone in a dune column":1,"minecraft:stone above the rock surface":24,"minecraft:andesite above the rock surface":4}
+rock surface above sand: {"columns":654315,"p5":11,"p50":28,"p95":73,"max":106}
+banking (share of columns with dune sand on top): coast 0-30 m 0.245, 30-100 m 0, inland 0; 64 m coast sectors: dunes bank over rock 3, rock clear 28
+steps over 3 blocks: 229 (with dune 0, rock only 229), largest 5, largest rock-only 5; slope > 20 deg 0.184, > 25 deg within 100 m of coast 0.053
+dune mountains: footprint columns with dune > 10 above rock 0; outside within 30 m of coast: {"columns":34853,"p50":5,"p95":9,"max":10,"shareAtLeast40":0,"shareAtLeast80":0}
+pass flags {"noGaps":true,"outlineIdentical":false,"reliefMismatchBelow0_1pct":true,"noAirBelowSurface":true,"noFloatingSand":false,"noRockWalls":false,"noUnexpectedBlocks":true,"duneIdentical":null}

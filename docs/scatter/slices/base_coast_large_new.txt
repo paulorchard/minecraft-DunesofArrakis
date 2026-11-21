@@ -1,0 +1,3 @@
+slice docs/scatter/slices/base_coast_large_new.png: 87 blocks from (9192,-7090) to (9131,-7151), y 55..120, 87 columns read
+columns with sandstone at y=62 (the body below sand level): 0; sandstone surface columns 51; dune sand on top of rock 0; sandstone surface without a body below 51; highest surface 57 above sand at (9151,-7131)
+profile (distance:height above sand, R rock top, S sand top, | = sandstone below sand level): 0:41R 4:42R 8:42R 12:43R 16:43R 20:44R 24:44R 28:44R 32:45R 36:45R 40:45R 44:45R 48:45R 52:49S 56:55S 60:57S 64:57S 68:57S 72:57S 76:57S 80:57S 84:57S

@@ -36,6 +36,7 @@ public class ToughScan {
         while (a[p].startsWith("--")) {
             switch (a[p]) {
                 case "--tough" -> ReliefScan.toughPath = a[p + 1];
+                case "--world" -> ReliefScan.worldPath = a[p + 1];
                 case "--islands" -> ReliefScan.islandsPath = a[p + 1];
                 case "--config" -> ReliefScan.coastPath = a[p + 1];
                 case "--relief" -> ReliefScan.reliefPath = a[p + 1];

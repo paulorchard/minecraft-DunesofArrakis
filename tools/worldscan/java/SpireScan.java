@@ -31,6 +31,7 @@ public class SpireScan {
         while (a[p].startsWith("--")) {
             switch (a[p]) {
                 case "--tough" -> ReliefScan.toughPath = a[p + 1];
+                case "--world" -> ReliefScan.worldPath = a[p + 1];
                 case "--islands" -> ReliefScan.islandsPath = a[p + 1];
                 default -> throw new IllegalArgumentException(a[p]);
             }

@@ -38,7 +38,7 @@
   "gap_guard": { "min_sand": 100 },
   "_gap_note": "outward growth of an ellipse at a point is limited to max(0, g/2 - min_sand/2), g = distance to the nearest other continent's nominal coast",
 
-  "ellipse_noise_scale": { "99": 0.2 },
+  "ellipse_noise_scale": { "99": 0.2, "9000": 0.2 },
   "_origin_note": "noise on the brown islet 99 (the origin lies inside it) is scaled down so the origin keeps at least 20 m of rock around it on every seed",
 
   "grid_margin": 1800

@@ -1,0 +1,3 @@
+slice docs/scatter/slices/kind3_foot_face_old.png: 109 blocks from (1023,10047) to (1065,9948), y 55..150, 109 columns read
+columns with sandstone at y=62 (the body below sand level): 109; sandstone surface columns 51; dune sand on top of rock 0; sandstone surface without a body below 0; highest surface 43 above sand at (1043,10000)
+profile (distance:height above sand, R rock top, S sand top, | = sandstone below sand level): 0:14R| 5:14R| 10:13R| 15:13R| 20:13R| 25:13R| 30:13R| 35:13R| 40:13R| 45:13R| 50:13R| 55:43S| 60:43S| 65:43S| 70:43S| 75:43S| 80:43S| 85:43S| 90:43S| 95:43S| 100:43S| 105:43S|

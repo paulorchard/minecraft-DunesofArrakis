@@ -1,0 +1,9 @@
+columns 1048576, air below the surface 0; base columns 0, tough-rock columns 0
+forbidden blocks inside the footprint: none
+census inside the footprint by band:
+census outside the footprint by band:
+  above63 islandcraft_dunesofarrakis:dune_sand 100.0%
+  8..63   stone 59.8%, sandstone 24.1%, smooth_sandstone 3.6%, andesite 3.3%, granite 2.8%, diorite 2.6%, islandcraft_dunesofarrakis:dune_sand 1.8%, tuff 1.5%
+  0..7    deepslate 56.2%, stone 43.6%, tuff 0.2%
+  below0  deepslate 94.8%, bedrock 4.7%, tuff 0.5%
+base rock columns with the rock surface exposed: skin of 3 sandstone then stone or blob: 0 ok, 0 not; exposed stone on the base surface: 0

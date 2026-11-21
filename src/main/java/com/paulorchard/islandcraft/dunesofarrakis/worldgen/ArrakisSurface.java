@@ -45,6 +45,7 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
 
     private final DensityFunction.NoiseHolder[] n = new DensityFunction.NoiseHolder[ReliefModel.NOISE_NAMES.length];
     private final DensityFunction dunes;
+    private final double duneScale = WorldConfig.shared().duneScale; // world.json: scales every dune height above the sand level (1.0 = prompt 11)
     private volatile WorldModels.Models models; // the footprint of this world (mapped land plus its seeded islands), built on first use
     private final ThreadLocal<CoastModel.Out> out = ThreadLocal.withInitial(CoastModel.Out::new);
     private final ThreadLocal<ToughModel.Col> col = ThreadLocal.withInitial(ToughModel.Col::new);
@@ -86,9 +87,9 @@ public final class ArrakisSurface implements DensityFunction.SimpleFunction, Coa
             ToughModel.Col col = this.col.get();
             wm.tough.eval(x, z, r, out.winnerEllipse, this, col);
             r = col.rt;
-            v = model.cfg.relief ? Math.max(r, dunes.compute(context)) : r;
+            v = model.cfg.relief ? Math.max(r, dunes.compute(context) * duneScale) : r;
         } else {
-            v = dunes.compute(context);
+            v = dunes.compute(context) * duneScale;
         }
         c.keys[slot] = key;
         c.values[slot] = v;

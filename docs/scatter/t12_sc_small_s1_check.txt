@@ -1,0 +1,11 @@
+=== t12_sc_small_s1 (x0 -3920 z0 352) small island 361 m across, kind 2
+window x -3920..-2897 z 352..1375: footprint 9.2% (96460 columns), full chunks 4096
+layers: {"inside":{"columns":96460,"p5":0,"p50":0,"p95":1},"outside":{"columns":952116,"p5":10,"p50":17,"p95":22}} unexpected blocks []
+outline (rock at y=63 vs footprint): 0 differing columns (0 within 1 block of the coast)
+relief vs analytic: 2 mismatching columns (1.91e-4%): top below 2, top at analytic but not sandstone 0, sandstone above 0; within 1 block of coast 0, on chunk borders 0; dune over rock 8648 (largest 13)
+blocks: air below surface 0, bedrock above bottom 5 0, floating sand in rock 0, sandstone above rock 0, wrong {}
+rock surface above sand: {"columns":87812,"p5":3,"p50":16,"p95":31,"max":34}
+banking (share of columns with dune sand on top): coast 0-30 m 0.231, 30-100 m 0.001, inland 0; 64 m coast sectors: dunes bank over rock 4, rock clear 22
+steps over 3 blocks: 0 (with dune 0, rock only 0), largest 1, largest rock-only 1; slope > 20 deg 0.2724, > 25 deg within 100 m of coast 0.0245
+dune mountains: footprint columns with dune > 10 above rock 170; outside within 30 m of coast: {"columns":42664,"p50":2,"p95":10,"max":13,"shareAtLeast40":0,"shareAtLeast80":0}
+pass flags {"noGaps":true,"outlineIdentical":true,"reliefMismatchBelow0_1pct":true,"noAirBelowSurface":true,"noFloatingSand":true,"noRockWalls":true,"noUnexpectedBlocks":true,"duneIdentical":null}

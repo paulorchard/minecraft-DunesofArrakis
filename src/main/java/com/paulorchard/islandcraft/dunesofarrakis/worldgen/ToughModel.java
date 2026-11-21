@@ -68,7 +68,20 @@ public final class ToughModel {
     public final int stoneCapDepth;
     private final ThreadLocal<FCache> fcache = ThreadLocal.withInitial(FCache::new);
 
+    // ---- new materials (prompt 12): sandstone skin, sandstone foot fading into stone, andesite bands
+    public final boolean newMat;
+    public final int skin, fadeMaxInt;
+    private final double fadeMin, fadeMax, fadeWl, fadeClump;
+    private final int[] nbEnd3, nbEnd2;
+    private final boolean[] nbAnd3, nbAnd2;
+    private final int nbCycle3, nbCycle2;
+
     public ToughModel(ToughConfig c, ReliefModel relief, ContinentIndex idx, long seed) {
+        this(c, relief, idx, seed, null, WorldConfig.shared());
+    }
+
+    /** {@code kindsIn}: the kind of every ellipse (the scattered footprint decides it per land mass), or null for the mapped rule of prompts 09 to 11. */
+    public ToughModel(ToughConfig c, ReliefModel relief, ContinentIndex idx, long seed, int[] kindsIn, WorldConfig wc) {
         this.c = c;
         this.relief = relief;
         this.seed = seed;
@@ -115,7 +128,38 @@ public final class ToughModel {
         capPatchThr = c.d("bands", "cap_patch_threshold");
         capMin = c.i("bands", "cap_depth_min");
         capMax = c.i("bands", "cap_depth_max");
-        kind = kinds(c, idx, seed);
+        kind = kindsIn != null ? kindsIn : kinds(c, idx, seed);
+        newMat = wc.newMaterials;
+        skin = c.i("materials_new", "sandstone_skin");
+        fadeMin = c.d("materials_new", "foot_fade_min");
+        fadeMax = c.d("materials_new", "foot_fade_max");
+        fadeWl = c.d("materials_new", "foot_fade_wavelength");
+        fadeClump = c.d("materials_new", "foot_fade_clump");
+        fadeMaxInt = (int) Math.ceil(fadeMax) + 1;
+        {
+            int[][] ends = new int[2][];
+            boolean[][] isA = new boolean[2][];
+            int[] cyc = new int[2];
+            String[] ks = {"kind3", "kind2"};
+            for (int q = 0; q < 2; q++) {
+                int sMin = c.i("materials_new", ks[q] + "_stone_min"), sMax = c.i("materials_new", ks[q] + "_stone_max");
+                int aMin = c.i("materials_new", ks[q] + "_andesite_min"), aMax = c.i("materials_new", ks[q] + "_andesite_max");
+                int nb = c.i("materials_new", ks[q] + "_cycle_bands") * 2;
+                SplittableRandom rr = new SplittableRandom(seed ^ (0x1F83D9ABFB41BD6BL + q * 0x5BE0CD19137E2179L));
+                ends[q] = new int[nb];
+                isA[q] = new boolean[nb];
+                int acc = 0;
+                for (int i = 0; i < nb; i++) {
+                    boolean a = (i & 1) == 1;
+                    isA[q][i] = a;
+                    acc += a ? aMin + rr.nextInt(aMax - aMin + 1) : sMin + rr.nextInt(sMax - sMin + 1);
+                    ends[q][i] = acc;
+                }
+                cyc[q] = acc;
+            }
+            nbEnd3 = ends[0]; nbAnd3 = isA[0]; nbCycle3 = cyc[0];
+            nbEnd2 = ends[1]; nbAnd2 = isA[1]; nbCycle2 = cyc[1];
+        }
         double ang = Math.toRadians(c.d("kind2", "weather_angle"));
         wCos = Math.cos(ang);
         wSin = Math.sin(ang);
@@ -910,6 +954,38 @@ public final class ToughModel {
     }
 
     // ------------------------------------------------------------------ materials
+
+    /** New materials: is the block at height y of a kind 3 (or, with {@code kind2}, kind 2) face an andesite band (else stone), for a column with band shift {@code shift}? */
+    public boolean andesiteBand(boolean kind2, double y, double shift) {
+        int[] end = kind2 ? nbEnd2 : nbEnd3;
+        int m = Math.floorMod((int) Math.floor(y + shift), kind2 ? nbCycle2 : nbCycle3);
+        int lo = 0, hi = end.length - 1;
+        while (lo < hi) {
+            int mid = (lo + hi) >>> 1;
+            if (m < end[mid]) hi = mid;
+            else lo = mid + 1;
+        }
+        return (kind2 ? nbAnd2 : nbAnd3)[lo];
+    }
+
+    /** The height (blocks above the base surface) at which the sandstone foot of the tough rock has faded out, at this column. */
+    public double footFadeHeight(CoastModel.Noise nz, double x, double z) {
+        return fadeMin + (fadeMax - fadeMin) * (0.5 + 0.5 * clamp1(1.5 * n(nz, 15, x, z, fadeWl)));
+    }
+
+    /**
+     * New materials: is the tough-rock block at (x, y, z), h blocks above the base surface (h >= 1), still the sandstone of the foot? The share of
+     * sandstone falls from 1 at the foot to 0 at the fade height; each block draws against it a mix of a hash and a clumpy noise, so the edge is ragged.
+     */
+    public boolean footSand(CoastModel.Noise nz, int x, int y, int z, int h, double fade) {
+        if (h >= fade) return false;
+        long k = seed ^ (x * 0x9E3779B97F4A7C15L) ^ (y * 0xC2B2AE3D27D4EB4FL) ^ (z * 0x165667B19E3779F9L);
+        k ^= k >>> 33; k *= 0xFF51AFD7ED558CCDL; k ^= k >>> 33;
+        double u = (k >>> 11) * 0x1.0p-53;
+        double clump = 0.5 + 0.5 * clamp1(1.5 * n(nz, 16, x + 0.7 * y, z - 0.7 * y, 9));
+        double r = (1 - fadeClump) * u + fadeClump * clump;
+        return r < 1 - (h - 0.5) / fade;
+    }
 
     /** Band colour index (into {@link #paletteBlock}) for the block height y in a column whose band shift is {@code shift}. */
     public int bandAt(double y, double shift) {

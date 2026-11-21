@@ -13,8 +13,8 @@ grep -v '^#' tools/worldscan/windows.tsv | while IFS=$'\t' read -r name seed cx 
   x0=$(( (cx - 512) / 16 * 16 )); z0=$(( (cz - 512) / 16 * 16 ))
   [ $(( (cx - 512) % 16 )) -lt 0 ] && x0=$(( x0 - 16 )); [ $(( (cz - 512) % 16 )) -lt 0 ] && z0=$(( z0 - 16 ))
   W="${TAG}_${name}_s${seed}"; R="run-server/$W/dimensions/islandcraft_dunesofarrakis/arrakis/region"
-  M="build/worldscan/cmask_${name}_s${seed}.bin"; ./tools/worldscan/relief.sh $CONT mask $seed $x0 $z0 1024 "$M" >/dev/null
-  RM="build/worldscan/rockmap_${name}_s${seed}.i16"; ./tools/worldscan/relief.sh $CONT rockmap $seed $x0 $z0 1024 "$RM" >/dev/null
+  M="build/worldscan/cmask_${name}_s${seed}.bin"; ./tools/worldscan/relief.sh $RELIEF_ARGS $CONT mask $seed $x0 $z0 1024 "$M" >/dev/null
+  RM="build/worldscan/rockmap_${name}_s${seed}.i16"; ./tools/worldscan/relief.sh $RELIEF_ARGS $CONT rockmap $seed $x0 $z0 1024 "$RM" >/dev/null
   H="build/worldscan/heights_${W}.i16"; EXTRA="--save $H"
   B="build/worldscan/heights_${BASE}_${name}_s${seed}.i16"; [ -f "$B" ] && EXTRA="$EXTRA --baseline $B"
   echo "=== $W (x0 $x0 z0 $z0)"

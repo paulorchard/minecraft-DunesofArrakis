@@ -1,0 +1,11 @@
+=== t12_sc_kind2_s1 (x0 -5904 z0 -1936) kind 2, medium 3402 m across at 6288 m from the origin
+window x -5904..-4881 z -1936..-913: footprint 64.0% (670779 columns), full chunks 4096
+layers: {"inside":{"columns":670779,"p5":0,"p50":0,"p95":0},"outside":{"columns":377797,"p5":11,"p50":16,"p95":19}} unexpected blocks []
+outline (rock at y=63 vs footprint): 0 differing columns (0 within 1 block of the coast)
+relief vs analytic: 175 mismatching columns (1.67e-2%): top below 26, top at analytic but not sandstone 0, sandstone above 149; within 1 block of coast 0, on chunk borders 35; dune over rock 146336 (largest 27)
+blocks: air below surface 0, bedrock above bottom 5 0, floating sand in rock 2, sandstone above rock 50, wrong {"minecraft:sandstone above the rock surface":50,"minecraft:stone above the rock surface":87,"minecraft:andesite above the rock surface":24,"islandcraft_dunesofarrakis:dune_sand where sandstone is due (at or below the rock surface)":2}
+rock surface above sand: {"columns":524443,"p5":11,"p50":19,"p95":54,"max":68}
+banking (share of columns with dune sand on top): coast 0-30 m 0.676, 30-100 m 0.17, inland 0.195; 64 m coast sectors: dunes bank over rock 19, rock clear 11
+steps over 3 blocks: 0 (with dune 0, rock only 0), largest 2, largest rock-only 2; slope > 20 deg 0.1072, > 25 deg within 100 m of coast 0.0194
+dune mountains: footprint columns with dune > 10 above rock 55546; outside within 30 m of coast: {"columns":35069,"p50":10,"p95":23,"max":29,"shareAtLeast40":0,"shareAtLeast80":0}
+pass flags {"noGaps":true,"outlineIdentical":true,"reliefMismatchBelow0_1pct":true,"noAirBelowSurface":true,"noFloatingSand":false,"noRockWalls":true,"noUnexpectedBlocks":true,"duneIdentical":null}

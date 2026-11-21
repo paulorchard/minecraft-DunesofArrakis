@@ -93,6 +93,10 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
         private final float[] blobCx = new float[8], blobCy = new float[8], blobCz = new float[8], blobRx = new float[8], blobRy = new float[8];
         private int blobY0;
         private boolean blobsReady;
+        private boolean newMat;
+        private int skin;
+        private BlockState sandstoneB, andesiteB;
+        private double fade = Double.NaN; // foot fade height of this column (new materials)
 
         Column(SurfaceRules.Context context, BlockState inside, BlockState outside) {
             RandomState random = context.randomState;
@@ -135,6 +139,10 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             for (int i = 0; i < band2.length; i++) band2[i] = state(tough.paletteBlock2[i]);
             patchBlock2 = state(tc.s("kind2_bands", "cap_patch_block"));
             capBlock = state("minecraft:red_sandstone");
+            newMat = tough.newMat;
+            skin = tough.skin;
+            sandstoneB = state("minecraft:sandstone");
+            andesiteB = state("minecraft:andesite");
             k1Stone = state(tough.stoneBlock);
             k1Streak = state(tough.streakBlock);
             patchBlock = state(tc.s("bands", "cap_patch_block"));
@@ -168,6 +176,7 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             lastZ = z;
             has = true;
             capDepth = -1;
+            fade = Double.NaN;
             wdBottom = Integer.MIN_VALUE;
             blobsReady = false;
         }
@@ -252,6 +261,25 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             return smoothPatch;
         }
 
+        /** Tough rock with the new materials: stone cap, sandstone foot fading into stone, then andesite bands (kinds 3 and 2) or streaks (kind 1) set in stone. */
+        private BlockState newToughBlock(int x, int y, int z) {
+            int topBlock = (int) Math.ceil(rockTop + 0.5) - 1;
+            int topBase = (int) Math.ceil(baseTop + 0.5) - 1;
+            if (capDepth < 0) {
+                capDepth = col.kind == 1 ? tough.stoneCapDepth : tough.capDepth(this, x, z);
+                capPatch = col.kind == 3 ? tough.capPatch(this, x, z) : col.kind == 2 && tough.capPatch2(this, x, z);
+                shift = col.kind == 1 ? 0 : tough.bandShift(this, x, z);
+            }
+            if (y > topBlock - capDepth) return capPatch && y == topBlock ? andesiteB : k1Stone;
+            int h = y - topBase;
+            if (h < tough.fadeMaxInt) {
+                if (Double.isNaN(fade)) fade = tough.footFadeHeight(this, x, z);
+                if (tough.footSand(this, x, y, z, h, fade)) return sandstoneB;
+            }
+            if (col.kind == 1) return tough.andesite(this, x, y, z) ? k1Streak : k1Stone;
+            return tough.andesiteBand(col.kind == 2, y, shift) ? andesiteB : k1Stone;
+        }
+
         @Override
         public BlockState tryApply(int x, int y, int z) {
             if (models == null) init();
@@ -265,9 +293,14 @@ public record ArrakisContinentRule(BlockState inside, BlockState outside) implem
             if (!(rockTop + 0.5 - y > 0.0)) return outside;
             if (baseTop + 0.5 - y > 0.0) { // base rock
                 if (!layers) return inside;
+                if (newMat) { // thin sandstone skin over stone (blobs, deepslate, bedrock below as before)
+                    int topBase = (int) Math.ceil(baseTop + 0.5) - 1;
+                    return y > topBase - skin ? sandstoneB : deep(x, y, z);
+                }
                 if (y > weatheredBottom(x, z)) return y < sandLevel - 2 && smooth(x, z) ? smooth : inside;
                 return deep(x, y, z);
             }
+            if (newMat) return newToughBlock(x, y, z);
             if (col.kind == 1) { // spires and wedges: stone, with vertical streaks and patches of andesite below the top few blocks
                 int top1 = (int) Math.ceil(rockTop + 0.5) - 1;
                 return y > top1 - tough.stoneCapDepth || !tough.andesite(this, x, y, z) ? k1Stone : k1Streak;

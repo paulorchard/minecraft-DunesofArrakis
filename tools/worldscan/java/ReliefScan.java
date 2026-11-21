@@ -51,6 +51,8 @@ public class ReliefScan {
     static WorldModels wm;
     static String toughPath = RES + "arrakis/tough.json"; // or off | layersoff | override3
     static String islandsPath = RES + "arrakis/islands.json";
+    static String worldPath = RES + "arrakis/world.json"; // or mapped (prompt 11 exactly: mapped footprint, old materials, dune scale 1) / scatter / a path
+    static JsonObject worldOverride = null;
     static String coastPath = RES + "arrakis/coast.json", reliefPath = RES + "arrakis/relief.json", terracePath = RES + "arrakis/terrace.json";
     static int step = 4;
     static String detailFile = null;
@@ -79,7 +81,10 @@ public class ReliefScan {
         if (toughPath.equals("override3")) tgo.addProperty("kind_override", 3);
         if (toughPath.equals("override2")) tgo.addProperty("kind_override", 2);
         if (toughPath.equals("override1")) tgo.addProperty("kind_override", 1);
-        wm = new WorldModels(ccfg, rcfg, tcfg, icfg, idx, new com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughConfig(tgo));
+        JsonObject wo = JsonParser.parseString(Files.readString(Path.of(worldPath.equals("mapped") || worldPath.equals("scatter") ? RES + "arrakis/world.json" : worldPath), StandardCharsets.UTF_8)).getAsJsonObject();
+        if (worldPath.equals("mapped")) { wo.addProperty("footprint", "mapped"); wo.addProperty("materials", "old"); wo.addProperty("dune_height_scale", 1.0); }
+        if (worldOverride != null) for (var en : worldOverride.entrySet()) wo.add(en.getKey(), en.getValue());
+        wm = new WorldModels(ccfg, rcfg, tcfg, icfg, idx, new com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughConfig(tgo), new com.paulorchard.islandcraft.dunesofarrakis.worldgen.WorldConfig(wo));
     }
 
     /** The world-seeded noise, built as RandomState does. */
@@ -112,6 +117,7 @@ public class ReliefScan {
                 case "--relief" -> reliefPath = a[p + 1];
                 case "--terrace" -> terracePath = a[p + 1];
                 case "--islands" -> islandsPath = a[p + 1];
+                case "--world" -> worldPath = a[p + 1];
                 case "--tough" -> toughPath = a[p + 1];
                 default -> throw new IllegalArgumentException(a[p]);
             }
@@ -126,6 +132,7 @@ public class ReliefScan {
         }
         switch (cmd) {
             case "render" -> render(Long.parseLong(rest.get(0)), rest.get(1), Double.parseDouble(rest.get(2)), Double.parseDouble(rest.get(3)), Double.parseDouble(rest.get(4)), Double.parseDouble(rest.get(5)));
+            case "maps" -> maps(Long.parseLong(rest.get(0)), Integer.parseInt(rest.get(1)), Integer.parseInt(rest.get(2)), Integer.parseInt(rest.get(3)), rest.get(4));
             case "rockmap" -> rockmap(Long.parseLong(rest.get(0)), Integer.parseInt(rest.get(1)), Integer.parseInt(rest.get(2)), Integer.parseInt(rest.get(3)), rest.get(4));
             case "stats" -> { for (String s : rest) { Result r = analyse(Long.parseLong(s)); System.out.println(r.text()); } }
             case "sweep" -> sweep(Integer.parseInt(rest.get(0)), rest.size() > 1 ? rest.get(1) : null);
@@ -200,6 +207,30 @@ public class ReliefScan {
         g.dispose();
         ImageIO.write(img, "png", new File(png));
         System.out.println("wrote " + png + " " + w + "x" + w);
+    }
+
+    /** Per column: <prefix>_base.i16 (top block y of the base rock, R' plus apron; -32768 outside), <prefix>_kind.bin (tough kind 0..3 of the column, 255 outside). */
+    static void maps(long seed, int x0, int z0, int size, String prefix) throws Exception {
+        Seeded nz = new Seeded(seed);
+        short[] m = new short[size * size];
+        byte[] kd = new byte[size * size];
+        IntStream.range(0, size).parallel().forEach(j -> {
+            CoastModel.Out o = new CoastModel.Out();
+            com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughModel.Col tc = new com.paulorchard.islandcraft.dunesofarrakis.worldgen.ToughModel.Col();
+            for (int i = 0; i < size; i++) {
+                int x = x0 + i, z = z0 + j;
+                double f = coast.field(x, z, nz, o);
+                if (!(f > 0)) { m[j * size + i] = Short.MIN_VALUE; kd[j * size + i] = (byte) 255; continue; }
+                wm.of(nz).tough.eval(x, z, relief.rockFromField(f, x, z, nz), o.winnerEllipse, nz, tc);
+                m[j * size + i] = (short) (Math.ceil(rcfg.sandLevel + tc.baseTop + 0.5) - 1);
+                kd[j * size + i] = (byte) (tc.tough ? wm.of(nz).tough.kindOf(o.winnerEllipse) : 0);
+            }
+        });
+        ByteBuffer bb = ByteBuffer.allocate(m.length * 2).order(ByteOrder.LITTLE_ENDIAN);
+        for (short v : m) bb.putShort(v);
+        try (FileOutputStream o = new FileOutputStream(prefix + "_base.i16")) { o.write(bb.array()); }
+        try (FileOutputStream o = new FileOutputStream(prefix + "_kind.bin")) { o.write(kd); }
+        System.out.println("wrote " + prefix);
     }
 
     static void rockmap(long seed, int x0, int z0, int size, String out) throws Exception {
