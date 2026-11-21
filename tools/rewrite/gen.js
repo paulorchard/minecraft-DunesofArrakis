@@ -1,143 +1,237 @@
 #!/usr/bin/env node
-// Generates the whole "Arrakis" generator data from tools/rewrite/grid.json and vanilla's own 26.1.2 data.
+// Generates the island layer of the "Arrakis" world type from tools/rewrite/grid.json and vanilla's own 26.1.2 data.
 //   node tools/rewrite/gen.js          (run tools/rewrite/extract-vanilla.sh once first: it fills build/vanilla and build/rw/params.json)
-// Writes under src/main/resources/data/<namespace>/ : density functions (copies of vanilla's overworld graph with five leaf inputs
-// replaced by the patch functions), noise settings, biome copies and the world preset. Nothing under data/minecraft is written.
+// The dune base is NOT generated here: it is the prompt-03 dune data (tools/dunes/generate.js, files arrakis_*).
+// Writes under src/main/resources/data/<namespace>/ : island masks, the terrain and biome-sampler climate functions, a copy of
+// vanilla's overworld density graph, the blended noise settings (two biome modes), eight biome copies and the world presets.
+// Nothing under data/minecraft is overridden (the world-type list is a tag with replace:false, which merges).
 const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const grid = JSON.parse(fs.readFileSync(path.join(__dirname, 'grid.json'), 'utf8'));
 const NS = grid.namespace;
 const VAN = path.join(ROOT, 'build/vanilla/data/minecraft/worldgen');
-const OUT = path.join(ROOT, 'src/main/resources/data', NS);
+const RES = path.join(ROOT, 'src/main/resources');
+const OUT = path.join(RES, 'data', NS);
 const readV = rel => JSON.parse(fs.readFileSync(path.join(VAN, rel), 'utf8'));
-function write(rel, obj) {
-  const p = path.join(OUT, rel); fs.mkdirSync(path.dirname(p), { recursive: true });
+function write(rel, obj, base = OUT) {
+  const p = path.join(base, rel); fs.mkdirSync(path.dirname(p), { recursive: true });
   fs.writeFileSync(p, JSON.stringify(obj, null, 2) + '\n');
 }
-// start clean so a removed patch does not leave a stale file behind
-fs.rmSync(path.join(OUT, 'worldgen'), { recursive: true, force: true });
+// remove only what this script generates (the dune files are not ours to delete)
+for (const d of ['island', 'overworld', 'biome_native', 'biome_sharp', 'patch']) fs.rmSync(path.join(OUT, 'worldgen/density_function', d), { recursive: true, force: true });
+for (const f of ['arrakis', 'arrakis_native', 'arrakis_sharp', 'arrakis_test']) { fs.rmSync(path.join(OUT, 'worldgen/noise_settings', f + '.json'), { force: true }); fs.rmSync(path.join(OUT, 'worldgen/world_preset', f + '.json'), { force: true }); }
+const keepBiome = new Set(['arrakis_desert.json']);
+if (fs.existsSync(path.join(OUT, 'worldgen/biome'))) for (const f of fs.readdirSync(path.join(OUT, 'worldgen/biome'))) if (!keepBiome.has(f)) fs.rmSync(path.join(OUT, 'worldgen/biome', f));
 
-// ---- sanity of the layout
-const size = grid.patch_size, blend = grid.blend;
-if (2 * blend > Math.min(grid.gap_x, grid.gap_z)) throw new Error('rings of neighbouring patches would overlap: need 2*blend <= gap');
-const patches = grid.patches.map(p => {
-  const x0 = grid.origin_x + (size + grid.gap_x) * p.col, z0 = grid.origin_z + (size + grid.gap_z) * p.row;
-  return Object.assign({ x0, z0, x1: x0 + size, z1: z0 + size, cx: x0 + size / 2, cz: z0 + size / 2 }, p);
-});
-const CLIM = ['continentalness', 'erosion', 'weirdness', 'temperature', 'humidity'];
-const OUTNAME = { continentalness: 'continents', erosion: 'erosion', weirdness: 'ridges', temperature: 'temperature', humidity: 'vegetation' };
+// ---- geometry
+const A = grid.diameter_x / 2, B = grid.diameter_z / 2, T = grid.transition, RM = (A + B) / 2;
+const REND = 1 + T / RM, QEND = REND * REND;                 // normalised radius and squared normalised radius where the transition ends
+const distOfQ = q => (Math.sqrt(q) - 1) * RM;                // the radial distance beyond the edge, in blocks
+const qOfDist = d => (1 + d / RM) * (1 + d / RM);
+const islands = grid.islands.map(p => Object.assign({ cx: grid.origin_x + grid.pitch * p.col, cz: grid.origin_z + grid.pitch * p.row }, p));
+const MODE = grid.biome_transition;
+if (!['native', 'sharp'].includes(MODE)) throw new Error('biome_transition must be native or sharp');
+// refuse overlapping transition zones: sample each zone boundary and test it against every other zone
+const qAt = (i, x, z) => ((x - i.cx) / A) ** 2 + ((z - i.cz) / B) ** 2;
+let minGap = Infinity;
+for (const i of islands) for (const j of islands) {
+  if (i === j) continue;
+  for (let k = 0; k < 7200; k++) {
+    const t = 2 * Math.PI * k / 7200, x = i.cx + A * Math.sqrt(QEND) * Math.cos(t), z = i.cz + B * Math.sqrt(QEND) * Math.sin(t);
+    if (qAt(j, x, z) < QEND) throw new Error(`transition zones of ${i.biome} and ${j.biome} overlap: pitch ${grid.pitch} is too small for diameters ${grid.diameter_x} x ${grid.diameter_z} and transition ${T}`);
+  }
+  if (i.row === j.row && Math.abs(i.col - j.col) === 1) minGap = Math.min(minGap, Math.hypot(i.cx - j.cx, 0) - 2 * A * Math.sqrt(QEND));
+  if (i.col === j.col && Math.abs(i.row - j.row) === 1) minGap = Math.min(minGap, Math.hypot(0, i.cz - j.cz) - 2 * B * Math.sqrt(QEND));
+}
+// worst error of the radial-distance approximation against the true distance to the ellipse, over the whole transition
+function trueDist(px, pz) {   // px, pz relative to the centre, outside the ellipse
+  let best = Infinity, bt = 0;
+  for (let k = 0; k < 720; k++) { const t = Math.PI * 2 * k / 720, d = Math.hypot(px - A * Math.cos(t), pz - B * Math.sin(t)); if (d < best) { best = d; bt = t; } }
+  let lo = bt - Math.PI / 360, hi = bt + Math.PI / 360;
+  for (let it = 0; it < 40; it++) {
+    const m1 = lo + (hi - lo) / 3, m2 = hi - (hi - lo) / 3;
+    const f = t => Math.hypot(px - A * Math.cos(t), pz - B * Math.sin(t));
+    if (f(m1) < f(m2)) hi = m2; else lo = m1;
+  }
+  return Math.hypot(px - A * Math.cos((lo + hi) / 2), pz - B * Math.sin((lo + hi) / 2));
+}
+let worstErr = 0, worstAt = null;
+for (let k = 0; k < 360; k++) for (let m = 1; m <= 40; m++) {
+  const t = 2 * Math.PI * k / 360, r = 1 + (REND - 1) * m / 40, px = A * r * Math.cos(t), pz = B * r * Math.sin(t);
+  const err = distOfQ(r * r) - trueDist(px, pz);
+  if (Math.abs(err) > Math.abs(worstErr)) { worstErr = err; worstAt = { angle_deg: +(t * 180 / Math.PI).toFixed(0), approx: +distOfQ(r * r).toFixed(1), true: +trueDist(px, pz).toFixed(1) }; }
+}
 
-// ---- density function node helpers (vanilla types only, plus our block_x / block_z)
+// ---- density function node helpers
 const add = (a, b) => ({ type: 'minecraft:add', argument1: a, argument2: b });
 const mul = (a, b) => ({ type: 'minecraft:mul', argument1: a, argument2: b });
-const max = (a, b) => ({ type: 'minecraft:max', argument1: a, argument2: b });
-const abs = a => ({ type: 'minecraft:abs', argument: a });
-const clamp = (a, lo, hi) => ({ type: 'minecraft:clamp', input: a, min: lo, max: hi });
+const sq = a => ({ type: 'minecraft:square', argument: a });
 const flat = a => ({ type: 'minecraft:flat_cache', argument: a });
+const c2d = a => ({ type: 'minecraft:cache_2d', argument: a });
+const rc = (input, lo, hi, inr, outr) => ({ type: 'minecraft:range_choice', input, min_inclusive: lo, max_exclusive: hi, when_in_range: inr, when_out_of_range: outr });
 const BX = { type: NS + ':block_x' }, BZ = { type: NS + ':block_z' };
-// mask = 1 inside the square, ramps linearly to 0 over `blend` blocks outside it (Chebyshev distance), 0 beyond.
-// t = max(|x-cx|-half, |z-cz|-half) is negative inside, 0 on the edge, positive outside; mask = clamp(1 - t/blend, 0, 1).
-function maskOf(p) {
-  const half = size / 2;
-  const tx = add(abs(add(BX, -p.cx)), -half), tz = add(abs(add(BZ, -p.cz)), -half);
-  return clamp(add(1.0, mul(-1.0 / blend, max(tx, tz))), 0.0, 1.0);
+const r9 = v => +v.toFixed(9);
+// normalised squared distance q = ((x-cx)/A)^2 + ((z-cz)/B)^2 from squares of block_x, block_z (no square root in vanilla)
+const qFn = i => add(mul(1 / (A * A), sq(add(BX, -i.cx))), mul(1 / (B * B), sq(add(BZ, -i.cz))));
+// a monotone profile over distance d (blocks beyond the edge) -> spline over q with Hermite derivatives
+function splineOver(i, pts) {   // pts: [{d, value, dvalue_dd}]
+  return { type: 'minecraft:spline', spline: { coordinate: qFn(i), points: pts.map(p => {
+    const q = qOfDist(p.d), dqdd = 2 * (1 + p.d / RM) / RM;     // dq/dd
+    return { location: r9(q), value: r9(p.value), derivative: r9(p.dvalue_dd / dqdd) };
+  }) } };
 }
-for (const p of patches) write(`worldgen/density_function/patch/mask_${p.biome}.json`, maskOf(p));
-// value = desert + sum over patches of mask_p * (patch_value - desert)
-function climateFn(key) {
-  const d = grid.desert[key];
-  let e = d;
-  for (const p of patches) e = add(e, mul(`${NS}:patch/mask_${p.biome}`, +(p[key] - d).toFixed(6)));
-  return flat(e);
+const smooth = s => s * s * (3 - 2 * s), dsmooth = s => 6 * s * (1 - s);
+// terrain mask: full inside the ellipse, smoothstep to 0 at edge + transition
+function terrainPts() {
+  const pts = []; const N = 40;
+  for (let k = 0; k <= N; k++) { const d = T * k / N, s = 1 - d / T; pts.push({ d, value: smooth(s), dvalue_dd: -dsmooth(s) / T }); }
+  return pts;
 }
-for (const key of CLIM) write(`worldgen/density_function/overworld/${OUTNAME[key]}.json`, climateFn(key));
+// sharp biome mask: full out to edge + sharp_edge_fraction*transition, then a short smoothstep ramp to 0
+function sharpPts() {
+  const E = grid.sharp_edge_fraction * T, R = grid.sharp_ramp, pts = [{ d: 0, value: 1, dvalue_dd: 0 }]; const N = 10;
+  for (let k = 0; k <= N; k++) { const d = E + R * k / N, s = 1 - k / N; pts.push({ d, value: smooth(s), dvalue_dd: -dsmooth(s) / R }); }
+  return pts;
+}
+const DF = 'worldgen/density_function/';
+for (const i of islands) {
+  write(`${DF}island/w_${i.biome}.json`, splineOver(i, terrainPts()));
+  write(`${DF}island/wb_${i.biome}.json`, splineOver(i, sharpPts()));
+}
+// total terrain mask, exact per block (cache_2d, never flat_cache). The zones never overlap (checked above), so instead of summing all
+// eight masks it picks the one island whose bounding box holds the block: a nested range_choice on block_x (columns), then block_z (rows).
+// A dune column then costs about four comparisons, not eight splines (the terrain graph re-evaluates this once per vertical cell).
+const pick = (coord, lo, hi, inner, outer) => rc(coord, Math.floor(lo), Math.ceil(hi) + 1, inner, outer);
+const cols = [...new Set(islands.map(i => i.col))].sort((p, q) => p - q);
+let tree = 0.0;
+for (const c of cols.slice().reverse()) {
+  const inCol = islands.filter(i => i.col === c).sort((p, q) => p.row - q.row);
+  let rowTree = 0.0;
+  for (const i of inCol.slice().reverse()) rowTree = pick(BZ, i.cz - B * REND, i.cz + B * REND, `${NS}:island/w_${i.biome}`, rowTree);
+  tree = pick(BX, inCol[0].cx - A * REND, inCol[0].cx + A * REND, rowTree, tree);
+}
+write(`${DF}island/w.json`, c2d(tree));
+const W = `${NS}:island/w`;
+
+// ---- climate functions
+const CLIM = ['continentalness', 'erosion', 'weirdness', 'temperature', 'humidity'];
+const ROUTER = { continentalness: 'continents', erosion: 'erosion', weirdness: 'ridges', temperature: 'temperature', humidity: 'vegetation' };
+const d0 = grid.desert;
+// (a) terrain graph leaves: the island's full values wherever its mask is above 0 (a step, not a ramp), desert values elsewhere.
+//     The vanilla density is only ever used where the mask is above 0, so those are the only places they matter.
+for (const key of ['continentalness', 'erosion', 'weirdness']) {
+  let e = d0[key];
+  for (const i of islands) e = add(e, mul(rc(`${NS}:island/w_${i.biome}`, 1e-9, 2.0, 1.0, 0.0), r9(i[key] - d0[key])));
+  write(`${DF}overworld/${ROUTER[key]}.json`, flat(e));
+}
+// (b) biome-sampler functions, two modes: native = ramp with the terrain mask; sharp = island values out to edge + 100, short ramp
+for (const [mode, prefix] of [['native', 'w_'], ['sharp', 'wb_']]) for (const key of CLIM) {
+  let e = d0[key];
+  for (const i of islands) e = add(e, mul(`${NS}:island/${prefix}${i.biome}`, r9(i[key] - d0[key])));
+  write(`${DF}biome_${mode}/${ROUTER[key]}.json`, flat(e));
+}
 
 // ---- copy of vanilla's overworld density function graph (every minecraft:overworld/... reference becomes ours)
 const rw = n => typeof n === 'string' ? n.replace(/^minecraft:overworld\//, NS + ':overworld/')
   : Array.isArray(n) ? n.map(rw) : (n && typeof n === 'object') ? Object.fromEntries(Object.entries(n).map(([k, v]) => [k, rw(v)])) : n;
 const COPIED = ['base_3d_noise', 'depth', 'factor', 'jaggedness', 'offset', 'ridges_folded', 'sloped_cheese'];
-for (const f of COPIED) write(`worldgen/density_function/overworld/${f}.json`, rw(readV(`density_function/overworld/${f}.json`)));
+for (const f of COPIED) write(`${DF}overworld/${f}.json`, rw(readV(`density_function/overworld/${f}.json`)));
 
-// ---- noise settings: vanilla overworld, our router, no aquifers, no cave terms in the final density
-const ns = readV('noise_settings/overworld.json');
-const router = rw(ns.noise_router);
-router.temperature = `${NS}:overworld/temperature`;
-router.vegetation = `${NS}:overworld/vegetation`;
-// final density: drop min(..., noodle) and replace the range_choice (entrances / cheese caves / spaghetti / pillars) by sloped_cheese itself
+// ---- noise settings
 const SLOPED = `${NS}:overworld/sloped_cheese`;
-let foundNoodle = false, foundRange = 0;
-let fd = router.final_density;
-if (fd.type === 'minecraft:min' && fd.argument2 === `${NS}:overworld/caves/noodle`) { fd = fd.argument1; foundNoodle = true; }
-const strip = n => {
-  if (Array.isArray(n)) return n.map(strip);
-  if (n && typeof n === 'object') {
-    if (n.type === 'minecraft:range_choice' && n.input === SLOPED) { foundRange++; return SLOPED; }
-    return Object.fromEntries(Object.entries(n).map(([k, v]) => [k, strip(v)]));
-  }
-  return n;
-};
-fd = strip(fd);
-if (!foundNoodle || foundRange !== 1) throw new Error('final_density no longer has the expected cave structure (noodle ' + foundNoodle + ', range_choice ' + foundRange + ')');
-if (JSON.stringify(fd).includes('caves/')) throw new Error('a cave function is still referenced');
-router.final_density = fd;
-ns.noise_router = router;
-ns.aquifers_enabled = false;
-const BIOMES = ['desert', ...patches.map(p => p.biome)];
+function vanillaNoCaves(router) {   // squeeze(0.64 * interpolated(...)) with min(..., noodle) and the cave range_choice removed
+  let fd = router.final_density, foundNoodle = false, foundRange = 0;
+  if (fd.type === 'minecraft:min' && fd.argument2 === `${NS}:overworld/caves/noodle`) { fd = fd.argument1; foundNoodle = true; }
+  const strip = n => Array.isArray(n) ? n.map(strip) : (n && typeof n === 'object')
+    ? (n.type === 'minecraft:range_choice' && n.input === SLOPED ? (foundRange++, SLOPED) : Object.fromEntries(Object.entries(n).map(([k, v]) => [k, strip(v)]))) : n;
+  fd = strip(fd);
+  if (!foundNoodle || foundRange !== 1 || JSON.stringify(fd).includes('caves/')) throw new Error('final_density no longer has the expected cave structure');
+  return fd;
+}
+// put the mask range_choice INSIDE the interpolated, so cell corners where the mask is 0 cost nothing (range_choice is lazy)
+function gateInterpolated(n) {
+  let hit = 0;
+  const go = x => Array.isArray(x) ? x.map(go) : (x && typeof x === 'object')
+    ? (x.type === 'minecraft:interpolated' ? (hit++, { type: 'minecraft:interpolated', argument: rc(W, 1e-9, 2.0, x.argument, 0.0) }) : Object.fromEntries(Object.entries(x).map(([k, v]) => [k, go(v)]))) : x;
+  const out = go(n); if (hit !== 1) throw new Error('expected exactly one interpolated in the final density, found ' + hit);
+  return out;
+}
+const BIOMES = islands.map(i => i.biome);
 const ownBiome = s => (typeof s === 'string' && s.startsWith('minecraft:') && BIOMES.includes(s.slice(10))) ? NS + ':' + s.slice(10) : s;
 const mapStr = (n, f) => Array.isArray(n) ? n.map(x => mapStr(x, f)) : (n && typeof n === 'object') ? Object.fromEntries(Object.entries(n).map(([k, v]) => [k, mapStr(v, f)])) : f(n);
-ns.surface_rule = mapStr(ns.surface_rule, ownBiome);
-write('worldgen/noise_settings/arrakis.json', ns);
+const DUNE_SURFACE = { type: 'minecraft:condition', if_true: { type: 'minecraft:biome', biome_is: [NS + ':' + d0.biome] }, then_run: { type: 'minecraft:block', result_state: { Name: 'minecraft:sand' } } };
+function noiseSettings(mode) {
+  const ns = readV('noise_settings/overworld.json'), router = rw(ns.noise_router);
+  const vanillaFinal = gateInterpolated(vanillaNoCaves(router));
+  for (const key of CLIM) router[ROUTER[key]] = `${NS}:biome_${mode}/${ROUTER[key]}`;
+  router.depth = `${NS}:overworld/depth`;
+  // terrain: final = w * vanilla + (1 - w) * dune, the dune part exact per block and outside every interpolated / flat cache
+  router.final_density = add(mul(W, vanillaFinal), mul(add(1.0, mul(-1.0, W)), `${NS}:arrakis_final_density`));
+  // preliminary surface height (read by the surface rule): the same blend, of heights
+  router.preliminary_surface_level = add(mul(W, rc(W, 1e-9, 2.0, router.preliminary_surface_level, 0.0)), mul(add(1.0, mul(-1.0, W)), `${NS}:arrakis_surface_height`));
+  // no ore veins in the dunes (they would replace the sand): the vein toggle is 0 wherever the mask is 0
+  router.vein_toggle = rc(W, 1e-9, 2.0, router.vein_toggle, 0.0);
+  ns.noise_router = router;
+  ns.aquifers_enabled = false;
+  ns.surface_rule = mapStr(ns.surface_rule, ownBiome);
+  ns.surface_rule.sequence.splice(1, 0, DUNE_SURFACE);        // right after the bedrock gradient, ahead of vanilla's rules
+  return ns;
+}
+write('worldgen/noise_settings/arrakis_native.json', noiseSettings('native'));
+write('worldgen/noise_settings/arrakis_sharp.json', noiseSettings('sharp'));
+write('worldgen/noise_settings/arrakis.json', noiseSettings(MODE));
 
-// ---- biome copies: carvers emptied, cave-style features removed, everything else byte for byte
-const removed = new Set(grid.removed_features), seenRemoved = new Set();
+// ---- biome copies of the eight islands: carvers emptied, cave-style features removed
+const removed = new Set(grid.removed_features);
 for (const b of BIOMES) {
   const j = readV(`biome/${b}.json`);
   j.carvers = [];
-  j.features = j.features.map(step => step.filter(f => { if (removed.has(f)) { seenRemoved.add(f); return false; } return true; }));
+  j.features = j.features.map(step => step.filter(f => !removed.has(f)));
   write(`worldgen/biome/${b}.json`, j);
 }
-for (const f of removed) if (!seenRemoved.has(f)) console.warn('note: removed feature never used by these biomes: ' + f);
 
-// ---- biome source: vanilla's parameter points of these 11 biomes, pointing at our copies
-const paramsFile = path.join(ROOT, 'build/rw/params.json');
-const all = JSON.parse(fs.readFileSync(paramsFile, 'utf8'));
-const mine = all.filter(x => BIOMES.includes(x.biome.slice(10))).map(x => ({ biome: NS + ':' + x.biome.slice(10), parameters: x.parameters }));
-// check each tuple against the subset the way Climate does (distance to the box, quantised to 1e-4)
-const q = v => Math.trunc(v * 10000);
-const dist = (v, r) => { const lo = q(Array.isArray(r) ? r[0] : r), hi = q(Array.isArray(r) ? r[1] : r); return Math.max(v - hi, lo - v, 0); };
-function nearest(t) {
-  const tv = { temperature: q(t.temperature), humidity: q(t.humidity), continentalness: q(t.continentalness), erosion: q(t.erosion), weirdness: q(t.weirdness), depth: 0 };
+// ---- biome source: vanilla's parameter points of these biomes (the Desert boxes now select the dune biome)
+const all = JSON.parse(fs.readFileSync(path.join(ROOT, 'build/rw/params.json'), 'utf8'));
+const target = b => b === d0.vanilla_biome ? NS + ':' + d0.biome : NS + ':' + b;
+const mine = all.filter(x => BIOMES.includes(x.biome.slice(10)) || x.biome === 'minecraft:' + d0.vanilla_biome).map(x => ({ biome: target(x.biome.slice(10)), parameters: x.parameters }));
+const q4 = v => Math.trunc(v * 10000);
+const dist = (v, r) => { const lo = q4(Array.isArray(r) ? r[0] : r), hi = q4(Array.isArray(r) ? r[1] : r); return Math.max(v - hi, lo - v, 0); };
+function nearest(t, depth = 0) {
+  const tv = { temperature: q4(t.temperature), humidity: q4(t.humidity), continentalness: q4(t.continentalness), erosion: q4(t.erosion), weirdness: q4(t.weirdness), depth: q4(depth) };
   let best = Infinity, who = new Set();
   for (const m of mine) {
-    const P = m.parameters; let d = 0;
-    for (const k of ['temperature', 'humidity', 'continentalness', 'erosion', 'weirdness', 'depth']) d += dist(tv[k], P[k]) ** 2;
-    d += q(P.offset) ** 2;
+    let d = 0; for (const k of Object.keys(tv)) d += dist(tv[k], m.parameters[k]) ** 2;
+    d += q4(m.parameters.offset) ** 2;
     if (d < best) { best = d; who = new Set([m.biome]); } else if (d === best) who.add(m.biome);
   }
   return { best, who: [...who] };
 }
 let bad = 0;
-for (const t of [{ biome: 'desert', ...grid.desert }, ...patches]) {
+for (const t of [{ ...d0, target: NS + ':' + d0.biome }, ...islands.map(i => ({ ...i, target: NS + ':' + i.biome }))]) {
   const r = nearest(t);
-  const ok = r.best === 0 && r.who.length === 1 && r.who[0] === NS + ':' + t.biome;
-  if (!ok) { bad++; console.warn(`WARNING tuple of ${t.biome}: nearest ${r.who.join(',')} distance ${r.best}`); }
+  if (!(r.best === 0 && r.who.length === 1 && r.who[0] === t.target)) { bad++; console.warn(`WARNING tuple of ${t.biome}: nearest ${r.who.join(',')} distance ${r.best}`); }
 }
 if (bad) console.warn(bad + ' tuple(s) do not select their own biome uniquely');
-const gen = { type: 'minecraft:noise', settings: `${NS}:arrakis`, biome_source: { type: 'minecraft:multi_noise', biomes: mine } };
-write('worldgen/world_preset/arrakis.json', {
+const preset = settings => ({
   dimensions: {
-    'minecraft:overworld': { type: 'minecraft:overworld', generator: gen },
+    'minecraft:overworld': { type: 'minecraft:overworld', generator: { type: 'minecraft:noise', settings: `${NS}:${settings}`, biome_source: { type: 'minecraft:multi_noise', biomes: mine } } },
     'minecraft:the_end': { type: 'minecraft:the_end', generator: { type: 'minecraft:noise', biome_source: { type: 'minecraft:the_end' }, settings: 'minecraft:end' } },
     'minecraft:the_nether': { type: 'minecraft:the_nether', generator: { type: 'minecraft:noise', biome_source: { type: 'minecraft:multi_noise', preset: 'minecraft:nether' }, settings: 'minecraft:nether' } }
   }
 });
-// TEST ONLY (WITH_CAVES=1): the same generator with vanilla's cave terms kept in the final density, to measure what removing them changes at the surface.
-if (process.env.WITH_CAVES) {
-  for (const f of fs.readdirSync(path.join(VAN, 'density_function/overworld/caves'))) write(`worldgen/density_function/overworld/caves/${f}`, rw(readV(`density_function/overworld/caves/${f}`)));
-  const nc = JSON.parse(JSON.stringify(ns)); nc.noise_router.final_density = rw(readV('noise_settings/overworld.json').noise_router.final_density);
-  write('worldgen/noise_settings/arrakis_caves.json', nc);
-  const pc = JSON.parse(fs.readFileSync(path.join(OUT, 'worldgen/world_preset/arrakis.json'), 'utf8')); pc.dimensions['minecraft:overworld'].generator.settings = `${NS}:arrakis_caves`;
-  write('worldgen/world_preset/arrakis_caves.json', pc);
-  console.log('test-only arrakis_caves preset written; run gen.js again without WITH_CAVES to remove it');
+write('worldgen/world_preset/arrakis.json', preset('arrakis'));
+write('worldgen/world_preset/arrakis_native.json', preset('arrakis_native'));
+write('worldgen/world_preset/arrakis_sharp.json', preset('arrakis_sharp'));
+// the world-type list: "Arrakis" (the mode of grid.json) and the other mode as a second entry (a tag with replace:false merges with vanilla's)
+write('tags/worldgen/world_preset/normal.json', { replace: false, values: [`${NS}:arrakis`, `${NS}:arrakis_${MODE === 'native' ? 'sharp' : 'native'}`] }, path.join(RES, 'data/minecraft'));
+// TEST ONLY (TEST_PRESETS=1): the dune terrain alone under the same world type, to know the dune height under every island exactly.
+if (process.env.TEST_PRESETS) {
+  const nd = noiseSettings('native'); nd.noise_router.final_density = `${NS}:arrakis_final_density`; nd.noise_router.preliminary_surface_level = `${NS}:arrakis_surface_height`;
+  write('worldgen/noise_settings/arrakis_test.json', nd);
+  write('worldgen/world_preset/arrakis_test.json', preset('arrakis_test'));
+  console.log('TEST-ONLY dune-only preset written as arrakis_test; run gen.js again without TEST_PRESETS to remove it');
 }
-console.log(`wrote ${patches.length} patch masks, 5 climate functions, ${COPIED.length} copied functions, noise_settings, ${BIOMES.length} biomes, world preset (${mine.length} parameter points)`);
+const geo = { radius_semi_axes: [A, B], mean_radius: RM, transition_end_q: +QEND.toFixed(4), transition_end_semi_axes: [+(A * REND).toFixed(1), +(B * REND).toFixed(1)],
+  min_clear_gap_between_zones: +minGap.toFixed(1), radial_distance_worst_error_blocks: +worstErr.toFixed(2), worst_error_at: worstAt };
+console.log(JSON.stringify(geo));
+console.log(`wrote ${islands.length} islands (biome mode of the default world type: ${MODE}), ${mine.length} parameter points`);

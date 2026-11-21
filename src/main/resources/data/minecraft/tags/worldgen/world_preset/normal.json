@@ -1,1 +1,7 @@
-{ "replace": false, "values": [ "islandcraft_dunesofarrakis:arrakis" ] }
+{
+  "replace": false,
+  "values": [
+    "islandcraft_dunesofarrakis:arrakis",
+    "islandcraft_dunesofarrakis:arrakis_sharp"
+  ]
+}

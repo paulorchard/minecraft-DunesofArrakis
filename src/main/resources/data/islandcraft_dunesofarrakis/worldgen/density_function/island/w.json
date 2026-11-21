@@ -1,0 +1,112 @@
+{
+  "type": "minecraft:cache_2d",
+  "argument": {
+    "type": "minecraft:range_choice",
+    "input": {
+      "type": "islandcraft_dunesofarrakis:block_x"
+    },
+    "min_inclusive": 225,
+    "max_exclusive": 976,
+    "when_in_range": {
+      "type": "minecraft:range_choice",
+      "input": {
+        "type": "islandcraft_dunesofarrakis:block_z"
+      },
+      "min_inclusive": 259,
+      "max_exclusive": 942,
+      "when_in_range": "islandcraft_dunesofarrakis:island/w_windswept_hills",
+      "when_out_of_range": {
+        "type": "minecraft:range_choice",
+        "input": {
+          "type": "islandcraft_dunesofarrakis:block_z"
+        },
+        "min_inclusive": 1259,
+        "max_exclusive": 1942,
+        "when_in_range": "islandcraft_dunesofarrakis:island/w_stony_peaks",
+        "when_out_of_range": 0
+      }
+    },
+    "when_out_of_range": {
+      "type": "minecraft:range_choice",
+      "input": {
+        "type": "islandcraft_dunesofarrakis:block_x"
+      },
+      "min_inclusive": 1225,
+      "max_exclusive": 1976,
+      "when_in_range": {
+        "type": "minecraft:range_choice",
+        "input": {
+          "type": "islandcraft_dunesofarrakis:block_z"
+        },
+        "min_inclusive": 259,
+        "max_exclusive": 942,
+        "when_in_range": "islandcraft_dunesofarrakis:island/w_windswept_gravelly_hills",
+        "when_out_of_range": {
+          "type": "minecraft:range_choice",
+          "input": {
+            "type": "islandcraft_dunesofarrakis:block_z"
+          },
+          "min_inclusive": 1259,
+          "max_exclusive": 1942,
+          "when_in_range": "islandcraft_dunesofarrakis:island/w_windswept_savanna",
+          "when_out_of_range": 0
+        }
+      },
+      "when_out_of_range": {
+        "type": "minecraft:range_choice",
+        "input": {
+          "type": "islandcraft_dunesofarrakis:block_x"
+        },
+        "min_inclusive": 2225,
+        "max_exclusive": 2976,
+        "when_in_range": {
+          "type": "minecraft:range_choice",
+          "input": {
+            "type": "islandcraft_dunesofarrakis:block_z"
+          },
+          "min_inclusive": 259,
+          "max_exclusive": 942,
+          "when_in_range": "islandcraft_dunesofarrakis:island/w_ice_spikes",
+          "when_out_of_range": {
+            "type": "minecraft:range_choice",
+            "input": {
+              "type": "islandcraft_dunesofarrakis:block_z"
+            },
+            "min_inclusive": 1259,
+            "max_exclusive": 1942,
+            "when_in_range": "islandcraft_dunesofarrakis:island/w_badlands",
+            "when_out_of_range": 0
+          }
+        },
+        "when_out_of_range": {
+          "type": "minecraft:range_choice",
+          "input": {
+            "type": "islandcraft_dunesofarrakis:block_x"
+          },
+          "min_inclusive": 3225,
+          "max_exclusive": 3976,
+          "when_in_range": {
+            "type": "minecraft:range_choice",
+            "input": {
+              "type": "islandcraft_dunesofarrakis:block_z"
+            },
+            "min_inclusive": 259,
+            "max_exclusive": 942,
+            "when_in_range": "islandcraft_dunesofarrakis:island/w_jagged_peaks",
+            "when_out_of_range": {
+              "type": "minecraft:range_choice",
+              "input": {
+                "type": "islandcraft_dunesofarrakis:block_z"
+              },
+              "min_inclusive": 1259,
+              "max_exclusive": 1942,
+              "when_in_range": "islandcraft_dunesofarrakis:island/w_eroded_badlands",
+              "when_out_of_range": 0
+            }
+          },
+          "when_out_of_range": 0
+        }
+      }
+    }
+  }
+}

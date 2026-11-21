@@ -1,0 +1,53 @@
+{
+  "type": "minecraft:add",
+  "argument1": {
+    "type": "islandcraft_dunesofarrakis:arrakis_linear",
+    "x_coefficient": -0.002641364,
+    "z_coefficient": 0.005664424
+  },
+  "argument2": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:mul",
+      "argument1": 0.26,
+      "argument2": {
+        "type": "minecraft:shifted_noise",
+        "noise": "islandcraft_dunesofarrakis:arrakis_dune_warp",
+        "xz_scale": 0,
+        "y_scale": 0,
+        "shift_x": {
+          "type": "islandcraft_dunesofarrakis:arrakis_linear",
+          "x_coefficient": -0.301870187,
+          "z_coefficient": 0.647362705
+        },
+        "shift_y": 0,
+        "shift_z": {
+          "type": "islandcraft_dunesofarrakis:arrakis_linear",
+          "x_coefficient": -0.906307787,
+          "z_coefficient": -0.422618262
+        }
+      }
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": 0.35,
+      "argument2": {
+        "type": "minecraft:shifted_noise",
+        "noise": "islandcraft_dunesofarrakis:arrakis_dune_spacing",
+        "xz_scale": 0,
+        "y_scale": 0,
+        "shift_x": {
+          "type": "islandcraft_dunesofarrakis:arrakis_linear",
+          "x_coefficient": -0.422618262,
+          "z_coefficient": 0.906307787
+        },
+        "shift_y": 0,
+        "shift_z": {
+          "type": "islandcraft_dunesofarrakis:arrakis_linear",
+          "x_coefficient": -0.906307787,
+          "z_coefficient": -0.422618262
+        }
+      }
+    }
+  }
+}

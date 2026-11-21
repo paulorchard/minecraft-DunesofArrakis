@@ -16,69 +16,109 @@
                 "type": "minecraft:add",
                 "argument1": {
                   "type": "minecraft:add",
-                  "argument1": {
-                    "type": "minecraft:add",
-                    "argument1": {
-                      "type": "minecraft:add",
-                      "argument1": -0.96665,
-                      "argument2": {
-                        "type": "minecraft:mul",
-                        "argument1": "islandcraft_dunesofarrakis:patch/mask_windswept_hills",
-                        "argument2": 0.30005
-                      }
-                    },
-                    "argument2": {
-                      "type": "minecraft:mul",
-                      "argument1": "islandcraft_dunesofarrakis:patch/mask_plains",
-                      "argument2": 0
-                    }
-                  },
+                  "argument1": -0.96665,
                   "argument2": {
                     "type": "minecraft:mul",
-                    "argument1": "islandcraft_dunesofarrakis:patch/mask_windswept_gravelly_hills",
+                    "argument1": {
+                      "type": "minecraft:range_choice",
+                      "input": "islandcraft_dunesofarrakis:island/w_windswept_hills",
+                      "min_inclusive": 1e-9,
+                      "max_exclusive": 2,
+                      "when_in_range": 1,
+                      "when_out_of_range": 0
+                    },
                     "argument2": 0.30005
                   }
                 },
                 "argument2": {
                   "type": "minecraft:mul",
-                  "argument1": "islandcraft_dunesofarrakis:patch/mask_ice_spikes",
-                  "argument2": 1.12495
+                  "argument1": {
+                    "type": "minecraft:range_choice",
+                    "input": "islandcraft_dunesofarrakis:island/w_windswept_gravelly_hills",
+                    "min_inclusive": 1e-9,
+                    "max_exclusive": 2,
+                    "when_in_range": 1,
+                    "when_out_of_range": 0
+                  },
+                  "argument2": 0.30005
                 }
               },
               "argument2": {
                 "type": "minecraft:mul",
-                "argument1": "islandcraft_dunesofarrakis:patch/mask_jagged_peaks",
-                "argument2": 0.30005
+                "argument1": {
+                  "type": "minecraft:range_choice",
+                  "input": "islandcraft_dunesofarrakis:island/w_ice_spikes",
+                  "min_inclusive": 1e-9,
+                  "max_exclusive": 2,
+                  "when_in_range": 1,
+                  "when_out_of_range": 0
+                },
+                "argument2": 1.12495
               }
             },
             "argument2": {
               "type": "minecraft:mul",
-              "argument1": "islandcraft_dunesofarrakis:patch/mask_stony_peaks",
+              "argument1": {
+                "type": "minecraft:range_choice",
+                "input": "islandcraft_dunesofarrakis:island/w_jagged_peaks",
+                "min_inclusive": 1e-9,
+                "max_exclusive": 2,
+                "when_in_range": 1,
+                "when_out_of_range": 0
+              },
               "argument2": 0.30005
             }
           },
           "argument2": {
             "type": "minecraft:mul",
-            "argument1": "islandcraft_dunesofarrakis:patch/mask_windswept_savanna",
-            "argument2": 1.63325
+            "argument1": {
+              "type": "minecraft:range_choice",
+              "input": "islandcraft_dunesofarrakis:island/w_stony_peaks",
+              "min_inclusive": 1e-9,
+              "max_exclusive": 2,
+              "when_in_range": 1,
+              "when_out_of_range": 0
+            },
+            "argument2": 0.30005
           }
         },
         "argument2": {
           "type": "minecraft:mul",
-          "argument1": "islandcraft_dunesofarrakis:patch/mask_badlands",
-          "argument2": 0
+          "argument1": {
+            "type": "minecraft:range_choice",
+            "input": "islandcraft_dunesofarrakis:island/w_windswept_savanna",
+            "min_inclusive": 1e-9,
+            "max_exclusive": 2,
+            "when_in_range": 1,
+            "when_out_of_range": 0
+          },
+          "argument2": 1.63325
         }
       },
       "argument2": {
         "type": "minecraft:mul",
-        "argument1": "islandcraft_dunesofarrakis:patch/mask_eroded_badlands",
-        "argument2": 1.12495
+        "argument1": {
+          "type": "minecraft:range_choice",
+          "input": "islandcraft_dunesofarrakis:island/w_badlands",
+          "min_inclusive": 1e-9,
+          "max_exclusive": 2,
+          "when_in_range": 1,
+          "when_out_of_range": 0
+        },
+        "argument2": 0
       }
     },
     "argument2": {
       "type": "minecraft:mul",
-      "argument1": "islandcraft_dunesofarrakis:patch/mask_deep_frozen_ocean",
-      "argument2": 0.96665
+      "argument1": {
+        "type": "minecraft:range_choice",
+        "input": "islandcraft_dunesofarrakis:island/w_eroded_badlands",
+        "min_inclusive": 1e-9,
+        "max_exclusive": 2,
+        "when_in_range": 1,
+        "when_out_of_range": 0
+      },
+      "argument2": 1.12495
     }
   }
 }

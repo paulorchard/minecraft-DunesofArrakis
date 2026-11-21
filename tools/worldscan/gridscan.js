@@ -27,7 +27,8 @@ const vd = new Uint8Array(W * H), pl = new Uint8Array(W * H);
 const biomeNames = [], blockNames = [];
 const bidx = (arr, n) => { let i = arr.indexOf(n); if (i < 0) { i = arr.length; if (i > 255) throw new Error('more than 255 names'); arr.push(n); } return i; };
 let nChunks = 0;
-const census = {};   // block name -> count over every block of every scanned chunk (only blocks inside the window rectangle are not separated: whole chunks are counted)
+const census = {}, biomeSections = {};   // biomeSections: biome name -> number of 16x16x16 sections whose biome palette holds it (every depth, not just the surface)
+const census0 = null;   // block name -> count over every block of every scanned chunk (only blocks inside the window rectangle are not separated: whole chunks are counted)
 const vox = [];   // every non-solid block below a column's top terrain block: wx, y, wz (to tell overhangs, open to the outside, from sealed pockets)
 for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mca'))) {
   for (const c of chunks(path.join(dir, f))) {
@@ -41,7 +42,7 @@ for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mca'))) {
       const pal = bs.palette.map(p => p.Name), pc = pal.map(clsOf);
       const idx = pal.length > 1 ? unpack(bs.data, Math.max(4, Math.ceil(Math.log2(pal.length))), 4096) : null;
       let bpal = null, bidxs = null;
-      if (s.biomes) { bpal = s.biomes.palette; bidxs = bpal.length > 1 ? unpack(s.biomes.data, Math.max(1, Math.ceil(Math.log2(bpal.length))), 64) : null; }
+      if (s.biomes) { bpal = s.biomes.palette; for (const bn0 of new Set(bpal)) biomeSections[bn0] = (biomeSections[bn0] || 0) + 1; bidxs = bpal.length > 1 ? unpack(s.biomes.data, Math.max(1, Math.ceil(Math.log2(bpal.length))), 64) : null; }
       if (!idx) census[pal[0]] = (census[pal[0]] || 0) + 4096;
       else { const cnt = new Uint32Array(pal.length); for (let k = 0; k < 4096; k++) cnt[idx[k]]++; for (let k = 0; k < pal.length; k++) if (cnt[k]) census[pal[k]] = (census[pal[k]] || 0) + cnt[k]; }
       secs.push({ y: s.Y, pal, pc, idx, bpal, bidxs });
@@ -87,5 +88,5 @@ for (const f of fs.readdirSync(dir).filter(f => f.endsWith('.mca'))) {
 fs.mkdirSync(path.dirname(outPrefix), { recursive: true });
 fs.writeFileSync(outPrefix + '.bin', Buffer.concat([top, biome, surf, cover, vd, pl].map(a => Buffer.from(a.buffer, a.byteOffset, a.byteLength))));
 fs.writeFileSync(outPrefix + '.vox', Buffer.from(Int32Array.from(vox).buffer));
-fs.writeFileSync(outPrefix + '.json', JSON.stringify({ x0, z0, width: W, height: H, chunks: nChunks, biomes: biomeNames, blocks: blockNames, census }));
+fs.writeFileSync(outPrefix + '.json', JSON.stringify({ x0, z0, width: W, height: H, chunks: nChunks, biomes: biomeNames, blocks: blockNames, census, biomeSections }));
 console.log(`gridscan: ${nChunks} chunks, ${W}x${H} columns, ${biomeNames.length} biomes, ${blockNames.length} block names -> ${outPrefix}.bin`);
