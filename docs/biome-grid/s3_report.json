@@ -1,0 +1,445 @@
+{
+ "scan": "build/rw/grid_s3",
+ "window": {
+  "x0": -192,
+  "z0": -192,
+  "width": 4032,
+  "height": 2016
+ },
+ "chunks": 31752,
+ "patches": {
+  "windswept_hills": {
+   "square": [
+    200,
+    200,
+    700,
+    700
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 50.96,
+    "plains": 39.38,
+    "windswept_hills": 9.65
+   },
+   "height": {
+    "p5": 80,
+    "p50": 91,
+    "p95": 120,
+    "max": 131
+   },
+   "top_blocks_pct": {
+    "grass_block": 64.51,
+    "stone": 33.01,
+    "gravel": 0.65,
+    "dirt": 0.6,
+    "andesite": 0.28
+   }
+  },
+  "plains": {
+   "square": [
+    900,
+    200,
+    1400,
+    700
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 50.96,
+    "plains": 49.04
+   },
+   "height": {
+    "p5": 63,
+    "p50": 67,
+    "p95": 70,
+    "max": 74
+   },
+   "top_blocks_pct": {
+    "grass_block": 99.89,
+    "stone": 0.09,
+    "dirt": 0.02,
+    "granite": 0,
+    "andesite": 0
+   }
+  },
+  "windswept_gravelly_hills": {
+   "square": [
+    1600,
+    200,
+    2100,
+    700
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 30.81,
+    "windswept_hills": 40,
+    "plains": 19.54,
+    "windswept_gravelly_hills": 9.65
+   },
+   "height": {
+    "p5": 77,
+    "p50": 85,
+    "p95": 106,
+    "max": 136
+   },
+   "top_blocks_pct": {
+    "gravel": 58.79,
+    "grass_block": 28.91,
+    "stone": 11.72,
+    "dirt": 0.24,
+    "coal_ore": 0.11
+   }
+  },
+  "ice_spikes": {
+   "square": [
+    2300,
+    200,
+    2800,
+    700
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 30.81,
+    "windswept_hills": 20.15,
+    "plains": 39.38,
+    "ice_spikes": 9.65
+   },
+   "height": {
+    "p5": 63,
+    "p50": 67,
+    "p95": 74,
+    "max": 120
+   },
+   "top_blocks_pct": {
+    "snow_block": 66.63,
+    "packed_ice": 33.1,
+    "grass_block": 0.23,
+    "stone": 0.04,
+    "dirt": 0
+   }
+  },
+  "jagged_peaks": {
+   "square": [
+    3000,
+    200,
+    3500,
+    700
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 10.35,
+    "badlands": 20.46,
+    "jagged_peaks": 69.19
+   },
+   "height": {
+    "p5": 206,
+    "p50": 231,
+    "p95": 255,
+    "max": 255
+   },
+   "top_blocks_pct": {
+    "snow_block": 73.45,
+    "stone": 25.28,
+    "gravel": 0.49,
+    "coal_ore": 0.39,
+    "iron_ore": 0.37
+   }
+  },
+  "stony_peaks": {
+   "square": [
+    200,
+    900,
+    700,
+    1400
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 10.35,
+    "badlands": 60.46,
+    "stony_peaks": 29.19
+   },
+   "height": {
+    "p5": 206,
+    "p50": 230,
+    "p95": 255,
+    "max": 255
+   },
+   "top_blocks_pct": {
+    "stone": 90.53,
+    "calcite": 5.45,
+    "gravel": 1.44,
+    "iron_ore": 1.27,
+    "coal_ore": 1.25
+   }
+  },
+  "windswept_savanna": {
+   "square": [
+    900,
+    900,
+    1400,
+    1400
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 70.81,
+    "windswept_savanna": 29.19
+   },
+   "height": {
+    "p5": 65,
+    "p50": 87,
+    "p95": 145,
+    "max": 247
+   },
+   "top_blocks_pct": {
+    "grass_block": 36.42,
+    "coarse_dirt": 35.11,
+    "stone": 24.89,
+    "dirt": 1.3,
+    "sand": 0.77
+   }
+  },
+  "badlands": {
+   "square": [
+    1600,
+    900,
+    2100,
+    1400
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 30.81,
+    "badlands": 69.19
+   },
+   "height": {
+    "p5": 113,
+    "p50": 116,
+    "p95": 118,
+    "max": 123
+   },
+   "top_blocks_pct": {
+    "terracotta": 64.72,
+    "light_gray_terracotta": 12.72,
+    "yellow_terracotta": 12.46,
+    "white_terracotta": 7.84,
+    "orange_terracotta": 2.22
+   }
+  },
+  "eroded_badlands": {
+   "square": [
+    2300,
+    900,
+    2800,
+    1400
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 50.96,
+    "badlands": 39.38,
+    "eroded_badlands": 9.65
+   },
+   "height": {
+    "p5": 70,
+    "p50": 71,
+    "p95": 75,
+    "max": 78
+   },
+   "top_blocks_pct": {
+    "red_sand": 95.71,
+    "terracotta": 2.44,
+    "red_terracotta": 1.21,
+    "orange_terracotta": 0.54,
+    "stone": 0.07
+   }
+  },
+  "deep_frozen_ocean": {
+   "square": [
+    3000,
+    900,
+    3500,
+    1400
+   ],
+   "inner_target_share_pct": 100,
+   "inner_other_biomes": {},
+   "ring_columns": 41600,
+   "ring_biomes_pct": {
+    "desert": 30.81,
+    "plains": 40,
+    "deep_frozen_ocean": 29.19
+   },
+   "height": {
+    "p5": 34,
+    "p50": 38,
+    "p95": 44,
+    "max": 90
+   },
+   "top_blocks_pct": {
+    "gravel": 97.15,
+    "packed_ice": 2.08,
+    "snow_block": 0.31,
+    "blue_ice": 0.22,
+    "granite": 0.13
+   },
+   "ocean": {
+    "floor_depth_below_sea_p5_p50_p95_max": [
+     19,
+     25,
+     29,
+     32
+    ],
+    "water_columns_pct": 97.64,
+    "ice_or_snow_cover_of_water_columns_pct": 0.11
+   }
+  }
+ },
+ "outside": {
+  "columns": 5212512,
+  "desert_share_pct": 100,
+  "other_biomes_columns": {},
+  "height_p5_p50_p95_max": [
+   63,
+   67,
+   70,
+   77
+  ]
+ },
+ "caves": {
+  "columns_with_void_below_top": 68428,
+  "void_blocks": 1121602,
+  "void_blocks_open_to_outside_overhangs": 1120368,
+  "void_blocks_sealed": 1234,
+  "sealed_pockets": 350,
+  "sealed_pocket_size_median_max": [
+   1,
+   501
+  ],
+  "sealed_pockets_larger_than_20_blocks": 5,
+  "sealed_examples": [
+   [
+    280,
+    80,
+    380
+   ],
+   [
+    280,
+    81,
+    380
+   ],
+   [
+    280,
+    82,
+    380
+   ],
+   [
+    280,
+    83,
+    380
+   ],
+   [
+    280,
+    84,
+    380
+   ],
+   [
+    281,
+    80,
+    380
+   ],
+   [
+    281,
+    81,
+    380
+   ],
+   [
+    281,
+    82,
+    380
+   ],
+   [
+    280,
+    79,
+    380
+   ],
+   [
+    240,
+    88,
+    497
+   ],
+   [
+    240,
+    88,
+    498
+   ],
+   [
+    240,
+    88,
+    499
+   ]
+  ],
+  "columns_with_non_terrain_plants_below_top": 6813,
+  "void_columns_by_area": {
+   "outside": 51,
+   "windswept_hills_ring": 765,
+   "windswept_gravelly_hills_ring": 34,
+   "ice_spikes_ring": 268,
+   "windswept_hills": 12346,
+   "ice_spikes": 11446,
+   "windswept_gravelly_hills": 3463,
+   "jagged_peaks": 28,
+   "plains": 3,
+   "windswept_savanna_ring": 732,
+   "eroded_badlands_ring": 34,
+   "deep_frozen_ocean_ring": 185,
+   "windswept_savanna": 32534,
+   "deep_frozen_ocean": 6536,
+   "stony_peaks": 1,
+   "badlands_ring": 2
+  }
+ },
+ "census": {
+  "ores_total": 14508126,
+  "ores": {
+   "deepslate_redstone_ore": 1120304,
+   "deepslate_diamond_ore": 848747,
+   "deepslate_lapis_ore": 497433,
+   "deepslate_gold_ore": 770473,
+   "deepslate_iron_ore": 1015202,
+   "iron_ore": 2379070,
+   "lapis_ore": 356490,
+   "copper_ore": 2632799,
+   "coal_ore": 4165546,
+   "gold_ore": 298943,
+   "deepslate_copper_ore": 229661,
+   "diamond_ore": 15016,
+   "deepslate_coal_ore": 26278,
+   "redstone_ore": 98523,
+   "emerald_ore": 52990,
+   "deepslate_emerald_ore": 651
+  },
+  "monster_room_or_geode_blocks": {
+   "calcite": 47268
+  },
+  "fluids": {
+   "lava": 4756,
+   "water": 6404324
+  },
+  "chests": {}
+ },
+ "worst_inner_target_share_pct": 100
+}

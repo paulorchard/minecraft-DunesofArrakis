@@ -1,0 +1,84 @@
+{
+  "type": "minecraft:flat_cache",
+  "argument": {
+    "type": "minecraft:add",
+    "argument1": {
+      "type": "minecraft:add",
+      "argument1": {
+        "type": "minecraft:add",
+        "argument1": {
+          "type": "minecraft:add",
+          "argument1": {
+            "type": "minecraft:add",
+            "argument1": {
+              "type": "minecraft:add",
+              "argument1": {
+                "type": "minecraft:add",
+                "argument1": {
+                  "type": "minecraft:add",
+                  "argument1": {
+                    "type": "minecraft:add",
+                    "argument1": {
+                      "type": "minecraft:add",
+                      "argument1": -0.96665,
+                      "argument2": {
+                        "type": "minecraft:mul",
+                        "argument1": "islandcraft_dunesofarrakis:patch/mask_windswept_hills",
+                        "argument2": 0.30005
+                      }
+                    },
+                    "argument2": {
+                      "type": "minecraft:mul",
+                      "argument1": "islandcraft_dunesofarrakis:patch/mask_plains",
+                      "argument2": 0
+                    }
+                  },
+                  "argument2": {
+                    "type": "minecraft:mul",
+                    "argument1": "islandcraft_dunesofarrakis:patch/mask_windswept_gravelly_hills",
+                    "argument2": 0.30005
+                  }
+                },
+                "argument2": {
+                  "type": "minecraft:mul",
+                  "argument1": "islandcraft_dunesofarrakis:patch/mask_ice_spikes",
+                  "argument2": 1.12495
+                }
+              },
+              "argument2": {
+                "type": "minecraft:mul",
+                "argument1": "islandcraft_dunesofarrakis:patch/mask_jagged_peaks",
+                "argument2": 0.30005
+              }
+            },
+            "argument2": {
+              "type": "minecraft:mul",
+              "argument1": "islandcraft_dunesofarrakis:patch/mask_stony_peaks",
+              "argument2": 0.30005
+            }
+          },
+          "argument2": {
+            "type": "minecraft:mul",
+            "argument1": "islandcraft_dunesofarrakis:patch/mask_windswept_savanna",
+            "argument2": 1.63325
+          }
+        },
+        "argument2": {
+          "type": "minecraft:mul",
+          "argument1": "islandcraft_dunesofarrakis:patch/mask_badlands",
+          "argument2": 0
+        }
+      },
+      "argument2": {
+        "type": "minecraft:mul",
+        "argument1": "islandcraft_dunesofarrakis:patch/mask_eroded_badlands",
+        "argument2": 1.12495
+      }
+    },
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": "islandcraft_dunesofarrakis:patch/mask_deep_frozen_ocean",
+      "argument2": 0.96665
+    }
+  }
+}

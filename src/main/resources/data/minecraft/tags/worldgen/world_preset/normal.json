@@ -1,7 +1,1 @@
-{
-  "replace": true,
-  "values": [
-    "minecraft:normal",
-    "minecraft:flat"
-  ]
-}
+{ "replace": false, "values": [ "islandcraft_dunesofarrakis:arrakis" ] }

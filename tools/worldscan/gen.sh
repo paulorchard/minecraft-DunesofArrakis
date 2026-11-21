@@ -8,20 +8,21 @@
 set -e
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"; cd "$ROOT"
 export JAVA_HOME="${JAVA_HOME:-$HOME/.jdks/temurin-25.0.5}"
-W=$1; SEED=$2; X0=$3; Z0=$4; SIZE=$5; DIM=${6:-islandcraft_dunesofarrakis:arrakis}
+W=$1; SEED=$2; X0=$3; Z0=$4; SIZE=$5; SZ=${SIZEZ:-$SIZE}; DIM=${6:-minecraft:overworld}
 LOG=run-server/logs/latest.log; TIMING=run-server/worldscan_$W.timing
 cp run-server/server.properties run-server/server.properties.worldscan-backup
 trap 'mv -f run-server/server.properties.worldscan-backup run-server/server.properties; rm -f run-server/mods/*.jar' EXIT
 rm -f run-server/mods/*.jar
-sed -i "s/^level-name=.*/level-name=$W/; s/^level-seed=.*/level-seed=$SEED/; s/^max-tick-time=.*/max-tick-time=-1/; s/^gamemode=.*/gamemode=creative/" run-server/server.properties
+LT=${LEVEL_TYPE:-islandcraft_dunesofarrakis\:arrakis}   # LEVEL_TYPE=minecraft\:normal makes a vanilla world
+sed -i "s/^level-type=.*/level-type=$LT/; s/^level-name=.*/level-name=$W/; s/^level-seed=.*/level-seed=$SEED/; s/^max-tick-time=.*/max-tick-time=-1/; s/^gamemode=.*/gamemode=creative/" run-server/server.properties
 rm -f $LOG
-probe_points() { for fx in 8 $((SIZE/2)) $((SIZE-8)); do for fz in 8 $((SIZE/2)) $((SIZE-8)); do echo "$((X0+fx)) $((Z0+fz))"; done; done; }
+probe_points() { for fx in 8 $((SIZE/2)) $((SIZE-8)); do for fz in 8 $((SZ/2)) $((SZ-8)); do echo "$((X0+fx)) $((Z0+fz))"; done; done; }
 (
   for i in $(seq 1 240); do grep -q "Done (" $LOG 2>/dev/null && break; sleep 1; done; sleep 1
   T0=$(date +%s.%N)
   # ORDER=reverse loads the 256 x 256 tiles in the opposite order (the chunk-order independence check of prompt 08)
-  ( for ((x=X0; x<X0+SIZE; x+=256)); do for ((z=Z0; z<Z0+SIZE; z+=256)); do
-    ex=$((x+255)); [ $ex -ge $((X0+SIZE)) ] && ex=$((X0+SIZE-1)); ez=$((z+255)); [ $ez -ge $((Z0+SIZE)) ] && ez=$((Z0+SIZE-1))
+  ( for ((x=X0; x<X0+SIZE; x+=256)); do for ((z=Z0; z<Z0+SZ; z+=256)); do
+    ex=$((x+255)); [ $ex -ge $((X0+SIZE)) ] && ex=$((X0+SIZE-1)); ez=$((z+255)); [ $ez -ge $((Z0+SZ)) ] && ez=$((Z0+SZ-1))
     echo "execute in $DIM run forceload add $x $z $ex $ez"
   done; done ) | if [ "${ORDER:-}" = reverse ]; then tac; else cat; fi
   n=0; DONE=0
@@ -35,4 +36,4 @@ probe_points() { for fx in 8 $((SIZE/2)) $((SIZE-8)); do for fz in 8 $((SIZE/2))
   sleep 1; echo "save-all flush"; sleep 6; echo stop
 ) | ./gradlew runServer --console=plain > "run-server/worldscan_$W.out" 2>&1
 cp $LOG "run-server/worldscan_$W.log"
-if [ -f $TIMING.raw ]; then read a b < $TIMING.raw; rm $TIMING.raw; awk -v a=$a -v b=$b -v n=$(( (SIZE/16)*(SIZE/16) )) 'BEGIN{printf "chunks %d  seconds %.1f  ms_per_chunk %.2f\n", n, b-a, (b-a)*1000/n}' | tee $TIMING; else echo "timing: probe grid never completed" | tee $TIMING; fi
+if [ -f $TIMING.raw ]; then read a b < $TIMING.raw; rm $TIMING.raw; awk -v a=$a -v b=$b -v n=$(( (SIZE/16)*(SZ/16) )) 'BEGIN{printf "chunks %d  seconds %.1f  ms_per_chunk %.2f\n", n, b-a, (b-a)*1000/n}' | tee $TIMING; else echo "timing: probe grid never completed" | tee $TIMING; fi

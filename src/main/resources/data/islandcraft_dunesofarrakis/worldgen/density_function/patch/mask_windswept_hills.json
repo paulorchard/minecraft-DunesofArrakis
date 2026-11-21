@@ -1,0 +1,44 @@
+{
+  "type": "minecraft:clamp",
+  "input": {
+    "type": "minecraft:add",
+    "argument1": 1,
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": -0.05,
+      "argument2": {
+        "type": "minecraft:max",
+        "argument1": {
+          "type": "minecraft:add",
+          "argument1": {
+            "type": "minecraft:abs",
+            "argument": {
+              "type": "minecraft:add",
+              "argument1": {
+                "type": "islandcraft_dunesofarrakis:block_x"
+              },
+              "argument2": -450
+            }
+          },
+          "argument2": -250
+        },
+        "argument2": {
+          "type": "minecraft:add",
+          "argument1": {
+            "type": "minecraft:abs",
+            "argument": {
+              "type": "minecraft:add",
+              "argument1": {
+                "type": "islandcraft_dunesofarrakis:block_z"
+              },
+              "argument2": -450
+            }
+          },
+          "argument2": -250
+        }
+      }
+    }
+  },
+  "min": 0,
+  "max": 1
+}

@@ -44,3 +44,7 @@ repo/
 docs/terrain-study/**/*.jar
 docs/terrain-study/**/*.zip
 run-server/study-downloads/
+
+### Local, not for git
+docs/inspiration/
+logs/

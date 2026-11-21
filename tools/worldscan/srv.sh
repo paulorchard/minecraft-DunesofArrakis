@@ -12,7 +12,8 @@ mkdir -p run-server/mods; rm -f run-server/mods/*.jar
 for j in "$@"; do cp "$MODS_SRC/$j" run-server/mods/; done
 cp run-server/server.properties run-server/server.properties.worldscan-backup
 trap 'mv -f run-server/server.properties.worldscan-backup run-server/server.properties; rm -f run-server/mods/*.jar' EXIT
-sed -i "s/^level-name=.*/level-name=$W/; s/^level-seed=.*/level-seed=$SEED/; s/^max-tick-time=.*/max-tick-time=-1/; s/^gamemode=.*/gamemode=creative/" run-server/server.properties
+LT=${LEVEL_TYPE:-islandcraft_dunesofarrakis\:arrakis}   # LEVEL_TYPE=minecraft\:normal makes a vanilla world
+sed -i "s/^level-type=.*/level-type=$LT/; s/^level-name=.*/level-name=$W/; s/^level-seed=.*/level-seed=$SEED/; s/^max-tick-time=.*/max-tick-time=-1/; s/^gamemode=.*/gamemode=creative/" run-server/server.properties
 rm -f run-server/logs/latest.log
 ( for i in $(seq 1 240); do grep -q "Done (" run-server/logs/latest.log 2>/dev/null && break; sleep 1; done; sleep 1
   while IFS= read -r line; do if [[ "$line" == sleep* ]]; then sleep "${line#sleep }"; else echo "$line"; fi; done < "$CMDS"

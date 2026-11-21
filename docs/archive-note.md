@@ -1,0 +1,3 @@
+# Archive note
+
+Everything in `docs/` written before the biome-grid rewrite (prompts 03 to 12: noise dunes, the 104-ellipse continents, coasts, relief, terraces, islands, the three tough-rock kinds, the layered underground and the scattered footprint) describes the retired generator. Its code and data are gone from the branch `rewrite-vanilla-base` but stay reachable: `git checkout before-rewrite` (tag on commit `0aa9379`) restores it exactly. It was retired because the owner restarted the terrain from zero with a back-to-basics rule: vanilla world generation, driven by data, so that how vanilla builds each biome can be seen first and then worked backwards from. The current generator is described in `docs/biome-grid.md`.
