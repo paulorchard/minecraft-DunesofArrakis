@@ -1,7 +1,7 @@
 {
   "type": "minecraft:range_choice",
-  "input": "islandcraft_dunesofarrakis:island/f",
-  "min_inclusive": 0.33,
+  "input": "islandcraft_dunesofarrakis:island/depth",
+  "min_inclusive": 0,
   "max_exclusive": 99,
   "when_in_range": {
     "type": "minecraft:range_choice",

@@ -5,6 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ArrakisLinear;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.ArrakisSawtooth;
 import com.paulorchard.islandcraft.dunesofarrakis.worldgen.BlockCoordinate;
+import com.paulorchard.islandcraft.dunesofarrakis.worldgen.LandmassFunction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.neoforged.bus.api.IEventBus;
@@ -28,6 +29,7 @@ public class DunesOfArrakis {
     static {
         DENSITY_FUNCTION_TYPES.register("block_x", () -> BlockCoordinate.CODEC_X.codec());
         DENSITY_FUNCTION_TYPES.register("block_z", () -> BlockCoordinate.CODEC_Z.codec());
+        DENSITY_FUNCTION_TYPES.register("landmass", () -> LandmassFunction.CODEC.codec());
         DENSITY_FUNCTION_TYPES.register("arrakis_linear", () -> ArrakisLinear.CODEC.codec());
         DENSITY_FUNCTION_TYPES.register("arrakis_sawtooth", () -> ArrakisSawtooth.CODEC.codec());
     }

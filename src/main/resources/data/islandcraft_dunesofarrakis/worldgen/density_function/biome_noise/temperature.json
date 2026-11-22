@@ -10,26 +10,26 @@
         "type": "minecraft:add",
         "argument1": {
           "type": "minecraft:range_choice",
-          "input": "islandcraft_dunesofarrakis:island/n_biome",
-          "min_inclusive": 0.0011,
+          "input": "islandcraft_dunesofarrakis:island/biome_index",
+          "min_inclusive": 3.5,
           "max_exclusive": 1000,
           "when_in_range": {
             "type": "minecraft:range_choice",
-            "input": "islandcraft_dunesofarrakis:island/n_biome",
-            "min_inclusive": 0.2146,
+            "input": "islandcraft_dunesofarrakis:island/biome_index",
+            "min_inclusive": 5.5,
             "max_exclusive": 1000,
             "when_in_range": {
               "type": "minecraft:range_choice",
-              "input": "islandcraft_dunesofarrakis:island/n_biome",
-              "min_inclusive": 0.3635,
+              "input": "islandcraft_dunesofarrakis:island/biome_index",
+              "min_inclusive": 6.5,
               "max_exclusive": 1000,
               "when_in_range": 0.775,
               "when_out_of_range": 0.775
             },
             "when_out_of_range": {
               "type": "minecraft:range_choice",
-              "input": "islandcraft_dunesofarrakis:island/n_biome",
-              "min_inclusive": 0.1025,
+              "input": "islandcraft_dunesofarrakis:island/biome_index",
+              "min_inclusive": 4.5,
               "max_exclusive": 1000,
               "when_in_range": 0.375,
               "when_out_of_range": 0.375
@@ -37,21 +37,21 @@
           },
           "when_out_of_range": {
             "type": "minecraft:range_choice",
-            "input": "islandcraft_dunesofarrakis:island/n_biome",
-            "min_inclusive": -0.2152,
+            "input": "islandcraft_dunesofarrakis:island/biome_index",
+            "min_inclusive": 1.5,
             "max_exclusive": 1000,
             "when_in_range": {
               "type": "minecraft:range_choice",
-              "input": "islandcraft_dunesofarrakis:island/n_biome",
-              "min_inclusive": -0.1011,
+              "input": "islandcraft_dunesofarrakis:island/biome_index",
+              "min_inclusive": 2.5,
               "max_exclusive": 1000,
               "when_in_range": -0.725,
               "when_out_of_range": -0.725
             },
             "when_out_of_range": {
               "type": "minecraft:range_choice",
-              "input": "islandcraft_dunesofarrakis:island/n_biome",
-              "min_inclusive": -0.3624,
+              "input": "islandcraft_dunesofarrakis:island/biome_index",
+              "min_inclusive": 0.5,
               "max_exclusive": 1000,
               "when_in_range": -0.3,
               "when_out_of_range": 0.025

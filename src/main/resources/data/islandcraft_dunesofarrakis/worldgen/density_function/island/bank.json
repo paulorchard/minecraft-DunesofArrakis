@@ -11,11 +11,11 @@
           "type": "minecraft:clamp",
           "input": {
             "type": "minecraft:mul",
-            "argument1": 8.333333333333334,
+            "argument1": 0.025,
             "argument2": {
               "type": "minecraft:add",
-              "argument1": "islandcraft_dunesofarrakis:island/f_bank",
-              "argument2": -0.33
+              "argument1": "islandcraft_dunesofarrakis:island/depth_bank",
+              "argument2": 0
             }
           },
           "min": 0,
@@ -32,11 +32,11 @@
             "type": "minecraft:clamp",
             "input": {
               "type": "minecraft:mul",
-              "argument1": 8.333333333333334,
+              "argument1": 0.025,
               "argument2": {
                 "type": "minecraft:add",
-                "argument1": "islandcraft_dunesofarrakis:island/f_bank",
-                "argument2": -0.33
+                "argument1": "islandcraft_dunesofarrakis:island/depth_bank",
+                "argument2": 0
               }
             },
             "min": 0,

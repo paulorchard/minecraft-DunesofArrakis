@@ -9,9 +9,10 @@ const fs = require('fs'), path = require('path');
 const ROOT = path.resolve(__dirname, '..', '..');
 const ISL_FILE = path.join(__dirname, 'islands.json');
 const ISL = fs.existsSync(ISL_FILE) ? JSON.parse(fs.readFileSync(ISL_FILE, 'utf8')) : null;
-const LAYOUT = process.env.LAYOUT || (ISL && !process.env.GRID_FILE ? ISL.layout : 'circles');   // "noise" (prompt 17, default) | "circles" (prompts 14-16, tools/rewrite/grid.json)
-if (!['noise', 'circles'].includes(LAYOUT)) throw new Error('layout must be noise or circles');
-const NOISE = LAYOUT === 'noise';
+const LAYOUT = process.env.LAYOUT || (ISL && !process.env.GRID_FILE ? ISL.layout : 'circles');   // "cells" (prompt 20, default) | "noise" (prompt 17) | "circles" (prompts 14-16, tools/rewrite/grid.json)
+if (!['noise', 'cells', 'circles'].includes(LAYOUT)) throw new Error('layout must be cells, noise or circles');
+const CELLS = LAYOUT === 'cells';
+const NOISE = LAYOUT === 'noise' || CELLS;
 const grid = NOISE ? Object.assign({ namespace: ISL.namespace, desert: ISL.desert, removed_features: ISL.removed_features, biome_transition: 'noise', transition: 0, sharp_ramp: 0,
   diameter_x: 100, diameter_z: 100, pitch: 300, origin_x: 0, origin_z: 0, islands: ISL.biomes.map((b, k) => Object.assign({ col: k, row: 0 }, b)) }, {})
   : JSON.parse(fs.readFileSync(process.env.GRID_FILE || path.join(__dirname, 'grid.json'), 'utf8'));
@@ -151,6 +152,31 @@ if (OC.enabled && !NOISE) {
   write(`${DF}island/rock_mask.json`, rc(W, 1e-9, 2.0, rc(add(ROCK, mul(-1.0, SURF)), 0.5, 1e6, 1.0, 0.0), 0.0));
 }
 
+function validateCells(C, bad) {
+  const out = { classes: [] };
+  if (!(C.cell_size > 0 && C.gap >= 0 && C.empty_share >= 0 && C.empty_share < 1 && C.jitter >= 0 && C.jitter <= 0.5)) bad('cells: cell_size > 0, gap >= 0, 0 <= empty_share < 1, 0 <= jitter <= 0.5');
+  if (!(C.ramp_blocks > 0 && C.bonus_ramp > 0 && C.edge_ramp_blocks > 0 && C.scour_pad_blocks > 0 && C.warp_bound >= 0 && C.rough_bound >= 0 && C.rough_inward >= 0)) bad('cells: ramp_blocks, bonus_ramp, edge_ramp_blocks, scour_pad_blocks must be positive; warp_bound, rough_bound >= 0');
+  if (!Array.isArray(C.classes) || !C.classes.length) bad('cells.classes is empty');
+  if (!(C.classes.reduce((s, c) => s + c.weight, 0) > 0) || C.classes.some(c => !(c.weight >= 0))) bad('cells.classes weights must be non-negative with a positive sum');
+  const sMax = Math.max(C.wind_stretch, ...ISL.biomes.map(b => b.wind_stretch || 0));
+  const reach = C.cell_size / 2 - C.gap / 2 - C.warp_bound - C.rough_bound * sMax;
+  out.reach_blocks = reach; out.stretch_max = sMax;
+  const lo2 = a => Array.isArray(a) && a.length === 2 && a[0] >= 0 && a[1] >= a[0];
+  for (const c of C.classes) {
+    if (!lo2(c.radius) || c.radius[0] <= 0) bad(`class ${c.name}: radius [min, max] positive`);
+    if (!(Array.isArray(c.biome_weights) && c.biome_weights.length === 8 && c.biome_weights.every(w => w >= 0) && c.biome_weights.reduce((s, w) => s + w, 0) > 0)) bad(`class ${c.name}: biome_weights needs 8 non-negative values with a positive sum`);
+    if (c.lobes) { if (!lo2(c.lobes) || c.lobes[0] < 1 || !lo2(c.lobe_radius) || c.lobe_radius[0] <= 0 || !lo2(c.spacing) || !(c.length_max > 0)) bad(`class ${c.name}: an archipelago needs lobes [>=1], lobe_radius, spacing, length_max`); }
+    else if (!lo2(c.satellites) || !lo2(c.sat_dist) || !lo2(c.sat_radius)) bad(`class ${c.name}: satellites, sat_dist, sat_radius need [min, max]`);
+    const pr = c.radius[1] * sMax;
+    if (pr > reach) bad(`class ${c.name}: radius ${c.radius[1]} x stretch ${sMax} = ${pr.toFixed(0)} blocks does not fit: a cell of ${C.cell_size} with gap ${C.gap} leaves ${reach.toFixed(0)} blocks from the landmass centre (cell_size / 2 - gap / 2 - warp_bound - rough_bound x stretch). Raise cell_size or lower the radius.`);
+    out.classes.push({ name: c.name, max_parent_extent: +pr.toFixed(0), room_left_for_satellites_and_jitter: +(reach - pr).toFixed(0) });
+  }
+  if (C.spawn_radius * sMax > reach) bad('cells.spawn_radius does not fit the cell');
+  if (!ISL.biomes.some(b => b.biome === C.spawn_biome)) bad('cells.spawn_biome is not one of the eight biomes');
+  if (!C.classes.some(c => c.name === C.spawn_class && !c.lobes)) bad('cells.spawn_class must name a class without lobes');
+  return out;
+}
+
 // ---- noise-shaped islands (prompt 17, rock and sand reworked in prompt 18): one land field F, no circles
 const ROUTER_NOISE = { continentalness: 'continents', erosion: 'erosion', weirdness: 'ridges', temperature: 'temperature', humidity: 'vegetation' };
 const CLIM_NOISE = ['continentalness', 'erosion', 'weirdness', 'temperature', 'humidity'];
@@ -159,6 +185,11 @@ if (NOISE) {
   const F = ISL.field, H = ISL.height, BN = ISL.biome_noise, AR = F.archipelago, SP = F.spawn, WD = ISL.wind, WS = ISL.wind_sand;
   const bad = m => { throw new Error('islands.json: ' + m); };
   if (ISL.biomes.length !== 8) bad('eight biomes expected');
+  const C = ISL.cells || {};
+  const THR = CELLS ? 0 : F.threshold, RAMP = CELLS ? C.ramp_blocks : H.ramp, EDGE_RAMP = CELLS ? C.edge_ramp_blocks : WS.edge_ramp, SPAD = CELLS ? C.scour_pad_blocks : WS.scour_pad, SUPPRESS = CELLS ? 3.0 : 0.03;
+  const FF = sfx => IS((CELLS ? 'depth' : 'f') + sfx);
+  let CELLS_REPORT = null;
+  if (CELLS) CELLS_REPORT = validateCells(C, bad);
   if (!(BN.cuts.length === 7 && BN.cuts.every((c, k) => k === 0 || c > BN.cuts[k - 1]))) bad('biome_noise.cuts needs 7 strictly increasing values');
   if (!(H.ramp > 0 && H.big_ramp > 0 && AR.ridge_width > 0 && AR.band_half_width > 0 && SP.radius > 0 && WS.edge_ramp > 0 && WS.scour_pad > 0)) bad('ramp, big_ramp, ridge_width, band_half_width, spawn.radius, wind_sand.edge_ramp and scour_pad must be positive');
   for (const k of ['scale_large', 'scale_mid', 'scale_fine', 'warp_scale']) if (!(F[k] >= 16 && F[k] <= 65536)) bad(k + ' must be 16..65536 blocks');
@@ -179,8 +210,10 @@ if (NOISE) {
   const IS = n => `${NS}:island/${n}`;
   const clampN = (x, lo, hi) => ({ type: 'minecraft:clamp', input: x, min: lo, max: hi });
   const smoothFn = x => mul(sq(x), add(3.0, mul(-2.0, x)));
-  write(`${DF}island/warp_x.json`, c2d(mul(F.warp_amplitude, plain('islands_warp_x'))));
-  write(`${DF}island/warp_z.json`, c2d(mul(F.warp_amplitude, plain('islands_warp_z'))));
+  const warpOf = nm => CELLS ? c2d(clampN(mul(F.warp_amplitude, plain(nm)), -C.warp_bound, C.warp_bound)) : c2d(mul(F.warp_amplitude, plain(nm)));
+  write(`${DF}island/warp_x.json`, warpOf('islands_warp_x'));
+  write(`${DF}island/warp_z.json`, warpOf('islands_warp_z'));
+  if (CELLS) write('worldgen/noise/islands_landmass_seed.json', { firstOctave: -4, amplitudes: [1.0] });
   // wind-aligned coordinates: u along the wind (divided by the stretch, so features are longer downwind), v across it; off = shift of the sample along the wind in blocks
   const wr = WD.toward_degrees * Math.PI / 180, cw = Math.cos(wr), sw = Math.sin(wr);
   const lin = (cx, cz) => ({ type: `${NS}:arrakis_linear`, x_coefficient: r9(cx), z_coefficient: r9(cz) });
@@ -195,32 +228,45 @@ if (NOISE) {
     write(`${DF}island/spawn_bump${sfx}.json`, mul(SP.strength, sq(clampN(add(1.0, mul(-1 / (SP.radius * SP.radius), add(sq(sdx), sq(sdz)))), 0.0, 1.0))));
     write(`${DF}island/f${sfx}.json`, c2d(add(add(add(mul(F.a, IS('n_large' + sfx)), mul(F.b, IS('n_mid' + sfx))), mul(F.c, IS('n_fine' + sfx))), add(mul(AR.d, mul(IS('ridge' + sfx), IS('band' + sfx))), IS('spawn_bump' + sfx)))));
   }
-  emitField('', 0);
-  write(`${DF}island/n_biome.json`, wnoise('islands_biome', 1.0, 0));
-  write(`${DF}island/w.json`, rc(IS('f'), F.threshold, 99.0, 1.0, 0.0));   // land: the lazy gate for the rock, the vein toggle and the biome
+  // cells layout: the landmass helper gives the depth (blocks inside the coast) and the biome index of the cell
+  const landCfg = () => ({ cell_size: C.cell_size, gap: C.gap, empty_share: C.empty_share, jitter: C.jitter, wind_degrees: WD.toward_degrees, warp_bound: C.warp_bound, rough_bound: C.rough_bound, rough_ref_radius: C.rough_ref_radius, rough_min_factor: C.rough_min_factor,
+    stretch: ISL.biomes.map(b => b.wind_stretch || C.wind_stretch), spawn: { radius: C.spawn_radius, biome: ISL.biomes.findIndex(b => b.biome === C.spawn_biome), class: C.spawn_class }, classes: C.classes });
+  const landNode = (mode, off) => c2d({ type: `${NS}:landmass`, mode, seed_noise: `${NS}:islands_landmass_seed`, warp_x: IS('warp_x'), warp_z: IS('warp_z'), rough: IS('rough'),
+    offset_x: r9(off * cw), offset_z: r9(off * sw), config: landCfg() });
+  if (CELLS) {
+    write(`${DF}island/n_mid.json`, wnoise('islands_mid', WD.stretch_mid, 0)); write(`${DF}island/n_fine.json`, wnoise('islands_fine', WD.stretch_fine, 0));
+    write(`${DF}island/rough.json`, c2d(clampN(add(mul(C.rough_mid, IS('n_mid')), mul(C.rough_fine, IS('n_fine'))), -C.rough_inward, C.rough_bound)   /* outward limited by the gap rule, inward (bays) free */));
+    write(`${DF}island/depth.json`, landNode('depth', 0));
+    write(`${DF}island/biome_index.json`, landNode('biome', 0));
+  } else {
+    emitField('', 0);
+    write(`${DF}island/n_biome.json`, wnoise('islands_biome', 1.0, 0));
+  }
+  write(`${DF}island/w.json`, rc(FF(''), THR, 99.0, 1.0, 0.0));   // land: the lazy gate for the rock, the vein toggle and the biome
   // sand wraps the rock: windward bank (rock lies downwind of the point), lee tail (rock lies upwind), scour moat at the foot where neither applies
   if (WS.bank_height > 0 || WS.tail_height > 0 || WS.scour_depth > 0) {
-    if (WS.bank_height > 0) emitField('_bank', WS.bank_distance);
-    if (WS.tail_height > 0) emitField('_tail', -WS.tail_distance);
+    if (CELLS) { if (WS.bank_height > 0) write(`${DF}island/depth_bank.json`, landNode('depth', WS.bank_distance)); if (WS.tail_height > 0) write(`${DF}island/depth_tail.json`, landNode('depth', -WS.tail_distance)); }
+    else { if (WS.bank_height > 0) emitField('_bank', WS.bank_distance); if (WS.tail_height > 0) emitField('_tail', -WS.tail_distance); }
   }
-  const inside = (sfx, ramp) => smoothFn(clampN(mul(1 / ramp, add(IS('f' + sfx), -F.threshold)), 0.0, 1.0));
+  const inside = (sfx, ramp) => smoothFn(clampN(mul(1 / ramp, add(FF(sfx), -THR)), 0.0, 1.0));
   const terms = [`${NS}:arrakis_dune_height`];
-  if (WS.bank_height > 0) { write(`${DF}island/bank.json`, c2d(mul(WS.bank_height, inside('_bank', WS.edge_ramp)))); terms.push(IS('bank')); }
-  if (WS.tail_height > 0) { write(`${DF}island/tail.json`, c2d(mul(WS.tail_height, inside('_tail', WS.edge_ramp)))); terms.push(IS('tail')); }
+  if (WS.bank_height > 0) { write(`${DF}island/bank.json`, c2d(mul(WS.bank_height, inside('_bank', EDGE_RAMP)))); terms.push(IS('bank')); }
+  if (WS.tail_height > 0) { write(`${DF}island/tail.json`, c2d(mul(WS.tail_height, inside('_tail', EDGE_RAMP)))); terms.push(IS('tail')); }
   if (WS.scour_depth > 0) {
-    const s = clampN(mul(1 / (1.3 * WS.scour_pad), add(IS('f'), -(F.threshold - WS.scour_pad))), 0.0, 1.0);
+    const s = clampN(mul(1 / (1.3 * SPAD), add(FF(''), -(THR - SPAD))), 0.0, 1.0);
     let sc = mul(WS.scour_depth, mul(4.0, mul(s, add(1.0, mul(-1.0, s)))));
-    if (WS.bank_height > 0) sc = mul(sc, add(1.0, mul(-1.0, clampN(mul(1 / 0.03, add(IS('f_bank'), -F.threshold)), 0.0, 1.0))));
-    if (WS.tail_height > 0) sc = mul(sc, add(1.0, mul(-1.0, clampN(mul(1 / 0.03, add(IS('f_tail'), -F.threshold)), 0.0, 1.0))));
+    if (WS.bank_height > 0) sc = mul(sc, add(1.0, mul(-1.0, clampN(mul(1 / SUPPRESS, add(FF('_bank'), -THR)), 0.0, 1.0))));
+    if (WS.tail_height > 0) sc = mul(sc, add(1.0, mul(-1.0, clampN(mul(1 / SUPPRESS, add(FF('_tail'), -THR)), 0.0, 1.0))));
     write(`${DF}island/scour.json`, c2d(mul(-1.0, sc))); terms.push(IS('scour'));
   }
   const sum = terms.reduce((e, t) => e === null ? t : add(e, t), null);
   // the sand surface: sand level + dunes - dips + bank + tail - scour, never below sand level - dip depth
   write(`${DF}island/dune_surface.json`, { type: 'minecraft:max', argument1: add(`${NS}:arrakis_sand_level`, -ISL.dune_floor_below_sand), argument2: add(`${NS}:arrakis_sand_level`, sum) });
   // rock height: a smoothstep of the land field above the threshold times the rise (2D, cached once per column)
-  write(`${DF}island/t.json`, c2d(smoothFn(clampN(mul(1 / H.ramp, add(IS('f'), -F.threshold)), 0.0, 1.0))));
-  write(`${DF}island/t2.json`, c2d(clampN(mul(1 / H.big_ramp, add(IS('f'), -(F.threshold + H.ramp))), 0.0, 1.0)));
-  const bandTree = vals => { const go = (lo, hi) => lo === hi ? vals[lo] : (m => rc(IS('n_biome'), BN.cuts[m - 1], 1e3, go(m, hi), go(lo, m - 1)))(Math.floor((lo + hi + 1) / 2)); return go(0, 7); };
+  write(`${DF}island/t.json`, c2d(smoothFn(clampN(mul(1 / RAMP, add(FF(''), -THR)), 0.0, 1.0))));
+  write(`${DF}island/t2.json`, c2d(clampN(mul(1 / (CELLS ? C.bonus_ramp : H.big_ramp), add(FF(''), -(CELLS ? C.bonus_start : F.threshold + H.ramp))), 0.0, 1.0)));
+  const BT_NODE = CELLS ? IS('biome_index') : IS('n_biome'), BT_CUTS = CELLS ? [0.5, 1.5, 2.5, 3.5, 4.5, 5.5, 6.5] : BN.cuts;   // the landmass's biome index, or the octile bands of the old noise
+  const bandTree = vals => { const go = (lo, hi) => lo === hi ? vals[lo] : (m => rc(BT_NODE, BT_CUTS[m - 1], 1e3, go(m, hi), go(lo, m - 1)))(Math.floor((lo + hi + 1) / 2)); return go(0, 7); };
   // relief shape n in 0..1 per biome from its own 2D noise (smooth, ridged, sharpened, terraced)
   const terrace = m => { const pts = [], P = 0.18; for (let i = 0; i < m; i++) { const v = m === 1 ? 0 : i / (m - 1); pts.push({ location: r9((i + P) / m), value: r9(v), derivative: 0.0 }); pts.push({ location: r9((i + 1 - P) / m), value: r9(v), derivative: 0.0 }); } pts.unshift({ location: 0.0, value: 0.0, derivative: 0.0 }); pts.push({ location: 1.0, value: 1.0, derivative: 0.0 }); return pts; };
   for (const b of ISL.biomes) {
@@ -229,14 +275,14 @@ if (NOISE) {
     if (b.relief_terrace > 0) n = { type: 'minecraft:spline', spline: { coordinate: n, points: terrace(b.relief_terrace) } };
     write(`${DF}island/relief_${b.biome}.json`, c2d(n));
   }
-  write(`${DF}island/rise.json`, c2d(rc(IS('f'), F.threshold, 99.0, add(add(H.min_rise, mul(add(bandTree(ISL.biomes.map(i => i.max_rise)), -H.min_rise), bandTree(ISL.biomes.map(i => IS('relief_' + i.biome))))), mul(H.big_bonus, IS('t2'))), 0.0)));
+  write(`${DF}island/rise.json`, c2d(rc(FF(''), THR, 99.0, add(add(H.min_rise, mul(add(bandTree(ISL.biomes.map(i => i.max_rise)), -H.min_rise), bandTree(ISL.biomes.map(i => IS('relief_' + i.biome))))), mul(H.big_bonus, IS('t2'))), 0.0)));
   write(`${DF}island/rock_height.json`, add(`${NS}:arrakis_sand_level`, { type: 'minecraft:min', argument1: H.cap_above_sand, argument2: mul(IS('t'), IS('rise')) }));
   write(`${DF}island/surface.json`, { type: 'minecraft:max', argument1: IS('dune_surface'), argument2: IS('rock_height') });
   write(`${DF}island/final_density.json`, add(0.5, add(IS('surface'), mul(-1.0, 'minecraft:y'))));
-  write(`${DF}island/rock_mask.json`, rc(IS('f'), F.threshold, 99.0, rc(add(IS('rock_height'), mul(-1.0, IS('dune_surface'))), 0.5, 1e6, 1.0, 0.0), 0.0));
+  write(`${DF}island/rock_mask.json`, rc(FF(''), THR, 99.0, rc(add(IS('rock_height'), mul(-1.0, IS('dune_surface'))), 0.5, 1e6, 1.0, 0.0), 0.0));
   for (const key of ['continentalness', 'erosion', 'weirdness']) write(`${DF}overworld/${ROUTER_NOISE[key]}.json`, flat(bandTree(ISL.biomes.map(i => i[key]))));
   for (const key of CLIM_NOISE) write(`${DF}biome_noise/${ROUTER_NOISE[key]}.json`, flat(add(grid.desert[key], mul(IS('rock_mask'), add(bandTree(ISL.biomes.map(i => i[key])), -grid.desert[key])))));
-  FIELD_SUMMARY = { first_octaves: { large: fo(F.scale_large), mid: fo(F.scale_mid), fine: fo(F.scale_fine), warp: fo(F.warp_scale), ridge: fo(AR.scale), biome: fo(BN.scale) }, biome_cuts: BN.cuts, threshold: F.threshold, wind_degrees: WD.toward_degrees };
+  if (CELLS) FIELD_SUMMARY = { cells: CELLS_REPORT }; else FIELD_SUMMARY = { first_octaves: { large: fo(F.scale_large), mid: fo(F.scale_mid), fine: fo(F.scale_fine), warp: fo(F.warp_scale), ridge: fo(AR.scale), biome: fo(BN.scale) }, biome_cuts: BN.cuts, threshold: F.threshold, wind_degrees: WD.toward_degrees };
 }
 
 // ---- climate functions
