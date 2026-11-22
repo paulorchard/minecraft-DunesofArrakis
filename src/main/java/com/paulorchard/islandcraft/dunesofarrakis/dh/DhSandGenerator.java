@@ -15,6 +15,7 @@ import com.seibel.distanthorizons.api.objects.data.DhApiTerrainDataPoint;
 import com.seibel.distanthorizons.api.objects.data.IDhApiFullDataSource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CancellationException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
 import java.util.function.Consumer;
@@ -51,6 +52,7 @@ final class DhSandGenerator implements IDhApiWorldGenerator {
     private final DensityFunction depth;
     private final IDhApiBlockStateWrapper land;
     private final IDhApiBlockStateWrapper sea;
+    private final IDhApiBlockStateWrapper air;
     private final IDhApiBiomeWrapper biome;
     private volatile boolean failed;
 
@@ -63,6 +65,7 @@ final class DhSandGenerator implements IDhApiWorldGenerator {
         if (factory == null) throw new IllegalStateException("DH wrapper factory not ready");
         this.land = factory.getBlockStateWrapper(new Object[] {settings.defaultBlock()}, levelWrapper);
         this.sea = factory.getBlockStateWrapper(new Object[] {settings.defaultFluid()}, levelWrapper);
+        this.air = factory.getBlockStateWrapper(new Object[] {net.minecraft.world.level.block.Blocks.AIR.defaultBlockState()}, levelWrapper);
         var biomes = generator.getBiomeSource().possibleBiomes();
         if (biomes.size() != 1) throw new IllegalStateException("expected the single fixed biome");
         Holder<Biome> only = biomes.iterator().next();
@@ -72,6 +75,7 @@ final class DhSandGenerator implements IDhApiWorldGenerator {
     /** The generator for an Arrakis overworld level, or null (not Arrakis, or the self-test failed). Never throws. */
     static DhSandGenerator createOrNull(IDhApiLevelWrapper levelWrapper, ServerLevel level) {
         try {
+            if (disabledThisSession) return null;
             if (!(level.getChunkSource().getGenerator() instanceof NoiseBasedChunkGenerator generator)) return null;
             ResourceKey<NoiseGeneratorSettings> arrakis = ResourceKey.create(Registries.NOISE_SETTINGS, Identifier.fromNamespaceAndPath(DunesOfArrakis.MOD_ID, "arrakis"));
             if (!generator.generatorSettings().is(arrakis)) return null;
@@ -114,37 +118,57 @@ final class DhSandGenerator implements IDhApiWorldGenerator {
     @Override
     public void close() {}
 
+    /** Set after the first failure (any level): no new registration happens in this session, so reloading a world gives DH its own generator. */
+    static volatile boolean disabledThisSession;
+
+    /**
+     * What a task means (read from DH 3.3.3: WorldGenerationQueue passes detailLevel = sectionDetail - 6; FullDataSourceV2 always holds 64 x 64 columns):
+     * the source covers 64 * 2^detailLevel blocks per side, starting at block (chunkPosMinX * 16, chunkPosMinZ * 16); column (x, z) is 2^detailLevel blocks wide.
+     * Data points inside a column must all be detail level 0 (block sized), listed top-down or in any order, gap-free, with an air point on top.
+     */
     @Override
     public CompletableFuture<Void> generateLod(int chunkPosMinX, int chunkPosMinZ, int posX, int posZ, byte detailLevel, IDhApiFullDataSource dataSource,
                                                EDhApiDistantGeneratorMode mode, ExecutorService executor, Consumer<IDhApiFullDataSource> consumer) {
-        if (this.failed) return CompletableFuture.failedFuture(new IllegalStateException("Dune Sand DH generator stopped after an earlier error"));
+        if (this.failed) return CompletableFuture.failedFuture(new CancellationException("Dune Sand DH generator stopped"));   // DH ignores cancellations silently
         return CompletableFuture.runAsync(() -> {
+            if (this.failed) throw new CancellationException("Dune Sand DH generator stopped");
             try {
                 int width = dataSource.getWidthInDataColumns();
-                int span = 1 << detailLevel, half = detailLevel > 0 ? span >> 1 : 0;
-                int relTop = this.maxY - this.minY, relSea = Mth.clamp(this.seaLevel - this.minY, 0, relTop);
+                int span = 1 << detailLevel, half = span >> 1;
+                int relTop = this.maxY - this.minY, relSea = Mth.clamp(this.seaLevel - this.minY, 1, relTop - 1);
                 for (int x = 0; x < width; x++) {
                     for (int z = 0; z < width; z++) {
                         int surface = surfaceY(chunkPosMinX * 16 + x * span + half, chunkPosMinZ * 16 + z * span + half);
-                        int rel = Mth.clamp(surface - this.minY, 1, relTop);
-                        List<DhApiTerrainDataPoint> column = new ArrayList<>(2);
-                        if (rel >= relSea) {   // land: default block up to the surface, air above
-                            column.add(DhApiTerrainDataPoint.create(detailLevel, 0, 15, 0, rel, this.land, this.biome));
+                        int rel = Mth.clamp(surface - this.minY, 1, relTop - 1);
+                        List<DhApiTerrainDataPoint> column = new ArrayList<>(3);
+                        int top;
+                        if (rel >= relSea) {   // land: default block up to the surface
+                            column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 15, 0, rel, this.land, this.biome));
+                            top = rel;
                         } else {               // sea: default block to the sea floor, default fluid (Dune Sand) from there up to the sea level
-                            column.add(DhApiTerrainDataPoint.create(detailLevel, 0, 0, 0, rel, this.land, this.biome));
-                            column.add(DhApiTerrainDataPoint.create(detailLevel, 0, 15, rel, relSea, this.sea, this.biome));
+                            column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 0, 0, rel, this.land, this.biome));
+                            column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 15, rel, relSea, this.sea, this.biome));
+                            top = relSea;
                         }
+                        column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 15, top, relTop, this.air, this.biome));
                         dataSource.setApiDataPointColumn(x, z, EDhApiWorldGenerationStep.SURFACE, column);
                     }
                 }
                 consumer.accept(dataSource);
             } catch (Throwable t) {
-                if (!this.failed) {
-                    this.failed = true;
-                    LOGGER.warn("Dune Sand Distant Horizons generator stopped after an error; far terrain generation for this level is paused (set dh_sand_generator = false to return to DH's own generator)", t);
-                }
-                throw t;
+                fail(t);
+                throw new CancellationException("Dune Sand DH generator failed");
             }
         }, executor);
+    }
+
+    /** One WARN with the stack for the first failure; everything after is silent (DH ignores cancellations) or debug. */
+    private void fail(Throwable t) {
+        disabledThisSession = true;
+        synchronized (this) {
+            if (this.failed) { LOGGER.debug("Dune Sand DH generator: another task failed", t); return; }
+            this.failed = true;
+        }
+        LOGGER.warn("Dune Sand Distant Horizons generator failed; its far terrain is paused for this world. Reload the world to get DH's own generator back, or set dh_sand_generator = false in islandcraft_dunesofarrakis-common.toml.", t);
     }
 }
