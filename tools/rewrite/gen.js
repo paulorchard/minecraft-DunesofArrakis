@@ -24,6 +24,7 @@ if (v.length !== 3 || JSON.stringify(v[0]).indexOf('bedrock') < 0 || JSON.string
 // and stone is already the default block, so it is dropped: the rule is the bedrock floor and the deepslate transition only.
 ns.surface_rule = { type: 'minecraft:sequence', sequence: [v[0], v[2]] };
 ns.noise_router = JSON.parse(ours(JSON.stringify(ns.noise_router)));
+const DUNES = require("./dunes.js").applyDunes(ns, OC, NS);   // prompt 25: null when dune_enabled is false (then the output equals the world-v1.0-base data)
 write('noise_settings/arrakis.json', ns);
 const names = new Set(JSON.stringify(ns.surface_rule).match(/"Name": ?"[^"]+"/g));
 console.log('SURFACE RULE BLOCKS', [...names].join(' '), '+ default block', ns.default_block.Name, '+ default fluid', ns.default_fluid.Name, '(sea_level ' + ns.sea_level + ')');
@@ -72,3 +73,12 @@ for (const n of COPY) { const j = readDF(n); if (n === 'continents') {
   write('density_function/overworld/' + n + '.json', j);
 }
 console.log('OCEAN', JSON.stringify(SPLINE_NOTE));
+
+// ---- Part D (prompt 25): dune files (noises, dune_height). Nothing is written when dune_enabled is false.
+fs.rmSync(path.join(OUT, 'noise'), { recursive: true, force: true });
+if (DUNES) {
+  for (const [n, j] of Object.entries(DUNES.noise)) write('noise/' + n + '.json', j);
+  for (const [n, j] of Object.entries(DUNES.density)) write('density_function/' + n + '.json', j);
+  console.log('DUNES', JSON.stringify(DUNES.info));
+}
+console.log('SURFACE RULE BLOCKS (final)', [...new Set(JSON.stringify(ns.surface_rule).match(/"Name":"[^"]+"/g))].join(' '));

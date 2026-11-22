@@ -29,6 +29,7 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.levelgen.DensityFunction;
 import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
+import net.minecraft.world.level.levelgen.RandomState;
 import org.slf4j.Logger;
 
 /**
@@ -54,6 +55,8 @@ final class DhSandGenerator implements IDhApiWorldGenerator {
     private final IDhApiBlockStateWrapper sea;
     private final IDhApiBlockStateWrapper air;
     private final IDhApiBiomeWrapper biome;
+    /** Our dune_height density function wired to this level's noises (2D), or null when the world has no dunes (flat sand, as before). */
+    private final DensityFunction dune;
     private volatile boolean failed;
 
     private DhSandGenerator(IDhApiLevelWrapper levelWrapper, ServerLevel level, NoiseBasedChunkGenerator generator, NoiseGeneratorSettings settings) throws Exception {
@@ -66,10 +69,41 @@ final class DhSandGenerator implements IDhApiWorldGenerator {
         this.land = factory.getBlockStateWrapper(new Object[] {settings.defaultBlock()}, levelWrapper);
         this.sea = factory.getBlockStateWrapper(new Object[] {settings.defaultFluid()}, levelWrapper);
         this.air = factory.getBlockStateWrapper(new Object[] {net.minecraft.world.level.block.Blocks.AIR.defaultBlockState()}, levelWrapper);
+        this.dune = loadDune(level);
         var biomes = generator.getBiomeSource().possibleBiomes();
         if (biomes.size() != 1) throw new IllegalStateException("expected the single fixed biome");
         Holder<Biome> only = biomes.iterator().next();
         this.biome = factory.getBiomeWrapper(new Object[] {only}, levelWrapper);
+    }
+
+    /**
+     * The dune_height density function from the registry, with its noises instantiated from this level's seed the way RandomState does it
+     * (DensityFunction.mapAll with a visitor that swaps every NoiseHolder for one holding getOrCreateNoise). Missing or failing: null, and the far sand stays flat.
+     */
+    private static DensityFunction loadDune(ServerLevel level) {
+        try {
+            var function = level.registryAccess().lookupOrThrow(Registries.DENSITY_FUNCTION)
+                .get(ResourceKey.create(Registries.DENSITY_FUNCTION, Identifier.fromNamespaceAndPath(DunesOfArrakis.MOD_ID, "overworld/dune_height")));
+            if (function.isEmpty()) return null;
+            RandomState randomState = level.getChunkSource().randomState();
+            DensityFunction wired = function.get().value().mapAll(new DensityFunction.Visitor() {
+                @Override
+                public DensityFunction apply(DensityFunction input) {
+                    return input;
+                }
+
+                @Override
+                public DensityFunction.NoiseHolder visitNoise(DensityFunction.NoiseHolder noise) {
+                    return new DensityFunction.NoiseHolder(noise.noiseData(), randomState.getOrCreateNoise(noise.noiseData().unwrapKey().orElseThrow()));
+                }
+            });
+            double test = wired.compute(new DensityFunction.SinglePointContext(0, 0, 0));
+            if (Double.isNaN(test) || test < 0 || test > 64) throw new IllegalStateException("dune height out of range: " + test);
+            return wired;
+        } catch (Throwable t) {
+            LOGGER.debug("Distant Horizons: no dune height for the far terrain, far sand stays flat", t);
+            return null;
+        }
     }
 
     /** The generator for an Arrakis overworld level, or null (not Arrakis, or the self-test failed). Never throws. */
@@ -147,8 +181,13 @@ final class DhSandGenerator implements IDhApiWorldGenerator {
                             top = rel;
                         } else {               // sea: default block to the sea floor, default fluid (Dune Sand) from there up to the sea level
                             column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 0, 0, rel, this.land, this.biome));
-                            column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 15, rel, relSea, this.sea, this.biome));
-                            top = relSea;
+                            int duneBlocks = 0;   // dunes stand on the sea: solid up to sea_level + height - 0.5, i.e. ceil(height - 0.5) blocks (only from a height of 1)
+                            if (this.dune != null) {
+                                double h = this.dune.compute(new DensityFunction.SinglePointContext(chunkPosMinX * 16 + x * span + half, this.minY, chunkPosMinZ * 16 + z * span + half));
+                                if (h >= 1.0) duneBlocks = Math.min((int) Math.ceil(h - 0.5), relTop - 1 - relSea);
+                            }
+                            column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 15, rel, relSea + duneBlocks, this.sea, this.biome));
+                            top = relSea + duneBlocks;
                         }
                         column.add(DhApiTerrainDataPoint.create((byte) 0, 0, 15, top, relTop, this.air, this.biome));
                         dataSource.setApiDataPointColumn(x, z, EDhApiWorldGenerationStep.SURFACE, column);
