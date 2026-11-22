@@ -41,11 +41,21 @@ b.creature_spawn_probability = 0.0; b.spawn_costs = {};
 b.has_precipitation = false; b.temperature = 2.0; b.downfall = 0.0; delete b.temperature_modifier;
 b.attributes = JSON.parse(JSON.stringify(desert.attributes)); b.effects = JSON.parse(JSON.stringify(desert.effects));
 write('biome/arrakis_stony_peaks.json', b);
+const SEA_BIOME = !!OC.dune_enabled;   // prompt 26: with dunes there is a second biome, identical to stony peaks except the id, for the open sand sea
+if (SEA_BIOME) write('biome/arrakis_sand_sea.json', b); else fs.rmSync(path.join(OUT, 'biome/arrakis_sand_sea.json'), { force: true });
 console.log('CARVERS', b.carvers.join(' '));
 
 // ---- world type
+// multi_noise biome source (prompt 26): sand sea below sea_biome_cut, stony peaks at or above it; continentalness is quantised as trunc(v * 10000) (Climate.quantizeCoord),
+// so the two ranges end on half steps of different quantised integers: sand sea q <= q(cut) - 1, stony peaks q >= q(cut): no gap, no overlap. All other parameters take the full range -2..2.
+function seaBiomeSource() {
+  const cut = OC.sea_biome_cut === undefined ? OC.dune_gate_end : OC.sea_biome_cut, q = Math.trunc(Math.round(cut * 1e6) / 100), half = v => v + (v < 0 ? -0.5 : 0.5);
+  const full = [-2.0, 2.0], mk = (biome, c) => ({ biome: NS + ':' + biome, parameters: { temperature: full, humidity: full, continentalness: c, erosion: full, depth: full, weirdness: full, offset: 0.0 } });
+  console.log('BIOME CUT', cut, 'quantised', q, 'sand sea max', half(q - 1) / 1e4, 'stony peaks min', half(q) / 1e4);
+  return { type: 'minecraft:multi_noise', biomes: [mk('arrakis_sand_sea', [-2.0, half(q - 1) / 1e4]), mk('arrakis_stony_peaks', [half(q) / 1e4, 2.0])] };
+}
 write('world_preset/arrakis.json', { dimensions: {
-  'minecraft:overworld': { type: 'minecraft:overworld', generator: { type: 'minecraft:noise', settings: NS + ':arrakis', biome_source: { type: 'minecraft:fixed', biome: NS + ':arrakis_stony_peaks' } } },
+  'minecraft:overworld': { type: 'minecraft:overworld', generator: { type: 'minecraft:noise', settings: NS + ':arrakis', biome_source: SEA_BIOME ? seaBiomeSource() : { type: 'minecraft:fixed', biome: NS + ':arrakis_stony_peaks' } } },
   'minecraft:the_end': { type: 'minecraft:the_end', generator: { type: 'minecraft:noise', biome_source: { type: 'minecraft:the_end' }, settings: 'minecraft:end' } },
   'minecraft:the_nether': { type: 'minecraft:the_nether', generator: { type: 'minecraft:noise', biome_source: { type: 'minecraft:multi_noise', preset: 'minecraft:nether' }, settings: 'minecraft:nether' } } } });
 

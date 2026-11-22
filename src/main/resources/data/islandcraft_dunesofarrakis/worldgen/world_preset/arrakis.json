@@ -6,8 +6,69 @@
         "type": "minecraft:noise",
         "settings": "islandcraft_dunesofarrakis:arrakis",
         "biome_source": {
-          "type": "minecraft:fixed",
-          "biome": "islandcraft_dunesofarrakis:arrakis_stony_peaks"
+          "type": "minecraft:multi_noise",
+          "biomes": [
+            {
+              "biome": "islandcraft_dunesofarrakis:arrakis_sand_sea",
+              "parameters": {
+                "temperature": [
+                  -2,
+                  2
+                ],
+                "humidity": [
+                  -2,
+                  2
+                ],
+                "continentalness": [
+                  -2,
+                  -0.18015
+                ],
+                "erosion": [
+                  -2,
+                  2
+                ],
+                "depth": [
+                  -2,
+                  2
+                ],
+                "weirdness": [
+                  -2,
+                  2
+                ],
+                "offset": 0
+              }
+            },
+            {
+              "biome": "islandcraft_dunesofarrakis:arrakis_stony_peaks",
+              "parameters": {
+                "temperature": [
+                  -2,
+                  2
+                ],
+                "humidity": [
+                  -2,
+                  2
+                ],
+                "continentalness": [
+                  -0.18005,
+                  2
+                ],
+                "erosion": [
+                  -2,
+                  2
+                ],
+                "depth": [
+                  -2,
+                  2
+                ],
+                "weirdness": [
+                  -2,
+                  2
+                ],
+                "offset": 0
+              }
+            }
+          ]
         }
       }
     },

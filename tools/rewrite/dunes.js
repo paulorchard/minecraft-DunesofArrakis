@@ -78,9 +78,10 @@ function applyDunes(ns, OC, NS) {
   // ---- surface rule: dune blocks (stone above the sea fill inside a dune field) become Dune Sand
   const cond = (c, then) => ({ type: 'minecraft:condition', if_true: c, then_run: then });
   const yAbove = y => ({ type: 'minecraft:y_above', anchor: { absolute: y }, surface_depth_multiplier: 0, add_stone_depth: false });
-  const rule = cond(yAbove(sea), cond({ type: 'minecraft:not', invert: yAbove(sea + P.H + 2) }, cond({ type: 'minecraft:above_preliminary_surface' }, cond({ type: 'minecraft:stone_depth', offset: P.H - 1, add_surface_depth: false, secondary_depth_range: 0, surface_type: 'floor' },
+  // biome(arrakis_sand_sea) is what keeps this off the rock: the biome source gives that biome only where the base continentalness is below sea_biome_cut (above_preliminary_surface and stone_depth are no longer needed)
+  const rule = cond(yAbove(sea), cond({ type: 'minecraft:not', invert: yAbove(sea + P.H + 2) }, cond({ type: 'minecraft:biome', biome_is: [NS + ':arrakis_sand_sea'] },
     cond({ type: 'minecraft:noise_threshold', noise: N('arrakis_dune_fields'), min_threshold: OC.dune_field_threshold - 0.01, max_threshold: 10.0 },
-      { type: 'minecraft:block', result_state: { Name: NS + ':dune_sand' } })))));
+      { type: 'minecraft:block', result_state: { Name: NS + ':dune_sand' } }))));
   ns.surface_rule = { type: 'minecraft:sequence', sequence: [rule, ...ns.surface_rule.sequence] };
   files.info = { ...P, sea, tFlat: +P.tFlat.toFixed(3), tSharp: +P.tSharp.toFixed(3) };
   return files;

@@ -18,6 +18,7 @@
   "dune_gate_open": -0.50,
   "dune_gate_end": -0.18,
   "dune_warp_blocks": 0,
+  "sea_biome_cut": -0.18,
   "dune_term_slope": 1,
   "_notes": {
     "ocean_bias": "added to vanilla continentalness after the noise; lower = more ocean. -0.30 gives 72.8% ocean in the model (vanilla 49.2%).",
