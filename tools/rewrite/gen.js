@@ -229,7 +229,7 @@ if (NOISE) {
     write(`${DF}island/f${sfx}.json`, c2d(add(add(add(mul(F.a, IS('n_large' + sfx)), mul(F.b, IS('n_mid' + sfx))), mul(F.c, IS('n_fine' + sfx))), add(mul(AR.d, mul(IS('ridge' + sfx), IS('band' + sfx))), IS('spawn_bump' + sfx)))));
   }
   // cells layout: the landmass helper gives the depth (blocks inside the coast) and the biome index of the cell
-  const landCfg = () => ({ cell_size: C.cell_size, gap: C.gap, empty_share: C.empty_share, jitter: C.jitter, wind_degrees: WD.toward_degrees, warp_bound: C.warp_bound, rough_bound: C.rough_bound, rough_ref_radius: C.rough_ref_radius, rough_min_factor: C.rough_min_factor,
+  const landCfg = () => ({ cell_size: C.cell_size, gap: C.gap, empty_share: C.empty_share, jitter: C.jitter, wind_degrees: WD.toward_degrees, warp_bound: C.warp_bound, rough_bound: C.rough_bound, rough_ref_radius: C.rough_ref_radius, rough_min_factor: C.rough_min_factor, rough_inward_frac: C.rough_inward_frac,
     stretch: ISL.biomes.map(b => b.wind_stretch || C.wind_stretch), spawn: { radius: C.spawn_radius, biome: ISL.biomes.findIndex(b => b.biome === C.spawn_biome), class: C.spawn_class }, classes: C.classes });
   const landNode = (mode, off) => c2d({ type: `${NS}:landmass`, mode, seed_noise: `${NS}:islands_landmass_seed`, warp_x: IS('warp_x'), warp_z: IS('warp_z'), rough: IS('rough'),
     offset_x: r9(off * cw), offset_z: r9(off * sw), config: landCfg() });
@@ -242,7 +242,7 @@ if (NOISE) {
     emitField('', 0);
     write(`${DF}island/n_biome.json`, wnoise('islands_biome', 1.0, 0));
   }
-  write(`${DF}island/w.json`, rc(FF(''), THR, 99.0, 1.0, 0.0));   // land: the lazy gate for the rock, the vein toggle and the biome
+  write(`${DF}island/w.json`, rc(FF(''), THR, 1e6, 1.0, 0.0));   // land: the lazy gate for the rock, the vein toggle and the biome
   // sand wraps the rock: windward bank (rock lies downwind of the point), lee tail (rock lies upwind), scour moat at the foot where neither applies
   if (WS.bank_height > 0 || WS.tail_height > 0 || WS.scour_depth > 0) {
     if (CELLS) { if (WS.bank_height > 0) write(`${DF}island/depth_bank.json`, landNode('depth', WS.bank_distance)); if (WS.tail_height > 0) write(`${DF}island/depth_tail.json`, landNode('depth', -WS.tail_distance)); }
@@ -275,11 +275,11 @@ if (NOISE) {
     if (b.relief_terrace > 0) n = { type: 'minecraft:spline', spline: { coordinate: n, points: terrace(b.relief_terrace) } };
     write(`${DF}island/relief_${b.biome}.json`, c2d(n));
   }
-  write(`${DF}island/rise.json`, c2d(rc(FF(''), THR, 99.0, add(add(H.min_rise, mul(add(bandTree(ISL.biomes.map(i => i.max_rise)), -H.min_rise), bandTree(ISL.biomes.map(i => IS('relief_' + i.biome))))), mul(H.big_bonus, IS('t2'))), 0.0)));
+  write(`${DF}island/rise.json`, c2d(rc(FF(''), THR, 1e6, add(add(H.min_rise, mul(add(bandTree(ISL.biomes.map(i => i.max_rise)), -H.min_rise), bandTree(ISL.biomes.map(i => IS('relief_' + i.biome))))), mul(H.big_bonus, IS('t2'))), 0.0)));
   write(`${DF}island/rock_height.json`, add(`${NS}:arrakis_sand_level`, { type: 'minecraft:min', argument1: H.cap_above_sand, argument2: mul(IS('t'), IS('rise')) }));
   write(`${DF}island/surface.json`, { type: 'minecraft:max', argument1: IS('dune_surface'), argument2: IS('rock_height') });
   write(`${DF}island/final_density.json`, add(0.5, add(IS('surface'), mul(-1.0, 'minecraft:y'))));
-  write(`${DF}island/rock_mask.json`, rc(FF(''), THR, 99.0, rc(add(IS('rock_height'), mul(-1.0, IS('dune_surface'))), 0.5, 1e6, 1.0, 0.0), 0.0));
+  write(`${DF}island/rock_mask.json`, rc(FF(''), THR, 1e6, rc(add(IS('rock_height'), mul(-1.0, IS('dune_surface'))), 0.5, 1e6, 1.0, 0.0), 0.0));
   for (const key of ['continentalness', 'erosion', 'weirdness']) write(`${DF}overworld/${ROUTER_NOISE[key]}.json`, flat(bandTree(ISL.biomes.map(i => i[key]))));
   for (const key of CLIM_NOISE) write(`${DF}biome_noise/${ROUTER_NOISE[key]}.json`, flat(add(grid.desert[key], mul(IS('rock_mask'), add(bandTree(ISL.biomes.map(i => i[key])), -grid.desert[key])))));
   if (CELLS) FIELD_SUMMARY = { cells: CELLS_REPORT }; else FIELD_SUMMARY = { first_octaves: { large: fo(F.scale_large), mid: fo(F.scale_mid), fine: fo(F.scale_fine), warp: fo(F.warp_scale), ridge: fo(AR.scale), biome: fo(BN.scale) }, biome_cuts: BN.cuts, threshold: F.threshold, wind_degrees: WD.toward_degrees };

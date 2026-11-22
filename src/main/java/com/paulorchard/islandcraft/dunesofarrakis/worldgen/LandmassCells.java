@@ -35,7 +35,7 @@ public final class LandmassCells {
 
     public static final double EMPTY_DEPTH = -1000.0;
 
-    private final double roughRef, roughMin;
+    private final double roughRef, roughMin, inwardFrac;
     private final double cell, half, gap, emptyShare, jitter, warpBound, roughBound, windCos, windSin;
     private final double[] stretch;
     private final Cls[] classes;
@@ -51,6 +51,7 @@ public final class LandmassCells {
         warpBound = cfg.get("warp_bound").getAsDouble(); roughBound = cfg.get("rough_bound").getAsDouble();
         double wr = Math.toRadians(cfg.get("wind_degrees").getAsDouble()); windCos = Math.cos(wr); windSin = Math.sin(wr);
         roughRef = cfg.has("rough_ref_radius") ? cfg.get("rough_ref_radius").getAsDouble() : 1.0; roughMin = cfg.has("rough_min_factor") ? cfg.get("rough_min_factor").getAsDouble() : 1.0;
+        inwardFrac = cfg.has("rough_inward_frac") ? cfg.get("rough_inward_frac").getAsDouble() : 1.0e9;
         stretch = arr(cfg.getAsJsonArray("stretch"));
         JsonArray cl = cfg.getAsJsonArray("classes"); classes = new Cls[cl.size()]; double tw = 0;
         for (int i = 0; i < classes.length; i++) {
@@ -168,7 +169,8 @@ public final class LandmassCells {
         }
         double edge = half - Math.max(Math.abs(px - ix * cell), Math.abs(pz - iz * cell));   // distance of the block to the cell border
         double f = Math.max(roughMin, Math.min(1.0, c.r[0] / roughRef));   // small landmasses keep a smaller share of the coast roughness
-        return Math.min(best + rough * f, edge - gap / 2);
+        double r2 = Math.max(rough * f, -inwardFrac * c.r[0]);   // bays never cut deeper than a fraction of the parent radius, so the core stays solid
+        return Math.min(best + r2, edge - gap / 2);
     }
 
     public int biome(double px, double pz) { Cell c = cellAt(px, pz); return c.land ? c.biome : 0; }

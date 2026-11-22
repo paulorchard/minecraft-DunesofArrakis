@@ -13,14 +13,14 @@ import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 public class CellsModel {
     static final String NS = DfEval.NS;
     static int n, step, x0, z0;
-    static double[] depth; static int[] bio;
+    static double[] depth, rock; static int[] bio;
 
     static void init(long seed) { DfEval.seed = seed; DfEval.fac = new XoroshiroRandomSource(seed).forkPositional(); DfEval.noises.clear(); DfEval.cellsCache.clear(); }
 
     static void fill(int size, int st, int ox, int oz) {
-        step = st; n = size / st; x0 = ox; z0 = oz; depth = new double[n * n]; bio = new int[n * n];
+        step = st; n = size / st; x0 = ox; z0 = oz; depth = new double[n * n]; rock = new double[n * n]; bio = new int[n * n];
         IntStream.range(0, n).parallel().forEach(j -> { try { DfEval.Ev ev = new DfEval.Ev();
-            for (int i = 0; i < n; i++) { ev.at(x0 + i * step, z0 + j * step); depth[j * n + i] = ev.val(new JsonPrimitive(NS + ":island/depth")); bio[j * n + i] = (int) ev.val(new JsonPrimitive(NS + ":island/biome_index")); } }
+            for (int i = 0; i < n; i++) { ev.at(x0 + i * step, z0 + j * step); depth[j * n + i] = ev.val(new JsonPrimitive(NS + ":island/depth")); bio[j * n + i] = (int) ev.val(new JsonPrimitive(NS + ":island/biome_index")); if (depth[j * n + i] > 0) rock[j * n + i] = ev.val(new JsonPrimitive(NS + ":island/rock_mask")); } }
             catch (Exception e) { throw new RuntimeException(e); } });
     }
 
@@ -67,6 +67,10 @@ public class CellsModel {
             double area = mem.length * (double) step * step, perim = edge * (double) step * Math.PI / 4, axis = 0; for (int d = 0; d < 4; d++) axis = Math.max(axis, projMax[d] - projMin[d]);
             info.add(new double[] {area, axis, perim, perim * perim / (4 * Math.PI * area), sx / mem.length, sz / mem.length, k});
         }
+        { long vis = 0; for (double r : rock) if (r > 0.5) vis++; int visComps = 0; double spawnVis = 0, spawnArea = 0; boolean[] seenC = new boolean[nc]; for (int k = 0; k < nc; k++) { long v = 0; for (int c : members.get(k)) if (rock[c] > 0.5) v++; if (v > 0) visComps++; if (comp[((0 - oz) / step) * n + ((0 - ox) / step)] == k) { spawnVis = v * (double) step * step; spawnArea = members.get(k).length * (double) step * step; } }
+          System.out.println(String.format("ROCK SHOWING above the dunes (rock_mask): %.2f%% of the window (land %.2f%%), %d of %d pieces show any rock; spawn island: %.2f km2 of rock showing of %.2f km2 land", 100.0 * vis / (n * n), 100.0 * landCols / (n * n), visComps, nc, spawnVis / 1e6, spawnArea / 1e6)); }
+        { double[] edges = {0, 15, 30, 50, 80, 120, 200, 1e9}; long[] tot = new long[7], vs = new long[7]; for (int s = 0; s < n * n; s++) if (depth[s] > 0) for (int b = 0; b < 7; b++) if (depth[s] < edges[b + 1]) { tot[b]++; if (rock[s] > 0.5) vs[b]++; break; }
+          StringBuilder sb2 = new StringBuilder("  share of land columns with rock showing, by depth (blocks inside the coast):"); for (int b = 0; b < 7; b++) sb2.append(String.format(" %.0f-%s: %.0f%%;", edges[b], b == 6 ? "inf" : String.format("%.0f", edges[b + 1]), tot[b] == 0 ? 0.0 : 100.0 * vs[b] / tot[b])); System.out.println(sb2); }
         // gaps: nearest boundary samples between components (bounding-box prefilter)
         List<int[]> bnd = new ArrayList<>(); int[][] bbox = new int[nc][4];
         for (int k = 0; k < nc; k++) { int[] mem = members.get(k); List<Integer> bb = new ArrayList<>(); int[] bx = {1 << 30, -(1 << 30), 1 << 30, -(1 << 30)};

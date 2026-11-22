@@ -6,16 +6,16 @@
       "type": "minecraft:add",
       "argument1": {
         "type": "minecraft:mul",
-        "argument1": 260,
+        "argument1": 170,
         "argument2": "islandcraft_dunesofarrakis:island/n_mid"
       },
       "argument2": {
         "type": "minecraft:mul",
-        "argument1": 40,
+        "argument1": 30,
         "argument2": "islandcraft_dunesofarrakis:island/n_fine"
       }
     },
-    "min": -400,
-    "max": 80
+    "min": -250,
+    "max": 60
   }
 }
