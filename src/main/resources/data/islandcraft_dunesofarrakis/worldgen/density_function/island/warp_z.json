@@ -1,18 +1,13 @@
 {
   "type": "minecraft:cache_2d",
   "argument": {
-    "type": "minecraft:clamp",
-    "input": {
-      "type": "minecraft:mul",
-      "argument1": 40,
-      "argument2": {
-        "type": "minecraft:noise",
-        "noise": "islandcraft_dunesofarrakis:islands_warp_z",
-        "xz_scale": 1,
-        "y_scale": 0
-      }
-    },
-    "min": -60,
-    "max": 60
+    "type": "minecraft:mul",
+    "argument1": 40,
+    "argument2": {
+      "type": "minecraft:noise",
+      "noise": "islandcraft_dunesofarrakis:islands_warp_z",
+      "xz_scale": 1,
+      "y_scale": 0
+    }
   }
 }

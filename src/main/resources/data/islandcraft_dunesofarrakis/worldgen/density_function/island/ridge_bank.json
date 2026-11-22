@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:clamp",
+  "input": {
+    "type": "minecraft:add",
+    "argument1": 1,
+    "argument2": {
+      "type": "minecraft:mul",
+      "argument1": -6.666666666666667,
+      "argument2": {
+        "type": "minecraft:abs",
+        "argument": "islandcraft_dunesofarrakis:island/n_ridge_bank"
+      }
+    }
+  },
+  "min": 0,
+  "max": 1
+}

@@ -2,7 +2,6 @@ import com.google.gson.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.stream.IntStream;
-import com.paulorchard.islandcraft.dunesofarrakis.worldgen.LandmassCells;
 import net.minecraft.world.level.levelgen.PositionalRandomFactory;
 import net.minecraft.world.level.levelgen.XoroshiroRandomSource;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
@@ -24,15 +23,6 @@ public class DfEval {
     static final Map<String, JsonElement> files = new HashMap<>();
     static final Map<String, NormalNoise> noises = new HashMap<>();
     static PositionalRandomFactory fac;
-    static final Map<String, LandmassCells> cellsCache = new HashMap<>();
-    /** the landmass helper as the game builds it: the seed comes from two samples of the bound seed noise (same formula as LandmassFunction.seedOf) */
-    static LandmassCells lc(JsonObject o) throws Exception {
-        synchronized (cellsCache) { String k = o.get("config").toString(); LandmassCells c = cellsCache.get(k);
-            if (c == null) { NormalNoise n = noise(o.get("seed_noise").getAsString()); double a = n.getValue(1234.5, 0.0, 987.25), b = n.getValue(-321.75, 55.5, 4096.125);
-                long z = Double.doubleToLongBits(a) * 0x9E3779B97F4A7C15L + Long.rotateLeft(Double.doubleToLongBits(b), 31); z = (z ^ (z >>> 30)) * 0xBF58476D1CE4E5B9L; z = (z ^ (z >>> 27)) * 0x94D049BB133111EBL; z = z ^ (z >>> 31);
-                c = new LandmassCells(o.getAsJsonObject("config"), z); cellsCache.put(k, c); }
-            return c; }
-    }
     static JsonElement file(String ref) throws Exception {
         String p = ref.substring(ref.indexOf(':') + 1);
         synchronized (files) { JsonElement e = files.get(p); if (e == null) { e = JsonParser.parseString(Files.readString(RES.resolve("density_function/" + p + ".json"))); files.put(p, e); } return e; }
@@ -72,9 +62,6 @@ public class DfEval {
                 case "minecraft:noise": { if (o.get("y_scale").getAsDouble() != 0) throw new IllegalStateException("3D noise"); double s = o.get("xz_scale").getAsDouble(); return noise(o.get("noise").getAsString()).getValue(x * s, 0, z * s); }
                 case "minecraft:shifted_noise": { if (o.get("y_scale").getAsDouble() != 0) throw new IllegalStateException("3D noise"); double s = o.get("xz_scale").getAsDouble();
                     return noise(o.get("noise").getAsString()).getValue(x * s + val(o.get("shift_x")), 0, z * s + val(o.get("shift_z"))); }
-                case NS + ":landmass": { LandmassCells c = lc(o); double px = x + o.get("offset_x").getAsDouble(), pz = z + o.get("offset_z").getAsDouble();
-                    if (o.get("mode").getAsString().equals("biome")) return c.biome(px, pz);
-                    return c.depth(px, pz, px + val(o.get("warp_x")), pz + val(o.get("warp_z")), val(o.get("rough"))); }
                 case NS + ":block_x": return x;
                 case NS + ":block_z": return z;
                 case NS + ":arrakis_linear": return o.get("x_coefficient").getAsDouble() * x + o.get("z_coefficient").getAsDouble() * z;
@@ -175,7 +162,7 @@ public class DfEval {
                 switch (t) { case "minecraft:cache_2d": cache2d++; break; case "minecraft:flat_cache": flatc++; break; case "minecraft:interpolated": interp++; break;
                     case "minecraft:noise": case "minecraft:shifted_noise": noiseNodes++; if (o.get("y_scale").getAsDouble() != 0) threeD++; break;
                     case "minecraft:find_top_surface": case "minecraft:old_blended_noise": case "minecraft:y_clamped_gradient": case "minecraft:end_islands": case "minecraft:weird_scaled_sampler": threeD++; break; default: }
-                for (Map.Entry<String, JsonElement> en : o.entrySet()) if (!en.getKey().equals("type") && !en.getKey().equals("noise") && !en.getKey().equals("seed_noise") && !en.getKey().equals("config")) st.add(en.getValue()); } }
+                for (Map.Entry<String, JsonElement> en : o.entrySet()) if (!en.getKey().equals("type") && !en.getKey().equals("noise")) st.add(en.getValue()); } }
         System.out.println("nodes reachable from island/surface (the final density is 0.5 + surface - y): named functions " + named + ", inline nodes " + inlineNodes + ", cache_2d " + cache2d + ", flat_cache " + flatc + ", interpolated " + interp + ", noise evaluations (2D) " + noiseNodes + ", 3D nodes (find_top_surface, y_scale != 0 noises, gradients, blended noise) " + threeD);
         System.out.println(types);
     }

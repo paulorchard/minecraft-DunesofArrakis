@@ -19,11 +19,11 @@
                 "type": "minecraft:clamp",
                 "input": {
                   "type": "minecraft:mul",
-                  "argument1": 0.03076923076923077,
+                  "argument1": 12.820512820512821,
                   "argument2": {
                     "type": "minecraft:add",
-                    "argument1": "islandcraft_dunesofarrakis:island/depth",
-                    "argument2": 25
+                    "argument1": "islandcraft_dunesofarrakis:island/f",
+                    "argument2": -0.27
                   }
                 },
                 "min": 0,
@@ -39,11 +39,11 @@
                     "type": "minecraft:clamp",
                     "input": {
                       "type": "minecraft:mul",
-                      "argument1": 0.03076923076923077,
+                      "argument1": 12.820512820512821,
                       "argument2": {
                         "type": "minecraft:add",
-                        "argument1": "islandcraft_dunesofarrakis:island/depth",
-                        "argument2": 25
+                        "argument1": "islandcraft_dunesofarrakis:island/f",
+                        "argument2": -0.27
                       }
                     },
                     "min": 0,
@@ -64,11 +64,11 @@
               "type": "minecraft:clamp",
               "input": {
                 "type": "minecraft:mul",
-                "argument1": 0.3333333333333333,
+                "argument1": 33.333333333333336,
                 "argument2": {
                   "type": "minecraft:add",
-                  "argument1": "islandcraft_dunesofarrakis:island/depth_bank",
-                  "argument2": 0
+                  "argument1": "islandcraft_dunesofarrakis:island/f_bank",
+                  "argument2": -0.33
                 }
               },
               "min": 0,
@@ -87,11 +87,11 @@
             "type": "minecraft:clamp",
             "input": {
               "type": "minecraft:mul",
-              "argument1": 0.3333333333333333,
+              "argument1": 33.333333333333336,
               "argument2": {
                 "type": "minecraft:add",
-                "argument1": "islandcraft_dunesofarrakis:island/depth_tail",
-                "argument2": 0
+                "argument1": "islandcraft_dunesofarrakis:island/f_tail",
+                "argument2": -0.33
               }
             },
             "min": 0,
