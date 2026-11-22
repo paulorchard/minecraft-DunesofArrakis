@@ -1,4 +1,5 @@
 {
   "block.islandcraft_dunesofarrakis.dune_sand": "Dune Sand",
+  "key.islandcraft_dunesofarrakis.toggle_sand": "Toggle Dune Sand visibility",
   "generator.islandcraft_dunesofarrakis.arrakis": "Arrakis"
 }

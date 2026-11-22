@@ -19,8 +19,8 @@ public final class ArrakisBlocks {
      * from vanilla sand (sounds, hardness, map colour, shovel tool). It is made immune to explosions and pistons; survival players
      * cannot break it, only harvest it (see {@link DuneSandHarvest}).
      */
-    public static final DeferredBlock<Block> DUNE_SAND = BLOCKS.registerSimpleBlock("dune_sand",
-        () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).explosionResistance(3_600_000.0F).pushReaction(PushReaction.BLOCK));
+    public static final DeferredBlock<DuneSandBlock> DUNE_SAND = BLOCKS.registerBlock("dune_sand", DuneSandBlock::new,
+        () -> BlockBehaviour.Properties.ofFullCopy(Blocks.SAND).noOcclusion().explosionResistance(3_600_000.0F).pushReaction(PushReaction.BLOCK));
     public static final DeferredItem<BlockItem> DUNE_SAND_ITEM = ITEMS.registerSimpleBlockItem(DUNE_SAND);
 
     private ArrakisBlocks() {}
