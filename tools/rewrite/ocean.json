@@ -15,7 +15,7 @@
   "dune_style_scale": 700,
   "dune_sharp_share": 0.35,
   "dune_flat_share": 0.2,
-  "dune_gate_open": -0.60,
+  "dune_gate_open": -0.50,
   "dune_gate_end": -0.18,
   "dune_warp_blocks": 0,
   "dune_term_slope": 1,

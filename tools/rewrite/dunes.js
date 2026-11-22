@@ -67,8 +67,9 @@ function applyDunes(ns, OC, NS) {
   files.density['overworld/dune_height'] = clamp(mul(P.H, mul(field, mul(gate, shape))), 0.0, P.H);
   // ---- router term, outermost, evaluated only for y >= sea level (range_choice computes only the chosen branch)
   const span = P.bandHi - P.bandLo + 2;
-  const hBand = { type: 'minecraft:interpolated', argument: { type: 'minecraft:range_choice', input: grad(P.bandLo - 1, P.bandHi + 1, 0.0, 1.0), min_inclusive: 0.5 / span, max_exclusive: 1.0,
-    when_in_range: N('overworld/dune_height'), when_out_of_range: 0.0 } };
+  // NOTE: interpolated(range_choice(y band, dune_height, 0)) returned 0 in the game (tested: constant, plain interpolated and un-interpolated variants all work), so the plain interpolated height is used.
+  // Cost: dune_height is evaluated at the cell corners (4 x 4 blocks, all 49 corner y); its three noises are cache_2d, so the repeated y corners only repeat cheap arithmetic.
+  const hBand = { type: "minecraft:interpolated", argument: N("overworld/dune_height") };
   const seaSpan = P.H + 3;
   const linear = grad(sea - 16, sea + P.H + 16, 15.5, -(P.H + 16.5));                                  // sea_level - 0.5 - y
   const term = { type: 'minecraft:range_choice', input: grad(sea - 1, sea + P.H + 2, 0.0, 1.0), min_inclusive: 0.5 / seaSpan, max_exclusive: 1.0,
@@ -77,9 +78,9 @@ function applyDunes(ns, OC, NS) {
   // ---- surface rule: dune blocks (stone above the sea fill inside a dune field) become Dune Sand
   const cond = (c, then) => ({ type: 'minecraft:condition', if_true: c, then_run: then });
   const yAbove = y => ({ type: 'minecraft:y_above', anchor: { absolute: y }, surface_depth_multiplier: 0, add_stone_depth: false });
-  const rule = cond(yAbove(sea), cond({ type: 'minecraft:not', invert: yAbove(sea + P.H + 2) }, cond({ type: 'minecraft:above_preliminary_surface' },
+  const rule = cond(yAbove(sea), cond({ type: 'minecraft:not', invert: yAbove(sea + P.H + 2) }, cond({ type: 'minecraft:above_preliminary_surface' }, cond({ type: 'minecraft:stone_depth', offset: P.H - 1, add_surface_depth: false, secondary_depth_range: 0, surface_type: 'floor' },
     cond({ type: 'minecraft:noise_threshold', noise: N('arrakis_dune_fields'), min_threshold: OC.dune_field_threshold - 0.01, max_threshold: 10.0 },
-      { type: 'minecraft:block', result_state: { Name: NS + ':dune_sand' } }))));
+      { type: 'minecraft:block', result_state: { Name: NS + ':dune_sand' } })))));
   ns.surface_rule = { type: 'minecraft:sequence', sequence: [rule, ...ns.surface_rule.sequence] };
   files.info = { ...P, sea, tFlat: +P.tFlat.toFixed(3), tSharp: +P.tSharp.toFixed(3) };
   return files;

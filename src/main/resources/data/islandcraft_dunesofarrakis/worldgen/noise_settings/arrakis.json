@@ -190,20 +190,7 @@
             },
             "argument2": {
               "type": "minecraft:interpolated",
-              "argument": {
-                "type": "minecraft:range_choice",
-                "input": {
-                  "type": "minecraft:y_clamped_gradient",
-                  "from_y": 55,
-                  "to_y": 89,
-                  "from_value": 0,
-                  "to_value": 1
-                },
-                "min_inclusive": 0.014705882352941176,
-                "max_exclusive": 1,
-                "when_in_range": "islandcraft_dunesofarrakis:overworld/dune_height",
-                "when_out_of_range": 0
-              }
+              "argument": "islandcraft_dunesofarrakis:overworld/dune_height"
             }
           }
         },
@@ -518,15 +505,25 @@
             "then_run": {
               "type": "minecraft:condition",
               "if_true": {
-                "type": "minecraft:noise_threshold",
-                "noise": "islandcraft_dunesofarrakis:arrakis_dune_fields",
-                "min_threshold": -0.095,
-                "max_threshold": 10
+                "type": "minecraft:stone_depth",
+                "offset": 9,
+                "add_surface_depth": false,
+                "secondary_depth_range": 0,
+                "surface_type": "floor"
               },
               "then_run": {
-                "type": "minecraft:block",
-                "result_state": {
-                  "Name": "islandcraft_dunesofarrakis:dune_sand"
+                "type": "minecraft:condition",
+                "if_true": {
+                  "type": "minecraft:noise_threshold",
+                  "noise": "islandcraft_dunesofarrakis:arrakis_dune_fields",
+                  "min_threshold": -0.095,
+                  "max_threshold": 10
+                },
+                "then_run": {
+                  "type": "minecraft:block",
+                  "result_state": {
+                    "Name": "islandcraft_dunesofarrakis:dune_sand"
+                  }
                 }
               }
             }
