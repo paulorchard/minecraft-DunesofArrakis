@@ -21,8 +21,8 @@
       "xz_scale": 1,
       "y_scale": 0.5
     },
-    "continents": "minecraft:overworld/continents",
-    "depth": "minecraft:overworld/depth",
+    "continents": "islandcraft_dunesofarrakis:overworld/continents",
+    "depth": "islandcraft_dunesofarrakis:overworld/depth",
     "erosion": "minecraft:overworld/erosion",
     "final_density": {
       "type": "minecraft:min",
@@ -67,12 +67,12 @@
                           "argument1": 0.078125,
                           "argument2": {
                             "type": "minecraft:range_choice",
-                            "input": "minecraft:overworld/sloped_cheese",
+                            "input": "islandcraft_dunesofarrakis:overworld/sloped_cheese",
                             "max_exclusive": 1.5625,
                             "min_inclusive": -1000000,
                             "when_in_range": {
                               "type": "minecraft:min",
-                              "argument1": "minecraft:overworld/sloped_cheese",
+                              "argument1": "islandcraft_dunesofarrakis:overworld/sloped_cheese",
                               "argument2": {
                                 "type": "minecraft:mul",
                                 "argument1": 5,
@@ -125,7 +125,7 @@
                                           "argument2": {
                                             "type": "minecraft:mul",
                                             "argument1": -0.64,
-                                            "argument2": "minecraft:overworld/sloped_cheese"
+                                            "argument2": "islandcraft_dunesofarrakis:overworld/sloped_cheese"
                                           }
                                         },
                                         "max": 0.5,
@@ -240,12 +240,12 @@
                                 },
                                 "argument2": {
                                   "type": "minecraft:cache_2d",
-                                  "argument": "minecraft:overworld/offset"
+                                  "argument": "islandcraft_dunesofarrakis:overworld/offset"
                                 }
                               },
                               "argument2": {
                                 "type": "minecraft:cache_2d",
-                                "argument": "minecraft:overworld/factor"
+                                "argument": "islandcraft_dunesofarrakis:overworld/factor"
                               }
                             }
                           }
@@ -279,7 +279,7 @@
                   "type": "minecraft:invert",
                   "argument": {
                     "type": "minecraft:cache_2d",
-                    "argument": "minecraft:overworld/factor"
+                    "argument": "islandcraft_dunesofarrakis:overworld/factor"
                   }
                 }
               },
@@ -288,7 +288,7 @@
                 "argument1": -1,
                 "argument2": {
                   "type": "minecraft:cache_2d",
-                  "argument": "minecraft:overworld/offset"
+                  "argument": "islandcraft_dunesofarrakis:overworld/offset"
                 }
               }
             }

@@ -1,0 +1,16 @@
+{
+  "_comment": "Every number of the wider, deeper sand ocean (prompt 22). Regenerate with: node tools/rewrite/gen.js (extract-vanilla.sh once first). sea_level stays vanilla 63 in the noise settings (one number: sea_level in tools/rewrite/gen.js output, i.e. set ns.sea_level there).",
+  "ocean_bias": -0.30,
+  "continent_scale": 0.25,
+  "floor_y": -10,
+  "shelf_width_blocks": 500,
+  "shelf_gradient_per_block": 0.00154,
+  "shelf_end_continentalness": -0.18,
+  "_notes": {
+    "ocean_bias": "added to vanilla continentalness after the noise; lower = more ocean. -0.30 gives 72.8% ocean in the model (vanilla 49.2%).",
+    "continent_scale": "xz_scale of the continentalness noise (vanilla 0.25). 0.20 = larger landmasses, 0.30 = smaller.",
+    "floor_y": "nominal sea-floor height of the deepest ocean (smooth part of the terrain: y = 128 * offset + 128, before factor and the 3D noise).",
+    "shelf_width_blocks": "horizontal length of the ramp from the floor up to vanilla's shelf height (y 48 at continentalness -0.18), converted to a continentalness range with shelf_gradient_per_block (median |grad c| over the ocean band, measured in tools/model).",
+    "shelf_end_continentalness": "where the ramp meets vanilla's spline (vanilla value -0.12 = y 48). Everything at or above this continentalness is vanilla."
+  }
+}

@@ -48,3 +48,5 @@ run-server/study-downloads/
 ### Local, not for git
 docs/inspiration/
 logs/
+
+libs/
