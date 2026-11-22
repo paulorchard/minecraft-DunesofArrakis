@@ -1,1 +1,0 @@
-const s=require(process.argv[2]);console.log(process.argv[3]);for(const[n,v]of Object.entries(s.biomes).sort((a,b)=>b[1].cols-a[1].cols).slice(0,6))console.log("  ",n.padEnd(36),JSON.stringify(v),"relief32",JSON.stringify(s.relief32[n]||{}))

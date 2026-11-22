@@ -10,7 +10,11 @@
     "minecraft:gameplay/snow_golem_melts": true,
     "minecraft:visual/sky_color": "#6eb1ff"
   },
-  "carvers": [],
+  "carvers": [
+    "minecraft:cave",
+    "minecraft:cave_extra_underground",
+    "minecraft:canyon"
+  ],
   "downfall": 0,
   "effects": {
     "water_color": "#3f76e4"
@@ -23,6 +27,15 @@
     [],
     [],
     [
+      "minecraft:ore_dirt",
+      "minecraft:ore_gravel",
+      "minecraft:ore_granite_upper",
+      "minecraft:ore_granite_lower",
+      "minecraft:ore_diorite_upper",
+      "minecraft:ore_diorite_lower",
+      "minecraft:ore_andesite_upper",
+      "minecraft:ore_andesite_lower",
+      "minecraft:ore_tuff",
       "minecraft:ore_coal_upper",
       "minecraft:ore_coal_lower",
       "minecraft:ore_iron_upper",
@@ -38,7 +51,8 @@
       "minecraft:ore_diamond_buried",
       "minecraft:ore_lapis",
       "minecraft:ore_lapis_buried",
-      "minecraft:ore_copper"
+      "minecraft:ore_copper",
+      "minecraft:ore_emerald"
     ],
     [],
     [],
@@ -48,16 +62,15 @@
   "has_precipitation": false,
   "spawn_costs": {},
   "spawners": {
-    "monster": [],
-    "creature": [],
     "ambient": [],
     "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
     "underground_water_creature": [],
-    "water_creature": [],
     "water_ambient": [],
-    "misc": []
+    "water_creature": []
   },
   "temperature": 2,
-  "temperature_modifier": "none",
   "creature_spawn_probability": 0
 }
